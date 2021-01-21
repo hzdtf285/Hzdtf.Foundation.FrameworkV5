@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>日志集成NLog</Product>
+    <Description>日志集成NLog，运行在.Net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Hzdtf.Logger.Integration.ENLog.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Logger.Integration.ENLog.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog" Version="4.7.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hzdtf.Logger.Contract\Hzdtf.Logger.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,5 @@
+{
+          "Action": "|ActionName|",
+          "Code": "|Code|",
+          "Disabled": false
+        }

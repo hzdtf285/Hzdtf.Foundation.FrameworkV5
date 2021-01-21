@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>样例应用系统</Product>
+    <Description>样例应用系统，运行在Asp.Net 5以上</Description>
+    <UserSecretsId>e08a64c0-8169-41c0-8027-4969c7723520</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Example.WebApp.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Example.WebApp.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AUC\Hzdtf.AUC.AspNet\Hzdtf.AUC.AspNet.csproj" />
+    <ProjectReference Include="..\..\..\Common\Hzdtf.Utility.AspNet\Hzdtf.Utility.AspNet.csproj" />
+    <ProjectReference Include="..\..\..\IOC\Hzdtf.Autofac.Extensions\Hzdtf.Autofac.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\Logger\Hzdtf.Logger.Integration.ENLog\Hzdtf.Logger.Integration.ENLog.csproj" />
+    <ProjectReference Include="..\..\..\Logger\Hzdtf.Logger.Integration.MicrosoftLog\Hzdtf.Logger.Integration.MicrosoftLog.csproj" />
+    <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.Controller\Hzdtf.BasicFunction.Controller.csproj" />
+    <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.MySql\Hzdtf.BasicFunction.MySql.csproj" />
+    <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.Service.Impl\Hzdtf.BasicFunction.Service.Impl.csproj" />
+    <ProjectReference Include="..\..\Workflow\Hzdtf.BasicFunction.Workflow\Hzdtf.BasicFunction.Workflow.csproj" />
+    <ProjectReference Include="..\..\Workflow\Hzdtf.Workflow.Controller\Hzdtf.Workflow.Controller.csproj" />
+    <ProjectReference Include="..\..\Workflow\Hzdtf.Workflow.MySql\Hzdtf.Workflow.MySql.csproj" />
+    <ProjectReference Include="..\..\Workflow\Hzdtf.Workflow.Service.Impl\Hzdtf.Workflow.Service.Impl.csproj" />
+    <ProjectReference Include="..\Hzdtf.Example.Controller\Hzdtf.Example.Controller.csproj" />
+    <ProjectReference Include="..\Hzdtf.Example.MySql\Hzdtf.Example.MySql.csproj" />
+    <ProjectReference Include="..\Hzdtf.Example.Service.Impl\Hzdtf.Example.Service.Impl.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,1214 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Persistence.Contract</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.DefaultConnectionString">
+            <summary>
+            默认连接字符串
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.DefaultConnectionString.ConnEnvironmentFactory">
+            <summary>
+            连接环境工厂
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.DefaultConnectionString.Connections">
+            <summary>
+            连接字符串集合
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.DefaultConnectionStringFactory">
+            <summary>
+            默认连接字符串工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.DefaultConnectionStringFactory.Create(Hzdtf.Utility.Enums.EnvironmentType)">
+            <summary>
+            创建
+            </summary>
+            <param name="type">类型</param>
+            <returns>产品</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString">
+            <summary>
+            默认连接字符串接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString.Connections">
+            <summary>
+            连接字符串集合
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection">
+            <summary>
+            持久化连接接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.MasterPersistenceConnection">
+            <summary>
+            主持久化连接信息
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.SlavePersistenceConnection">
+            <summary>
+            从持久化连接信息
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.CreateDbConnection(System.String)">
+            <summary>
+            创建数据库连接
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.NewConnectionId(Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            新建一个连接ID
+            </summary>
+            <param name="accessMode">访问模式</param>
+            <returns>连接ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.Release(System.String)">
+            <summary>
+            释放连接ID
+            </summary>
+            <param name="connectionId">连接ID</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.BeginTransaction(System.String,System.Data.IsolationLevel)">
+            <summary>
+            开启事务
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="isolation">事务级别</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.GetDbTransaction(System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            根据连接ID获取数据库事务
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.PersistenceConectionInfo">
+            <summary>
+            持久化连接信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConectionInfo.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConectionInfo.AccessMode">
+            <summary>
+            访问模式
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase">
+            <summary>
+            持久化连接基类
+            本类支持自定义连接字符串，取连接字符串顺序为：本类重写>回调获取>读取默认（配置文件）
+            如果需要动态获取连接字符串，请设置回调：PersistenceConnectionBase.DynamcGetConnectionString
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.DefaultConnectionString">
+            <summary>
+            默认连接字符串，默认取0主库；1从库
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.DynamcGetConnectionString">
+            <summary>
+            动态获取连接字符串
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.MasterPersistenceConnection">
+            <summary>
+            主持久化连接信息
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.slavePersistenceConnection">
+            <summary>
+            从持久化连接信息
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.SlavePersistenceConnection">
+            <summary>
+            从持久化连接信息
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.GetPersistenceConnection(Hzdtf.Utility.Enums.AccessMode,System.Func{System.String},System.Byte)">
+            <summary>
+            获取持久化连接对象
+            </summary>
+            <param name="accessMode">访问模式</param>
+            <param name="getThisConnString">获取本身连接字符串</param>
+            <param name="defaultConnectionStringIndex">默认连接字符串索引</param>
+            <returns>持久化连接对象</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.NewConnectionId(Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            新建一个连接ID
+            </summary>
+            <param name="accessMode">访问模式</param>
+            <returns>连接ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.Release(System.String)">
+            <summary>
+            释放连接ID
+            </summary>
+            <param name="connectionId">连接ID</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.BeginTransaction(System.String,System.Data.IsolationLevel)">
+            <summary>
+            开启事务
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="isolation">事务级别</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.GetDbTransaction(System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            根据连接ID获取数据库事务
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.GetMasterConnectionString">
+            <summary>
+            获取主连接字符串
+            </summary>
+            <returns>主连接字符串</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.GetSlaveConnectionString">
+            <summary>
+            获取从连接字符串
+            </summary>
+            <returns>从连接字符串</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.CreateDbConnection(System.String)">
+            <summary>
+            创建数据库连接
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.CreatePersistenceConnection(Hzdtf.Persistence.Contract.Basic.PersistenceConectionInfo,System.String,Hzdtf.Utility.Enums.AccessMode,System.Action{Hzdtf.Persistence.Contract.Basic.PersistenceConectionInfo})">
+            <summary>
+            创建持久化连接信息
+            </summary>
+            <param name="persistenceConection">持久化连接</param>
+            <param name="connectionString">连接字符串</param>
+            <param name="accessMode">访问模式</param>
+            <param name="setAction">设置动作</param>
+            <returns>持久化连接信息</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Data.IPersistence`2">
+            <summary>
+            持久化接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Select(`0,System.String)">
+            <summary>
+            根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Select(`0,System.String[],System.String)">
+            <summary>
+            根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Select(`0[],System.String)">
+            <summary>
+            根据ID集合查询模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Select(`0[],System.String[],System.String)">
+            <summary>
+            根据ID集合查询模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Count(`0,System.String)">
+            <summary>
+            根据ID统计模型数
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Count(System.String)">
+            <summary>
+            统计模型数
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Select(System.String)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Select(System.String[],System.String)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.SelectPage(System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,System.String)">
+            <summary>
+            查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="connectionId">连接ID</param>
+            <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.SelectPage(System.Int32,System.Int32,System.String[],Hzdtf.Utility.Model.FilterInfo,System.String)">
+            <summary>
+            查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="filter">筛选</param>
+            <param name="connectionId">连接ID</param>
+            <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Insert(`1,System.String)">
+            <summary>
+            插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Insert(System.Collections.Generic.IList{`1},System.String)">
+            <summary>
+            插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.UpdateById(`1,System.String)">
+            <summary>
+            根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.UpdateById(`1,System.String[],System.String)">
+            <summary>
+            根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.DeleteById(`0,System.String)">
+            <summary>
+            根据ID删除模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.DeleteByIds(`0[],System.String)">
+            <summary>
+            根据ID数组删除模型
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Delete(System.String)">
+            <summary>
+            删除所有模型
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2">
+            <summary>
+            持久化异步接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectAsync(`0,System.String@)">
+            <summary>
+            异步根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectAsync(`0,System.String[],System.String@)">
+            <summary>
+            异步根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectAsync(`0[],System.String@)">
+            <summary>
+            异步根据ID集合查询模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectAsync(`0[],System.String[],System.String@)">
+            <summary>
+            异步根据ID集合查询模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.CountAsync(`0,System.String@)">
+            <summary>
+            异步根据ID统计模型数
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.CountAsync(System.String@)">
+            <summary>
+            异步统计模型数
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectAsync(System.String@)">
+            <summary>
+            异步查询模型列表
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectAsync(System.String[],System.String@)">
+            <summary>
+            异步查询模型列表
+            </summary>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectPageAsync(System.Int32,System.Int32,System.String@,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            异步查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="connectionId">连接ID</param>
+            <param name="filter">筛选</param>
+            <returns>分页信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectPageAsync(System.Int32,System.Int32,System.String[],System.String@,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            异步查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <param name="filter">筛选</param>
+            <returns>分页信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.InsertAsync(`1,System.String@)">
+            <summary>
+            异步插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.InsertAsync(System.Collections.Generic.IList{`1},System.String@)">
+            <summary>
+            异步插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.UpdateByIdAsync(`1,System.String@)">
+            <summary>
+            异步根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.UpdateByIdAsync(`1,System.String[],System.String@)">
+            <summary>
+            异步根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.DeleteByIdAsync(`0,System.String@)">
+            <summary>
+            异步根据ID删除模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.DeleteByIdsAsync(`0[],System.String@)">
+            <summary>
+            异步根据ID数组删除模型
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.DeleteAsync(System.String@)">
+            <summary>
+            异步删除所有模型
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Data.PersistenceBase`2">
+            <summary>
+            持久化基类
+            如果可实例化的子类包含有TenantId属性（字段），则默认代表中存在租户ID，本类对外提供所有的增/删/改/查操作都自动加上租户ID约束，同时取租户ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <summary>
+            异步持久化基类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Identity">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,System.String)">
+            <summary>
+            根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,System.String[],System.String)">
+            <summary>
+            根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0[],System.String)">
+            <summary>
+            根据ID集合查询模型列表
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0[],System.String[],System.String)">
+            <summary>
+            根据ID集合查询模型列表
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Count(`0,System.String)">
+            <summary>
+            根据ID统计模型数
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Count(System.String)">
+            <summary>
+            统计模型数
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(System.String)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(System.String[],System.String)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectPage(System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,System.String)">
+            <summary>
+            查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="connectionId">连接ID</param>
+            <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectPage(System.Int32,System.Int32,System.String[],Hzdtf.Utility.Model.FilterInfo,System.String)">
+            <summary>
+            查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="filter">筛选</param>
+            <param name="connectionId">连接ID</param>
+            <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(`1,System.String)">
+            <summary>
+            插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(System.Collections.Generic.IList{`1},System.String)">
+            <summary>
+            插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.UpdateById(`1,System.String)">
+            <summary>
+            根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.UpdateById(`1,System.String[],System.String)">
+            <summary>
+            根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteById(`0,System.String)">
+            <summary>
+            根据ID删除模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteByIds(`0[],System.String)">
+            <summary>
+            根据ID数组删除模型
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Delete(System.String)">
+            <summary>
+            删除所有模型
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,System.Data.IDbConnection,System.Data.IDbTransaction,System.String[])">
+            <summary>
+            根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0[],System.Data.IDbConnection,System.Data.IDbTransaction,System.String[])">
+            <summary>
+            根据ID集合查询模型列表
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Count(`0,System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            根据ID统计模型数
+            </summary>
+            <param name="id">ID</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>模型数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Count(System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            统计模型数
+            </summary>
+            <returns>模型数</returns>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(System.Data.IDbConnection,System.Data.IDbTransaction,System.String[])">
+            <summary>
+            查询模型列表
+            </summary>
+            <returns>模型列表</returns>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectPage(System.Int32,System.Int32,System.Data.IDbConnection,Hzdtf.Utility.Model.FilterInfo,System.Data.IDbTransaction,System.String[])">
+            <summary>
+            查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="filter">筛选</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(`1,System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(System.Collections.Generic.IList{`1},System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.UpdateById(`1,System.Data.IDbConnection,System.Data.IDbTransaction,System.String[])">
+            <summary>
+            根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteById(`0,System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            根据ID删除模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteByIds(`0[],System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            根据ID数组删除模型
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Delete(System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            删除所有模型
+            </summary>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteSlaveTable(System.String,System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            删除从表
+            </summary>
+            <param name="table">从表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteSlaveTableByForeignKeys(System.String,System.String,`0[],System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            删除从表
+            </summary>
+            <param name="table">从表</param>
+            <param name="foreignKeyName">外键名称</param>
+            <param name="foreignKeyValues">外键值集合</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.BeforeFilterInfo(Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            过滤信息前
+            </summary>
+            <param name="filter">过滤</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.PrimaryKeyIncr(`0)">
+            <summary>
+            主键是否自增
+            </summary>
+            <param name="id">ID</param>
+            <returns>主键是否自增</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsTenantId">
+            <summary>
+            是否存在租赁ID
+            </summary>
+            <returns>查询时是否需要追加租赁ID为过滤条件</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsTenantId(`0@)">
+            <summary>
+            是否存在租赁ID
+            </summary>
+            <param name="currUserTenantId">当前用户租户ID</param>
+            <returns>是否存在租赁ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelContainerTenantId">
+            <summary>
+            模型是否包含租户ID
+            </summary>
+            <returns>模型是否包含租户ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SetTenantId(`1,`0)">
+            <summary>
+            设置模型的租赁ID
+            </summary>
+            <param name="model">模型</param>
+            <param name="tenantId">租赁ID</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ExecTransaction(System.Action{System.String},Hzdtf.Utility.Enums.AccessMode,System.Data.IsolationLevel,System.String)">
+            <summary>
+            执行事务
+            </summary>
+            <param name="action">动作回调</param>
+            <param name="accessMode">访问模式</param>
+            <param name="level">事务等级</param>
+            <param name="connectionId">连接ID</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectAsync(`0,System.String@)">
+            <summary>
+            异步根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectAsync(`0,System.String[],System.String@)">
+            <summary>
+            异步根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectAsync(`0[],System.String@)">
+            <summary>
+            异步根据ID集合查询模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectAsync(`0[],System.String[],System.String@)">
+            <summary>
+            异步根据ID集合查询模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.CountAsync(`0,System.String@)">
+            <summary>
+            异步根据ID统计模型数
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.CountAsync(System.String@)">
+            <summary>
+            异步统计模型数
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectAsync(System.String@)">
+            <summary>
+            异步查询模型列表
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectAsync(System.String[],System.String@)">
+            <summary>
+            异步查询模型列表
+            </summary>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectPageAsync(System.Int32,System.Int32,System.String@,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            异步查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="connectionId">连接ID</param>
+            <param name="filter">筛选</param>
+            <returns>分页信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectPageAsync(System.Int32,System.Int32,System.String[],System.String@,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            异步查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <param name="filter">筛选</param>
+            <returns>分页信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.InsertAsync(`1,System.String@)">
+            <summary>
+            异步插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.InsertAsync(System.Collections.Generic.IList{`1},System.String@)">
+            <summary>
+            异步插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.UpdateByIdAsync(`1,System.String@)">
+            <summary>
+            异步根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.UpdateByIdAsync(`1,System.String[],System.String@)">
+            <summary>
+            异步根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteByIdAsync(`0,System.String@)">
+            <summary>
+            异步根据ID删除模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteByIdsAsync(`0[],System.String@)">
+            <summary>
+            异步根据ID数组删除模型
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DeleteAsync(System.String@)">
+            <summary>
+            异步删除所有模型
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ExecAsync``1(System.String,System.Boolean,System.Data.IDbConnection,System.Func{``0})">
+            <summary>
+            异步执行
+            </summary>
+            <typeparam name="TResult">结果类型</typeparam>
+            <param name="connectionId">连接ID</param>
+            <param name="isClose">是否关闭</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="func">函数</param>
+            <returns>结果任务</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Management.DbConnectionManager">
+            <summary>
+            数据库连接管理器
+            @ 黄振东
+            </summary>
+            <summary>
+            数据库连接管理器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Contract.Management.DbConnectionManager.dicDbConnections">
+            <summary>
+            数据库连接字典
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbConnectionManager.CurrDbConnCount">
+            <summary>
+            当前数据库连接数
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Contract.Management.DbConnectionManager.dicDbTransaction">
+            <summary>
+            数据库事务字典
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbConnectionManager.CurrDbTransactionCount">
+            <summary>
+            当前数据库事务数
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Contract.Management.DbConnectionManager.syncDicDbConnection">
+            <summary>
+            同步数据库连接字典
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Contract.Management.DbConnectionManager.syncDicDbTransaction">
+            <summary>
+            同步数据库事务字典
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.GetDbConnection(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,System.String@,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            获取数据库连接
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="persistenceConnection">持久化连接</param>
+            <param name="connectionString">连接字符串</param>
+            <param name="accessMode">访问模式</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.BrainpowerExecute(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,System.Action{System.String,System.Data.IDbConnection},Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            智能执行
+            根据连接ID会判断是否已经存在该连接，如果存在则直接引用存在的连接，否则新创建
+            </summary>
+            <param name="connectionId">连接ID（如果需要执行一连串则设置相同连接ID，一旦传入该值，则不会关闭此链接，需要调用方关闭。[前提是先执行新建连接ID]]）</param>
+            <param name="persistenceConnection">持久化连接</param>
+            <param name="action">动作</param>
+            <param name="accessMode">访问模式</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.NewConnectionId(Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            新建一个连接ID
+            </summary>
+            <param name="persistenceConnection">持久化连接</param>>
+            <param name="accessMode">访问模式</param>
+            <returns>连接ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.BeginTransaction(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,System.Data.IsolationLevel)">
+            <summary>
+            开启事务
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="persistenceConnection">持久化连接</param>
+            <param name="isolation">事务级别</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.ReleaseAll">
+            <summary>
+            释放所有
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.Release(System.String,System.Data.IDbConnection)">
+            <summary>
+            根据连接ID和数据库连接释放
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="dbConnection">数据库连接</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.Release(System.String)">
+            <summary>
+            根据连接ID释放
+            </summary>
+            <param name="connectionId">连接ID</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.GetDbTransaction(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            根据连接ID获取数据库事务
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="persistenceConnection">持久化连接</param>
+            <param name="accessMode">访问模式</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.GetPersistenceConnectionInfo(Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            获取持久化连接信息
+            </summary>
+            <param name="persistenceConnection">持久化连接</param>>
+            <param name="accessMode">访问模式</param>
+            <returns>持久化连接信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.AddDicValue(System.String,Hzdtf.Persistence.Contract.Management.DbConnectionEx)">
+            <summary>
+            添加键值
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="dbConnectionEx">数据库连接</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.GetDbConnectionFromCache(System.String,System.String,System.Boolean@)">
+            <summary>
+            从缓存里获取数据库连接
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="connectionString">连接字符串</param>
+            <param name="isExistsConnection">是否存在连接</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.GetDbConnection(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,System.Boolean@,System.String@,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            获取数据库连接
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <param name="persistenceConnection">持久化连接</param>
+            <param name="isExistsConnection">是否存在连接</param>
+            <param name="connectionString">连接字符串</param>
+            <param name="accessMode">访问模式</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.BrainpowerExecuteAsync(System.String@,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,System.Action{System.String,System.Boolean,System.Data.IDbConnection},Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            异步智能执行
+            根据连接ID会判断是否已经存在该连接，如果存在则直接引用存在的连接，否则新创建
+            因为执行业务方法是异步，本程序不自动关闭连接，由业务自行关闭
+            </summary>
+            <param name="connectionId">连接ID（如果需要执行一连串则设置相同连接ID，一旦传入该值，则不会关闭此链接，需要调用方关闭。[前提是先执行新建连接ID]]）</param>
+            <param name="persistenceConnection">持久化连接</param>
+            <param name="action">动作</param>
+            <param name="accessMode">访问模式</param>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Management.DbConnectionEx">
+            <summary>
+            数据库连接扩展
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbConnectionEx.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbConnectionEx.DbConnection">
+            <summary>
+            数据库连接
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Management.DbTransactionEx">
+            <summary>
+            数据库事务扩展
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbTransactionEx.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbTransactionEx.DbTransaction">
+            <summary>
+            数据库事务
+            </summary>
+        </member>
+    </members>
+</doc>

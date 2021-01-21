@@ -1,0 +1,1213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.BasicFunction.MySql</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.BasicFunction.MySql.AttachmentPersistence">
+            <summary>
+            附件持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            附件持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.SelectByOwner(System.Int16,System.Int32,System.String,System.String)">
+            <summary>
+            根据归属查询附件列表
+            </summary>
+            <param name="ownerType">归属类型</param>
+            <param name="ownerId">归属ID</param>
+            <param name="blurTitle">模糊标题</param>
+            <param name="connectionId">连接ID</param>
+            <returns>附件列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.CountByOwner(System.Int16,System.Int32,System.String,System.String)">
+            <summary>
+            根据归属查询统计附件个数
+            </summary>
+            <param name="ownerType">归属类型</param>
+            <param name="ownerId">归属ID</param>
+            <param name="blurTitle">模糊标题</param>
+            <param name="connectionId">连接ID</param>
+            <returns>附件个数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.DeleteByOwner(System.Int16,System.Int32,System.String)">
+            <summary>
+            根据归属删除
+            </summary>
+            <param name="ownerType">归属类型</param>
+            <param name="ownerId">归属ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            追加查询分页SQL
+            </summary>
+            <param name="whereSql">where语句</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.AttachmentPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.AttachmentPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.AttachmentPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.AttachmentPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.AttachmentInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.AttachmentPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence">
+            <summary>
+            数据字典子项扩展持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            数据字典子项扩展持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.SelectByDataDictionaryItemId(System.Int32,System.String)">
+            <summary>
+            根据数据字典子项ID查询数据字典子项扩展列表
+            </summary>
+            <param name="dataDictionaryItemId">数据字典子项ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>数据字典子项扩展列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            追加查询分页SQL
+            </summary>
+            <param name="whereSql">where语句</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.DataDictionaryItemExpandInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemExpandPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence">
+            <summary>
+            数据字典子项持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            数据字典子项持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.CountByDataItemIdAndText(System.Int32,System.String,System.String)">
+            <summary>
+            根据数据字典ID和文本统计个数
+            </summary>
+            <param name="dataDictionaryId">数据字典ID</param>
+            <param name="text">文本</param>
+            <param name="connectionId">连接ID</param>
+            <returns>个数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.CountByDataItemIdAndTextNotId(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            根据数据字典ID和文本统计个数，但排除ID
+            </summary>
+            <param name="notId">排除ID</param>
+            <param name="dataDictionaryId">数据字典ID</param>
+            <param name="text">文本</param>
+            <param name="connectionId">连接ID</param>
+            <returns>个数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.SelectByDataDictionaryId(System.Int32,System.String)">
+            <summary>
+            根据数据字典ID查询数据字典子项列表
+            </summary>
+            <param name="dataDictionaryId">数据字典ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>数据字典子项列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.SelectByDataDictionaryCode(System.String,System.String)">
+            <summary>
+            根据数据字典编码查询数据字典子项列表
+            </summary>
+            <param name="dataDictionaryCode">数据字典编码</param>
+            <param name="connectionId">连接ID</param>
+            <returns>数据字典子项列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            追加查询分页SQL
+            </summary>
+            <param name="whereSql">where语句</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.DataDictionaryItemInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryItemPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence">
+            <summary>
+            数据字典持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            数据字典持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.GetPageKeywordFields">
+            <summary>
+            获取分页按关键字查询的字段集合
+            </summary>
+            <returns>分页按关键字查询的字段集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.DataDictionaryInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.DataDictionaryPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.FunctionPersistence">
+            <summary>
+            功能持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            功能持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.FunctionPersistence.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.FunctionPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.FunctionPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.FunctionPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.FunctionPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.FunctionPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.FunctionInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.FunctionPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.FunctionPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.FunctionPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence">
+            <summary>
+            菜单功能持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            菜单功能持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.MenuFunctionInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuFunctionPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.MenuPersistence">
+            <summary>
+            菜单持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            菜单持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.MenuPersistence.FunctionPersistence">
+            <summary>
+            功能持久化
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.SelectByUserId(System.Int32,System.String)">
+            <summary>
+            根据用户ID查询具有权限的菜单列表
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>菜单列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.SelectByRoleIds(System.Int32[],System.String)">
+            <summary>
+            根据角色ID集合查询具有权限的菜单列表
+            </summary>
+            <param name="roleIds">角色ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>菜单列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.SelectContainsFunctions(System.String)">
+            <summary>
+            查询所有菜单列表，包含所属的功能列表
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>菜单列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.MenuPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.MenuPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.MenuPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.MenuPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.MenuInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.MenuPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence">
+            <summary>
+            角色菜单持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            角色菜单功能持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.FunctionPersistence">
+            <summary>
+            功能持久化
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.MenuFunctionPersistence">
+            <summary>
+            菜单功能持久化
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.CountByMenuCodeAndFunctionCodesAndRoleIds(System.String,System.String[],System.Int32[],System.String)">
+            <summary>
+            根据菜单编码、功能编码集合和角色ID集合统计个数
+            </summary>
+            <param name="menuCode">菜单编码</param>
+            <param name="functionCodes">功能编码集合</param>
+            <param name="roleIds">角色ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>个数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.SelectFunctionsByMenuCodeAndRoleIds(System.String,System.Int32[],System.String)">
+            <summary>
+            根据菜单编码和角色ID集合查询功能信息列表
+            </summary>
+            <param name="menuCode">菜单编码</param>
+            <param name="roleIds">角色ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>功能信息列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.SelectMenuFunctionsByRoleId(System.Int32,System.String)">
+            <summary>
+            根据角色ID查询菜单功能信息列表
+            </summary>
+            <param name="roleId">角色ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>菜单功能信息列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.DeleteByRoleId(System.Int32,System.String)">
+            <summary>
+            根据用户ID删除
+            </summary>
+            <param name="roleId">角色ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.RoleMenuFunctionInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RoleMenuFunctionPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.RolePersistence">
+            <summary>
+            角色持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            角色持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.SelelctByCodeOrName(System.String,System.String,System.String)">
+            <summary>
+            根据编码或名称查询角色列表
+            </summary>
+            <param name="code">编码</param>
+            <param name="name">名称</param>
+            <param name="connectionId">连接ID</param>
+            <returns>角色列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.SelelctByCodeOrNameNotId(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            根据编码或名称查询角色列表，但排除ID
+            </summary>
+            <param name="code">编码</param>
+            <param name="name">名称</param>
+            <param name="notId">排除ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>角色列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.SelectAndNotSystemHide(System.String)">
+            <summary>
+            查询角色列表并去掉系统隐藏
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>角色列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.SelectByFilter(Hzdtf.Utility.Model.KeywordFilterInfo,System.String)">
+            <summary>
+            根据筛选条件查询角色列表
+            </summary>
+            <param name="filter">筛选</param>
+            <param name="connectionId">连接ID</param>
+            <returns>角色列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            追加查询分页SQL
+            </summary>
+            <param name="whereSql">where语句</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.GetPageKeywordFields">
+            <summary>
+            获取分页按关键字查询的字段集合
+            </summary>
+            <returns>分页按关键字查询的字段集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.RolePersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.RolePersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.RolePersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.RolePersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.RoleInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.RolePersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.SequencePersistence">
+            <summary>
+            序列持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            序列持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SequencePersistence.SelectBySeqType(System.String,System.String)">
+            <summary>
+            根据序列类型查询序列信息
+            </summary>
+            <param name="seqType">序列类型</param>
+            <param name="connectionId">连接ID</param>
+            <returns>序列信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SequencePersistence.UpdateIncrementById(Hzdtf.BasicFunction.Model.SequenceInfo,System.String)">
+            <summary>
+            根据ID更新增量
+            </summary>
+            <param name="sequenceInfo">序列信息</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.SequencePersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.SequencePersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.SequencePersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.SequencePersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SequencePersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.SequenceInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SequencePersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SequencePersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SequencePersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence">
+            <summary>
+            用户菜单持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            用户菜单功能持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.CountByMenuCodeAndFunctionCodesAndUserId(System.String,System.String[],System.Int32,System.String)">
+            <summary>
+            根据菜单编码、功能编码集合和用户ID统计个数
+            </summary>
+            <param name="menuCode">菜单编码</param>
+            <param name="functionCodes">功能编码集合</param>
+            <param name="userId">用户ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>个数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.SelectFunctionsByMenuCodeAndUserId(System.String,System.Int32,System.String)">
+            <summary>
+            根据菜单编码和用户ID查询功能信息列表
+            </summary>
+            <param name="menuCode">菜单编码</param>
+            <param name="userId">用户ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>功能信息列表</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.UserMenuFunctionInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserMenuFunctionPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.UserRolePersistence">
+            <summary>
+            用户角色持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            用户角色持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.UserRolePersistence.RolePersistence">
+            <summary>
+            角色持久化
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.UserRolePersistence.UserPersistence">
+            <summary>
+            用户持久化
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.SelectRolesByUserId(System.Int32,System.String)">
+            <summary>
+            根据用户ID查询角色列表
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>角色列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.DeleteByUserId(System.Int32,System.String)">
+            <summary>
+            根据用户ID删除
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.SelectContainsRoleByUserIds(System.Int32[],System.String)">
+            <summary>
+            根据用户ID集合查询用户角色列表，包含角色信息
+            </summary>
+            <param name="userIds">用户ID集合</param>
+            <param name="connectionId">连接ID</param>
+            <returns>用户角色列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.SelectUsersByRoleId(System.Int32,System.String)">
+            <summary>
+            根据角色ID查询用户列表
+            </summary>
+            <param name="roleId">角色ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>用户列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.SelectUsersByRoleCode(System.String,System.String)">
+            <summary>
+            根据角色编码查询用户列表
+            </summary>
+            <param name="roleCode">角色编码</param>
+            <param name="connectionId">连接ID</param>
+            <returns>用户列表</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.UserRolePersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserRolePersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserRolePersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserRolePersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.UserRoleInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserRolePersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.UserPersistence">
+            <summary>
+            用户持久化
+            @ 黄振东
+            </summary>
+            <summary>
+            用户持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.SelectByLoginIdAndPassword(System.String,System.String,System.String)">
+            <summary>
+            根据登录ID和密码查询用户信息
+            </summary>
+            <param name="loginId">登录ID</param>
+            <param name="password">密码</param>
+            <param name="connectionId">连接ID</param>
+            <returns>用户信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.UpdatePasswordById(Hzdtf.BasicFunction.Model.UserInfo,System.String)">
+            <summary>
+            根据ID更新密码
+            </summary>
+            <param name="user">用户</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.SelectByLoginIdOrCodeOrName(System.String,System.String,System.String,System.String)">
+            <summary>
+            根据登录ID或编码或名称查询用户信息
+            </summary>
+            <param name="loginId">登录ID</param>
+            <param name="code">编码</param>
+            <param name="name">名称</param>
+            <param name="connectionId">连接ID</param>
+            <returns>用户信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.SelectByLoginIdOrCodeOrNameNotId(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            根据登录ID或编码或名称查询用户信息，但排除ID
+            </summary>
+            <param name="notId">排除ID</param>
+            <param name="loginId">登录ID</param>
+            <param name="code">编码</param>
+            <param name="name">名称</param>
+            <param name="connectionId">连接ID</param>
+            <returns>用户信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.SelectByFilter(Hzdtf.BasicFunction.Model.Expand.User.UserFilterInfo,System.String)">
+            <summary>
+            根据筛选条件查询用户列表
+            </summary>
+            <param name="filter">筛选</param>
+            <param name="connectionId">连接ID</param>
+            <returns>用户列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.GetPageKeywordFields">
+            <summary>
+            获取分页按关键字查询的字段集合
+            </summary>
+            <returns>分页按关键字查询的字段集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            追加查询分页SQL
+            </summary>
+            <param name="whereSql">where语句</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.GetSelectPageJoinSql(Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+            <summary>
+            获取查询分页连接SQL
+            </summary>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+            <returns>连接SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.SlaveTables">
+            <summary>
+            从表集合
+            Key:表名;Value:外键字段
+            </summary>
+            <returns>从表集合</returns>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.UserPersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserPersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserPersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.UserPersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.UserInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.UserPersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence">
+            <summary>
+            送件流程路线持久化
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.INSERT_FIELD_NAMES">
+            <summary>
+            插入字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.UPDATE_FIELD_NAMES">
+            <summary>
+            更新字段名称集合
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.FIELD_MAP_PROPS">
+            <summary>
+            所有字段映射集合
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.GetValueByFieldName(Hzdtf.BasicFunction.Model.SendFlowRouteInfo,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.MySql.SendFlowRoutePersistence.AllFieldMapProps">
+            <summary>
+            所有字段映射集合
+            </summary>
+            <returns>所有字段映射集合</returns>
+        </member>
+    </members>
+</doc>

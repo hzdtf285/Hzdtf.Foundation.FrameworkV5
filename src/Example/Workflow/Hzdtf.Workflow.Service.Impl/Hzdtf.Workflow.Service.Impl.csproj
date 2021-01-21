@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>工作流服务实现类库</Product>
+    <Description>工作流服务实现类库，运行在.Net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Workflow.Service.Impl.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Workflow.Service.Impl.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Service\Hzdtf.Service.Impl\Hzdtf.Service.Impl.csproj" />
+    <ProjectReference Include="..\Hzdtf.Workflow.Persistence.Contract\Hzdtf.Workflow.Persistence.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Workflow.Service.Contract\Hzdtf.Workflow.Service.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

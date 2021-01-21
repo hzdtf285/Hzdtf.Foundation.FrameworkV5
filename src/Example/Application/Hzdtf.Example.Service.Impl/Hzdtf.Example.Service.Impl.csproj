@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>样例系统服务服务类库</Product>
+    <Description>样例系统服务契约类库，运行在.Net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Example.Service.Impl.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Example.Service.Impl.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Service\Hzdtf.Service.Impl\Hzdtf.Service.Impl.csproj" />
+    <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.Service.Contract\Hzdtf.BasicFunction.Service.Contract.csproj" />
+    <ProjectReference Include="..\..\Workflow\Hzdtf.Workflow.Service.Contract\Hzdtf.Workflow.Service.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Example.Persistence.Contract\Hzdtf.Example.Persistence.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Example.Service.Contract\Hzdtf.Example.Service.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

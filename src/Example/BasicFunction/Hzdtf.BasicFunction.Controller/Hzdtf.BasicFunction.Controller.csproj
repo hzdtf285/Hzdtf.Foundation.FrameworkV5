@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>基础功能服务控制器类库</Product>
+    <Description>基础功能服务控制器类库，运行在.Net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.BasicFunction.Controller.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.BasicFunction.Controller.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AUC\Hzdtf.AUC.Contract\Hzdtf.AUC.Contract.csproj" />
+    <ProjectReference Include="..\..\..\Common\Hzdtf.Utility.AspNet\Hzdtf.Utility.AspNet.csproj" />
+    <ProjectReference Include="..\..\..\Controller\Hzdtf.BasicController\Hzdtf.BasicController.csproj" />
+    <ProjectReference Include="..\Hzdtf.BasicFunction.Service.Contract\Hzdtf.BasicFunction.Service.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

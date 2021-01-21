@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Example.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Example.Model.TestFormInfo">
+            <summary>
+            测试表单信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Example.Model.TestFormInfo.Code_Name">
+            <summary>
+            编码_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Example.Model.TestFormInfo.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Example.Model.TestFormInfo.Name_Name">
+            <summary>
+            名称_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Example.Model.TestFormInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Example.Model.WorkflowDefine">
+            <summary>
+            工作流定义
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Example.Model.WorkflowDefine.TEST_FORM">
+            <summary>
+            测试表单
+            </summary>
+        </member>
+    </members>
+</doc>

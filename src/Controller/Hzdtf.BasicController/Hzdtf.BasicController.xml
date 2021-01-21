@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.BasicController</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.BasicController.BasicControllerBase`3">
+            <summary>
+            基本控制器基类
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.BasicController.BasicControllerBase`3.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicController.BasicControllerBase`3.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicController.BasicControllerBase`3.Service">
+            <summary>
+            服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.BasicControllerBase`3.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+            <returns>菜单编码</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.IPagingParseFilter">
+            <summary>
+            分页解析筛选接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.IPagingParseFilter.ToFilterObjectFromHttp``1(Microsoft.AspNetCore.Http.HttpRequest,System.Int32@,System.Int32@)">
+            <summary>
+            从HTTP请求对象转换为筛选对象
+            </summary>
+            <typeparam name="PagingFilterObjectT">分页筛选对象类型</typeparam>
+            <param name="httpRequest">HTTP请求对象</param>
+            <param name="pageIndex">页码（从0开始）</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>分页筛选对象</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.JqGridPagingParseFilter">
+            <summary>
+            JqGrid分页解析筛选
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.JqGridPagingParseFilter.ToFilterObjectFromHttp``1(Microsoft.AspNetCore.Http.HttpRequest,System.Int32@,System.Int32@)">
+            <summary>
+            从HTTP请求对象转换为筛选对象
+            </summary>
+            <typeparam name="PagingFilterObjectT">分页筛选对象类型</typeparam>
+            <param name="httpRequest">HTTP请求对象</param>
+            <param name="pageIndex">页码（从0开始）</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>分页筛选对象</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.ManageControllerBase`4">
+            <summary>
+            管理控制器基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+            <typeparam name="PageInfoT">页面信息类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Get(`0)">
+            <summary>
+            根据ID查找模型
+            </summary>
+            <param name="id">ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Post(`1)">
+            <summary>
+            添加模型
+            </summary>
+            <param name="model">模型</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Put(`0,`1)">
+            <summary>
+            修改模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="model">模型</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Delete(`0)">
+            <summary>
+            移除模型
+            </summary>
+            <param name="id">ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.BatchAdd(System.Collections.Generic.IList{`1})">
+            <summary>
+            批量添加模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.BatchRemove(`0[])">
+            <summary>
+            根据ID集合批量移除模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Count">
+            <summary>
+            统计模型数量
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Exists(`0)">
+            <summary>
+            根据ID获取是否存在模型
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.PageDataControllerBase`4">
+            <summary>
+            页面数据控制器基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+            <typeparam name="PageInfoT">页面信息类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.PageData">
+            <summary>
+            获取页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{`3})">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+        </member>
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.CreatePageData">
+            <summary>
+            创建页面数据
+            </summary>
+            <returns>页面数据</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.PagingControllerBase`5">
+            <summary>
+            分页控制器基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+            <typeparam name="PageInfoT">页面信息类型</typeparam>
+            <typeparam name="PageFilterT">分页筛选类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.BasicController.PagingControllerBase`5.PagingParseFilter">
+            <summary>
+            分页解析筛选
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicController.PagingControllerBase`5.PagingReturnConvert">
+            <summary>
+            分页返回转换
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.Page">
+            <summary>
+            执行分页获取数据
+            </summary>
+            <returns>分页返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.DoPageAsync">
+            <summary>
+            异步去分页
+            </summary>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.QueryPageFromServiceAsync(System.Int32,System.Int32,`4)">
+            <summary>
+            异步从服务里查询分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AfterPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,`4)">
+            <summary>
+            分页后
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AppendFilterParams(`4)">
+            <summary>
+            追加筛选参数
+            </summary>
+            <param name="pageFilter">分页筛选</param>
+        </member>
+        <member name="T:Hzdtf.BasicController.SystemController">
+            <summary>
+            系统控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.SystemController.CurrConnCount">
+            <summary>
+            获取当前数据库连接数
+            </summary>
+            <returns>当前数据库连接数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.SystemController.CurrTransactionCount">
+            <summary>
+            获取当前数据库事务数
+            </summary>
+            <returns>当前数据库事务数</returns>
+        </member>
+    </members>
+</doc>

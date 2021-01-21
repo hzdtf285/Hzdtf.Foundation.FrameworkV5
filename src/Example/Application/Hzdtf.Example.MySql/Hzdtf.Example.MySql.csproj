@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>样例系统MySql类库</Product>
+    <Description>样例系统MySql类库，运行在.Net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Example.MySql.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Example.MySql.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Persistence\Hzdtf.MySql\Hzdtf.MySql.csproj" />
+    <ProjectReference Include="..\Hzdtf.Example.Model\Hzdtf.Example.Model.csproj" />
+    <ProjectReference Include="..\Hzdtf.Example.Persistence.Contract\Hzdtf.Example.Persistence.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

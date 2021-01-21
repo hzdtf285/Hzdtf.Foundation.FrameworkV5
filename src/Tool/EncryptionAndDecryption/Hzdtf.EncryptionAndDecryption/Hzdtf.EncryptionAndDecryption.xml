@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.EncryptionAndDecryption</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.EncryptionAndDecryption.Main">
+            <summary>
+            主界面
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.btnParseToPlaintext_Click(System.Object,System.EventArgs)">
+            <summary>
+            点击粘贴到明文
+            </summary>
+            <param name="sender">引发对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.btnEncrypt_Click(System.Object,System.EventArgs)">
+            <summary>
+            点击加密
+            </summary>
+            <param name="sender">引发对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.btnCopyCiphertext_Click(System.Object,System.EventArgs)">
+            <summary>
+            点击复制密文
+            </summary>
+            <param name="sender">引发对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.btnParseToCiphertext_Click(System.Object,System.EventArgs)">
+            <summary>
+            点击粘贴到密文
+            </summary>
+            <param name="sender">引发对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.btnDecryption_Click(System.Object,System.EventArgs)">
+            <summary>
+            点击解密
+            </summary>
+            <param name="sender">引发对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.btnPlaintext_Click(System.Object,System.EventArgs)">
+            <summary>
+            点击复制明文
+            </summary>
+            <param name="sender">引发对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.CopyFromTextControll(System.Windows.Forms.TextBox,System.String)">
+            <summary>
+            复制来自文本控件
+            </summary>
+            <param name="textBox">文本控件</param>
+            <param name="name">名称</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.PasteToTextControll(System.Windows.Forms.TextBox)">
+            <summary>
+            粘贴到文本控件里
+            </summary>
+            <param name="textBox">文本控件</param>
+        </member>
+        <member name="F:Hzdtf.EncryptionAndDecryption.Main.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Main.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Hzdtf.EncryptionAndDecryption.Program.Main">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+    </members>
+</doc>

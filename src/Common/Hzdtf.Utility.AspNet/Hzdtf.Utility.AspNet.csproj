@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Description>AspNet辅助类库，运行在AspNet Core5以上</Description>
+    <Product>AspNet辅助类库</Product>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Utility.AspNet.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Utility.AspNet.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Logger\Hzdtf.Logger.Contract\Hzdtf.Logger.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Utility\Hzdtf.Utility.csproj" />
+  </ItemGroup>
+
+</Project>

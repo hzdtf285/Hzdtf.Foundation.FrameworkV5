@@ -1,0 +1,29 @@
+﻿using Hzdtf.BasicController;
+using |NamespacePfx|.Model;
+using |NamespacePfx|.Service.Contract;
+using Hzdtf.Utility.Attr;
+using Hzdtf.Utility.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Hzdtf.Utility.Utils;
+
+namespace |NamespacePfx|.Controller
+{
+    /// <summary>
+    /// |Description|控制器
+    /// @ 黄振东
+    /// </summary>
+    [Inject]
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
+    public partial class |Name| : PagingControllerBase<|PkType|, |Model|Info, I|Model|Service, PageInfo<|PkType|>, FilterInfo>
+    {
+        /// <summary>
+        /// 菜单编码
+        /// </summary>
+        /// <returns>菜单编码</returns>
+        protected override string MenuCode() => "|Model|";
+    }
+}

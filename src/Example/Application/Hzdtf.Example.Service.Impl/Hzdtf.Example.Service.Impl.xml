@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Example.Service.Impl</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Example.Service.Impl.TestFormService">
+            <summary>
+            测试表单服务
+            @ 黄振东
+            </summary>
+            <summary>
+            测试表单服务
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.TestFormService.ModifyFlowStatusByWorkflowId(Hzdtf.Example.Model.TestFormInfo,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+            <summary>
+            根据流程ID修改流程状态
+            </summary>
+            <param name="testForm">测试表单</param>
+            <param name="connectionId">连接ID</param>
+            <param name="currUser">当前用户</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.TestFormService.Hzdtf#Workflow#Service#Contract#Engine#IFormDataReader{Hzdtf#Example#Model#TestFormInfo}#ReaderByWorkflowId(System.Int32,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+            <summary>
+            根据工作流ID读取表单数据
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <param name="connectionId">连接ID</param>
+            <param name="currUser">当前用户</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.TestFormService.Hzdtf#Workflow#Service#Contract#Engine#IFormDataReader{Hzdtf#Workflow#Model#Expand#ConcreteFormInfo}#ReaderByWorkflowId(System.Int32,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+            <summary>
+            根据工作流ID读取表单数据
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <param name="connectionId">连接ID</param>
+            <param name="currUser">当前用户</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.TestFormService.RemoveByWorkflowId(System.Int32,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+            <summary>
+            根据工作流ID移除
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <param name="connectionId">连接ID</param>
+            <param name="currUser">当前用户</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Workflow.FormDataReaderFactory">
+            <summary>
+            表单数据读取工厂
+            黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Example.Service.Impl.Workflow.FormDataReaderFactory.TestFormService">
+            <summary>
+            测试表单服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Workflow.FormDataReaderFactory.Create(System.String)">
+            <summary>
+            创建
+            </summary>
+            <param name="type">类型</param>
+            <returns>产品</returns>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Workflow.FormEngineFactory">
+            <summary>
+            表单引擎工厂
+            黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Example.Service.Impl.Workflow.FormEngineFactory.TestFormEngine">
+            <summary>
+            测试表单引擎
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Workflow.FormEngineFactory.Create(System.String)">
+            <summary>
+            创建
+            </summary>
+            <param name="type">类型</param>
+            <returns>产品</returns>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Workflow.FormRemoveFactory">
+            <summary>
+            表单移除工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Example.Service.Impl.Workflow.FormRemoveFactory.TestFormRemove">
+            <summary>
+            测试表单移除
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Workflow.FormRemoveFactory.Create(System.String)">
+            <summary>
+            创建
+            </summary>
+            <param name="type">类型</param>
+            <returns>产品</returns>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Workflow.TestFormEngine">
+            <summary>
+            测试表单引擎
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Workflow.TestFormRemove">
+            <summary>
+            测试表单移除
+            @ 黄振东
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>基础功能服务契约类库</Product>
+    <Description>基础功能服务契约类库，运行在.Net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.BasicFunction.Service.Contract.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.BasicFunction.Service.Contract.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Service\Hzdtf.Service.Contract\Hzdtf.Service.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.BasicFunction.Model\Hzdtf.BasicFunction.Model.csproj" />
+  </ItemGroup>
+
+</Project>

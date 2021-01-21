@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--程序集配置-->
+<Assemblys>
+  <!--服务程序集-->
+  <Services>
+    <Assembly>
+      <Names>
+        <Name>Hzdtf.Logger.Contract</Name>
+        <Name>Hzdtf.Logger.Integration.ENLog</Name>
+        <Name>Hzdtf.CodeGenerator.Persistence.Contract</Name>
+        <Name>Hzdtf.CodeGenerator.SqlServer</Name>
+        <Name>Hzdtf.CodeGenerator.MySql</Name>
+      </Names>
+      <Lifecycle>SIGNLETON</Lifecycle>
+    </Assembly>
+    <Assembly>
+      <Names>
+        <Name>Hzdtf.CodeGenerator.Contract</Name>
+        <Name>Hzdtf.CodeGenerator.Impl</Name>
+      </Names>
+      <Lifecycle>SIGNLETON</Lifecycle>
+      <Intercepteds>
+        <Intercepted>Hzdtf.Autofac.Extensions,Hzdtf.Autofac.Extensions.Intercepteds.ProcTrackLogInterceptor</Intercepted>
+        <Intercepted>Hzdtf.Autofac.Extensions,Hzdtf.Autofac.Extensions.Intercepteds.ValiInterceptor</Intercepted>
+      </Intercepteds>
+    </Assembly>
+  </Services>
+</Assemblys>

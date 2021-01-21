@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.BasicFunction.Controller</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.BasicFunction.Controller.AttachmentController">
+            <summary>
+            附件控制器
+            @ 黄振东
+            </summary>
+            <summary>
+            附件控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.AttachmentController.UserService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.Get(System.Int32)">
+            <summary>
+            根据ID查找附件
+            </summary>
+            <param name="id">ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.Page">
+            <summary>
+            执行分页获取数据
+            </summary>
+            <returns>分页返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.List">
+            <summary>
+            根据附件归属条件获取附件列表
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.DeleteByOwner(System.Int16,System.Int32)">
+            <summary>
+            根据归属移除附件
+            </summary>
+            <param name="ownerType">归属类型</param>
+            <param name="ownerId">归属ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FilterDownLoadPermissionFileAddress(System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.AttachmentInfo})">
+            <summary>
+            过滤下载权限的文件地址
+            </summary>
+            <param name="attachments">附件列表</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FilterDownLoadPermissionFileAddress(Hzdtf.BasicFunction.Model.AttachmentInfo)">
+            <summary>
+            过滤下载权限的文件地址
+            </summary>
+            <param name="attachment">附件</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}})">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.CreatePageData">
+            <summary>
+            创建页面数据
+            </summary>
+            <returns>页面数据</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+            <returns>菜单编码</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController">
+            <summary>
+            附件扩展控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.AttachmentService">
+            <summary>
+            附件服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.Upload(Hzdtf.BasicFunction.Model.Expand.Attachment.SimpleAttachmentInfo)">
+            <summary>
+            上传附件
+            </summary>
+            <param name="simpleAttachment">简单附件</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.BeforeUpload(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},Hzdtf.BasicFunction.Model.AttachmentInfo)">
+            <summary>
+            上传附件前
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="attachment">附件</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.AfterUpload(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.AttachmentInfo})">
+            <summary>
+            上传附件后
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="attachments">附件列表</param>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.DataDictionaryItemController">
+            <summary>
+            数据字典子项控制器
+            @ 黄振东
+            </summary>
+            <summary>
+            数据字典子项控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.UserService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.DataDictionaryService">
+            <summary>
+            数据字典服务
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.DataDictionaryItemExpandService">
+            <summary>
+            数据字典子项扩展服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.DataDictionarys">
+            <summary>
+            查询所有的数据字典列表
+            </summary>
+            <returns>数据字典列表</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.PageExpandList(System.Int32,System.Int32)">
+            <summary>
+            执行分页获取数据
+            </summary>
+            <param name="page">页码，从1开始</param>
+            <param name="rows">每页记录数</param>
+            <returns>分页返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}})">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.CreatePageData">
+            <summary>
+            创建页面数据
+            </summary>
+            <returns>页面数据</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+            <returns>菜单编码</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.RoleController">
+            <summary>
+            角色控制器
+            @ 黄振东
+            </summary>
+            <summary>
+            角色控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.RoleController.UserService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.Export">
+            <summary>
+            导出
+            </summary>
+            <returns>文件内容结果</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo})">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.CreatePageData">
+            <summary>
+            创建页面数据
+            </summary>
+            <returns>页面数据</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+            <returns>菜单编码</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.UserController">
+            <summary>
+            用户控制器
+            @ 黄振东
+            </summary>
+            <summary>
+            用户控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.UserController.RoleService">
+            <summary>
+            角色服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.ModifyCurrUserPassword(Hzdtf.BasicFunction.Model.Expand.User.CurrUserModifyPasswordInfo)">
+            <summary>
+            修改当前用户密码
+            </summary>
+            <param name="currUserModifyPassword">当前用户修改密码</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.ResetUserPassword(Hzdtf.BasicFunction.Model.Expand.User.ModifyPasswordInfo,System.String)">
+            <summary>
+            重置用户密码
+            </summary>
+            <param name="modifyPassword">修改密码</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.Export">
+            <summary>
+            导出
+            </summary>
+            <returns>文件内容结果</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.AppendPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.BasicFunction.Model.Expand.User.UserPageInfo})">
+            <summary>
+            追加页面数据
+            </summary>
+            <param name="returnInfo">返回信息</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.BasicFunction.Model.Expand.User.UserPageInfo})">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.CreatePageData">
+            <summary>
+            创建页面数据
+            </summary>
+            <returns>页面数据</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+            <returns>菜单编码</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware">
+            <summary>
+            路由权限中间件
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.userService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.BasicFunction.Service.Contract.IUserService)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="next">下一个中间件处理委托</param>
+            <param name="options">路由权限选项配置</param>
+            <param name="reader">读取API权限配置</param>
+            <param name="userService">用户服务</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.IsHavePermission(Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
+            <summary>
+            判断是否拥有权限
+            </summary>
+            <param name="controller">控制器信息</param>
+            <param name="action">动作信息</param>
+            <param name="basicReturn">基本返回</param>
+            <returns>获取是否拥有权限</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.Home.AuthorizationController">
+            <summary>
+            授权控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IdentityAuth">
+            <summary>
+            身份授权
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IdentityBasicAuth">
+            <summary>
+            身份基本授权
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IdentityExit">
+            <summary>
+            身份退出
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IdentityTokenAuth">
+            <summary>
+            身份令牌授权
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IsDisabledLogin">
+            <summary>
+            是否禁用登录
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.Login(Hzdtf.Utility.Model.LoginInfo)">
+            <summary>
+            登录
+            </summary>
+            <param name="loginInfo">登录信息</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.LoginToToken(Hzdtf.Utility.Model.LoginInfo)">
+            <summary>
+            登录并返回令牌
+            </summary>
+            <param name="loginInfo">登录信息</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.Logout">
+            <summary>
+            登出
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.GetIsVerificationCode">
+            <summary>
+            获取是否需要验证码
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.ExecLogin(Hzdtf.Utility.Model.LoginInfo,System.Action{System.String,System.String,Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.LoginReturnInfo}})">
+            <summary>
+            执行登录
+            </summary>
+            <param name="loginInfo">登录信息</param>
+            <param name="callbackLogin">回调登录</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IsNeedIsVerificationCode">
+            <summary>
+            判断是否需要验证码
+            </summary>
+            <returns>是否需要验证码</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.Home.HomeController">
+            <summary>
+            主页控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.HomeController.UserMenuService">
+            <summary>
+            用户菜单服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Home.HomeController.Index">
+            <summary>
+            主页
+            </summary>
+            <returns>动作结果</returns>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.Other.ImageController">
+            <summary>
+            图片控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Other.ImageController.BuilderCheckCode">
+            <summary>
+            生成验证码
+            </summary>
+        </member>
+        <member name="T:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController">
+            <summary>
+            角色权限控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.MenuService">
+            <summary>
+            菜单服务
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.RoleMenuFunctionService">
+            <summary>
+            角色菜单功能服务
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.UserService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.MenuTrees">
+            <summary>
+            获取菜单树列表（包含菜单及所拥有的功能列表）
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.HaveMenuFunctions(System.Int32)">
+            <summary>
+            获取角色拥有的功能菜单信息列表
+            </summary>
+            <param name="roleId">角色ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.SavePermission(System.Int32,System.Collections.Generic.IList{System.Int32})">
+            <summary>
+            保存权限
+            </summary>
+            <param name="roleId">角色ID</param>
+            <param name="menuFunctionIds">菜单功能ID列表</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+            <returns>菜单编码</returns>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo})">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.CreatePageData">
+            <summary>
+            创建页面数据
+            </summary>
+            <returns>页面数据</returns>
+        </member>
+    </members>
+</doc>

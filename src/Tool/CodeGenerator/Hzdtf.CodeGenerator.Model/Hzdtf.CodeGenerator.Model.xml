@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.CodeGenerator.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.CodeGenerator.Model.BasicInfo">
+            <summary>
+            基本信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.BasicInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.BasicInfo.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.BasicInfo.IsPage">
+            <summary>
+            是否分页，默认为是
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.CodeParamInfo">
+            <summary>
+            代码参数信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.FunctionTypes">
+            <summary>
+            功能类型数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.NamespacePfx">
+            <summary>
+            命名空间前辍
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.PkType">
+            <summary>
+            主键类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.IsTenant">
+            <summary>
+            是否租户
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.CodeGeneratorParamInfo">
+            <summary>
+            代码生成参数信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeGeneratorParamInfo.Tables">
+            <summary>
+            表列表
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.ColumnInfo">
+            <summary>
+            列信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.ColumnInfo.DataType">
+            <summary>
+            数据类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.ColumnInfo.ColumnType">
+            <summary>
+            列类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.ColumnInfo.IsNull">
+            <summary>
+            是否允许为null
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.ColumnInfo.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.CommentInfo">
+            <summary>
+            描述信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CommentInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CommentInfo.Desc">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CommentInfo.Range">
+            <summary>
+            范围
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CommentInfo.MinLength">
+            <summary>
+            最小长度
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.CommentInfo.Enum">
+            <summary>
+            枚举，如果不为空，则输出枚举类型
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.EnumInfo">
+            <summary>
+            枚举信息
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.EnumInfo.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.EnumInfo.Desc">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.EnumInfo.Items">
+            <summary>
+            枚举子项集合
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.EnumItem">
+            <summary>
+            枚举子项
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.EnumItem.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.EnumItem.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.EnumItem.Desc">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.FunctionType">
+            <summary>
+            功能类型枚举
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.FunctionType.MODEL">
+            <summary>
+            模型
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.FunctionType.PERSISTENCE">
+            <summary>
+            持久
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.FunctionType.SERVICE">
+            <summary>
+            服务
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.FunctionType.CONTROLLER">
+            <summary>
+            控制器
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.FunctionType.ROUTE_PERMISSION_CONFIG">
+            <summary>
+            路由权限配置
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.ModelInfo">
+            <summary>
+            模型信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.ModelInfo.PropertyType">
+            <summary>
+            属性类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.ModelInfo.Attrs">
+            <summary>
+            特性列表
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.PrimaryKeyType">
+            <summary>
+            主键类型
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.PrimaryKeyType.INT">
+            <summary>
+            整型
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.PrimaryKeyType.STRING">
+            <summary>
+            字符串
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.PrimaryKeyType.GUID">
+            <summary>
+            GUID
+            </summary>
+        </member>
+        <member name="F:Hzdtf.CodeGenerator.Model.PrimaryKeyType.SNOWFLAKE">
+            <summary>
+            雪花算法
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.PrimaryKeyExtensions">
+            <summary>
+            主键类型扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.CodeGenerator.Model.PrimaryKeyExtensions.ToCodeString(Hzdtf.CodeGenerator.Model.PrimaryKeyType)">
+            <summary>
+            根据主键类型转换为编码字符串
+            </summary>
+            <param name="pkType">主键类型</param>
+            <returns>编码字符串</returns>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.TableInfo">
+            <summary>
+            表信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.TableInfo.Columns">
+            <summary>
+            列列表
+            </summary>
+        </member>
+    </members>
+</doc>

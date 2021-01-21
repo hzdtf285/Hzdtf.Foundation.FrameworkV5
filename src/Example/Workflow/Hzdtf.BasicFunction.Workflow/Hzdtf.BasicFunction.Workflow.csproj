@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>基础功能工作流类库</Product>
+    <Description>基础功能工作流类库，运行在.Net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.BasicFunction.Workflow.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.BasicFunction.Workflow.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\IOC\Hzdtf.Autofac.Extensions\Hzdtf.Autofac.Extensions.csproj" />
+    <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.Service.Contract\Hzdtf.BasicFunction.Service.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Workflow.Service.Contract\Hzdtf.Workflow.Service.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Workflow.Service.Impl\Hzdtf.Workflow.Service.Impl.csproj" />
+  </ItemGroup>
+
+</Project>

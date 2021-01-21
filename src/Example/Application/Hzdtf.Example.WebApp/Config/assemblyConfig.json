@@ -1,0 +1,46 @@
+{
+  "Services": [
+    {
+      "Names": [
+        "Hzdtf.BasicController",
+        "Hzdtf.BasicFunction.Controller",
+        "Hzdtf.Workflow.Controller",
+        "Hzdtf.Example.Controller"
+      ]
+    },
+    {
+      "Names": [
+        "Hzdtf.Utility",
+        "Hzdtf.Logger.Contract",
+        "Hzdtf.Logger.Integration.ENLog",
+        "Hzdtf.Logger.Integration.MicrosoftLog",
+        "Hzdtf.AUC.Contract",
+        "Hzdtf.AUC.AspNet",
+        "Hzdtf.Persistence.Contract",
+        "Hzdtf.BasicFunction.Persistence.Contract",
+        "Hzdtf.BasicFunction.MySql",
+        "Hzdtf.Workflow.Persistence.Contract",
+        "Hzdtf.Workflow.MySql",
+        "Hzdtf.Example.Persistence.Contract",
+        "Hzdtf.Example.MySql"
+      ], 
+      "Lifecycle": "SIGNLETON"
+    },
+    {
+      "Names": [
+        "Hzdtf.BasicFunction.Service.Contract",
+        "Hzdtf.BasicFunction.Service.Impl",
+        "Hzdtf.Workflow.Service.Contract",
+        "Hzdtf.Workflow.Service.Impl",
+        "Hzdtf.BasicFunction.Workflow",
+        "Hzdtf.Example.Service.Contract",
+        "Hzdtf.Example.Service.Impl"
+      ],
+      "Lifecycle": "SIGNLETON",
+      "Intercepteds": [
+        "Hzdtf.Persistence.Autofac,Hzdtf.Persistence.Autofac.TransactionInterceptor"
+      ]
+    }
+  ],
+  "IsLoadAutoMapperConfig": true
+}

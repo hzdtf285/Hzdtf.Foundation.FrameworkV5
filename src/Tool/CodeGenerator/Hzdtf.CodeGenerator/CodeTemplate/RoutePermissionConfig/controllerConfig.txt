@@ -1,0 +1,8 @@
+{
+      "Controller": "|ControllerName|",
+      "Code": "|Code|",
+      "Disabled": false,
+      "Actions": [
+        |ActionConfig|
+      ]
+    }
