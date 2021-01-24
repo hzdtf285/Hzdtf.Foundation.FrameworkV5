@@ -495,6 +495,19 @@
             <param name="request">http请求</param>
             <returns>带有Bearer的票据</returns>
         </member>
+        <member name="T:Microsoft.AspNetCore.Routing.RouteValueDictionaryExtensions">
+            <summary>
+            路由值字典扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteValueDictionaryExtensions.GetControllerAction(Microsoft.AspNetCore.Routing.RouteValueDictionary)">
+            <summary>
+            获取控制器和动作
+            </summary>
+            <param name="keyValues">路由字典</param>
+            <returns>控制器和动作，0:控制器;1:动作</returns>
+        </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.ApiExceptionHandleServiceExtensions">
             <summary>
             Api异常处理服务扩展类

@@ -11,6 +11,7 @@ using Hzdtf.Utility.Utils;
 using System.Linq;
 using Hzdtf.Utility.Model;
 using static Hzdtf.Utility.ApiPermission.RoutePermissionInfo;
+using Microsoft.AspNetCore.Routing;
 
 namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
 {
@@ -64,77 +65,70 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
             if (path.StartsWith(options.PfxApiPath))
             {
                 var routeValue = context.Request.RouteValues;
-                if (routeValue != null && routeValue.Count > 1 && routeValue.ContainsKey("controller") && routeValue.ContainsKey("action"))
+                var routes = routeValue.GetControllerAction();
+                if (routes.IsNullOrLength0())
                 {
-                    string controller = routeValue["controller"].ToString(), action = routeValue["action"].ToString();
-                    if (string.IsNullOrWhiteSpace(controller) || string.IsNullOrWhiteSpace(action))
-                    {
-                        await next(context);
-                        return;
-                    }
+                    await next(context);
+                    return;
+                }
 
-                    var routePermisses = reader.Reader();
-                    if (routePermisses.IsNullOrLength0())
-                    {
-                        await next(context);
-                        return;
-                    }
+                var routePermisses = reader.Reader();
+                if (routePermisses.IsNullOrLength0())
+                {
+                    await next(context);
+                    return;
+                }
 
-                    var controllerConfig = routePermisses.Where(p => p.Controller == controller).FirstOrDefault();
-                    if (controllerConfig == null)
-                    {
-                        await next(context);
-                        return;
-                    }
-                    if (controllerConfig.Disabled)
-                    {
-                        var tempReturn = new BasicReturnInfo();
-                        tempReturn.SetFailureMsg("此功能已禁用");
-                        await WriteContent(context, tempReturn);
+                var controllerConfig = routePermisses.Where(p => p.Controller == routes[0]).FirstOrDefault();
+                if (controllerConfig == null)
+                {
+                    await next(context);
+                    return;
+                }
+                if (controllerConfig.Disabled)
+                {
+                    var tempReturn = new BasicReturnInfo();
+                    tempReturn.SetFailureMsg("此功能已禁用");
+                    await WriteContent(context, tempReturn);
 
-                        return;
-                    }
-                    if (controllerConfig.Actions.IsNullOrLength0())
-                    {
-                        await next(context);
-                        return;
-                    }
+                    return;
+                }
+                if (controllerConfig.Actions.IsNullOrLength0())
+                {
+                    await next(context);
+                    return;
+                }
 
-                    var actionConfig = controllerConfig.Actions.Where(p => p.Action == action).FirstOrDefault();
-                    if (actionConfig == null)
-                    {
-                        await next(context);
-                        return;
-                    }
-                    if (actionConfig.Disabled)
-                    {
-                        var tempReturn = new BasicReturnInfo();
-                        tempReturn.SetFailureMsg("此功能已禁用");
-                        await WriteContent(context, tempReturn);
+                var actionConfig = controllerConfig.Actions.Where(p => p.Action == routes[1]).FirstOrDefault();
+                if (actionConfig == null)
+                {
+                    await next(context);
+                    return;
+                }
+                if (actionConfig.Disabled)
+                {
+                    var tempReturn = new BasicReturnInfo();
+                    tempReturn.SetFailureMsg("此功能已禁用");
+                    await WriteContent(context, tempReturn);
 
-                        return;
-                    }
+                    return;
+                }
 
-                    var basicReturn = new BasicReturnInfo();
-                    var isPer = IsHavePermission(controllerConfig, actionConfig, basicReturn);
-                    if (basicReturn.Failure())
-                    {
-                        await WriteContent(context, basicReturn);
-                        return;
-                    }
-                    if (isPer)
-                    {
-                        await next(context);
-                        return;
-                    }
-                    else
-                    {
-                        await NotPermissionHandle(context);
-                    }
+                var basicReturn = new BasicReturnInfo();
+                var isPer = IsHavePermission(controllerConfig, actionConfig, basicReturn);
+                if (basicReturn.Failure())
+                {
+                    await WriteContent(context, basicReturn);
+                    return;
+                }
+                if (isPer)
+                {
+                    await next(context);
+                    return;
                 }
                 else
                 {
-                    await next(context);
+                    await NotPermissionHandle(context);
                 }
             }
             else

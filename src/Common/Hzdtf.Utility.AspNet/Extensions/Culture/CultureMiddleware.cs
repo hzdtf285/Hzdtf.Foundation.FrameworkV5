@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Routing;
+using Hzdtf.Utility.Utils;
 
 namespace Hzdtf.Utility.AspNet.Extensions.Culture
 {
@@ -33,6 +35,14 @@ namespace Hzdtf.Utility.AspNet.Extensions.Culture
         /// <returns>任务</returns>
         public async Task InvokeAsync(HttpContext context)
         {
+            var routeValue = context.Request.RouteValues;
+            var routes = routeValue.GetControllerAction();
+            if (routes.IsNullOrLength0())
+            {
+                await next(context);
+                return;
+            }
+
             // 如果有URL传过来的文化，则使用URL的
             string culture = null;
             if (context.Request.Query.ContainsKey("culture"))
