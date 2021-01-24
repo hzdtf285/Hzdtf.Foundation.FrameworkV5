@@ -28,6 +28,7 @@ namespace Hzdtf.Example.WebApp
         {
             Configuration = configuration;
             App.CurrConfig = configuration;
+            App.IsReturnCulture = true;
         }
 
         public IConfiguration Configuration { get; }
@@ -109,6 +110,7 @@ namespace Hzdtf.Example.WebApp
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCulture();
             app.UseRoutePermission<RoutePermissionMiddleware>();
             app.UseRequestLog();
             app.UseIdentityAuth<int>();

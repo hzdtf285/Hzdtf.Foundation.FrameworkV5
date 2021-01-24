@@ -1,9 +1,10 @@
-﻿using Hzdtf.Utility.Utils;
+﻿using Hzdtf.Utility.Localization;
 using MessagePack;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Hzdtf.Utility.Model.Return
 {
@@ -76,6 +77,19 @@ namespace Hzdtf.Utility.Model.Return
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 文化
+        /// </summary>
+        [JsonProperty("culture")]
+        [Key("culture")]
+        public string Culture
+        {
+            get
+            {
+                return App.IsReturnCulture ? LocalizationUtil.GetCurrentCulture() : null;
+            }
         }
 
         /// <summary>

@@ -213,6 +213,26 @@
             <param name="name">名称</param>
             <returns>连接字符串</returns>
         </member>
+        <member name="F:Hzdtf.Utility.App.defaultCulture">
+            <summary>
+            默认文化
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.App.syncDefaultCulture">
+            <summary>
+            同步默认文化
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.App.DefaultCulture">
+            <summary>
+            默认文化，默认值取当前线程
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.App.IsReturnCulture">
+            <summary>
+            返回对象是否返回文化，默认为否，如果要返回，则程序启动时需要设置
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Attr.AuthAttribute">
             <summary>
             授权特性
@@ -3038,6 +3058,155 @@
             <param name="array">数组</param>
             <returns>索引</returns>
         </member>
+        <member name="T:Hzdtf.Utility.Localization.CultureDefine">
+            <summary>
+            文化定义
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Localization.CultureDefine.zh_CN">
+            <summary>
+            简体中文
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Localization.CultureDefine.zh_TW">
+            <summary>
+            繁体中文
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Localization.CultureDefine.en_US">
+            <summary>
+            英文
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.Localization.CultureLibraryCache">
+            <summary>
+            文化库缓存
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Localization.CultureLibraryCache.dicCache">
+            <summary>
+            字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Localization.CultureLibraryCache.syncDicCache">
+            <summary>
+            同步字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Localization.CultureLibraryCache.protoCultureLibrary">
+            <summary>
+            原生文化库读取
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.CultureLibraryCache.GetCache">
+            <summary>
+            获取缓存
+            </summary>
+            <returns>缓存</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.CultureLibraryCache.GetSyncCache">
+            <summary>
+            获取同步的缓存对象，是为了线程安全
+            </summary>
+            <returns>同步的缓存对象</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.CultureLibraryCache.Set(Hzdtf.Utility.Localization.ICultureLibrary)">
+            <summary>
+            设置对象
+            </summary>
+            <param name="obj">对象</param>
+        </member>
+        <member name="T:Hzdtf.Utility.Localization.ICultureLibrary">
+            <summary>
+            文化库接口
+            key：键
+            value： { key：文化名称，value：文化对应的值 }
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.ICultureLibrary.Reader">
+            <summary>
+            读取
+            </summary>
+            <returns>数据</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.Localization.ILocalization">
+            <summary>
+            本地化接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.ILocalization.Get(System.String,System.String)">
+            <summary>
+            根据键获取值
+            </summary>
+            <param name="key">键</param>
+            <param name="defaultValue">默认值</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.ILocalization.Get(System.String,System.String,System.String)">
+            <summary>
+            根据键获取值
+            </summary>
+            <param name="key">键</param>
+            <param name="culture">文化</param>
+            <param name="defaultValue">默认值</param>
+            <returns>值</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.Localization.LocalizationImpl">
+            <summary>
+            本地化实现
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Localization.LocalizationImpl.CultureLibrary">
+            <summary>
+            文化库
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.LocalizationImpl.Get(System.String,System.String)">
+            <summary>
+            根据键获取值
+            </summary>
+            <param name="key">键</param>
+            <param name="defaultValue">默认值</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.LocalizationImpl.Get(System.String,System.String,System.String)">
+            <summary>
+            根据键获取值
+            </summary>
+            <param name="key">键</param>
+            <param name="culture">文化</param>
+            <param name="defaultValue">默认值</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.LocalizationImpl.GetCurrCulture">
+            <summary>
+            获取当前文化
+            </summary>
+            <returns>当前文化</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.Localization.LocalizationUtil">
+            <summary>
+            本地化辅助类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.LocalizationUtil.SetCurrentCulture(System.String)">
+            <summary>
+            设置当前语言文化
+            </summary>
+            <param name="culture">文化</param>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.LocalizationUtil.GetCurrentCulture">
+            <summary>
+            获取当前语言文化
+            </summary>
+            <returns>文化</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Memorandum.CareTaker`1">
             <summary>
             守护者
@@ -3938,6 +4107,11 @@
         <member name="P:Hzdtf.Utility.Model.Return.BasicReturnInfo.Desc">
             <summary>
             描述
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.Return.BasicReturnInfo.Culture">
+            <summary>
+            文化
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.Return.BasicReturnInfo.Extend">

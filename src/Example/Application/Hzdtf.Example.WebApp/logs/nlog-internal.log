@@ -384,3 +384,99 @@
 2021-01-18 23:31:50.2281 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\Hzdtf.Foundation.Framework\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
 2021-01-18 23:31:50.2671 Info Configuration initialized.
 2021-01-18 23:31:50.2990 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 16:37:49.2001 Info Message Template Auto Format enabled
+2021-01-24 16:37:49.4875 Info Adding target FileTarget(Name=f)
+2021-01-24 16:37:49.5034 Info Adding target FileTarget(Name=fe)
+2021-01-24 16:37:49.5684 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\Hzdtf.Foundation.Framework\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 16:37:49.6318 Info Configuration initialized.
+2021-01-24 16:37:49.7888 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 16:48:50.9613 Info Message Template Auto Format enabled
+2021-01-24 16:48:51.0622 Info Adding target FileTarget(Name=f)
+2021-01-24 16:48:51.0750 Info Adding target FileTarget(Name=fe)
+2021-01-24 16:48:51.1151 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\Hzdtf.Foundation.Framework\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 16:48:51.1453 Info Configuration initialized.
+2021-01-24 16:48:51.1727 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 16:54:20.7336 Info Message Template Auto Format enabled
+2021-01-24 16:54:20.8885 Info Adding target FileTarget(Name=f)
+2021-01-24 16:54:20.9712 Info Adding target FileTarget(Name=fe)
+2021-01-24 16:54:21.0224 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\Hzdtf.Foundation.Framework\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 16:54:21.0760 Info Configuration initialized.
+2021-01-24 16:54:21.1056 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 16:57:45.0603 Info Message Template Auto Format enabled
+2021-01-24 16:57:45.2186 Info Adding target FileTarget(Name=f)
+2021-01-24 16:57:45.2339 Info Adding target FileTarget(Name=fe)
+2021-01-24 16:57:45.2952 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\Hzdtf.Foundation.Framework\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 16:57:45.3758 Info Configuration initialized.
+2021-01-24 16:57:45.4528 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 17:01:26.2248 Info Message Template Auto Format enabled
+2021-01-24 17:01:26.4060 Info Adding target FileTarget(Name=f)
+2021-01-24 17:01:26.4443 Info Adding target FileTarget(Name=fe)
+2021-01-24 17:01:26.5301 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\Hzdtf.Foundation.Framework\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 17:01:26.5776 Info Configuration initialized.
+2021-01-24 17:01:26.6121 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 17:29:58.5433 Info Message Template Auto Format enabled
+2021-01-24 17:29:58.7347 Info Adding target FileTarget(Name=f)
+2021-01-24 17:29:58.7503 Info Adding target FileTarget(Name=fe)
+2021-01-24 17:29:58.8142 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 17:29:58.8699 Info Configuration initialized.
+2021-01-24 17:29:58.9143 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 17:33:44.8189 Info Message Template Auto Format enabled
+2021-01-24 17:33:45.0604 Info Adding target FileTarget(Name=f)
+2021-01-24 17:33:45.0813 Info Adding target FileTarget(Name=fe)
+2021-01-24 17:33:45.1644 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 17:33:45.2140 Info Configuration initialized.
+2021-01-24 17:33:45.2442 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 17:38:46.8961 Info Message Template Auto Format enabled
+2021-01-24 17:38:47.0283 Info Adding target FileTarget(Name=f)
+2021-01-24 17:38:47.0451 Info Adding target FileTarget(Name=fe)
+2021-01-24 17:38:47.1274 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 17:38:47.1776 Info Configuration initialized.
+2021-01-24 17:38:47.2184 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 17:40:26.0422 Info Message Template Auto Format enabled
+2021-01-24 17:40:26.1895 Info Adding target FileTarget(Name=f)
+2021-01-24 17:40:26.2085 Info Adding target FileTarget(Name=fe)
+2021-01-24 17:40:26.2786 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 17:40:26.3383 Info Configuration initialized.
+2021-01-24 17:40:26.3702 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 18:02:18.3067 Info Message Template Auto Format enabled
+2021-01-24 18:02:18.4541 Info Adding target FileTarget(Name=f)
+2021-01-24 18:02:18.4670 Info Adding target FileTarget(Name=fe)
+2021-01-24 18:02:18.5111 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 18:02:18.5437 Info Configuration initialized.
+2021-01-24 18:02:18.5657 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 18:03:54.3699 Info Message Template Auto Format enabled
+2021-01-24 18:03:54.5066 Info Adding target FileTarget(Name=f)
+2021-01-24 18:03:54.5239 Info Adding target FileTarget(Name=fe)
+2021-01-24 18:03:54.5728 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 18:03:54.6124 Info Configuration initialized.
+2021-01-24 18:03:54.6397 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 18:09:21.9991 Info Message Template Auto Format enabled
+2021-01-24 18:09:22.1013 Info Adding target FileTarget(Name=f)
+2021-01-24 18:09:22.1254 Info Adding target FileTarget(Name=fe)
+2021-01-24 18:09:22.1669 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 18:09:22.1977 Info Configuration initialized.
+2021-01-24 18:09:22.2169 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 18:10:39.6499 Info Message Template Auto Format enabled
+2021-01-24 18:10:39.9333 Info Adding target FileTarget(Name=f)
+2021-01-24 18:10:39.9488 Info Adding target FileTarget(Name=fe)
+2021-01-24 18:10:40.0363 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 18:10:40.1245 Info Configuration initialized.
+2021-01-24 18:10:40.1782 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 18:15:46.1061 Info Message Template Auto Format enabled
+2021-01-24 18:15:46.2747 Info Adding target FileTarget(Name=f)
+2021-01-24 18:15:46.2747 Info Adding target FileTarget(Name=fe)
+2021-01-24 18:15:46.3780 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 18:15:46.4257 Info Configuration initialized.
+2021-01-24 18:15:46.4585 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 18:20:30.0814 Info Message Template Auto Format enabled
+2021-01-24 18:20:30.2622 Info Adding target FileTarget(Name=f)
+2021-01-24 18:20:30.2764 Info Adding target FileTarget(Name=fe)
+2021-01-24 18:20:30.3141 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 18:20:30.3404 Info Configuration initialized.
+2021-01-24 18:20:30.3652 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-24 18:24:32.0595 Info Message Template Auto Format enabled
+2021-01-24 18:24:32.2072 Info Adding target FileTarget(Name=f)
+2021-01-24 18:24:32.2229 Info Adding target FileTarget(Name=fe)
+2021-01-24 18:24:32.2860 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=F:\MyWorks\NetV5\github\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-24 18:24:32.3260 Info Configuration initialized.
+2021-01-24 18:24:32.3601 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False

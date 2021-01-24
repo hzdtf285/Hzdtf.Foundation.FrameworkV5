@@ -234,5 +234,18 @@
             </summary>
             <returns>当前数据库事务数</returns>
         </member>
+        <member name="M:Hzdtf.BasicController.SystemController.CurrCulture">
+            <summary>
+            获取当前语言文化
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.SystemController.SetCurrCulture(System.String)">
+            <summary>
+            设置当前语言文化
+            </summary>
+            <param name="culture">文化</param>
+            <returns>返回信息</returns>
+        </member>
     </members>
 </doc>

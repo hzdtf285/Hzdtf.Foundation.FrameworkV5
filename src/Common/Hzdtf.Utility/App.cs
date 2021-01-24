@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Hzdtf.Utility
 {
@@ -197,5 +198,46 @@ namespace Hzdtf.Utility
         /// <param name="name">名称</param>
         /// <returns>连接字符串</returns>
         public static string GetDirectConnectionString(string name) => CurrConfig.GetConnectionString(name);
+
+        /// <summary>
+        /// 默认文化
+        /// </summary>
+        private static string defaultCulture;
+
+        /// <summary>
+        /// 同步默认文化
+        /// </summary>
+        private readonly static object syncDefaultCulture = new object();
+
+        /// <summary>
+        /// 默认文化，默认值取当前线程
+        /// </summary>
+        public static string DefaultCulture
+        {
+            get
+            {
+                if (defaultCulture == null)
+                {
+                    lock (syncDefaultCulture)
+                    {
+                        defaultCulture = Thread.CurrentThread.CurrentCulture.Name;
+                    }
+                }
+
+                return defaultCulture;
+            }
+            set
+            {
+                lock (syncDefaultCulture)
+                {
+                    defaultCulture = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 返回对象是否返回文化，默认为否，如果要返回，则程序启动时需要设置
+        /// </summary>
+        public static bool IsReturnCulture { get; set; }
     }
 }

@@ -30,6 +30,11 @@ var ADD_REQUEST_TYPE = "post";
 var MODIFY_REQUEST_TYPE = "put";
 
 /**
+ * 修改部分请求类型
+ * */
+var MODIFY_PART_REQUEST_TYPE = "patch";
+
+/**
  * 移除请求类型
  * */
 var REMOVE_REQUEST_TYPE = "delete";
