@@ -3100,6 +3100,13 @@
             原生文化库读取
             </summary>
         </member>
+        <member name="M:Hzdtf.Utility.Localization.CultureLibraryCache.Get(System.String)">
+            <summary>
+            根据键获取值
+            </summary>
+            <param name="key">键</param>
+            <returns>值</returns>
+        </member>
         <member name="M:Hzdtf.Utility.Localization.CultureLibraryCache.GetCache">
             <summary>
             获取缓存
@@ -3125,12 +3132,6 @@
             value： { key：文化名称，value：文化对应的值 }
             @ 黄振东
             </summary>
-        </member>
-        <member name="M:Hzdtf.Utility.Localization.ICultureLibrary.Reader">
-            <summary>
-            读取
-            </summary>
-            <returns>数据</returns>
         </member>
         <member name="T:Hzdtf.Utility.Localization.ILocalization">
             <summary>

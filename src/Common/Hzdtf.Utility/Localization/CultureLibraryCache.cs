@@ -20,7 +20,7 @@ namespace Hzdtf.Utility.Localization
         /// <summary>
         /// 字典缓存
         /// </summary>
-        private static IDictionary<string, IDictionary<string, string>> dicCache = new Dictionary<string, IDictionary<string, string>>(1);
+        private static IDictionary<string, IDictionary<string, string>> dicCache = new Dictionary<string, IDictionary<string, string>>();
 
         /// <summary>
         /// 同步字典缓存
@@ -35,6 +35,43 @@ namespace Hzdtf.Utility.Localization
         #endregion
 
         #region 重写父类的方法
+
+        /// <summary>
+        /// 根据键获取值
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns>值</returns>
+        public override IDictionary<string, string> Get(string key)
+        {
+            if (Exists(key))
+            {
+                return dicCache[key];
+            }
+            else
+            {
+                if (dicCache.Count == 0)
+                {
+                    GetCache();
+                    if (dicCache.ContainsKey(key))
+                    {
+                        return dicCache[key];
+                    }
+
+                    return null;
+                }
+                else
+                {
+                    var values = protoCultureLibrary.Get(key);
+                    if (values == null)
+                    {
+                        return null;
+                    }
+                    Add(key, values);
+
+                    return values;
+                }
+            }
+        }
 
         /// <summary>
         /// 获取缓存

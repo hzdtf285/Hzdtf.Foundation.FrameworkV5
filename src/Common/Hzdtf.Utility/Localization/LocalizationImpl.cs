@@ -62,22 +62,14 @@ namespace Hzdtf.Utility.Localization
                 return defaultValue;
             }
 
-            var dicValues = CultureLibrary.Reader();
+            var dicValues = CultureLibrary.Get(key);
             if (dicValues.IsNullOrCount0())
             {
                 return defaultValue;
             }
-            if (dicValues.ContainsKey(key))
+            if (dicValues.ContainsKey(culture))
             {
-                var keyValues = dicValues[key];
-                if (keyValues.IsNullOrCount0())
-                {
-                    return defaultValue;
-                }
-                if (keyValues.ContainsKey(culture))
-                {
-                    return keyValues[culture];
-                }
+                return dicValues[culture];
             }
 
             return defaultValue;
