@@ -3125,6 +3125,13 @@
             </summary>
             <param name="obj">对象</param>
         </member>
+        <member name="M:Hzdtf.Utility.Localization.CultureLibraryCache.Get(System.String[])">
+            <summary>
+            根据键数组获取值字典
+            </summary>
+            <param name="keys">键数组</param>
+            <returns>值字典</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Localization.ICultureLibrary">
             <summary>
             文化库接口
@@ -3132,6 +3139,13 @@
             value： { key：文化名称，value：文化对应的值 }
             @ 黄振东
             </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.ICultureLibrary.Get(System.String[])">
+            <summary>
+            根据键数组获取值字典
+            </summary>
+            <param name="keys">键数组</param>
+            <returns>值字典</returns>
         </member>
         <member name="T:Hzdtf.Utility.Localization.ILocalization">
             <summary>
@@ -3155,6 +3169,14 @@
             <param name="culture">文化</param>
             <param name="defaultValue">默认值</param>
             <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.ILocalization.Get(System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            根据键字典获取值字典
+            </summary>
+            <param name="keyDefaultValues">键字典，key：键，value：默认值</param>
+            <param name="culture">文化</param>
+            <returns>值字典</returns>
         </member>
         <member name="T:Hzdtf.Utility.Localization.LocalizationImpl">
             <summary>
@@ -3183,6 +3205,14 @@
             <param name="culture">文化</param>
             <param name="defaultValue">默认值</param>
             <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Localization.LocalizationImpl.Get(System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            根据键字典获取值字典
+            </summary>
+            <param name="keyDefaultValues">键字典，key：键，value：默认值</param>
+            <param name="culture">文化</param>
+            <returns>值字典</returns>
         </member>
         <member name="M:Hzdtf.Utility.Localization.LocalizationImpl.GetCurrCulture">
             <summary>

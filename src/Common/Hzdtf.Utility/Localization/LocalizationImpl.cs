@@ -37,6 +37,7 @@ namespace Hzdtf.Utility.Localization
             {
                 culture = LocalizationUtil.GetCurrentCulture();
             }
+
             return Get(key, culture, defaultValue);
         }
 
@@ -73,6 +74,61 @@ namespace Hzdtf.Utility.Localization
             }
 
             return defaultValue;
+        }
+
+        /// <summary>
+        /// 根据键字典获取值字典
+        /// </summary>
+        /// <param name="keyDefaultValues">键字典，key：键，value：默认值</param>
+        /// <param name="culture">文化</param>
+        /// <returns>值字典</returns>
+        public IDictionary<string, string> Get(IDictionary<string, string> keyDefaultValues, string culture = null)
+        {
+            if (string.IsNullOrWhiteSpace(culture))
+            {
+                culture = GetCurrCulture();
+                if (string.IsNullOrWhiteSpace(culture))
+                {
+                    culture = LocalizationUtil.GetCurrentCulture();
+                }
+            }
+            if (string.IsNullOrWhiteSpace(culture))
+            {
+                return keyDefaultValues;
+            }
+
+            var keys = keyDefaultValues.Keys.ToArray();
+            var dicValues = CultureLibrary.Get(keys);
+            if (dicValues.IsNullOrCount0())
+            {
+                return keyDefaultValues;
+            }
+
+            var result = new Dictionary<string, string>(keyDefaultValues.Count);
+            foreach (var kv in keyDefaultValues)
+            {
+                string value = null;
+                if (dicValues.ContainsKey(kv.Key))
+                {
+                    var val = dicValues[kv.Key];
+                    if (val.IsNullOrCount0() || !val.ContainsKey(culture))
+                    {
+                        value = kv.Value;
+                    }
+                    else
+                    {
+                        value = val[culture];
+                    }
+                }
+                else
+                {
+                    value = kv.Value;
+                }
+
+                result.Add(kv.Key, value);
+            }
+
+            return result;
         }
 
         /// <summary>

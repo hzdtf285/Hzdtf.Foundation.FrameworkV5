@@ -15,5 +15,11 @@ namespace Hzdtf.Utility.Localization
     /// </summary>
     public interface ICultureLibrary : IGetable<string, IDictionary<string, string>>, IReader<IDictionary<string, IDictionary<string, string>>>
     {
+        /// <summary>
+        /// 根据键数组获取值字典
+        /// </summary>
+        /// <param name="keys">键数组</param>
+        /// <returns>值字典</returns>
+        IDictionary<string, IDictionary<string, string>> Get(string[] keys);
     }
 }

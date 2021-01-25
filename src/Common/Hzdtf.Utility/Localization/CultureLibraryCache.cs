@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Hzdtf.Utility.Cache;
+using Hzdtf.Utility.Utils;
 
 namespace Hzdtf.Utility.Localization
 {
@@ -113,6 +114,66 @@ namespace Hzdtf.Utility.Localization
         public void Set(ICultureLibrary obj)
         {
             this.protoCultureLibrary = obj;
+        }
+
+        #endregion
+
+        #region ICultureLibrary 接口
+
+        /// <summary>
+        /// 根据键数组获取值字典
+        /// </summary>
+        /// <param name="keys">键数组</param>
+        /// <returns>值字典</returns>
+        public IDictionary<string, IDictionary<string, string>> Get(string[] keys)
+        {
+            if (keys.IsNullOrLength0())
+            {
+                return null;
+            }
+
+            var result = new Dictionary<string, IDictionary<string, string>>(keys.Length);
+            // 不在缓存里的键列表
+            var notCacheKeys = new List<string>();
+            foreach (var k in keys)
+            {
+                if (dicCache.ContainsKey(k))
+                {
+                    result.Add(k, dicCache[k]);
+                }
+                else
+                {
+                    notCacheKeys.Add(k);
+                }
+            }
+            // 不在缓存里则从原生获取
+            if (notCacheKeys.Count > 0)
+            {
+                var keyValues = protoCultureLibrary.Get(notCacheKeys.ToArray());
+                if (keyValues.IsNullOrCount0())
+                {
+                    return result;
+                }
+
+                lock (syncDicCache)
+                {
+                    foreach (var kv in keyValues)
+                    {
+                        try
+                        {
+                            result.Add(kv.Key, kv.Value);
+                            if (dicCache.ContainsKey(kv.Key))
+                            {
+                                continue;
+                            }
+                            dicCache.Add(kv.Key, kv.Value);
+                        }
+                        catch (ArgumentException) { }
+                    }
+                }
+            }
+
+            return result;
         }
 
         #endregion
