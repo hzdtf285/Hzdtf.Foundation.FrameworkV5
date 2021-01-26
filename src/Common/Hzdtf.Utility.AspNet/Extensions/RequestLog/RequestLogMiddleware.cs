@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Logger.Contract;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -56,36 +57,48 @@ namespace Hzdtf.Utility.AspNet.Extensions.RequestLog
             await next(context);
             stop.Stop();
 
-            var msg = $"请求:{path},耗时:{stop.ElapsedMilliseconds}ms";
+            var routeValue = context.Request.RouteValues;
+            var routes = routeValue.GetControllerAction();
+            var msg = new StringBuilder($"请求:{path} method:{context.Request.Method} ");
+            string controller = null, action = null;
+            if (routes != null && routes.Length == 2)
+            {
+                controller = routes[0];
+                action = routes[1];
+                msg.AppendFormat("controller:{0},action:{1}.", controller, action);
+            }
+
+            msg.Append($"耗时:{stop.ElapsedMilliseconds}ms");
+            var msgStr = msg.ToString();
             switch (options.LogLevel)
             {
                 case LogLevelEnum.TRACE:
-                    _ = log.TraceAsync(msg, null, "RequestLogMiddleware", path);
+                    _ = log.TraceAsync(msgStr, null, "RequestLogMiddleware", path, controller, action);
 
                     break;
 
                 case LogLevelEnum.DEBUG:
-                    _ = log.DebugAsync(msg, null, "RequestLogMiddleware", path);
+                    _ = log.DebugAsync(msgStr, null, "RequestLogMiddleware", path, controller, action);
 
                     break;
 
                 case LogLevelEnum.WRAN:
-                    _ = log.WranAsync(msg, null, "RequestLogMiddleware", path);
+                    _ = log.WranAsync(msgStr, null, "RequestLogMiddleware", path, controller, action);
 
                     break;
 
                 case LogLevelEnum.INFO:
-                    _ = log.InfoAsync(msg, null, "RequestLogMiddleware", path);
+                    _ = log.InfoAsync(msgStr, null, "RequestLogMiddleware", path, controller, action);
 
                     break;
 
                 case LogLevelEnum.ERROR:
-                    _ = log.ErrorAsync(msg, null, "RequestLogMiddleware", path);
+                    _ = log.ErrorAsync(msgStr, null, "RequestLogMiddleware", path, controller, action);
 
                     break;
 
                 case LogLevelEnum.FATAL:
-                    _ = log.FatalAsync(msg, null, "RequestLogMiddleware", path);
+                    _ = log.FatalAsync(msgStr, null, "RequestLogMiddleware", path, controller, action);
 
                     break;
             }

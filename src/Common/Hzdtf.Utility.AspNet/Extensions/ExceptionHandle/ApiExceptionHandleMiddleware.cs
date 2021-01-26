@@ -2,6 +2,7 @@
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,18 @@ namespace Hzdtf.Utility.AspNet.Extensions.ExceptionHandle
                 }
                 catch (Exception ex)
                 {
-                    _ = log.ErrorAsync(ex.Message, ex, "ApiExceptionHandleMiddleware");
+                    var routeValue = context.Request.RouteValues;
+                    var routes = routeValue.GetControllerAction();
+                    var msg = new StringBuilder($"请求:{path} method:{context.Request.Method} ");
+                    string controller = null, action = null;
+                    if (routes != null && routes.Length == 2)
+                    {
+                        controller = routes[0];
+                        action = routes[1];
+                        msg.AppendFormat("controller:{0},action:{1}.", controller, action);
+                    }
+                    msg.Append("发生异常." + ex.Message);
+                    _ = log.ErrorAsync(msg.ToString(), ex, "ApiExceptionHandleMiddleware", path, controller, action);
 
                     var returnInfo = new BasicReturnInfo()
                     {

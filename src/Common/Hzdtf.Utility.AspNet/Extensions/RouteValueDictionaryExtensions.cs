@@ -1,6 +1,4 @@
-﻿using Hzdtf.Utility.Model;
-using Microsoft.AspNetCore.Routing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,8 +27,8 @@ namespace Microsoft.AspNetCore.Routing
             {
                 return new string[]
                 {
-                    keyValues.ContainsKey("controller").ToString(),
-                    keyValues.ContainsKey("action").ToString(),
+                    keyValues["controller"].ToString(),
+                    keyValues["action"].ToString(),
                 };
             }
 
