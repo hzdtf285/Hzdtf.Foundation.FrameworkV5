@@ -38,14 +38,10 @@ namespace Hzdtf.Example.WebApp
         {
             services.AddControllersWithViews()
                 .AddControllersAsServices()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.IgnoreNullValues = true;
-                });
+                .AddDefaultJsonOptions();
             services.AddControllers()
                 .AddControllersAsServices();
             services.AddSession();
-            services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.All));
 
             services.AddLogging(builder =>
             {

@@ -522,6 +522,19 @@
             <param name="options">Api异常处理选项配置</param>
             <returns>服务收藏</returns>
         </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.JsonSerializerOptionsExtensioins">
+            <summary>
+            Json序列化选项扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.JsonSerializerOptionsExtensioins.AddDefaultJsonOptions(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+            <summary>
+            添加默认的JSON选项
+            </summary>
+            <param name="builder">MVC生成器</param>
+            <returns>MVC生成器</returns>
+        </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.HashIpPortLoadBalanceExtensions">
             <summary>
             哈希+IP负载均衡扩展类
