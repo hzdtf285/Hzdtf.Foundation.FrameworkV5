@@ -33,6 +33,9 @@ namespace StackExchange.Redis
             // 如果大于1，说明已经被其他地方锁定资源，需要监听等待触发释放锁
             if (count > 1)
             {
+                // 线程互斥对象
+                var auto = new AutoResetEvent(false);
+
                 // 是否已执行业务
                 var isExecuted = false;
                 subscriber.SubscribeAsync(channel, (myChannel, channelValue) =>
@@ -45,11 +48,13 @@ namespace StackExchange.Redis
 
                     isExecuted = true;
                     subscriber.UnsubscribeAsync(channel, flags: flags);
+
+                    auto.Set();
                     ExecLockAction(subscriber, db, key, action, flags);
                 }, flags: flags);
 
                 // 等待超时，如果超时后还未执行，则手动执行，预防死锁
-                Thread.Sleep(timeoutMilliSecond);
+                auto.WaitOne(timeoutMilliSecond);
                 if (isExecuted)
                 {
                     return;
