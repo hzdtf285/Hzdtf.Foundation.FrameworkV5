@@ -66,7 +66,6 @@ namespace Hzdtf.Logger.Exceptionless
                     break;
 
                 case LogLevelEnum.FATAL:
-
                     exLevel = LogLevel.Fatal;
 
                     break;
