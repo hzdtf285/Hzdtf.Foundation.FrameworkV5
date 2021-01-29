@@ -37,7 +37,7 @@ namespace Hzdtf.Logger.Exceptionless
                 source = ex.Source;
             }
             var logLevel = LogLevelHelper.Parse(level);
-            var exLevel = LogLevel.Off;
+            LogLevel exLevel = null;
             switch (logLevel)
             {
                 case LogLevelEnum.TRACE:
@@ -66,19 +66,34 @@ namespace Hzdtf.Logger.Exceptionless
                     break;
 
                 case LogLevelEnum.FATAL:
+
                     exLevel = LogLevel.Fatal;
 
                     break;
+
+                default:
+
+                    return;
             }
 
-            if (ex != null)
+            EventBuilder builder = null;
+            if (ex == null)
             {
-                msg += $".异常:msg:{ex.Message},ex:{ex.StackTrace}";
+                builder = ExceptionlessClient.Default.CreateLog(source, msg, exLevel);
             }
-
-            var builder = ExceptionlessClient.Default.CreateLog(source, msg, exLevel);
+            else
+            {
+                builder = ExceptionlessClient.Default.CreateException(ex);
+                if (!string.IsNullOrWhiteSpace(source))
+                {
+                    builder.SetSource(source);
+                }
+                if (!string.IsNullOrWhiteSpace(msg))
+                {
+                    builder.SetMessage(msg);
+                }
+            }
             builder.AddTags(AppendLocalIdTags(tags));
-
             builder.Submit();
         }
     }

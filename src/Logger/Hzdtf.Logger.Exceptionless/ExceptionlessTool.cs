@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Hzdtf.Utility;
+using Hzdtf.Logger.Contract;
+using Exceptionless.Logging;
 
 namespace Hzdtf.Logger.Exceptionless
 {
@@ -72,6 +74,32 @@ namespace Hzdtf.Logger.Exceptionless
         }
 
         /// <summary>
+        /// 获取记录级别
+        /// </summary>
+        /// <returns>记录级别</returns>
+        public static string RecordLevel
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(App.CurrConfig["Logging:LogLevel:Default"]))
+                {
+                    if (string.IsNullOrWhiteSpace(App.CurrConfig["HzdtfLog:LogLevel:Default"]))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return App.CurrConfig["HzdtfLog:LogLevel:Default"];
+                    }
+                }
+                else
+                {
+                    return App.CurrConfig["Logging:LogLevel:Default"];
+                }
+            }
+        }
+
+        /// <summary>
         /// 是否执行默认初始化
         /// </summary>
         private static bool isExecDefaultInit;
@@ -95,7 +123,8 @@ namespace Hzdtf.Logger.Exceptionless
         /// <param name="apiKey">API键</param>
         /// <param name="serverUrl">服务URL地址</param>
         /// <param name="isFilterUnrelatedLog">是否过滤掉无关日志</param>
-        public static void SetInit(string apiKey = null, string serverUrl = null, bool isFilterUnrelatedLog = true)
+        /// <param name="minLogLevel">最小日志等级,如果为null，则从配置里取</param>
+        public static void SetInit(string apiKey = null, string serverUrl = null, bool isFilterUnrelatedLog = true, LogLevel minLogLevel = null)
         {
             lock (syncApiKey)
             {
@@ -110,7 +139,7 @@ namespace Hzdtf.Logger.Exceptionless
             {
                 isExecDefaultInit = false;
             }
-            DefaultInit();
+            DefaultInit(minLogLevel);
 
             if (isFilterUnrelatedLog)
             {
@@ -121,7 +150,8 @@ namespace Hzdtf.Logger.Exceptionless
         /// <summary>
         /// 默认初始化
         /// </summary>
-        public static void DefaultInit()
+        /// <param name="minLogLevel">最小日志等级,如果为null，则从配置里取</param>
+        public static void DefaultInit(LogLevel minLogLevel = null)
         {
             if (isExecDefaultInit)
             {
@@ -130,6 +160,50 @@ namespace Hzdtf.Logger.Exceptionless
 
             ExceptionlessClient.Default.Configuration.ApiKey = ApiKey;
             ExceptionlessClient.Default.Configuration.ServerUrl = ServerUrl;
+
+            if (minLogLevel == null)
+            {
+                var logLevel = LogLevelHelper.Parse(RecordLevel);
+                switch (logLevel)
+                {
+                    case LogLevelEnum.TRACE:
+                        minLogLevel = LogLevel.Trace;
+
+                        break;
+
+                    case LogLevelEnum.DEBUG:
+                        minLogLevel = LogLevel.Debug;
+
+                        break;
+
+                    case LogLevelEnum.INFO:
+                        minLogLevel = LogLevel.Info;
+
+                        break;
+
+                    case LogLevelEnum.WRAN:
+                        minLogLevel = LogLevel.Warn;
+
+                        break;
+
+                    case LogLevelEnum.ERROR:
+                        minLogLevel = LogLevel.Error;
+
+                        break;
+
+                    case LogLevelEnum.FATAL:
+                        minLogLevel = LogLevel.Fatal;
+
+                        break;
+
+                    default:
+                        minLogLevel = LogLevel.Off;
+
+                        break;
+                }
+            }
+
+            ExceptionlessClient.Default.Configuration.SetDefaultMinLogLevel(minLogLevel);
 
             lock (syncIsExecDefaultInit)
             {
@@ -161,37 +235,39 @@ namespace Hzdtf.Logger.Exceptionless
         private static void FilterUnrelatedSubmittingEvent(object sender, EventSubmittingEventArgs e)
         {
             // 仅处理未被处理过的异常
-            if (!e.IsUnhandledError)
-                return;
-
-            // 忽略404事件
-            if (e.Event.IsNotFound())
+            if (e.IsUnhandledError)
             {
-                e.Cancel = true;
-                return;
+                // 忽略404事件
+                if (e.Event.IsNotFound())
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                // 获取error对象
+                var error = e.Event.GetError();
+                if (error == null)
+                {
+                    return;
+                }
+
+                // 忽略 401 或 `HttpRequestValidationException`异常
+                if (error.Code == "401" || error.Type == "System.Web.HttpRequestValidationException")
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                // 忽略不是指定命名空间代码抛出的异常
+                var handledNamespaces = new List<string> { "Exceptionless" };
+                if (!error.StackTrace.Select(s => s.DeclaringNamespace).Distinct().Any(ns => handledNamespaces.Any(ns.Contains)))
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                e.Event.MarkAsCritical();
             }
-
-            // 获取error对象
-            var error = e.Event.GetError();
-            if (error == null)
-                return;
-
-            // 忽略 401 或 `HttpRequestValidationException`异常
-            if (error.Code == "401" || error.Type == "System.Web.HttpRequestValidationException")
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            // 忽略不是指定命名空间代码抛出的异常
-            var handledNamespaces = new List<string> { "Exceptionless" };
-            if (!error.StackTrace.Select(s => s.DeclaringNamespace).Distinct().Any(ns => handledNamespaces.Any(ns.Contains)))
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            e.Event.MarkAsCritical();
         }
     }
 }
