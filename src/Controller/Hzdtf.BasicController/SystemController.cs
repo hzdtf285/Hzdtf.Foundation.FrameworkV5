@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Hzdtf.Utility.Model.Return;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hzdtf.BasicController
 {
@@ -17,6 +18,7 @@ namespace Hzdtf.BasicController
     [Inject]
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class SystemController : ControllerBase
     {
         /// <summary>
@@ -38,6 +40,7 @@ namespace Hzdtf.BasicController
         /// </summary>
         /// <returns>返回信息</returns>
         [HttpGet("CurrCulture")]
+        [AllowAnonymous]
         public ReturnInfo<string> CurrCulture()
         {
             var re = new ReturnInfo<string>();
@@ -52,6 +55,7 @@ namespace Hzdtf.BasicController
         /// <param name="culture">文化</param>
         /// <returns>返回信息</returns>
         [HttpPatch("SetCurrCulture/{culture}")]
+        [AllowAnonymous]
         public BasicReturnInfo SetCurrCulture(string culture)
         {
             HttpContext.SetCurrentCulture(culture);
