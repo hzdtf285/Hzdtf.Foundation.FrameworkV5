@@ -83,6 +83,79 @@
              the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo">
+            <summary>
+            数据源配置信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.DataSource">
+            <summary>
+            数据源
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.BuilderItem">
+            <summary>
+            生成项
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Datasource">
+            <summary>
+            数据源
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Datasource.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Datasource.Host">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Datasource.Port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Datasource.Db">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Datasource.User">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Datasource.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Builderitem">
+            <summary>
+            生成项
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Builderitem.Namespace">
+            <summary>
+            命名空间
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Builderitem.PkType">
+            <summary>
+            主键类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Builderitem.IsTenant">
+            <summary>
+            是否租户
+            </summary>
+        </member>
         <member name="M:Hzdtf.CodeGenerator.Program.Main">
             <summary>
              The main entry point for the application.

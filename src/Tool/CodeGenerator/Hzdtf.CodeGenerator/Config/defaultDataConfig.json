@@ -1,0 +1,15 @@
+{
+  "DataSource": {
+    "Type": "MySql",
+    "Host": "localhost",
+    "Port": 3306,
+    "Db": "basic_function",
+    "User": "root",
+    "Password": "123456"
+  },
+  "BuilderItem": {
+    "Namespace": "Hzdtf.BasicFunction",
+    "PkType": "整型",
+    "IsTenant": false
+  }
+}

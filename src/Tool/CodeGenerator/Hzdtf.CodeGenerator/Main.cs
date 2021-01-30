@@ -35,7 +35,20 @@ namespace Hzdtf.CodeGenerator
 
             dgvTable.AutoGenerateColumns = false;
             BindDataSourceType();
-            cbxPkType.SelectedIndex = 0;
+
+            var dataSourceConfigFile = $"{AppContext.BaseDirectory}/Config/defaultDataConfig.json";
+            var dataConfig = dataSourceConfigFile.ToJsonObjectFromFile<DataSourceConfigInfo>();
+           
+            cbxPkType.SelectedItem = dataConfig.DataSource;
+            txtHost.Text = dataConfig.DataSource.Host;
+            txtPort.Text = dataConfig.DataSource.Port.ToString();
+            txtUser.Text = dataConfig.DataSource.User;
+            txtPassword.Text = dataConfig.DataSource.Password;
+            txtDb.Text = dataConfig.DataSource.Db;
+
+            txtNameSpacePfx.Text = dataConfig.BuilderItem.Namespace;
+            cbxPkType.SelectedItem = dataConfig.BuilderItem.PkType;
+            cbxTenant.Checked = dataConfig.BuilderItem.IsTenant;
         }
 
         /// <summary>

@@ -101,7 +101,7 @@ namespace System
                 return default(T);
             }
 
-            return action(File.ReadAllText(fileName));
+            return action(File.ReadAllText(fileName, Encoding.UTF8));
         }
     }
 }

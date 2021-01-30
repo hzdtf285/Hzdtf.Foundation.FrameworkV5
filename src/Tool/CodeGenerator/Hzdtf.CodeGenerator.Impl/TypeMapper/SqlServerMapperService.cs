@@ -25,14 +25,24 @@ namespace Hzdtf.CodeGenerator.Impl.TypeMapper
             {
                 case "varchar":
                 case "nvarchar":
-                case "char":
                 case "nchar":
                 case "text":
                 case "ntext":
                 case "xml":
                 case "uniqueidentifier":
                     return "string";
-                    
+
+                case "char":
+                    if (column.Length == 1)
+                    {
+                        isValueType = true;
+                        return "char";
+                    }
+                    else
+                    {
+                        return "string";
+                    }
+
                 case "int":
                     isValueType = true;
                     return "int";

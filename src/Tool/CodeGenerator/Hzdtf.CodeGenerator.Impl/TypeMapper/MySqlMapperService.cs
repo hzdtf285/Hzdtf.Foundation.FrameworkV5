@@ -24,11 +24,21 @@ namespace Hzdtf.CodeGenerator.Impl.TypeMapper
             switch (colType)
             {
                 case "varchar":
-                case "char":
                 case "text":
                 case "longtext":
                 case "tinytext":
                     return "string";
+
+                case "char":
+                    if (column.Length == 1)
+                    {
+                        isValueType = true;
+                        return "char";
+                    }
+                    else
+                    {
+                        return "string";
+                    }
                     
                 case "int":
                     isValueType = true;
