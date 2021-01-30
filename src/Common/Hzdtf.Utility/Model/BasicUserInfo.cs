@@ -113,6 +113,26 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
+        /// 登录IP_名称
+        /// </summary>
+		public const string LoginIp_Name = "LoginIp";
+
+        /// <summary>
+        /// 登录IP
+        /// </summary>
+        [JsonProperty("loginIp")]
+        [MessagePack.Key("loginIp")]
+        [MaxLength(15)]
+
+        [DisplayName("登录IP")]
+        [Display(Name = "登录IP", Order = 6, AutoGenerateField = true)]
+        public string LoginIp
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 租户ID_名称
         /// 一般情况没有，特殊情况下有用，如SAAS中的租户
         /// </summary>

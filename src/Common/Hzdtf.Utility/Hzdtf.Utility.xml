@@ -3418,6 +3418,16 @@
             登录时间
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.LoginIp_Name">
+            <summary>
+            登录IP_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.LoginIp">
+            <summary>
+            登录IP
+            </summary>
+        </member>
         <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantId_Name">
             <summary>
             租户ID_名称
