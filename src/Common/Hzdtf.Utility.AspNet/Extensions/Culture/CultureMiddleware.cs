@@ -43,25 +43,16 @@ namespace Hzdtf.Utility.AspNet.Extensions.Culture
                 return;
             }
 
-            // 如果有URL传过来的文化，则使用URL的
-            string culture = null;
-            if (context.Request.Query.ContainsKey("culture"))
-            {
-                culture = context.Request.Query["culture"];
-            }
             // 使用上下文里的文化
+            string culture = context.GetCurrentCulture();
             if (string.IsNullOrWhiteSpace(culture))
             {
+                // 使用子类的文化
                 culture = context.GetCurrentCulture();
-            }
-            // 使用子类默认的文化
+            }            
             if (string.IsNullOrWhiteSpace(culture))
             {
-                culture = GetDefaultCulture();
-            }
-            // 使用默认的文化
-            if (string.IsNullOrWhiteSpace(culture))
-            {
+                // 使用默认的文化
                 culture = App.DefaultCulture;
             }
             if (string.IsNullOrWhiteSpace(culture))

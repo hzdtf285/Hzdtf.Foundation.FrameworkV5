@@ -13,30 +13,45 @@ namespace Microsoft.AspNetCore.Http
     public static class CurrentCultureExtensions
     {
         /// <summary>
-        /// 设置当前语言文化，使用的是Session存储，使用之前必须启用Session
+        /// 设置当前语言文化，使用的是Cookies存储，使用之前必须启用Cookies
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="culture">文化</param>
-        public static void SetCurrentCulture(this HttpContext context, string culture)
+        /// <param name="expireDay">过期天数，默认为30天</param>
+        public static void SetCurrentCulture(this HttpContext context, string culture, int expireDay = 30)
         {
-            context.Session.SetString("Culture", culture);
+            context.Response.Cookies.Append("Culture", culture, new CookieOptions()
+            {
+                HttpOnly = false,
+                Expires = DateTimeOffset.UtcNow.AddDays(expireDay)
+            });
             LocalizationUtil.SetCurrentCulture(culture);
         }
 
         /// <summary>
-        /// 获取当前语言文化，使用的是Session存储，使用之前必须启用Session
+        /// 获取当前语言文化，使用的是Cookies存储，使用之前必须启用Cookies
         /// </summary>
         /// <param name="context">上下文</param>
         /// <returns>文化</returns>
         public static string GetCurrentCulture(this HttpContext context)
         {
-            var culture = context.Session.GetString("Culture");
-            if (string.IsNullOrWhiteSpace(culture))
+            if (context.Request.Cookies.ContainsKey("Culture"))
             {
-                return LocalizationUtil.GetCurrentCulture();
+                string culture;
+                if (context.Request.Cookies.TryGetValue("Culture", out culture))
+                {
+                    if (string.IsNullOrWhiteSpace(culture))
+                    {
+                        return LocalizationUtil.GetCurrentCulture();
+                    }
+                    else
+                    {
+                        return culture;
+                    }
+                }
             }
 
-            return culture;
+            return LocalizationUtil.GetCurrentCulture();
         }
     }
 }

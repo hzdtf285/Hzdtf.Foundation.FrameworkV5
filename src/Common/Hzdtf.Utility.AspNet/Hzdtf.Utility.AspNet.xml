@@ -461,16 +461,17 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.Http.CurrentCultureExtensions.SetCurrentCulture(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+        <member name="M:Microsoft.AspNetCore.Http.CurrentCultureExtensions.SetCurrentCulture(Microsoft.AspNetCore.Http.HttpContext,System.String,System.Int32)">
             <summary>
-            设置当前语言文化，使用的是Session存储，使用之前必须启用Session
+            设置当前语言文化，使用的是Cookies存储，使用之前必须启用Cookies
             </summary>
             <param name="context">上下文</param>
             <param name="culture">文化</param>
+            <param name="expireDay">过期天数，默认为30天</param>
         </member>
         <member name="M:Microsoft.AspNetCore.Http.CurrentCultureExtensions.GetCurrentCulture(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
-            获取当前语言文化，使用的是Session存储，使用之前必须启用Session
+            获取当前语言文化，使用的是Cookies存储，使用之前必须启用Cookies
             </summary>
             <param name="context">上下文</param>
             <returns>文化</returns>

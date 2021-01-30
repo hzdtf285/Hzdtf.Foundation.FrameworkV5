@@ -504,3 +504,21 @@
 2021-01-27 21:48:15.9219 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=D:\MyProjects\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
 2021-01-27 21:48:15.9334 Info Configuration initialized.
 2021-01-27 21:48:15.9428 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-30 21:01:47.4752 Info Message Template Auto Format enabled
+2021-01-30 21:01:47.5375 Info Adding target FileTarget(Name=f)
+2021-01-30 21:01:47.5375 Info Adding target FileTarget(Name=fe)
+2021-01-30 21:01:47.5721 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=D:\MyProjects\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-30 21:01:47.5901 Info Configuration initialized.
+2021-01-30 21:01:47.6081 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-30 21:10:52.5750 Info Message Template Auto Format enabled
+2021-01-30 21:10:52.6294 Info Adding target FileTarget(Name=f)
+2021-01-30 21:10:52.6294 Info Adding target FileTarget(Name=fe)
+2021-01-30 21:10:52.6519 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=D:\MyProjects\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-30 21:10:52.6686 Info Configuration initialized.
+2021-01-30 21:10:52.6795 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
+2021-01-30 22:39:26.4069 Info Message Template Auto Format enabled
+2021-01-30 22:39:26.4779 Info Adding target FileTarget(Name=f)
+2021-01-30 22:39:26.4779 Info Adding target FileTarget(Name=fe)
+2021-01-30 22:39:26.4962 Info Validating config: TargetNames=f, fe, ConfigItems=36, FilePath=D:\MyProjects\Hzdtf.Foundation.FrameworkV5\src\Example\Application\Hzdtf.Example.WebApp\bin\Debug\net5.0\NLog.config
+2021-01-30 22:39:26.5072 Info Configuration initialized.
+2021-01-30 22:39:26.5072 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.6.12219. Product version: 4.7.6+e16065c1f397a4b0a5beed10d2e79bbedc1fd1e6. GlobalAssemblyCache: False
