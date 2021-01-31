@@ -45,7 +45,12 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// <summary>
         /// 动态获取连接字符串
         /// </summary>
-        public static Func<AccessMode, string> DynamcGetConnectionString;
+        protected Func<AccessMode, string> dynamcGetConnectionString;
+
+        /// <summary>
+        /// 动态获取连接字符串
+        /// </summary>
+        public Func<AccessMode, string> DynamcGetConnectionString { set => dynamcGetConnectionString = value; }
 
         /// <summary>
         /// 主持久化连接信息
@@ -57,11 +62,6 @@ namespace Hzdtf.Persistence.Contract.Basic
                 return GetMasterConnectionString();
             }, 0);
         }
-
-        /// <summary>
-        /// 从持久化连接信息
-        /// </summary>
-        private PersistenceConectionInfo slavePersistenceConnection;
 
         /// <summary>
         /// 从持久化连接信息
@@ -86,9 +86,9 @@ namespace Hzdtf.Persistence.Contract.Basic
             var connStr = getThisConnString();
             if (string.IsNullOrWhiteSpace(connStr))
             {
-                if (DynamcGetConnectionString != null)
+                if (dynamcGetConnectionString != null)
                 {
-                    connStr = DynamcGetConnectionString(accessMode);
+                    connStr = dynamcGetConnectionString(accessMode);
                     if (string.IsNullOrWhiteSpace(connStr))
                     {
                         connStr = DefaultConnectionString.Connections[defaultConnectionStringIndex];

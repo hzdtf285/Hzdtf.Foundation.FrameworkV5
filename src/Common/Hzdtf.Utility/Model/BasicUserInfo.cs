@@ -133,6 +133,24 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
+        /// 登录次数_名称
+        /// </summary>
+		public const string Logins_Name = "Logins";
+
+        /// <summary>
+        /// 登录次数
+        /// </summary>
+        [JsonProperty("logins")]
+        [MessagePack.Key("logins")]
+        [DisplayName("登录次数")]
+        [Display(Name = "登录次数", Order = 7, AutoGenerateField = true)]
+        public int Logins
+        {
+            get;
+            set;
+        }
+        
+        /// <summary>
         /// 租户ID_名称
         /// 一般情况没有，特殊情况下有用，如SAAS中的租户
         /// </summary>

@@ -200,12 +200,13 @@
             原生用户验证
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Service.Impl.Expand.User.UserValiService.Vali(System.String,System.String)">
+        <member name="M:Hzdtf.BasicFunction.Service.Impl.Expand.User.UserValiService.Vali(System.String,System.String,System.Object)">
             <summary>
             验证
             </summary>
             <param name="user">用户</param>
             <param name="password">密码</param>
+            <param name="otherData">其他数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="T:Hzdtf.BasicFunction.Service.Impl.AttachmentService">
@@ -770,12 +771,13 @@
             <param name="appendPageData">追加页面数据回调</param>
             <returns></returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Service.Impl.UserService.Vali(System.String,System.String)">
+        <member name="M:Hzdtf.BasicFunction.Service.Impl.UserService.Vali(System.String,System.String,System.Object)">
             <summary>
             验证
             </summary>
             <param name="user">用户</param>
             <param name="password">密码</param>
+            <param name="otherData">其他数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="M:Hzdtf.BasicFunction.Service.Impl.UserService.CanAccessMenus(System.Int32,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">

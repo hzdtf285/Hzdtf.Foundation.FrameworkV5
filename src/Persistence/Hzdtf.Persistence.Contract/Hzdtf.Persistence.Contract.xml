@@ -60,6 +60,11 @@
             从持久化连接信息
             </summary>
         </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.DynamcGetConnectionString">
+            <summary>
+            动态获取连接字符串
+            </summary>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.CreateDbConnection(System.String)">
             <summary>
             创建数据库连接
@@ -95,6 +100,13 @@
             <param name="connectionId">连接ID</param>
             <param name="accessMode">访问模式</param>
             <returns>数据库事务</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.IPersistenceConnectionFactory`1">
+            <summary>
+            持久化连接工厂接口
+            @ 黄振东
+            </summary>
+            <typeparam name="PersistencerT">持久化类型</typeparam>
         </member>
         <member name="T:Hzdtf.Persistence.Contract.Basic.PersistenceConectionInfo">
             <summary>
@@ -135,7 +147,12 @@
             默认连接字符串，默认取0主库；1从库
             </summary>
         </member>
-        <member name="F:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.DynamcGetConnectionString">
+        <member name="F:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.dynamcGetConnectionString">
+            <summary>
+            动态获取连接字符串
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.DynamcGetConnectionString">
             <summary>
             动态获取连接字符串
             </summary>
@@ -143,11 +160,6 @@
         <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.MasterPersistenceConnection">
             <summary>
             主持久化连接信息
-            </summary>
-        </member>
-        <member name="F:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.slavePersistenceConnection">
-            <summary>
-            从持久化连接信息
             </summary>
         </member>
         <member name="P:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.SlavePersistenceConnection">

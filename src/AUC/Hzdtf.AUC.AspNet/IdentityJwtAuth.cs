@@ -71,8 +71,9 @@ namespace Hzdtf.AUC.AspNet
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="password">密码</param>
+        /// <param name="otherData">其他数据</param>
         /// <returns>返回信息</returns>
-        public ReturnInfo<string> AccreditToToken(string user, string password)
+        public ReturnInfo<string> AccreditToToken(string user, string password, object otherData = null)
         {
             if (userVali == null)
             {
@@ -80,7 +81,7 @@ namespace Hzdtf.AUC.AspNet
             }
 
             var re = new ReturnInfo<string>();
-            ReturnInfo<UserT> returnInfo = userVali.Vali(user, password);
+            ReturnInfo<UserT> returnInfo = userVali.Vali(user, password, otherData);
             re.FromBasic(returnInfo);
             if (re.Failure())
             {

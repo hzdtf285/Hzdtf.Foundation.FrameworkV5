@@ -40,15 +40,16 @@ namespace Hzdtf.AUC.Contract.IdentityAuth
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="password">密码</param>
+        /// <param name="otherData">其他数据</param>
         /// <returns>返回信息</returns>
-        public ReturnInfo<UserT> Accredit(string user, string password)
+        public ReturnInfo<UserT> Accredit(string user, string password, object otherData = null)
         {
             if (userVali == null)
             {
                 throw new NullReferenceException("用户验证不能为null");
             }
 
-            ReturnInfo<UserT> returnInfo = userVali.Vali(user, password);
+            ReturnInfo<UserT> returnInfo = userVali.Vali(user, password, otherData);
             if (returnInfo.Failure())
             {
                 return returnInfo;

@@ -3428,6 +3428,16 @@
             登录IP
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.Logins_Name">
+            <summary>
+            登录次数_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.Logins">
+            <summary>
+            登录次数
+            </summary>
+        </member>
         <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantId_Name">
             <summary>
             租户ID_名称

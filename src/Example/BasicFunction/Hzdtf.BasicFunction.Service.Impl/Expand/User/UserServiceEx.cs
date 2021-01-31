@@ -389,9 +389,10 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="password">密码</param>
+        /// <param name="otherData">其他数据</param>
         /// <returns>返回信息</returns>
         [ProcTrackLog(IgnoreParamValues = true)]
-        public virtual ReturnInfo<UserInfo> Vali([DisplayName2("用户"), Required] string user, [DisplayName2("密码"), Required] string password)
+        public virtual ReturnInfo<UserInfo> Vali([DisplayName2("用户"), Required] string user, [DisplayName2("密码"), Required] string password, object otherData = null)
         {
             ReturnInfo<UserInfo> returnInfo = new ReturnInfo<UserInfo>();
 

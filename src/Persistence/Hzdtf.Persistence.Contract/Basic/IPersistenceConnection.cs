@@ -23,6 +23,11 @@ namespace Hzdtf.Persistence.Contract.Basic
         PersistenceConectionInfo SlavePersistenceConnection { get; }
 
         /// <summary>
+        /// 动态获取连接字符串
+        /// </summary>
+        Func<AccessMode, string> DynamcGetConnectionString { set; }
+
+        /// <summary>
         /// 创建数据库连接
         /// </summary>
         /// <param name="connectionString">连接字符串</param>

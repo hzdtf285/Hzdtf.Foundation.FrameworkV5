@@ -121,12 +121,13 @@
             <param name="authUserData">授权用户数据</param>
             <param name="httpContext">Http上下文访问</param>
         </member>
-        <member name="M:Hzdtf.AUC.AspNet.IdentityJwtAuth`2.AccreditToToken(System.String,System.String)">
+        <member name="M:Hzdtf.AUC.AspNet.IdentityJwtAuth`2.AccreditToToken(System.String,System.String,System.Object)">
             <summary>
             授权并生成令牌
             </summary>
             <param name="user">用户</param>
             <param name="password">密码</param>
+            <param name="otherData">其他数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="M:Hzdtf.AUC.AspNet.IdentityJwtAuth`2.BuilderToken(System.Collections.Generic.IList{System.Security.Claims.Claim})">

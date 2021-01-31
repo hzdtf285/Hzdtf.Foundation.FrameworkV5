@@ -16,7 +16,8 @@ namespace Hzdtf.AUC.Contract.IdentityAuth.Token
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="password">密码</param>
+        /// <param name="otherData">其他数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<string> AccreditToToken(string user, string password);
+        ReturnInfo<string> AccreditToToken(string user, string password, object otherData = null);
     }
 }
