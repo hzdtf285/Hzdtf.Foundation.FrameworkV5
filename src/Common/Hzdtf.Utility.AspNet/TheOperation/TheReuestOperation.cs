@@ -21,7 +21,7 @@ namespace Hzdtf.Utility.AspNet.TheOperation
         /// <summary>
         /// 上下文访问
         /// </summary>
-        private readonly IHttpContextAccessor contextAccessor;
+        protected readonly IHttpContextAccessor contextAccessor;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace Hzdtf.Utility.AspNet.TheOperation
         /// <summary>
         /// 事件ID
         /// </summary>
-        public string EventId
+        public virtual string EventId
         {
             get
             {
