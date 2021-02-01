@@ -41,13 +41,15 @@ namespace Hzdtf.Utility.AspNet.TheOperation
 
                 string eventId = null;
                 // 优先从http header里获取，否则返回连接I+上下文哈希码
-                if (contextAccessor.HttpContext.Request != null && contextAccessor.HttpContext.Request.Headers != null && contextAccessor.HttpContext.Request.Headers.ContainsKey(HttpClientExtension.EVENT_ID_KEY))
+                var context = contextAccessor.HttpContext;
+                var request = context.Request;
+                if (request != null && request.Headers != null && request.Headers.ContainsKey(HttpClientExtension.EVENT_ID_KEY))
                 {
-                    eventId = contextAccessor.HttpContext.Request.Headers[HttpClientExtension.EVENT_ID_KEY].ToString();
+                    eventId = request.Headers[HttpClientExtension.EVENT_ID_KEY].ToString();
                 }
-                if (string.IsNullOrWhiteSpace(eventId) && contextAccessor.HttpContext.Connection != null)
+                if (string.IsNullOrWhiteSpace(eventId) && context.Connection != null)
                 {
-                    return $"{contextAccessor.HttpContext.Connection.Id}_{contextAccessor.HttpContext.GetHashCode()}";
+                    return $"{context.Connection.Id}_{context.GetHashCode()}";
                 }
 
                 return null;
