@@ -80,7 +80,7 @@ namespace Hzdtf.CodeGenerator.Impl.Function
         /// </summary>
         private static readonly string[] USER_IGNORE_PROP_NAMES = new string[]
         {
-            "LoginId", "TenantId", "Password", "LoginTime", "LoginIp", "Logins", "Code", "Name", "Enabled", "SystemInlay"
+            "LoginId", "TenantId", "Password", "LoginTime", "LoginIp", "Logins", "LogoutTime", "Code", "Name", "Enabled", "SystemInlay"
         };
 
         /// <summary>

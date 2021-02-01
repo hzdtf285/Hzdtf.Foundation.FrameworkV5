@@ -80,6 +80,5 @@ namespace Hzdtf.CodeGenerator.Model
             /// </summary>
             public bool IsTenant { get; set; }
         }
-
     }
 }

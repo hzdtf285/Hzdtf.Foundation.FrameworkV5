@@ -35,19 +35,16 @@ namespace Microsoft.AspNetCore.Http
         /// <returns>文化</returns>
         public static string GetCurrentCulture(this HttpContext context)
         {
-            if (context.Request.Cookies.ContainsKey("Culture"))
+            string culture;
+            if (context.Request.Cookies.TryGetValue("Culture", out culture))
             {
-                string culture;
-                if (context.Request.Cookies.TryGetValue("Culture", out culture))
+                if (string.IsNullOrWhiteSpace(culture))
                 {
-                    if (string.IsNullOrWhiteSpace(culture))
-                    {
-                        return LocalizationUtil.GetCurrentCulture();
-                    }
-                    else
-                    {
-                        return culture;
-                    }
+                    return LocalizationUtil.GetCurrentCulture();
+                }
+                else
+                {
+                    return culture;
                 }
             }
 

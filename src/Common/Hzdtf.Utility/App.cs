@@ -151,7 +151,7 @@ namespace Hzdtf.Utility
         /// <summary>
         /// 同步默认上传图片的扩展名集合
         /// </summary>
-        private static readonly object syncAllowUploadImageExpands;
+        private static readonly object syncAllowUploadImageExpands = new object();
 
         /// <summary>
         /// 默认上传图片的扩展名集合

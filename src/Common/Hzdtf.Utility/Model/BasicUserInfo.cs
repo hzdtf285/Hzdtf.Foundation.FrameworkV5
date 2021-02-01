@@ -149,7 +149,25 @@ namespace Hzdtf.Utility.Model
             get;
             set;
         }
-        
+
+        /// <summary>
+        /// 退出登录时间_名称
+        /// </summary>
+        public const string LogoutTime_Name = "LogoutTime";
+
+        /// <summary>
+        /// 退出登录时间
+        /// </summary>
+        [JsonProperty("LogoutTime")]
+        [DisplayValueConvert(typeof(DateTimeValueToTextConvert))]
+        [Display(Name = "退出登录时间", Order = 8, AutoGenerateField = false)]
+        [MessagePack.Key("LogoutTime")]
+        public DateTime? LogoutTime
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 租户ID_名称
         /// 一般情况没有，特殊情况下有用，如SAAS中的租户

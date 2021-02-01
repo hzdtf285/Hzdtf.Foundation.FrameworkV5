@@ -3438,6 +3438,16 @@
             登录次数
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.LogoutTime_Name">
+            <summary>
+            退出登录时间_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.LogoutTime">
+            <summary>
+            退出登录时间
+            </summary>
+        </member>
         <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantId_Name">
             <summary>
             租户ID_名称
