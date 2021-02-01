@@ -15,3 +15,4 @@ NuGet.exe
 *.lock.json
 *.coverage
 .dotnet/*
+*.log

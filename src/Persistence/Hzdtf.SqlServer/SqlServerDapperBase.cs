@@ -278,10 +278,10 @@ namespace Hzdtf.SqlServer
         }
 
         /// <summary>
-        /// 默认分页排序SQL，默认是按修改时间降序、创建时间降序、ID降序。如果要改变，请在子类重写
+        /// 默认分页排序SQL，默认是按修改时间降序、创建时间降序、ID升序。如果要改变，请在子类重写
         /// </summary>
         /// <returns>默认排序SQL</returns>
-        public virtual string DefaultPageSortSql() => $" ORDER BY [{GetFieldByProp("ModifyTime")}] DESC, [{GetFieldByProp("CreateTime")}] DESC, [{GetFieldByProp("Id")}] DESC";
+        public virtual string DefaultPageSortSql() => $" ORDER BY [{GetFieldByProp("ModifyTime")}] DESC, [{GetFieldByProp("CreateTime")}] DESC, [{GetFieldByProp("Id")}]";
 
         #endregion
 
