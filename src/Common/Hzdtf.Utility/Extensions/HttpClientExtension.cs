@@ -245,6 +245,62 @@ namespace System.Net.Http
 
         #endregion
 
+        #region Patch
+
+        /// <summary>
+        /// Patch请求JSON
+        /// </summary>
+        /// <param name="url">URL</param>
+        /// <param name="data">数据</param>
+        /// <returns>返回字符串</returns>
+        public static string PatchJson(string url, object data = null)
+        {
+            using (var httpClient = CreateHttpClient())
+            {
+                return httpClient.PatchJson(url, data);
+            }
+        }
+
+        /// <summary>
+        /// Patch请求JSON
+        /// </summary>
+        /// <param name="httpClient">http客户端</param>
+        /// <param name="url">URL</param>
+        /// <param name="data">数据</param>
+        /// <returns>返回字符串</returns>
+        public static string PatchJson(this HttpClient httpClient, string url, object data = null)
+        {
+            return httpClient.RequestJson("Patch", httpContent =>
+            {
+                return httpClient.PatchAsync(url, httpContent);
+            }, data);
+        }
+
+        /// <summary>
+        /// Patch请求JSON
+        /// </summary>
+        /// <param name="url">URL</param>
+        /// <param name="data">数据</param>
+        /// <returns>任务</returns>
+        public static Task<string> PatchJsonAsync(string url, object data = null)
+        {
+            return Task<string>.Run(() => PatchJson(url, data));
+        }
+
+        /// <summary>
+        /// Patch请求JSON
+        /// </summary>
+        /// <param name="httpClient">http客户端</param>
+        /// <param name="url">URL</param>
+        /// <param name="data">数据</param>
+        /// <returns>任务</returns>
+        public static Task<string> PatchJsonAsync(this HttpClient httpClient, string url, object data = null)
+        {
+            return Task<string>.Run(() => httpClient.PatchJson(url, data));
+        }
+
+        #endregion
+
         /// <summary>
         /// 添加token到头里
         /// </summary>

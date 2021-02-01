@@ -8153,6 +8153,40 @@
             <param name="data">数据</param>
             <returns>任务</returns>
         </member>
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJson(System.String,System.Object)">
+            <summary>
+            Patch请求JSON
+            </summary>
+            <param name="url">URL</param>
+            <param name="data">数据</param>
+            <returns>返回字符串</returns>
+        </member>
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJson(System.Net.Http.HttpClient,System.String,System.Object)">
+            <summary>
+            Patch请求JSON
+            </summary>
+            <param name="httpClient">http客户端</param>
+            <param name="url">URL</param>
+            <param name="data">数据</param>
+            <returns>返回字符串</returns>
+        </member>
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJsonAsync(System.String,System.Object)">
+            <summary>
+            Patch请求JSON
+            </summary>
+            <param name="url">URL</param>
+            <param name="data">数据</param>
+            <returns>任务</returns>
+        </member>
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJsonAsync(System.Net.Http.HttpClient,System.String,System.Object)">
+            <summary>
+            Patch请求JSON
+            </summary>
+            <param name="httpClient">http客户端</param>
+            <param name="url">URL</param>
+            <param name="data">数据</param>
+            <returns>任务</returns>
+        </member>
         <member name="M:System.Net.Http.HttpClientExtension.AddBearerTokenToHeader(System.Net.Http.HttpClient,System.String)">
             <summary>
             添加token到头里
