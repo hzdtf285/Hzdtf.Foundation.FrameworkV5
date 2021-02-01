@@ -498,6 +498,19 @@
             <param name="context">上下文</param>
             <returns>文化</returns>
         </member>
+        <member name="T:Microsoft.AspNetCore.Http.HttpContextExtensions">
+            <summary>
+            http上下文扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.GetContextKey(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取上下文键
+            </summary>
+            <param name="context">上下文</param>
+            <returns>上下文键</returns>
+        </member>
         <member name="T:Microsoft.AspNetCore.Http.HttpRequestExtensions">
             <summary>
             HTTP请求扩展类

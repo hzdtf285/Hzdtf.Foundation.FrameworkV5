@@ -47,9 +47,9 @@ namespace Hzdtf.Utility.AspNet.TheOperation
                 {
                     eventId = request.Headers[HttpClientExtension.EVENT_ID_KEY].ToString();
                 }
-                if (string.IsNullOrWhiteSpace(eventId) && context.Connection != null)
+                if (string.IsNullOrWhiteSpace(eventId))
                 {
-                    return $"{context.Connection.Id}_{context.GetHashCode()}";
+                    return context.GetContextKey();
                 }
 
                 return null;
