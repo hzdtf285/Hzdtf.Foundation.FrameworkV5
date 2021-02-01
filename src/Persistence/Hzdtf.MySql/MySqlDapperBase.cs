@@ -182,24 +182,17 @@ namespace Hzdtf.MySql
             }
 
             string createTimeField = GetFieldByProp("CreateTime");
-            if (filter.StartCreateTime != null && filter.EndCreateTime != null)
-            {
-                parameters.Add("@StartCreateTime", filter.StartCreateTime);
-                parameters.Add("@EndCreateTime", filter.EndCreateTime);
-
-                whereSql.AppendFormat(" AND `{0}`.{1} BETWEEN @StartCreateTime AND @EndCreateTime", Table, createTimeField);
-            }
-            else if (filter.StartCreateTime != null)
+            if (filter.StartCreateTime != null)
             {
                 parameters.Add("@StartCreateTime", filter.StartCreateTime);
 
                 whereSql.AppendFormat(" AND `{0}`.{1}>=@StartCreateTime", Table, createTimeField);
             }
-            else if (filter.EndCreateTime != null)
+            if (filter.EndCreateTime != null)
             {
-                parameters.Add("@EndCreateTime", filter.EndCreateTime);
+                parameters.Add("@EndCreateTime", filter.EndCreateTime.GetValueOrDefault().ToLessThanDate());
 
-                whereSql.AppendFormat(" AND `{0}`.{1}<=@EndCreateTime", Table, createTimeField);
+                whereSql.AppendFormat(" AND `{0}`.{1}<@EndCreateTime", Table, createTimeField);
             }
         }
 
