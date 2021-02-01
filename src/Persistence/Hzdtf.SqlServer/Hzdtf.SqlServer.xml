@@ -132,7 +132,7 @@
         </member>
         <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.DefaultPageSortSql">
             <summary>
-            默认分页排序SQL，默认是按ID升序。如果要改变，请在子类重写
+            默认分页排序SQL，默认是按修改时间降序、创建时间降序、ID升序。如果要改变，请在子类重写
             </summary>
             <returns>默认排序SQL</returns>
         </member>
