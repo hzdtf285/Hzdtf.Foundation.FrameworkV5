@@ -172,7 +172,7 @@ namespace Hzdtf.Logger.Contract
 
     /// <summary>
     /// 日志级别帮助类
-    /// @ 网狐
+    /// @ 黄振东
     /// </summary>
     public static class LogLevelHelper
     {

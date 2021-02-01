@@ -437,7 +437,7 @@
         <member name="T:Hzdtf.Logger.Contract.LogLevelHelper">
             <summary>
             日志级别帮助类
-            @ 网狐
+            @ 黄振东
             </summary>
         </member>
         <member name="M:Hzdtf.Logger.Contract.LogLevelHelper.Parse(System.String)">
