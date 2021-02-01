@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Autofac;
 using Hzdtf.Autofac.Extensions;
 using Hzdtf.BasicFunction.Service.Impl;
@@ -9,6 +10,7 @@ using Hzdtf.Utility.ApiPermission;
 using Hzdtf.Utility.Config.AssemblyConfig;
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Localization;
+using Hzdtf.Utility.TheOperation;
 
 namespace Hzdtf.Example.WebApp.AppStart
 {
@@ -41,7 +43,7 @@ namespace Hzdtf.Example.WebApp.AppStart
                     builder.RegisterType<RoutePermissionCache>().As<IReader<RoutePermissionInfo[]>>().AsSelf().PropertiesAutowired().SingleInstance();
                     builder.RegisterType<CultureLibraryCache>().As<ICultureLibrary>().AsSelf().PropertiesAutowired().SingleInstance();
                 }
-            });//
+            });
             builder.RegisterBuildCallback(container =>
             {
                 var attachmentService = container.Resolve<AttachmentService>();
@@ -49,6 +51,12 @@ namespace Hzdtf.Example.WebApp.AppStart
                 attachmentOwnerLocalMember.ProtoAttachmentOwnerReader = container.Resolve<AttachmentOwnerJson>();
 
                 attachmentService.AttachmentOwnerReader = attachmentOwnerLocalMember;
+
+                HttpClientExtension.GetEventIdFunc = () =>
+                {
+                    var theOper = container.Resolve<ITheOperation>();
+                    return theOper != null ? theOper.EventId : null;
+                };
             });
         }
     }

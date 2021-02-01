@@ -32,9 +32,10 @@ namespace Hzdtf.Utility.Cache
         /// <returns>值</returns>
         public virtual ValueT Get(KeyT key)
         {
-            if (Exists(key))
+            ValueT value;
+            if (GetCache().TryGetValue(key, out value))
             {
-                return GetCache()[key];
+                return value;
             }
             else
             {
@@ -61,7 +62,7 @@ namespace Hzdtf.Utility.Cache
             {
                 return false;
             }
-            lock(GetSyncCache())
+            lock (GetSyncCache())
             {
                 try
                 {
@@ -86,8 +87,15 @@ namespace Hzdtf.Utility.Cache
             {
                 lock (GetSyncCache())
                 {
-                    GetCache()[key] = value;
-                    return true;
+                    if (Exists(key))
+                    {
+                        GetCache()[key] = value;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             else
@@ -107,7 +115,14 @@ namespace Hzdtf.Utility.Cache
         {
             if (Exists(key))
             {
-                return Update(key, value);
+                if (Update(key, value))
+                {
+                    return true;
+                }
+                else
+                {
+                    return Add(key, value);
+                }
             }
             else
             {
@@ -127,7 +142,14 @@ namespace Hzdtf.Utility.Cache
             {
                 lock (GetSyncCache())
                 {
-                    return GetCache().Remove(key);
+                    if (Exists(key))
+                    {
+                        return GetCache().Remove(key);
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 

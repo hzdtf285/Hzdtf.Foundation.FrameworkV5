@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Hzdtf.Logger.Contract;
+using Hzdtf.Utility.TheOperation;
 using Hzdtf.Utility.Utils;
 
 namespace Hzdtf.Logger.Contract
@@ -26,6 +28,15 @@ namespace Hzdtf.Logger.Contract
         /// 本地ID标签数组
         /// </summary>
         private static readonly string[] localIdTags = new string[] { NetworkUtil.LocalIP, Environment.MachineName };
+
+        /// <summary>
+        /// 本地操作
+        /// </summary>
+        public ITheOperation TheOperation
+        {
+            get;
+            set;
+        }
 
         #endregion
 
@@ -140,12 +151,29 @@ namespace Hzdtf.Logger.Contract
         /// </summary>
         /// <param name="tag">标签</param>
         /// <returns>本地标识标签</returns>
-        protected string[] AppendLocalIdTags(params string[] tag) => localIdTags.Merge(tag);
+        protected string[] AppendLocalIdTags(params string[] tag)
+        {
+            var tags = localIdTags.Merge(tag);
+            if (TheOperation != null)
+            {
+                try
+                {
+                    var eventId = TheOperation.EventId;
+                    if (!string.IsNullOrWhiteSpace(eventId))
+                    {
+                        return tags.Merge(new string[] { eventId });
+                    }
+                }
+                catch { }
+            }
+
+            return tags;
+        }
     }
 
     /// <summary>
     /// 日志级别帮助类
-    /// @ 黄振东
+    /// @ 网狐
     /// </summary>
     public static class LogLevelHelper
     {

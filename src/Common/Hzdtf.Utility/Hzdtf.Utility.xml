@@ -6055,6 +6055,18 @@
             UTC当前时间
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.TheOperation.ITheOperation">
+            <summary>
+            本次操作接口，通常是代表UI的一次一系列进行的操作
+            比如在UI上添加一个数据，后台里进行一系列的处理，由多个处理完成，则代表一个TheOperation
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.TheOperation.ITheOperation.EventId">
+            <summary>
+            事件ID
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Utils.AuthUtil">
             <summary>
             身份认证辅助类
@@ -8003,6 +8015,16 @@
             获取token回调
             </summary>
         </member>
+        <member name="F:System.Net.Http.HttpClientExtension.GetEventIdFunc">
+            <summary>
+            获取事件ID回调
+            </summary>
+        </member>
+        <member name="F:System.Net.Http.HttpClientExtension.EVENT_ID_KEY">
+            <summary>
+            事件ID键
+            </summary>
+        </member>
         <member name="M:System.Net.Http.HttpClientExtension.Get(System.String)">
             <summary>
             Get请求
@@ -8150,6 +8172,13 @@
             创建http客户端
             </summary>
             <returns>http客户端</returns>
+        </member>
+        <member name="M:System.Net.Http.HttpClientExtension.AddEventIdToHeader(System.Net.Http.HttpClient,System.String)">
+            <summary>
+            添加事件ID到头上
+            </summary>
+            <param name="httpClient">http客户端</param>
+            <param name="eventId">事件ID，如果为空，则会回调GetEventIdFunc</param>
         </member>
         <member name="M:System.Net.Http.HttpClientExtension.RequestJson(System.Net.Http.HttpClient,System.String,System.Func{System.Net.Http.HttpContent,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}},System.Object)">
             <summary>

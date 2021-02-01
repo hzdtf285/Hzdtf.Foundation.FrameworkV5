@@ -115,7 +115,7 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 登录IP_名称
         /// </summary>
-		public const string LoginIp_Name = "LoginIp";
+        public const string LoginIp_Name = "LoginIp";
 
         /// <summary>
         /// 登录IP
@@ -135,7 +135,7 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 登录次数_名称
         /// </summary>
-		public const string Logins_Name = "Logins";
+        public const string Logins_Name = "Logins";
 
         /// <summary>
         /// 登录次数

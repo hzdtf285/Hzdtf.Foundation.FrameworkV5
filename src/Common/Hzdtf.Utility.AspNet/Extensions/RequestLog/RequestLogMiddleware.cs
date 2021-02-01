@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Hzdtf.Utility.Utils;
 
 namespace Hzdtf.Utility.AspNet.Extensions.RequestLog
 {
@@ -51,14 +52,22 @@ namespace Hzdtf.Utility.AspNet.Extensions.RequestLog
         /// <returns>任务</returns>
         public async Task InvokeAsync(HttpContext context)
         {
+            var routeValue = context.Request.RouteValues;
+            var routes = routeValue.GetControllerAction();
+            // 过滤掉非控制器
+            if (routes.IsNullOrLength0())
+            {
+                await next(context);
+
+                return;
+            } 
+
             var stop = new Stopwatch();
             stop.Start();
             var path = context.Request.Path.Value.ToLower();
             await next(context);
             stop.Stop();
 
-            var routeValue = context.Request.RouteValues;
-            var routes = routeValue.GetControllerAction();
             var msg = new StringBuilder($"请求:{path} method:{context.Request.Method} ");
             string controller = null, action = null;
             if (routes != null && routes.Length == 2)

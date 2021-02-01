@@ -11,6 +11,7 @@
     {
       "Names": [
         "Hzdtf.Utility",
+        "Hzdtf.Utility.AspNet",
         "Hzdtf.Logger.Contract",
         "Hzdtf.Logger.Integration.ENLog",
         "Hzdtf.Logger.Integration.MicrosoftLog",

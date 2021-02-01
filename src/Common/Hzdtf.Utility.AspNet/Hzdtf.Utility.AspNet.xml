@@ -365,6 +365,28 @@
             <param name="prefix">前辍</param>
             <param name="model">模型</param>
         </member>
+        <member name="T:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation">
+            <summary>
+            本次请求操作
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation.contextAccessor">
+            <summary>
+            上下文访问
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation.EventId">
+            <summary>
+            事件ID
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="contextAccessor">上下文访问</param>
+        </member>
         <member name="T:Hzdtf.Utility.AspNet.WebApp">
             <summary>
             Web应用类

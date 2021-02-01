@@ -19,6 +19,16 @@ namespace System.Net.Http
         /// </summary>
         public static Func<string> GetTokenFunc;
 
+        /// <summary>
+        /// 获取事件ID回调
+        /// </summary>
+        public static Func<string> GetEventIdFunc;
+
+        /// <summary>
+        /// 事件ID键
+        /// </summary>
+        public const string EVENT_ID_KEY = "EventId";
+
         #region Get
 
         /// <summary>
@@ -266,8 +276,31 @@ namespace System.Net.Http
             {
                 httpClient.AddBearerTokenToHeader(GetTokenFunc());
             }
+            httpClient.AddEventIdToHeader();
 
             return httpClient;
+        }
+
+        /// <summary>
+        /// 添加事件ID到头上
+        /// </summary>
+        /// <param name="httpClient">http客户端</param>
+        /// <param name="eventId">事件ID，如果为空，则会回调GetEventIdFunc</param>
+        public static void AddEventIdToHeader(this HttpClient httpClient, string eventId = null)
+        {
+            if (string.IsNullOrWhiteSpace(eventId))
+            {
+                if (GetEventIdFunc != null)
+                {
+                    eventId = GetEventIdFunc();
+                    if (string.IsNullOrWhiteSpace(eventId))
+                    {
+                        return;
+                    }
+                }
+            }
+
+            httpClient.DefaultRequestHeaders.Add(EVENT_ID_KEY, eventId);
         }
 
         /// <summary>
@@ -280,12 +313,31 @@ namespace System.Net.Http
         /// <returns>返回字符串</returns>
         public static string RequestJson(this HttpClient httpClient, string method, Func<HttpContent, Task<HttpResponseMessage>> callbackRequest, object data = null)
         {
-            string dataJson = data.ToJsonString();
-            HttpContent content = new StringContent(dataJson);
+            HttpContent content = null;
+            if (data != null)
+            {
+                string dataJson = data.ToJsonString();
+                if (string.IsNullOrWhiteSpace(dataJson))
+                {
+                    content = new StringContent(string.Empty);
+                }
+                else
+                {
+                    content = new StringContent(dataJson, Encoding.UTF8);
+                }
+            }
+            else
+            {
+                content = new StringContent(string.Empty);
+            }
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             Task<HttpResponseMessage> task = null;
             httpClient.DefaultRequestHeaders.Add("Method", method);
+            if (!httpClient.DefaultRequestHeaders.Contains(EVENT_ID_KEY))
+            {
+                httpClient.AddEventIdToHeader();
+            }
             task = callbackRequest(content);
             task.Wait();
 
