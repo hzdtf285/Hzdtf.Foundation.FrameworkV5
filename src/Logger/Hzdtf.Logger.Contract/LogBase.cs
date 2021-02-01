@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Hzdtf.Logger.Contract;
 using Hzdtf.Utility.TheOperation;
 using Hzdtf.Utility.Utils;
 
