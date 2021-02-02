@@ -1735,7 +1735,7 @@ namespace Hzdtf.Service.Impl
         protected virtual void AfterClear(ReturnInfo<bool> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
 
         /// <summary>
-        /// 是否支持乐观锁，如果支持，则会在更新和删除时，会判断修改时间，默认不支持，如果要改为支持，请在子类重写
+        /// 是否支持乐观锁，如果支持，则会在更新时，会判断修改时间，默认不支持，如果要改为支持，请在子类重写
         /// </summary>
         /// <returns>是否支持乐观锁</returns>
         protected virtual bool IsSupportOptimisticLock() => false;
