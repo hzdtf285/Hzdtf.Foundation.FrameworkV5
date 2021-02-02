@@ -273,8 +273,21 @@ namespace Hzdtf.SqlServer
         /// <summary>
         /// 默认分页排序SQL，默认是按修改时间降序、创建时间降序、ID升序。如果要改变，请在子类重写
         /// </summary>
+        /// <param name="pfx">前辍</param>
         /// <returns>默认排序SQL</returns>
-        public virtual string DefaultPageSortSql() => $" ORDER BY [{GetFieldByProp("ModifyTime")}] DESC, [{GetFieldByProp("CreateTime")}] DESC, [{GetFieldByProp("Id")}]";
+        public virtual string DefaultPageSortSql(string pfx = null)
+        {
+            if (string.IsNullOrWhiteSpace(pfx))
+            {
+                pfx = Table;
+            }
+            else
+            {
+                pfx = pfx.Replace(".", null);
+            }
+
+            return $" ORDER BY {pfx}.[{GetFieldByProp("ModifyTime")}] DESC, {pfx}.[{GetFieldByProp("CreateTime")}] DESC, {pfx}.[{GetFieldByProp("Id")}]";
+        }
 
         /// <summary>
         /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）

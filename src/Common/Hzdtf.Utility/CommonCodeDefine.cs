@@ -30,12 +30,12 @@ namespace Hzdtf.Utility
         /// <summary>
         /// 操作成功文化键
         /// </summary>
-        public const string OPERATION_SUCCESS_KEY = "Common.Platform.M..OperateSuccessfully";
+        public const string OPER_SUCCESS_KEY = "Common.Platform.M..OperSuccess";
 
         /// <summary>
         /// 操作失败文化键
         /// </summary>
-        public const string OPERATION_FAILURE_KEY = "Common.Platform.M..OperateFailure";
+        public const string OPER_FAILURE_KEY = "Common.Platform.M..OperFailure";
 
         /// <summary>
         /// 系统发生异常

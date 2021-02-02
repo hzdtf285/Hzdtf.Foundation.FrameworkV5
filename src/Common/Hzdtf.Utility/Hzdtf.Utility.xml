@@ -955,12 +955,12 @@
             禁止访问文化键
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.CommonCodeDefine.OPERATION_SUCCESS_KEY">
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.OPER_SUCCESS_KEY">
             <summary>
             操作成功文化键
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.CommonCodeDefine.OPERATION_FAILURE_KEY">
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.OPER_FAILURE_KEY">
             <summary>
             操作失败文化键
             </summary>

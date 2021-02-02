@@ -148,12 +148,12 @@ namespace Hzdtf.Autofac.Extensions.Intercepteds
                     {
                         if (basicReturnInfo.Success())
                         {
-                            var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPERATION_SUCCESS_KEY, "操作成功") : "操作成功";
+                            var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPER_SUCCESS_KEY, "操作成功") : "操作成功";
                             basicReturnInfo.SetSuccessMsg(msg);
                         }
                         else
                         {
-                            var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPERATION_FAILURE_KEY, "操作失败") : "操作失败";
+                            var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPER_FAILURE_KEY, "操作失败") : "操作失败";
                             basicReturnInfo.SetSuccessMsg(msg);
                         }
                     }
