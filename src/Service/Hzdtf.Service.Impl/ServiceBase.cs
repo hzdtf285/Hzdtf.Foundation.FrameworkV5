@@ -13,6 +13,8 @@ using Hzdtf.Utility.Attr.ParamAttr;
 using System.ComponentModel.DataAnnotations;
 using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.Model.Identitys;
+using Hzdtf.Utility.Localization;
+using System.Text;
 
 namespace Hzdtf.Service.Impl
 {
@@ -42,6 +44,15 @@ namespace Hzdtf.Service.Impl
         /// ID
         /// </summary>
         public IIdentity<IdT> Identity
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 本地化
+        /// </summary>
+        public ILocalization Localize
         {
             get;
             set;
@@ -1042,56 +1053,40 @@ namespace Hzdtf.Service.Impl
         [Auth(CurrUserParamIndex = 2)]
         public virtual ReturnInfo<bool> ModifyById([DisplayName2("模型"), Required, Model] ModelT model, string connectionId = null, BasicUserInfo<IdT> currUser = null)
         {
-            SetModifyInfo(model, currUser);
-
-            bool isClose = false;
-            if (string.IsNullOrWhiteSpace(connectionId))
+            return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {
-                isClose = true;
-            }
-
-            try
-            {
-                ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeModifyById(returnInfo, model, ref connectionId, currUser);
-                if (returnInfo.Failure())
+                OptimissticLockHandle(model, reInfo, connectionId: connId);
+                if (reInfo.Failure())
                 {
-                    return returnInfo;
+                    return false;
                 }
 
-                OnModifyByIding(returnInfo, model, connectionId, currUser);
-                if (returnInfo.Failure())
+                SetModifyInfo(model, currUser);
+
+                BeforeModifyById(reInfo, model, ref connectionId, currUser);
+                if (reInfo.Failure())
                 {
-                    return returnInfo;
+                    return false;
                 }
 
-                returnInfo = ExecReturnFunc<bool>((reInfo) =>
+                OnModifyByIding(reInfo, model, connectionId, currUser);
+                if (reInfo.Failure())
                 {
-                    return Persistence.UpdateById(model, connectionId) > 0;
-                }, returnInfo);
-
-                AfterModifyById(returnInfo, model, ref connectionId, currUser);
-                if (returnInfo.Failure())
-                {
-                    return returnInfo;
+                    return false;
                 }
 
-                OnModifyByIded(returnInfo, model, connectionId, currUser);
+                var result = Persistence.UpdateById(model, connectionId) > 0;
 
-                return returnInfo;
-            }
-            catch (Exception ex)
-            {
-                isClose = true;
-                throw new Exception(ex.Message, ex);
-            }
-            finally
-            {
-                if (isClose)
+                AfterModifyById(reInfo, model, ref connectionId, currUser);
+                if (reInfo.Failure())
                 {
-                    Persistence.Release(connectionId);
+                    return false;
                 }
-            }
+
+                OnModifyByIded(reInfo, model, connectionId, currUser);
+
+                return result;
+            }, connectionId: connectionId, accessMode: AccessMode.MASTER);
         }
 
         /// <summary>
@@ -1738,6 +1733,70 @@ namespace Hzdtf.Service.Impl
         /// <param name="connectionId">连接ID</param>
         /// <param name="currUser">当前用户</param>
         protected virtual void AfterClear(ReturnInfo<bool> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+
+        /// <summary>
+        /// 是否支持乐观锁，如果支持，则会在更新和删除时，会判断修改时间，默认不支持，如果要改为支持，请在子类重写
+        /// </summary>
+        /// <returns>是否支持乐观锁</returns>
+        protected virtual bool IsSupportOptimisticLock() => false;
+
+        /// <summary>
+        /// 乐观锁处理，注意：根据ID和修改时间来判断
+        /// </summary>
+        /// <typeparam name="ReturnDataT">返回数据类型</typeparam>
+        /// <param name="model">模型</param>
+        /// <param name="returnInfo">返回信息</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT model, ReturnInfo<ReturnDataT> returnInfo, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        {
+            // 如果支持乐观锁，则需要先按修改时间来查询是否之前被修改过
+            if (IsSupportOptimisticLock())
+            {
+                var temp = Persistence.SelectModifyInfoByIdAndGeModifyTime(model, mode, connectionId);
+                if (temp == null)
+                {
+                    return;
+                }
+
+                var person = temp as PersonTimeInfo<IdT>;
+                var msg = Localize.Get(ServiceCodeDefine.DATA_MODIFIED_CULTURE_KEY, "数据已被[{0}]修改过,请重新加载数据");
+                returnInfo.SetCodeMsg(ServiceCodeDefine.DATA_MODIFIED, string.Format(msg, person.Modifier));
+            }
+        }
+
+        /// <summary>
+        /// 乐观锁处理，注意：根据ID和修改时间来判断
+        /// </summary>
+        /// <typeparam name="ReturnDataT">返回数据类型</typeparam>
+        /// <param name="models">模型列表</param>
+        /// <param name="returnInfo">返回信息</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT[] models, ReturnInfo<ReturnDataT> returnInfo, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        {
+            // 如果支持乐观锁，则需要先按修改时间来查询是否之前被修改过
+            if (IsSupportOptimisticLock())
+            {
+                var temp = Persistence.SelectModifyInfosByIdAndGeModifyTime(models, mode, connectionId);
+                if (temp.IsNullOrCount0())
+                {
+                    return;
+                }
+
+                var msg = Localize.Get(ServiceCodeDefine.DATA_MODIFIED_CULTURE_KEY, "数据已被[{0}]修改过,请重新加载数据");
+
+                var modifyStr = new StringBuilder();
+                foreach (var item in temp)
+                {
+                    var person = item as PersonTimeInfo<IdT>;
+                    modifyStr.AppendFormat("{0},", person.Modifier);
+                }
+                modifyStr.Remove(modifyStr.Length - 1, 1);
+
+                returnInfo.SetCodeMsg(ServiceCodeDefine.DATA_MODIFIED, string.Format(msg, modifyStr.ToString()));
+            }
+        }
 
         #endregion
     }

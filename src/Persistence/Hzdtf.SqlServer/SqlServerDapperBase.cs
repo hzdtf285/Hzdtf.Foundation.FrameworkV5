@@ -276,6 +276,50 @@ namespace Hzdtf.SqlServer
         /// <returns>默认排序SQL</returns>
         public virtual string DefaultPageSortSql() => $" ORDER BY [{GetFieldByProp("ModifyTime")}] DESC, [{GetFieldByProp("CreateTime")}] DESC, [{GetFieldByProp("Id")}]";
 
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <returns>只有修改信息的模型</returns>
+        protected override string SelectModifyInfoByIdAndGeModifyTimeSql(ModelT model)
+        {
+            var modifyTimeField = $"[{ GetFieldByProp("ModifyTime") }]";
+            var idField = $"[{ GetFieldByProp("Id")}]";
+            return $"SELECT {idField} Id,[{GetFieldByProp("ModifierId")}] ModifierId,[{GetFieldByProp("Modifier")}] Modifier,{modifyTimeField} ModifyTime"
+                + $" FROM [{Table}] WHERE {idField}=@Id AND {modifyTimeField}>@ModifyTime {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        }
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="models">模型数组</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>只有修改信息的模型列表</returns>
+        protected override string SelectModifyInfosByIdAndGeModifyTimeSql(ModelT[] models, out DynamicParameters parameters)
+        {
+            parameters = new DynamicParameters();
+            var modifyTimeField = $"[{ GetFieldByProp("ModifyTime") }]";
+            var idField = $"[{ GetFieldByProp("Id")}]";
+
+            var whereSql = new StringBuilder(" WHERE (");
+            for (var i = 0; i < models.Length; i++)
+            {
+                var person = models[i] as PersonTimeInfo<IdT>;
+
+                var paraIdName = $"@Id{i}";
+                var paraModifyTimeName = $"@ModifyTime{i}";
+                parameters.Add(paraIdName, person.Id);
+                parameters.Add(paraModifyTimeName, person.ModifyTime);
+
+                whereSql.AppendFormat(" ({0}={1} AND {2}>{3}) OR", idField, paraIdName, modifyTimeField, paraModifyTimeName);
+            }
+            whereSql.Remove(whereSql.Length - 3, 3);
+            whereSql.Append(")");
+
+            return $"SELECT {idField} Id,[{GetFieldByProp("ModifierId")}] ModifierId,[{GetFieldByProp("Modifier")}] Modifier,{modifyTimeField} ModifyTime"
+                + $" FROM [{Table}] {whereSql.ToString()} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        }
+
         #endregion
 
         #region 写入方法

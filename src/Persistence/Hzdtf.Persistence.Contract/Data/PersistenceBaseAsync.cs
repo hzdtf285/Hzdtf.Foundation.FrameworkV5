@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Persistence.Contract.Management;
+using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Page;
 using System;
@@ -32,7 +33,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Select(id, dbConn);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -53,7 +54,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Select(id, dbConn, propertyNames: propertyNames);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -73,7 +74,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Select(ids, dbConn);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -94,7 +95,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Select(ids, dbConn, propertyNames: propertyNames);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -114,7 +115,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Count(id, dbConn);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -133,7 +134,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Count(dbConn);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -152,7 +153,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Select(dbConn);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -172,7 +173,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return Select(dbConn, propertyNames: propertyNames);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -194,7 +195,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return SelectPage(pageIndex, pageSize, dbConn, filter);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
 
             return task;
         }
@@ -217,7 +218,49 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return SelectPage(pageIndex, pageSize, dbConn, filter, propertyNames: propertyNames);
                 });
-            });
+            }, accessMode: AccessMode.SLAVE);
+
+            return task;
+        }
+
+        /// <summary>
+        /// 异步根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>只有修改信息的模型任务</returns>
+        public virtual Task<ModelT> SelectModifyInfoByIdAndGeModifyTimeAsync(ModelT model, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        {
+            Task<ModelT> task = null;
+            DbConnectionManager.BrainpowerExecuteAsync(ref connectionId, this, (connId, isClose, dbConn) =>
+            {
+                task = ExecAsync<ModelT>(connId, isClose, dbConn, () =>
+                {
+                    return SelectModifyInfoByIdAndGeModifyTime(model: model, mode: mode, connectionId: connId);
+                });
+            }, accessMode: mode);
+
+            return task;
+        }
+
+        /// <summary>
+        /// 异步根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="models">模型数组</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>只有修改信息的模型列表任务</returns>
+        public virtual Task<IList<ModelT>> SelectModifyInfosByIdAndGeModifyTimeAsync(ModelT[] models, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        {
+            Task<IList<ModelT>> task = null;
+            DbConnectionManager.BrainpowerExecuteAsync(ref connectionId, this, (connId, isClose, dbConn) =>
+            {
+                task = ExecAsync<IList<ModelT>>(connId, isClose, dbConn, () =>
+                {
+                    return SelectModifyInfosByIdAndGeModifyTime(models: models, mode: mode, connectionId: connId);
+                });
+            }, accessMode: mode);
 
             return task;
         }

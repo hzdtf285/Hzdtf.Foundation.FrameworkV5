@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Persistence.Contract.Basic;
+using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Page;
 using System;
@@ -102,6 +103,24 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <param name="filter">筛选</param>
         /// <returns>分页信息任务</returns>
         Task<PagingInfo<ModelT>> SelectPageAsync(int pageIndex, int pageSize, string[] propertyNames, ref string connectionId, FilterInfo filter = null);
+
+        /// <summary>
+        /// 异步根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>只有修改信息的模型任务</returns>
+        Task<ModelT> SelectModifyInfoByIdAndGeModifyTimeAsync(ModelT model, AccessMode mode = AccessMode.MASTER, string connectionId = null);
+
+        /// <summary>
+        /// 异步根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="models">模型数组</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>只有修改信息的模型列表任务</returns>
+        Task<IList<ModelT>> SelectModifyInfosByIdAndGeModifyTimeAsync(ModelT[] models, AccessMode mode = AccessMode.MASTER, string connectionId = null);
 
         #endregion
 

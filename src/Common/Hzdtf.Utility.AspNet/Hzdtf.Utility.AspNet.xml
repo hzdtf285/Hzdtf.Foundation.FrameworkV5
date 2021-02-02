@@ -97,6 +97,7 @@
             API异常处理中间件
             只有对路径是从传过来的配置前辍才处理
             会对下一个中间件捕获异常，如果发生异常，会返回BasicReturnInfo对象
+            对于BusinessException业务异常则不会记录日志，会返回BasicReturnInfo对象
             @ 黄振东
             </summary>
         </member>
@@ -128,6 +129,15 @@
             执行
             </summary>
             <param name="context">http上下文</param>
+            <returns>任务</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.ExceptionHandle.ApiExceptionHandleMiddleware.WriteReturnInfo(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.AspNet.Extensions.ExceptionHandle.ApiExceptionHandleOptions,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
+            <summary>
+            写入返回信息
+            </summary>
+            <param name="context">http上下文</param>
+            <param name="options">Api异常处理选项配置</param>
+            <param name="reInfo">返回信息</param>
             <returns>任务</returns>
         </member>
         <member name="T:Hzdtf.Utility.AspNet.Extensions.ExceptionHandle.ApiExceptionHandleOptions">

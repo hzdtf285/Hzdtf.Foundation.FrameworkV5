@@ -84,7 +84,7 @@ namespace Hzdtf.Utility.Localization
             {
                 if (protoCultureLibrary == null)
                 {
-                    throw new NullReferenceException("原生文化库读取不能为null");
+                    return new Dictionary<string, IDictionary<string, string>>();
                 }
 
                 var temp = protoCultureLibrary.Reader();

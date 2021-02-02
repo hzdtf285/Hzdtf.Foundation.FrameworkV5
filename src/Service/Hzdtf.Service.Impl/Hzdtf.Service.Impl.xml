@@ -43,6 +43,11 @@
             ID
             </summary>
         </member>
+        <member name="P:Hzdtf.Service.Impl.ServiceBase`3.Localize">
+            <summary>
+            本地化
+            </summary>
+        </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Get">
             <summary>
             获取对象
@@ -807,6 +812,32 @@
             <param name="returnInfo">返回信息</param>
             <param name="connectionId">连接ID</param>
             <param name="currUser">当前用户</param>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.IsSupportOptimisticLock">
+            <summary>
+            是否支持乐观锁，如果支持，则会在更新和删除时，会判断修改时间，默认不支持，如果要改为支持，请在子类重写
+            </summary>
+            <returns>是否支持乐观锁</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1,Hzdtf.Utility.Model.Return.ReturnInfo{``0},Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            乐观锁处理，注意：根据ID和修改时间来判断
+            </summary>
+            <typeparam name="ReturnDataT">返回数据类型</typeparam>
+            <param name="model">模型</param>
+            <param name="returnInfo">返回信息</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1[],Hzdtf.Utility.Model.Return.ReturnInfo{``0},Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            乐观锁处理，注意：根据ID和修改时间来判断
+            </summary>
+            <typeparam name="ReturnDataT">返回数据类型</typeparam>
+            <param name="models">模型列表</param>
+            <param name="returnInfo">返回信息</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
         </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
             <summary>

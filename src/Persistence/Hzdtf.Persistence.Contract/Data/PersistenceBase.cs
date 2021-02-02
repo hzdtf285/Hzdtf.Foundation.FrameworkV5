@@ -10,6 +10,7 @@ using System.Data;
 using Hzdtf.Utility.Utils;
 using Hzdtf.Utility.Model.Identitys;
 using System.Linq;
+using Hzdtf.Utility.Localization;
 
 namespace Hzdtf.Persistence.Contract.Data
 {
@@ -28,6 +29,15 @@ namespace Hzdtf.Persistence.Contract.Data
         /// ID
         /// </summary>
         public IIdentity<IdT> Identity
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 本地化
+        /// </summary>
+        public ILocalization Localize
         {
             get;
             set;
@@ -210,6 +220,42 @@ namespace Hzdtf.Persistence.Contract.Data
             {
                 result = SelectPage(pageIndex, pageSize, dbConn, filter, GetDbTransaction(connId, AccessMode.SLAVE), propertyNames);
             }, AccessMode.SLAVE);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>只有修改信息的模型</returns>
+        public virtual ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        {
+            ModelT result = null;
+            DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
+            {
+                result = SelectModifyInfoByIdAndGeModifyTime(model, dbConn, GetDbTransaction(connId, mode));
+            }, mode);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="models">模型数组</param>
+        /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>只有修改信息的模型列表</returns>
+        public virtual IList<ModelT> SelectModifyInfosByIdAndGeModifyTime(ModelT[] models, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        {
+            IList<ModelT> result = null;
+            DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
+            {
+                result = SelectModifyInfosByIdAndGeModifyTime(models, dbConn, GetDbTransaction(connId, mode));
+            }, mode);
 
             return result;
         }
@@ -477,7 +523,25 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>分页信息</returns>
         protected abstract PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, IDbConnection dbConnection, FilterInfo filter = null, IDbTransaction dbTransaction = null, string[] propertyNames = null);
-        
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="dbConnection">数据库连接</param>
+        /// <param name="dbTransaction">数据库事务</param>
+        /// <returns>只有修改信息的模型</returns>
+        protected abstract ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null);
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="models">模型数组</param>
+        /// <param name="dbConnection">数据库连接</param>
+        /// <param name="dbTransaction">数据库事务</param>
+        /// <returns>只有修改信息的模型列表</returns>
+        protected abstract IList<ModelT> SelectModifyInfosByIdAndGeModifyTime(ModelT[] models, IDbConnection dbConnection, IDbTransaction dbTransaction = null);
+
         /// <summary>
         /// 所有字段映射集合
         /// </summary>

@@ -75,6 +75,24 @@
             <param name="propertyNames">属性名称集合</param>
             <returns>分页信息</returns>
         </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfoByIdAndGeModifyTime(`1,System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>只有修改信息的模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfosByIdAndGeModifyTime(`1[],System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>只有修改信息的模型列表</returns>
+        </member>
         <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Insert(`1,System.Data.IDbConnection,System.Data.IDbTransaction)">
             <summary>
             插入模型
@@ -207,6 +225,21 @@
             <param name="filter">筛选</param>
             <param name="propertyNames">属性名称集合</param>
             <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfoByIdAndGeModifyTimeSql(`1)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <returns>只有修改信息的模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfosByIdAndGeModifyTimeSql(`1[],Dapper.DynamicParameters@)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="parameters">参数</param>
+            <returns>只有修改信息的模型列表</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.InsertSql(`1,System.Boolean)">
             <summary>

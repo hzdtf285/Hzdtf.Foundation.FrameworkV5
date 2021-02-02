@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Utility.Data;
+using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -15,6 +16,7 @@ namespace Hzdtf.Utility.AspNet.Extensions.ExceptionHandle
     /// API异常处理中间件
     /// 只有对路径是从传过来的配置前辍才处理
     /// 会对下一个中间件捕获异常，如果发生异常，会返回BasicReturnInfo对象
+    /// 对于BusinessException业务异常则不会记录日志，会返回BasicReturnInfo对象
     /// @ 黄振东
     /// </summary>
     public class ApiExceptionHandleMiddleware
@@ -61,6 +63,13 @@ namespace Hzdtf.Utility.AspNet.Extensions.ExceptionHandle
                 {
                     await next(context);
                 }
+                catch (BusinessException ex) // 业务异常不记录日志
+                {
+                    var re = new BasicReturnInfo();
+                    re.SetCodeMsg(ex.Code, ex.Msg, ex.Desc);
+
+                    await WriteReturnInfo(context, options, re);
+                }
                 catch (Exception ex)
                 {
                     var routeValue = context.Request.RouteValues;
@@ -91,16 +100,28 @@ namespace Hzdtf.Utility.AspNet.Extensions.ExceptionHandle
                         returnInfo.Desc = ex.Message;
                     }
 
-                    context.Response.ContentType = "application/json;charset=UTF-8";
-                    context.Response.StatusCode = options.HttpStatusCode;
-
-                    await context.Response.WriteAsync(options.Serialization.Serialize(returnInfo));
+                    await WriteReturnInfo(context, options, returnInfo);
                 }
             }
             else
             {
                 await next(context);
             }
+        }
+
+        /// <summary>
+        /// 写入返回信息
+        /// </summary>
+        /// <param name="context">http上下文</param>
+        /// <param name="options">Api异常处理选项配置</param>
+        /// <param name="reInfo">返回信息</param>
+        /// <returns>任务</returns>
+        private static async Task WriteReturnInfo(HttpContext context, ApiExceptionHandleOptions options, BasicReturnInfo reInfo)
+        {
+            context.Response.ContentType = "application/json;charset=UTF-8";
+            context.Response.StatusCode = options.HttpStatusCode;
+
+            await context.Response.WriteAsync(options.Serialization.Serialize(reInfo));
         }
     }
 

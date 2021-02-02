@@ -30,7 +30,7 @@ namespace Hzdtf.Utility.Model
         {
             get;
             set;
-        } = DateTime.Now;
+        }
 
         /// <summary>
         /// 修改时间_名称
@@ -47,7 +47,7 @@ namespace Hzdtf.Utility.Model
         {
             get;
             set;
-        } = DateTime.Now;
+        }
     }
 
     /// <summary>

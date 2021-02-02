@@ -333,6 +333,24 @@
             </summary>
             <returns>所有字段映射集合</returns>
         </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.SelectModifyInfoByIdAndGeModifyTime(`1,Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.SelectModifyInfosByIdAndGeModifyTime(`1[],Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型列表</returns>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Insert(`1,System.String)">
             <summary>
             插入模型
@@ -482,6 +500,24 @@
             <param name="filter">筛选</param>
             <returns>分页信息任务</returns>
         </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectModifyInfoByIdAndGeModifyTimeAsync(`1,Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            异步根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.SelectModifyInfosByIdAndGeModifyTimeAsync(`1[],Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            异步根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型列表任务</returns>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.IPersistenceAsync`2.InsertAsync(`1,System.String@)">
             <summary>
             异步插入模型
@@ -554,6 +590,11 @@
         <member name="P:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Identity">
             <summary>
             ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Localize">
+            <summary>
+            本地化
             </summary>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,System.String)">
@@ -640,6 +681,24 @@
             <param name="filter">筛选</param>
             <param name="connectionId">连接ID</param>
             <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectModifyInfoByIdAndGeModifyTime(`1,Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectModifyInfosByIdAndGeModifyTime(`1[],Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型列表</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(`1,System.String)">
             <summary>
@@ -754,6 +813,24 @@
             <param name="dbTransaction">数据库事务</param>
             <param name="propertyNames">属性名称集合</param>
             <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectModifyInfoByIdAndGeModifyTime(`1,System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>只有修改信息的模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectModifyInfosByIdAndGeModifyTime(`1[],System.Data.IDbConnection,System.Data.IDbTransaction)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>只有修改信息的模型列表</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.AllFieldMapProps">
             <summary>
@@ -974,6 +1051,24 @@
             <param name="connectionId">连接ID</param>
             <param name="filter">筛选</param>
             <returns>分页信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectModifyInfoByIdAndGeModifyTimeAsync(`1,Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            异步根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型任务</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectModifyInfosByIdAndGeModifyTimeAsync(`1[],Hzdtf.Utility.Enums.AccessMode,System.String)">
+            <summary>
+            异步根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="mode">访问模式，默认为主库</param>
+            <param name="connectionId">连接ID</param>
+            <returns>只有修改信息的模型列表任务</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.InsertAsync(`1,System.String@)">
             <summary>

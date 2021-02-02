@@ -3466,6 +3466,52 @@
             @ 黄振东
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.Model.BusinessException">
+            <summary>
+            业务异常
+            初步定义：
+            100-9999为平台编码
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Model.BusinessException.code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.BusinessException.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Model.BusinessException.msg">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.BusinessException.Msg">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Model.BusinessException.desc">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.BusinessException.Desc">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.BusinessException.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="code">编码</param>
+            <param name="msg">消息</param>
+            <param name="desc">描述</param>
+        </member>
         <member name="T:Hzdtf.Utility.Model.CodeNameFilterInfo">
             <summary>
             编码名称筛选信息

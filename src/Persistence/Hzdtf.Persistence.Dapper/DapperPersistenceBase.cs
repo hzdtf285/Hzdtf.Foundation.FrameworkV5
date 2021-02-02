@@ -129,6 +129,35 @@ namespace Hzdtf.Persistence.Dapper
             });
         }
 
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="dbConnection">数据库连接</param>
+        /// <param name="dbTransaction">数据库事务</param>
+        /// <returns>只有修改信息的模型</returns>
+        protected override ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        {
+            var sql = SelectModifyInfoByIdAndGeModifyTimeSql(model);
+            Log.TraceAsync(sql, source: this.GetType().Name, tags: "SelectModifyInfoByIdAndGeModifyTime");
+            return dbConnection.QueryFirstOrDefault<ModelT>(sql: sql, param: model, transaction: dbTransaction);
+        }
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="models">模型数组</param>
+        /// <param name="dbConnection">数据库连接</param>
+        /// <param name="dbTransaction">数据库事务</param>
+        /// <returns>只有修改信息的模型列表</returns>
+        protected override IList<ModelT> SelectModifyInfosByIdAndGeModifyTime(ModelT[] models, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        {
+            DynamicParameters parameters;
+            var sql = SelectModifyInfosByIdAndGeModifyTimeSql(models, out parameters);
+            Log.TraceAsync(sql, source: this.GetType().Name, tags: "SelectModifyInfosByIdAndGeModifyTime");
+            return dbConnection.Query<ModelT>(sql: sql, param: parameters, transaction: dbTransaction).AsList();
+        }
+
         #endregion
 
         #region 写入方法
@@ -324,7 +353,22 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>SQL语句</returns>
         protected abstract string SelectPageSql(int pageIndex, int pageSize, out DynamicParameters parameters, FilterInfo filter = null, string[] propertyNames = null);
-        
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <returns>只有修改信息的模型</returns>
+        protected abstract string SelectModifyInfoByIdAndGeModifyTimeSql(ModelT model);
+
+        /// <summary>
+        /// 根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+        /// </summary>
+        /// <param name="models">模型数组</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>只有修改信息的模型列表</returns>
+        protected abstract string SelectModifyInfosByIdAndGeModifyTimeSql(ModelT[] models, out DynamicParameters parameters);
+
         #endregion
 
         #region 写入方法
