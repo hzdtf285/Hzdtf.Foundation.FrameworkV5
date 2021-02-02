@@ -269,6 +269,21 @@
             日志
             </summary>
         </member>
+        <member name="F:Hzdtf.Autofac.Extensions.Intercepteds.TryExceptionInterceptor.syncLocalize">
+            <summary>
+            同步本地化
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Autofac.Extensions.Intercepteds.TryExceptionInterceptor.localize">
+            <summary>
+            本地化
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Autofac.Extensions.Intercepteds.TryExceptionInterceptor.Localize">
+            <summary>
+            本地化
+            </summary>
+        </member>
         <member name="M:Hzdtf.Autofac.Extensions.Intercepteds.TryExceptionInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
             <summary>
             拦截

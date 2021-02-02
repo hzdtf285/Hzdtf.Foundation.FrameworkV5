@@ -8,6 +8,8 @@ using System.Reflection;
 using Hzdtf.Utility.Model.Return;
 using Hzdtf.Utility.Attr;
 using Hzdtf.Autofac.Extensions;
+using Hzdtf.Utility;
+using Hzdtf.Utility.Localization;
 
 namespace Hzdtf.Autofac.Extensions.Intercepteds
 {
@@ -54,6 +56,39 @@ namespace Hzdtf.Autofac.Extensions.Intercepteds
                 }
 
                 return log;
+            }
+        }
+
+        /// <summary>
+        /// 同步本地化
+        /// </summary>
+        private static readonly object syncLocalize = new object();
+
+        /// <summary>
+        /// 本地化
+        /// </summary>
+        private static ILocalization localize;
+
+        /// <summary>
+        /// 本地化
+        /// </summary>
+        private static ILocalization Localize
+        {
+            get
+            {
+                if (localize == null)
+                {
+                    var locali = AutofacTool.Resolve<ILocalization>();
+                    if (locali != null)
+                    {
+                        lock (syncLocalize)
+                        {
+                            localize = locali;
+                        }
+                    }
+                }
+
+                return Localize;
             }
         }
 
@@ -113,18 +148,21 @@ namespace Hzdtf.Autofac.Extensions.Intercepteds
                     {
                         if (basicReturnInfo.Success())
                         {
-                            basicReturnInfo.SetSuccessMsg("操作成功");
+                            var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPERATION_SUCCESS_KEY, "操作成功") : "操作成功";
+                            basicReturnInfo.SetSuccessMsg(msg);
                         }
                         else
                         {
-                            basicReturnInfo.SetSuccessMsg("操作失败");
+                            var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPERATION_FAILURE_KEY, "操作失败") : "操作失败";
+                            basicReturnInfo.SetSuccessMsg(msg);
                         }
                     }
                 }
                 else
                 {
+                    var msg = Localize != null ? Localize.Get(CommonCodeDefine.SYSTEM_EXCEPTION_KEY, "操作异常，请联系管理员") : "操作异常，请联系管理员";
                     BasicReturnInfo basicReturnInfo = invocation.Method.ReturnType.CreateInstance<BasicReturnInfo>();
-                    basicReturnInfo.SetFailureMsg("操作异常，请联系管理员", ex.Message, ex);
+                    basicReturnInfo.SetFailureMsg(msg, ex.Message, ex);
                     invocation.ReturnValue = basicReturnInfo;
                 }
 

@@ -934,6 +934,42 @@
             初始化定时器
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.CommonCodeDefine">
+            <summary>
+            公共编码定义
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.NOT_PERMISSION">
+            <summary>
+            没有权限
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.NOT_PERMISSION_CULTURE_KEY">
+            <summary>
+            没有权限文化键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.DISABLED_ACCESS_CULTURE_KEY">
+            <summary>
+            禁止访问文化键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.OPERATION_SUCCESS_KEY">
+            <summary>
+            操作成功文化键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.OPERATION_FAILURE_KEY">
+            <summary>
+            操作失败文化键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.CommonCodeDefine.SYSTEM_EXCEPTION_KEY">
+            <summary>
+            系统发生异常
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Config.AssemblyConfig.AssemblyConfigInfo">
             <summary>
             程序集配置信息
@@ -3575,17 +3611,6 @@
         <member name="P:Hzdtf.Utility.Model.DateRangePageInfo.EndDate">
             <summary>
             结束日期
-            </summary>
-        </member>
-        <member name="T:Hzdtf.Utility.Model.ErrCodeDefine">
-            <summary>
-            错误编码定义
-            @ 黄振东
-            </summary>
-        </member>
-        <member name="F:Hzdtf.Utility.Model.ErrCodeDefine.NOT_PERMISSION">
-            <summary>
-            没有权限
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.Model.FilterInfo">

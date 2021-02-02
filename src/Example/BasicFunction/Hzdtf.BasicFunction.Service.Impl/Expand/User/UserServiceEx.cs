@@ -17,6 +17,7 @@ using Hzdtf.Utility.Attr.ParamAttr;
 using System.ComponentModel.DataAnnotations;
 using Hzdtf.Utility.AutoMapperExtensions;
 using Hzdtf.AUC.Contract.User;
+using Hzdtf.Utility;
 
 namespace Hzdtf.BasicFunction.Service.Impl
 {
@@ -193,7 +194,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     }
                     else
                     {
-                        reInfo.SetCodeMsg(ErrCodeDefine.NOT_PERMISSION, "Sorry,您没有访问此功能权限！");
+                        reInfo.SetCodeMsg(CommonCodeDefine.NOT_PERMISSION, "Sorry,您没有访问此功能权限！");
                         return false;
                     }
                 }, null, connectionId, AccessMode.SLAVE);                    
@@ -208,7 +209,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     }
                     else
                     {
-                        reInfo.SetCodeMsg(ErrCodeDefine.NOT_PERMISSION, "Sorry,您没有访问此功能权限！");
+                        reInfo.SetCodeMsg(CommonCodeDefine.NOT_PERMISSION, "Sorry,您没有访问此功能权限！");
                         return false;
                     }
                 });

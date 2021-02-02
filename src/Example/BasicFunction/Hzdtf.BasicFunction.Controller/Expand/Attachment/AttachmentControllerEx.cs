@@ -10,6 +10,7 @@ using Hzdtf.Utility.Utils;
 using Hzdtf.Utility.Model.Page;
 using System.Threading.Tasks;
 using Hzdtf.BasicFunction.Service.Contract;
+using Hzdtf.Utility;
 
 namespace Hzdtf.BasicFunction.Controller
 {
@@ -120,7 +121,7 @@ namespace Hzdtf.BasicFunction.Controller
             }
 
             ReturnInfo<bool> returnInfo = UserService.IsCurrUserPermission(MenuCode(), FunCodeDefine.DOWNLOAD_CODE);
-            if (returnInfo.Code == ErrCodeDefine.NOT_PERMISSION)
+            if (returnInfo.Code == CommonCodeDefine.NOT_PERMISSION)
             {
                 foreach (var a in attachments)
                 {
@@ -145,7 +146,7 @@ namespace Hzdtf.BasicFunction.Controller
             }
 
             ReturnInfo<bool> returnInfo = UserService.IsCurrUserPermission(MenuCode(), FunCodeDefine.DOWNLOAD_CODE);
-            if (returnInfo.Code == ErrCodeDefine.NOT_PERMISSION)
+            if (returnInfo.Code == CommonCodeDefine.NOT_PERMISSION)
             {
                 attachment.FileAddress = null;
                 returnInfo.SetSuccessMsg("操作成功");

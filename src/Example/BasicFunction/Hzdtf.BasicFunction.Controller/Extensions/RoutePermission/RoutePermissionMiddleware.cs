@@ -2,6 +2,7 @@
 using Hzdtf.Utility.ApiPermission;
 using Hzdtf.Utility.AspNet.Extensions.RoutePermission;
 using Hzdtf.Utility.Data;
+using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -31,9 +32,10 @@ namespace Hzdtf.BasicFunction.Controller.Extensions.RoutePermission
         /// <param name="options">路由权限选项配置</param>
         /// <param name="reader">读取API权限配置</param>
         /// <param name="userService">用户服务</param>
+        /// <param name="localize">本地化</param>
         public RoutePermissionMiddleware(RequestDelegate next, IOptions<RoutePermissionOptions> options, IReader<RoutePermissionInfo[]> reader,
-            IUserService userService)
-            : base(next, options, reader)
+            IUserService userService, ILocalization localize)
+            : base(next, options, reader, localize)
         {
             this.userService = userService;
         }
