@@ -21,7 +21,7 @@ namespace Hzdtf.Utility.Localization
         /// <summary>
         /// 字典缓存
         /// </summary>
-        private static IDictionary<string, IDictionary<string, string>> dicCache = new Dictionary<string, IDictionary<string, string>>();
+        private static IDictionary<string, IDictionary<string, string>> dicCache = new Dictionary<string, IDictionary<string, string>>(20);
 
         /// <summary>
         /// 同步字典缓存
@@ -84,7 +84,7 @@ namespace Hzdtf.Utility.Localization
             {
                 if (protoCultureLibrary == null)
                 {
-                    return new Dictionary<string, IDictionary<string, string>>();
+                    return dicCache;
                 }
 
                 var temp = protoCultureLibrary.Reader();
