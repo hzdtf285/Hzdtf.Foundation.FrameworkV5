@@ -1,4 +1,5 @@
-﻿using Hzdtf.Utility.Attr;
+﻿using Hzdtf.Utility;
+using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.TheOperation;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -40,19 +41,19 @@ namespace Hzdtf.Utility.AspNet.TheOperation
                 }
 
                 string eventId = null;
-                // 优先从http header里获取，否则返回连接I+上下文哈希码
+                // 优先从http header里获取，否则返回连接ID+上下文哈希码
                 var context = contextAccessor.HttpContext;
                 var request = context.Request;
-                if (request != null && request.Headers != null && request.Headers.ContainsKey(HttpClientExtension.EVENT_ID_KEY))
+                if (request != null && request.Headers != null && request.Headers.ContainsKey(App.EVENT_ID_KEY))
                 {
-                    eventId = request.Headers[HttpClientExtension.EVENT_ID_KEY].ToString();
+                    eventId = request.Headers[App.EVENT_ID_KEY].ToString();
                 }
                 if (string.IsNullOrWhiteSpace(eventId))
                 {
                     return context.GetContextKey();
                 }
 
-                return null;
+                return eventId;
             }
         }
 

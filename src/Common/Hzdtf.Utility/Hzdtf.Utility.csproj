@@ -19,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="androidxml" Version="1.1.14" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.34.0" />
     <PackageReference Include="Hei.Captcha" Version="0.2.0" />
     <PackageReference Include="MessagePack" Version="2.2.85" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
