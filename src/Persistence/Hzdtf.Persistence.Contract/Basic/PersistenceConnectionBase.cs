@@ -11,7 +11,7 @@ namespace Hzdtf.Persistence.Contract.Basic
     /// <summary>
     /// 持久化连接基类
     /// 本类支持自定义连接字符串，取连接字符串顺序为：本类重写>回调获取>读取默认（配置文件）
-    /// 如果需要动态获取连接字符串，请设置回调：PersistenceConnectionBase.DynamcGetConnectionString
+    /// 如果需要动态获取连接字符串，请设置回调：DynamcGetConnectionString
     /// @ 黄振东
     /// </summary>
     public abstract class PersistenceConnectionBase : IPersistenceConnection
