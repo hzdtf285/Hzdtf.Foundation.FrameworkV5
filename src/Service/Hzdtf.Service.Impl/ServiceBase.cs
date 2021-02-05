@@ -753,6 +753,11 @@ namespace Hzdtf.Service.Impl
                     return returnInfo;
                 }
 
+                if (!DbBuilderId() && Identity.IsEmpty(model.Id))
+                {
+                    model.Id = Identity.New();
+                }
+
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
                 {
                     return Persistence.Insert(model, connectionId) > 0;
@@ -856,6 +861,17 @@ namespace Hzdtf.Service.Impl
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
+                }
+
+                if (!DbBuilderId())
+                {
+                    foreach (var m in models)
+                    {
+                        if (Identity.IsEmpty(m.Id))
+                        {
+                            m.Id = Identity.New();
+                        }
+                    }
                 }
 
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
@@ -1797,6 +1813,12 @@ namespace Hzdtf.Service.Impl
                 returnInfo.SetCodeMsg(ServiceCodeDefine.DATA_MODIFIED, string.Format(msg, modifyStr.ToString()));
             }
         }
+
+        /// <summary>
+        /// 是否由DB生成ID，默认为是。如果为是，则由数据库自增生成。如果为否则，默认添加方法会自动调用Identity.New()生成ID
+        /// </summary>
+        /// <returns>是否由DB生成ID</returns>
+        protected virtual bool DbBuilderId() => true;
 
         #endregion
     }
