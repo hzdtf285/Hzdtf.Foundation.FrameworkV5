@@ -182,7 +182,7 @@ namespace Hzdtf.Persistence.Dapper
             }
             else
             {
-                return dbConnection.ExecuteScalar<int>(sql, model, dbTransaction);
+                return dbConnection.Execute(sql, model, dbTransaction);
             }
         }
 
