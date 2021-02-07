@@ -839,6 +839,12 @@
             <param name="mode">访问模式，默认为主库</param>
             <param name="connectionId">连接ID</param>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.DbBuilderId">
+            <summary>
+            是否由DB生成ID，默认为是。如果为是，则由数据库自增生成。如果为否则，默认添加方法会自动调用Identity.New()生成ID
+            </summary>
+            <returns>是否由DB生成ID</returns>
+        </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
             <summary>
             异步根据ID查找模型

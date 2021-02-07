@@ -177,9 +177,13 @@ namespace Hzdtf.Persistence.Dapper
             if (isAuto)
             {
                 model.Id = dbConnection.ExecuteScalar<IdT>(sql, model, dbTransaction);
-            }
 
-            return 1;
+                return 1;
+            }
+            else
+            {
+                return dbConnection.Execute(sql, model, dbTransaction);
+            }
         }
 
         /// <summary>
