@@ -27,6 +27,11 @@
             服务
             </summary>
         </member>
+        <member name="P:Hzdtf.BasicController.BasicControllerBase`3.Localize">
+            <summary>
+            本地化
+            </summary>
+        </member>
         <member name="M:Hzdtf.BasicController.BasicControllerBase`3.MenuCode">
             <summary>
             菜单编码
