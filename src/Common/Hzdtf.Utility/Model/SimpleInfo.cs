@@ -35,6 +35,17 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
+        /// ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// </summary>
+        [JsonProperty("idString")]
+        [Display(AutoGenerateField = false)]
+        [MessagePack.Key("idString")]
+        public string IdString
+        {
+            get => Id.ToString();
+        }
+
+        /// <summary>
         /// 浅拷贝
         /// </summary>
         /// <returns>拷贝后的对象</returns>
