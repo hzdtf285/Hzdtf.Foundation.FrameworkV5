@@ -6,6 +6,7 @@ using Hzdtf.BasicFunction.Service.Impl;
 using Hzdtf.BasicFunction.Service.Impl.Expand.Attachment;
 using Hzdtf.Logger.Contract;
 using Hzdtf.Logger.Integration.ENLog;
+using Hzdtf.Utility;
 using Hzdtf.Utility.ApiPermission;
 using Hzdtf.Utility.Config.AssemblyConfig;
 using Hzdtf.Utility.Data;
@@ -52,7 +53,7 @@ namespace Hzdtf.Example.WebApp.AppStart
 
                 attachmentService.AttachmentOwnerReader = attachmentOwnerLocalMember;
 
-                HttpClientExtension.GetEventIdFunc = () =>
+                App.GetEventIdFunc = () =>
                 {
                     var theOper = container.Resolve<ITheOperation>();
                     return theOper != null ? theOper.EventId : null;

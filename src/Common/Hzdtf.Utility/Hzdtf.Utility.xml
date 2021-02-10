@@ -233,6 +233,21 @@
             返回对象是否返回文化，默认为否，如果要返回，则程序启动时需要设置
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.App.EVENT_ID_KEY">
+            <summary>
+            事件ID键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.App.GetTokenFunc">
+            <summary>
+            获取token回调
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.App.GetEventIdFunc">
+            <summary>
+            获取事件ID回调
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Attr.AuthAttribute">
             <summary>
             授权特性
@@ -8086,21 +8101,6 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="F:System.Net.Http.HttpClientExtension.GetTokenFunc">
-            <summary>
-            获取token回调
-            </summary>
-        </member>
-        <member name="F:System.Net.Http.HttpClientExtension.GetEventIdFunc">
-            <summary>
-            获取事件ID回调
-            </summary>
-        </member>
-        <member name="F:System.Net.Http.HttpClientExtension.EVENT_ID_KEY">
-            <summary>
-            事件ID键
-            </summary>
-        </member>
         <member name="M:System.Net.Http.HttpClientExtension.Get(System.String)">
             <summary>
             Get请求
@@ -8749,6 +8749,65 @@
             </summary>
             <param name="options">选项配置，如果不传则默认加载appsetting.json</param>
             <returns>配置对象</returns>
+        </member>
+        <member name="T:Grpc.Net.Client.GRpcChannelUtil">
+            <summary>
+            GRpc渠道辅助类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Grpc.Net.Client.GRpcChannelUtil.defaultCustomerOptions">
+            <summary>
+            默认渠道自定义配置选项
+            </summary>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.CreateChannel(System.String,System.Action{Grpc.Net.Client.GrpcChannel,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException},Grpc.Net.Client.GrpcChannelCustomerOptions,Grpc.Net.Client.GrpcChannelOptions)">
+            <summary>
+            创建一个渠道，执行完业务处理方法后，会自动关闭渠道连接
+            </summary>
+            <param name="address">地址</param>
+            <param name="action">回调业务处理方法</param>
+            <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
+            <param name="customerOptions">自定义选项配置</param>
+            <param name="options">选项配置</param>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.IsRequestGRpc(System.String)">
+            <summary>
+            判断请求内容类型是否GRpc
+            </summary>
+            <param name="requestContentType">请求内容</param>
+            <returns>请求内容类型是否GRpc</returns>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.ThrowRpcException(System.Exception,System.String)">
+            <summary>
+            抛出RPC异常
+            </summary>
+            <param name="ex">异常</param>
+            <param name="msg">消息</param>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.ThrowReturnFailureRpcException(Hzdtf.Utility.Model.Return.BasicReturnInfo)">
+            <summary>
+            如果返回值是错误则抛出RPC异常
+            </summary>
+            <param name="basicReturn">基本返回</param>
+        </member>
+        <member name="T:Grpc.Net.Client.GrpcChannelCustomerOptions">
+            <summary>
+            GRpc渠道自定义选项配置
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Grpc.Net.Client.GrpcChannelCustomerOptions.IsAddToken">
+            <summary>
+            是否添加Token，设置后，会调用App.GetTokenFunc获取Token
+            默认为是
+            </summary>
+        </member>
+        <member name="P:Grpc.Net.Client.GrpcChannelCustomerOptions.IsAddEventId">
+            <summary>
+            是否添加事件ID，设置后，会调用App.GetEventIdFunc获取事件ID
+            默认为是
+            </summary>
         </member>
     </members>
 </doc>

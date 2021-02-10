@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Hzdtf.Utility.Utils;
+using Grpc.Net.Client;
 
 namespace Hzdtf.Utility.AspNet.Extensions.RequestLog
 {
@@ -54,13 +55,13 @@ namespace Hzdtf.Utility.AspNet.Extensions.RequestLog
         {
             var routeValue = context.Request.RouteValues;
             var routes = routeValue.GetControllerAction();
-            // 过滤掉非控制器
-            if (routes.IsNullOrLength0())
+            // 过滤掉非控制器（排除掉GRpc）
+            if (routes.IsNullOrLength0() && !GRpcChannelUtil.IsRequestGRpc(context.Request.ContentType))
             {
                 await next(context);
 
                 return;
-            } 
+            }
 
             var stop = new Stopwatch();
             stop.Start();

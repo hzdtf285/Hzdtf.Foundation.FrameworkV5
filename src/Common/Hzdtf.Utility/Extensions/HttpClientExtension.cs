@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Hzdtf.Utility;
 using Hzdtf.Utility.Utils;
 
 namespace System.Net.Http
@@ -14,21 +15,6 @@ namespace System.Net.Http
     /// </summary>
     public static class HttpClientExtension
     {
-        /// <summary>
-        /// 获取token回调
-        /// </summary>
-        public static Func<string> GetTokenFunc;
-
-        /// <summary>
-        /// 获取事件ID回调
-        /// </summary>
-        public static Func<string> GetEventIdFunc;
-
-        /// <summary>
-        /// 事件ID键
-        /// </summary>
-        public const string EVENT_ID_KEY = "EventId";
-
         #region Get
 
         /// <summary>
@@ -328,9 +314,9 @@ namespace System.Net.Http
         public static HttpClient CreateHttpClient()
         {
             var httpClient = new HttpClient();
-            if (GetTokenFunc != null)
+            if (App.GetTokenFunc != null)
             {
-                httpClient.AddBearerTokenToHeader(GetTokenFunc());
+                httpClient.AddBearerTokenToHeader(App.GetTokenFunc());
             }
             httpClient.AddEventIdToHeader();
 
@@ -346,9 +332,9 @@ namespace System.Net.Http
         {
             if (string.IsNullOrWhiteSpace(eventId))
             {
-                if (GetEventIdFunc != null)
+                if (App.GetEventIdFunc != null)
                 {
-                    eventId = GetEventIdFunc();
+                    eventId = App.GetEventIdFunc();
                     if (string.IsNullOrWhiteSpace(eventId))
                     {
                         return;
@@ -356,7 +342,7 @@ namespace System.Net.Http
                 }
             }
 
-            httpClient.DefaultRequestHeaders.Add(EVENT_ID_KEY, eventId);
+            httpClient.DefaultRequestHeaders.Add(App.EVENT_ID_KEY, eventId);
         }
 
         /// <summary>
@@ -390,7 +376,7 @@ namespace System.Net.Http
 
             Task<HttpResponseMessage> task = null;
             httpClient.DefaultRequestHeaders.Add("Method", method);
-            if (!httpClient.DefaultRequestHeaders.Contains(EVENT_ID_KEY))
+            if (!httpClient.DefaultRequestHeaders.Contains(App.EVENT_ID_KEY))
             {
                 httpClient.AddEventIdToHeader();
             }

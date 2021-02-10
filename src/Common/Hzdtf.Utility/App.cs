@@ -239,5 +239,21 @@ namespace Hzdtf.Utility
         /// 返回对象是否返回文化，默认为否，如果要返回，则程序启动时需要设置
         /// </summary>
         public static bool IsReturnCulture { get; set; }
+
+        /// <summary>
+        /// 事件ID键
+        /// </summary>
+        public const string EVENT_ID_KEY = "EventId";
+
+        /// <summary>
+        /// 获取token回调
+        /// </summary>
+        public static Func<string> GetTokenFunc;
+
+        /// <summary>
+        /// 获取事件ID回调
+        /// </summary>
+        public static Func<string> GetEventIdFunc;
+
     }
 }

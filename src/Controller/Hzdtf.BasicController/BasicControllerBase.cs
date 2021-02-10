@@ -1,6 +1,7 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Service.Contract;
 using Hzdtf.Utility;
+using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +43,15 @@ namespace Hzdtf.BasicController
         /// 服务
         /// </summary>
         public ServiceT Service
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 本地化
+        /// </summary>
+        public ILocalization Localize
         {
             get;
             set;
