@@ -3511,6 +3511,16 @@
             一般情况没有，特殊情况下有用，如SAAS中的租户
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantIdString_Name">
+            <summary>
+            租户ID字符串_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.TenantIdString">
+            <summary>
+            租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Model.BasicUserInfo">
             <summary>
             基本用户信息
@@ -4130,6 +4140,16 @@
             创建人ID
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.Model.PersonTimeInfo`1.CreaterIdString_Name">
+            <summary>
+            创建人ID字符串_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.PersonTimeInfo`1.CreaterIdString">
+            <summary>
+            创建人ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+            </summary>
+        </member>
         <member name="F:Hzdtf.Utility.Model.PersonTimeInfo`1.Creater_Name">
             <summary>
             创建人_名称
@@ -4148,6 +4168,16 @@
         <member name="P:Hzdtf.Utility.Model.PersonTimeInfo`1.ModifierId">
             <summary>
             修改人ID
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Model.PersonTimeInfo`1.TenantIdString_Name">
+            <summary>
+            修改人ID字符串_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.PersonTimeInfo`1.ModifierIdString">
+            <summary>
+            修改人ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
             </summary>
         </member>
         <member name="F:Hzdtf.Utility.Model.PersonTimeInfo`1.Modifier_Name">
@@ -4180,6 +4210,16 @@
         <member name="P:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantId">
             <summary>
             租户ID
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantIdString_Name">
+            <summary>
+            租户ID字符串_名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantIdString">
+            <summary>
+            租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.Model.SimpleInfoExtensions">
@@ -4570,6 +4610,11 @@
         <member name="P:Hzdtf.Utility.Model.SimpleInfo`1.Id">
             <summary>
             ID
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Model.SimpleInfo`1.IdString_Name">
+            <summary>
+            ID字符串_名称
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.SimpleInfo`1.IdString">
@@ -6439,6 +6484,36 @@
             <param name="array">数组</param>
             <param name="value">值</param>
             <returns>新的数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ArrayToString``1(``0[])">
+            <summary>
+            将数组里的值转换为数组字符串
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="array">数组</param>
+            <returns>数组字符串</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ArrayToLong(System.String[])">
+            <summary>
+            将字符串数组转换为长整型数组
+            </summary>
+            <param name="array">字符串数组</param>
+            <returns>长整型数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ListToString``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            将列表里的值转换为列表字符串
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="list">列表</param>
+            <returns>列表字符串</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ListToLong(System.Collections.Generic.IList{System.String})">
+            <summary>
+            将字符串列表转换为长整型列表
+            </summary>
+            <param name="list">字符串列表</param>
+            <returns>长整型列表</returns>
         </member>
         <member name="T:Hzdtf.Utility.Utils.DataTableUtil">
             <summary>

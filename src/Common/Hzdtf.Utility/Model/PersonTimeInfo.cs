@@ -33,6 +33,22 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
+        /// 创建人ID字符串_名称
+        /// </summary>
+        public const string CreaterIdString_Name = "CreaterIdString";
+
+        /// <summary>
+        /// 创建人ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// </summary>
+        [JsonProperty("createrIdString")]
+        [Display(AutoGenerateField = false)]
+        [MessagePack.Key("createrIdString")]
+        public string CreaterIdString
+        {
+            get => CreaterId.ToString();
+        }
+
+        /// <summary>
         /// 创建人_名称
         /// </summary>
         public const string Creater_Name = "Creater";
@@ -64,6 +80,22 @@ namespace Hzdtf.Utility.Model
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 修改人ID字符串_名称
+        /// </summary>
+        public const string TenantIdString_Name = "ModifierIdString";
+
+        /// <summary>
+        /// 修改人ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// </summary>
+        [JsonProperty("modifierIdString")]
+        [Display(AutoGenerateField = false)]
+        [MessagePack.Key("modifierIdString")]
+        public string ModifierIdString
+        {
+            get => ModifierId.ToString();
         }
 
         /// <summary>
@@ -114,6 +146,22 @@ namespace Hzdtf.Utility.Model
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 租户ID字符串_名称
+        /// </summary>
+        public const string TenantIdString_Name = "TenantIdString";
+
+        /// <summary>
+        /// 租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// </summary>
+        [JsonProperty("tenantIdString")]
+        [Display(AutoGenerateField = false)]
+        [MessagePack.Key("tenantIdString")]
+        public string TenantIdString
+        {
+            get => TenantId.ToString();
         }
     }
 

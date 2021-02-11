@@ -480,5 +480,91 @@ namespace Hzdtf.Utility.Utils
                 return curr.Equals(value);
             });
         }
+
+        /// <summary>
+        /// 将数组里的值转换为数组字符串
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="array">数组</param>
+        /// <returns>数组字符串</returns>
+        public static string[] ArrayToString<T>(this T[] array)
+        {
+            if (array.IsNullOrLength0())
+            {
+                return null;
+            }
+
+            var result = new string[array.Length];
+            for (var i = 0; i < array.Length; i++)
+            {
+                result[i] = array[i].ToString();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 将字符串数组转换为长整型数组
+        /// </summary>
+        /// <param name="array">字符串数组</param>
+        /// <returns>长整型数组</returns>
+        public static long[] ArrayToLong(this string[] array)
+        {
+            if (array.IsNullOrLength0())
+            {
+                return null;
+            }
+
+            var result = new long[array.Length];
+            for (var i = 0;  i < array.Length; i++)
+            {
+                result[i] = long.Parse(array[i]);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 将列表里的值转换为列表字符串
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="list">列表</param>
+        /// <returns>列表字符串</returns>
+        public static IList<string> ListToString<T>(this IList<T> list)
+        {
+            if (list.IsNullOrCount0())
+            {
+                return null;
+            }
+
+            var result = new List<string>(list.Count);
+            foreach (var item in list)
+            {
+                result.Add(item.ToString());
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 将字符串列表转换为长整型列表
+        /// </summary>
+        /// <param name="list">字符串列表</param>
+        /// <returns>长整型列表</returns>
+        public static IList<long> ListToLong(this IList<string> list)
+        {
+            if (list.IsNullOrCount0())
+            {
+                return null;
+            }
+
+            var result = new List<long>(list.Count);
+            foreach (var item in list)
+            {
+                result.Add(long.Parse(item));
+            }
+
+            return result;
+        }
     }
 }

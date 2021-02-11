@@ -35,6 +35,11 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
+        /// ID字符串_名称
+        /// </summary>
+        public const string IdString_Name = "IdString";
+
+        /// <summary>
         /// ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
         [JsonProperty("idString")]

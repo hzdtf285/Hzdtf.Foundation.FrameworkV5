@@ -186,6 +186,22 @@ namespace Hzdtf.Utility.Model
             get;
             set;
         }
+
+        /// <summary>
+        /// 租户ID字符串_名称
+        /// </summary>
+        public const string TenantIdString_Name = "TenantIdString";
+
+        /// <summary>
+        /// 租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// </summary>
+        [JsonProperty("tenantIdString")]
+        [Display(AutoGenerateField = false)]
+        [MessagePack.Key("tenantIdString")]
+        public string TenantIdString
+        {
+            get => TenantId.ToString();
+        }
     }
 
     /// <summary>
