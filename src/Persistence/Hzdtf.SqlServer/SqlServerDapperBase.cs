@@ -254,7 +254,7 @@ namespace Hzdtf.SqlServer
             {
                 var tenantIdField = GetFieldByProp("TenantId");
                 pfx = string.IsNullOrWhiteSpace(pfx) ? null : pfx + ".";
-                var sql = $"{pfx}]{tenantIdField}]={Identity.GetValueSql(tenantId)}";
+                var sql = $"({pfx}[{tenantIdField}]={Identity.GetValueSql(tenantId)})";
                 if (isBeforeAppWhere)
                 {
                     return $" WHERE {sql}";
