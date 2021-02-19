@@ -4170,7 +4170,7 @@
             修改人ID
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.Model.PersonTimeInfo`1.TenantIdString_Name">
+        <member name="F:Hzdtf.Utility.Model.PersonTimeInfo`1.ModifierIdString_Name">
             <summary>
             修改人ID字符串_名称
             </summary>

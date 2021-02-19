@@ -85,7 +85,7 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 修改人ID字符串_名称
         /// </summary>
-        public const string TenantIdString_Name = "ModifierIdString";
+        public const string ModifierIdString_Name = "ModifierIdString";
 
         /// <summary>
         /// 修改人ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
