@@ -6,6 +6,7 @@ using Dapper;
 using System.Data;
 using Hzdtf.Utility.Utils;
 using Hzdtf.Persistence.Contract.Data;
+using Hzdtf.Persistence.Contract.PermissionFilter;
 
 namespace Hzdtf.Persistence.Dapper
 {
@@ -38,9 +39,26 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>模型</returns>
         protected override ModelT Select(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
         {
-            var sql = SelectSql(id, propertyNames);
+            DynamicParameters dataParameter = null;
+            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter);
+
+            bool sqlEmptyNotFilter;
+            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+            if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
+            {
+                return null;
+            }
+
+            var sql = SelectSql(id, dataPermissionSql, fieldPermissionSql, propertyNames);
             Log.TraceAsync(sql, source: this.GetType().Name, tags: "Select");
-            return dbConnection.QueryFirstOrDefault<ModelT>(sql, new SimpleInfo<IdT>() { Id = id }, dbTransaction);
+
+            if (dataParameter == null)
+            {
+                dataParameter = new DynamicParameters();
+            }
+            dataParameter.Add("@Id", id);
+
+            return dbConnection.QueryFirstOrDefault<ModelT>(sql, dataParameter, dbTransaction);
         }
 
         /// <summary>
@@ -53,10 +71,20 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>模型列表</returns>
         protected override IList<ModelT> Select(IdT[] ids, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
         {
+            DynamicParameters dataParameter = null;
+            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter);
+
+            bool sqlEmptyNotFilter;
+            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+            if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
+            {
+                return null;
+            }
+
             DynamicParameters parameters;
-            var sql = SelectSql(ids, out parameters, propertyNames);
+            var sql = SelectSql(ids, dataPermissionSql, fieldPermissionSql, out parameters, propertyNames);
             Log.TraceAsync(sql, source: this.GetType().Name, tags: "Select");
-            return dbConnection.Query<ModelT>(sql, parameters, dbTransaction).AsList();
+            return dbConnection.Query<ModelT>(sql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
         }
 
         /// <summary>
@@ -68,9 +96,18 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>模型数</returns>
         protected override int Count(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
         {
-            var sql = CountSql(id);
+            DynamicParameters dataParameter = null;
+            var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter);
+            var sql = CountSql(id, dataPermissionSql);
             Log.TraceAsync(sql, source: this.GetType().Name, tags: "Count");
-            return dbConnection.ExecuteScalar<int>(sql, new SimpleInfo<IdT>() { Id = id }, dbTransaction);
+
+            if (dataParameter == null)
+            {
+                dataParameter = new DynamicParameters();
+            }
+            dataParameter.Add("@Id", id);
+
+            return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
         }
 
         /// <summary>
@@ -81,9 +118,12 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="dbTransaction">数据库事务</param>
         protected override int Count(IDbConnection dbConnection, IDbTransaction dbTransaction = null)
         {
-            var sql = CountSql();
+            DynamicParameters dataParameter = null;
+            var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter);
+            var sql = CountSql(dataPermissionSql: dataPermissionSql);
             Log.TraceAsync(sql, source: this.GetType().Name, tags: "Count");
-            return dbConnection.ExecuteScalar<int>(sql, dbTransaction);
+
+            return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
         }
 
         /// <summary>
@@ -95,9 +135,19 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="propertyNames">属性名称集合</param>
         protected override IList<ModelT> Select(IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
         {
-            var sql = SelectSql(propertyNames: propertyNames);
+            DynamicParameters dataParameter = null;
+            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter);
+
+            bool sqlEmptyNotFilter;
+            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+            if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
+            {
+                return null;
+            }
+
+            var sql = SelectSql(propertyNames: propertyNames, dataPermissionSql: dataPermissionSql, fieldPermissionSql: fieldPermissionSql);
             Log.TraceAsync(sql, source: this.GetType().Name, tags: "Select");
-            return dbConnection.Query<ModelT>(sql, dbTransaction).AsList();
+            return dbConnection.Query<ModelT>(sql, dataParameter, dbTransaction).AsList();
         }
 
         /// <summary>
@@ -114,18 +164,29 @@ namespace Hzdtf.Persistence.Dapper
         {
             BeforeFilterInfo(filter);
             var source = this.GetType().Name;
+            DynamicParameters dataParameter = null;
+            string dataPermissionSql = null;
             return PagingUtil.ExecPage<ModelT>(pageIndex, pageSize, () =>
             {
+                dataPermissionSql = ExecDataPermissionFilter("SelectPage", dbConnection, dbTransaction, ref dataParameter);
+
                 DynamicParameters parameters;
-                var countSql = CountByFilterSql(filter, out parameters);
+                var countSql = CountByFilterSql(filter, dataPermissionSql, out parameters);
                 Log.TraceAsync(countSql, source: source, tags: "SelectPage");
-                return dbConnection.ExecuteScalar<int>(countSql, parameters, dbTransaction);
+                return dbConnection.ExecuteScalar<int>(countSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction);
             }, () =>
             {
+                bool sqlEmptyNotFilter;
+                var fieldPermissionSql = ExecFieldPermissionFilter("SelectPage", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+                if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
+                {
+                    return null;
+                }
+
                 DynamicParameters parameters;
-                var pageSql = SelectPageSql(pageIndex, pageSize, out parameters, filter, propertyNames);
+                var pageSql = SelectPageSql(pageIndex, pageSize, dataPermissionSql, fieldPermissionSql, out parameters, filter, propertyNames);
                 Log.TraceAsync(pageSql, source: source, tags: "SelectPage");
-                return dbConnection.Query<ModelT>(pageSql, parameters, dbTransaction).AsList();
+                return dbConnection.Query<ModelT>(pageSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
             });
         }
 
@@ -303,40 +364,47 @@ namespace Hzdtf.Persistence.Dapper
         /// 根据ID查询模型SQL语句
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectSql(IdT id, string[] propertyNames = null);
+        protected abstract string SelectSql(IdT id, string dataPermissionSql, string fieldPermissionSql, string[] propertyNames = null);
 
         /// <summary>
         /// 根据ID集合查询模型列表SQL语句
         /// </summary>
         /// <param name="ids">ID集合</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="parameters">参数</param>
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectSql(IdT[] ids, out DynamicParameters parameters, string[] propertyNames = null);
+        protected abstract string SelectSql(IdT[] ids, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, string[] propertyNames = null);
 
         /// <summary>
         /// 根据ID统计模型数SQL语句
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <returns>SQL语句</returns>
-        protected abstract string CountSql(IdT id);
+        protected abstract string CountSql(IdT id, string dataPermissionSql);
 
         /// <summary>
         /// 统计模型数SQL语句
         /// </summary>
         /// <param name="pfx">前辍</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <returns>SQL语句</returns>
-        protected abstract string CountSql(string pfx = null);
+        protected abstract string CountSql(string pfx = null, string dataPermissionSql = null);
 
         /// <summary>
         /// 根据筛选信息统计模型数SQL语句
         /// </summary>
         /// <param name="filter">筛选信息</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <param name="parameters">参数</param>
         /// <returns>SQL语句</returns>
-        protected abstract string CountByFilterSql(FilterInfo filter, out DynamicParameters parameters);
+        protected abstract string CountByFilterSql(FilterInfo filter, string dataPermissionSql, out DynamicParameters parameters);
 
         /// <summary>
         /// 查询模型列表
@@ -344,19 +412,23 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="pfx">前辍</param>
         /// <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectSql(string pfx = null, string appendFieldSqls = null, string[] propertyNames = null);
+        protected abstract string SelectSql(string pfx = null, string appendFieldSqls = null, string[] propertyNames = null, string dataPermissionSql = null, string fieldPermissionSql = null);
 
         /// <summary>
         /// 查询模型列表并分页SQL语句
         /// </summary>
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="parameters">参数</param>
         /// <param name="filter">筛选</param>
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectPageSql(int pageIndex, int pageSize, out DynamicParameters parameters, FilterInfo filter = null, string[] propertyNames = null);
+        protected abstract string SelectPageSql(int pageIndex, int pageSize, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, FilterInfo filter = null, string[] propertyNames = null);
 
         /// <summary>
         /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
@@ -462,6 +534,110 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="sortName">排序名称</param>
         /// <returns>查询分页的排序名称前辍</returns>
         protected virtual string GetSelectSortNamePfx(string sortName) => null;
+
+        /// <summary>
+        /// 创建数据权限过滤
+        /// </summary>
+        /// <param name="methodName">方法名</param>
+        /// <param name="conn">数据库连接</param>
+        /// <param name="trans">数据库事务</param>
+        /// <param name="tbPfx">表前辍</param>
+        /// <returns>数据权限过滤</returns>
+        protected virtual DataPermissionFilterInfo CreateDataPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, string tbPfx = null) => new DataPermissionFilterInfo()
+        {
+            PersistenceClassName = this.GetType().Name,
+            Table = Table,
+            TablePfx = string.IsNullOrWhiteSpace(tbPfx) ? Table : tbPfx,
+            PersistenceMethodName = methodName,
+            DbTransaction = trans,
+            DbConnection = conn
+        };
+
+        /// <summary>
+        /// 创建字段权限过滤
+        /// </summary>
+        /// <param name="methodName">方法名</param>
+        /// <param name="conn">数据库连接</param>
+        /// <param name="trans">数据库事务</param>
+        /// <param name="tbPfx">表前辍</param>
+        /// <returns>字段权限过滤</returns>
+        protected virtual FieldPermissionFilterInfo CreateFieldPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, string tbPfx = null) => new FieldPermissionFilterInfo()
+        {
+            PersistenceClassName = this.GetType().Name,
+            Table = Table,
+            TablePfx = string.IsNullOrWhiteSpace(tbPfx) ? Table : tbPfx,
+            PersistenceMethodName = methodName,
+            DbTransaction = trans,
+            DbConnection = conn
+        };
+
+        /// <summary>
+        /// 执行数据权限过滤
+        /// </summary>
+        /// <param name="methodName">方法名</param>
+        /// <param name="conn">数据库连接</param>
+        /// <param name="trans">数据库事务</param>
+        /// <param name="param">参数</param>
+        /// <param name="tbPfx">表前辍</param>
+        /// <returns>过滤SQL</returns>
+        protected virtual string ExecDataPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, ref DynamicParameters param, string tbPfx = null)
+        {
+            if (DataPermissionFilter == null)
+            {
+                return null;
+            }
+            var perFilter = CreateDataPermissionFilter(methodName, conn, trans, tbPfx);
+            DataPermissionFilter.DoFilter(perFilter);
+            if (string.IsNullOrWhiteSpace(perFilter.Sql))
+            {
+                return perFilter.SqlEmptyNotFilter ? null : NoEqualWhereSql();
+            }
+            else
+            {
+                if (!perFilter.Params.IsNullOrCount0())
+                {
+                    if (param == null)
+                    {
+                        param = new DynamicParameters();
+                    }
+                    foreach (var p in perFilter.Params)
+                    {
+                        param.Add(p.Key, p.Value);
+                    }
+                }
+            }
+
+            return perFilter.Sql;
+        }
+
+        /// <summary>
+        /// 执行字段权限过滤
+        /// </summary>
+        /// <param name="methodName">方法名</param>
+        /// <param name="conn">数据库连接</param>
+        /// <param name="trans">数据库事务</param>
+        /// <param name="tbPfx">表前辍</param>
+        /// <param name="sqlEmptyNotFilter">SQL为空时则不过滤，默认为是</param>
+        /// <returns>过滤SQL</returns>
+        protected virtual string ExecFieldPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, out bool sqlEmptyNotFilter, string tbPfx = null)
+        {
+            sqlEmptyNotFilter = true;
+            if (FieldPermissionFilter == null)
+            {
+                return null;
+            }
+            var perFilter = CreateFieldPermissionFilter(methodName, conn, trans, tbPfx);
+            FieldPermissionFilter.DoFilter(perFilter);
+            sqlEmptyNotFilter = perFilter.SqlEmptyNotFilter;
+
+            return perFilter.Sql;
+        }
+
+        /// <summary>
+        /// 不匹配条件SQL
+        /// </summary>
+        /// <returns>不匹配条件SQL</returns>
+        protected virtual string NoEqualWhereSql() => " (false) ";
 
         #endregion
     }

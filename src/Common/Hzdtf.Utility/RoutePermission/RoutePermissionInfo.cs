@@ -61,6 +61,11 @@ namespace Hzdtf.Utility.ApiPermission
             public bool Disabled { get; set; }
 
             /// <summary>
+            /// 资源键
+            /// </summary>
+            public string ResourceKey { get; set; }
+
+            /// <summary>
             /// 扩展属性
             /// </summary>
             public IDictionary<string, string> Extend

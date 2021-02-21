@@ -597,6 +597,16 @@
             本地化
             </summary>
         </member>
+        <member name="P:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.DataPermissionFilter">
+            <summary>
+            数据权限过滤
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.FieldPermissionFilter">
+            <summary>
+            字段权限过滤
+            </summary>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,System.String)">
             <summary>
             根据ID查询模型
@@ -1313,6 +1323,99 @@
             </summary>
         </member>
         <member name="P:Hzdtf.Persistence.Contract.Management.DbTransactionEx.DbTransaction">
+            <summary>
+            数据库事务
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.PermissionFilter.DataPermissionFilterInfo">
+            <summary>
+            数据权限过滤信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.DataPermissionFilterInfo.Params">
+            <summary>
+            参数字典，key：参数名，value：参数值
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.PermissionFilter.FieldPermissionFilterInfo">
+            <summary>
+            字段权限过滤信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.FieldPermissionFilterInfo.PropTexts">
+            <summary>
+            属性文本列表，key：属性名，value：属性文本
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.PermissionFilter.IDataPermissionFilter">
+            <summary>
+            数据权限过滤接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.PermissionFilter.IFieldPermissionFilter">
+            <summary>
+            字段权限过滤接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.PermissionFilter.IPermissionFilter`1">
+            <summary>
+            权限过滤接口
+            @ 黄振东
+            </summary>
+            <typeparam name="PermissionFilterT">权限过滤类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.PermissionFilter.IPermissionFilter`1.DoFilter(`0)">
+            <summary>
+            去过滤
+            </summary>
+            <param name="permissionFilter">权限筛选</param>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo">
+            <summary>
+            权限筛选信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.Sql">
+            <summary>
+            SQL
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.SqlEmptyNotFilter">
+            <summary>
+            SQL为空则不过滤，默认为是
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.TablePfx">
+            <summary>
+            表前辍
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.Table">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.PersistenceClassName">
+            <summary>
+            持久化类名
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.PersistenceMethodName">
+            <summary>
+            持久化方法名
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.DbConnection">
+            <summary>
+            数据库连接
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.PermissionFilter.PermissionFilterInfo.DbTransaction">
             <summary>
             数据库事务
             </summary>

@@ -36,36 +36,99 @@ namespace Hzdtf.MySql
         /// 根据ID查询模型SQL语句
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>SQL语句</returns>
-        protected override string SelectSql(IdT id, string[] propertyNames = null) => $"{BasicSelectSql(propertyNames: propertyNames)} {WHERE_ID_EQUAL_PARAM_SQL} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        protected override string SelectSql(IdT id, string dataPermissionSql, string fieldPermissionSql, string[] propertyNames = null)
+        {
+            if (!string.IsNullOrWhiteSpace(dataPermissionSql))
+            {
+                dataPermissionSql = $" AND ({dataPermissionSql})";
+            }
+
+            string basicSelectSql = null;
+            if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
+            {
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM `{Table}` {Table}";
+            }
+            else
+            {
+                basicSelectSql = BasicSelectSql(propertyNames: propertyNames);
+            }
+
+            return $"{basicSelectSql} {WHERE_ID_EQUAL_PARAM_SQL} {dataPermissionSql} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        }
 
         /// <summary>
         /// 根据ID集合查询模型列表SQL语句
         /// </summary>
         /// <param name="ids">ID集合</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="parameters">参数</param>
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>SQL语句</returns>
-        protected override string SelectSql(IdT[] ids, out DynamicParameters parameters, string[] propertyNames = null) => $"{BasicSelectSql(propertyNames: propertyNames)} WHERE {GetWhereIdsSql(ids, out parameters)} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        protected override string SelectSql(IdT[] ids, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, string[] propertyNames = null)
+        {
+            if (!string.IsNullOrWhiteSpace(dataPermissionSql))
+            {
+                dataPermissionSql = $" AND ({dataPermissionSql})";
+            }
+
+            string basicSelectSql = null;
+            if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
+            {
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM `{Table}` {Table}";
+            }
+            else
+            {
+                basicSelectSql = BasicSelectSql(propertyNames: propertyNames);
+            }
+
+            return $"{basicSelectSql} WHERE {GetWhereIdsSql(ids, out parameters)} {dataPermissionSql} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        }
 
         /// <summary>
         /// 根据ID统计模型数SQL语句
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <returns>SQL语句</returns>
-        protected override string CountSql(IdT id) => $"{BasicCountSql()} {WHERE_ID_EQUAL_PARAM_SQL} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        protected override string CountSql(IdT id, string dataPermissionSql)
+        {
+            if (!string.IsNullOrWhiteSpace(dataPermissionSql))
+            {
+                dataPermissionSql = $" AND ({dataPermissionSql})";
+            }
+
+            return $"{BasicCountSql()} {WHERE_ID_EQUAL_PARAM_SQL} {dataPermissionSql} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        }
 
         /// <summary>
         /// 统计模型数SQL语句
         /// </summary>
         /// <param name="pfx">前辍</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <returns>SQL语句</returns>
-        protected override string CountSql(string pfx = null)
+        protected override string CountSql(string pfx = null, string dataPermissionSql = null)
         {
-            string tbAlias = string.IsNullOrWhiteSpace(pfx) ? null : pfx.Replace(".", null);
+            var whereSql = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(dataPermissionSql))
+            {
+                whereSql.AppendFormat(" WHERE ({0})", dataPermissionSql);
+            }
 
-            return $"{BasicCountSql(pfx)} {GetTenantIdFilterSql(isBeforeAppWhere: true, pfx: tbAlias)}";
+            string tbAlias = string.IsNullOrWhiteSpace(pfx) ? null : pfx.Replace(".", null);
+            bool isAppWhere = false, isAppAnd = true;
+            if (whereSql.Length == 0)
+            {
+                isAppWhere = true;
+                isAppAnd = false;
+            }
+            whereSql.Append(GetTenantIdFilterSql(isBeforeAppWhere: isAppWhere, isBeforeAppAnd: isAppAnd, pfx: tbAlias));
+
+            return $"{BasicCountSql(pfx)} {whereSql.ToString()} {GetTenantIdFilterSql(isBeforeAppWhere: true, pfx: tbAlias)}";
         }
 
         /// <summary>
@@ -81,13 +144,15 @@ namespace Hzdtf.MySql
         }
 
         /// <summary>
-        /// 查询模型列表
+        /// 查询模型列表SQL语句
         /// </summary>
         /// <param name="pfx">前辍</param>
         /// <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <returns>SQL语句</returns>
-        protected override string SelectSql(string pfx = null, string appendFieldSqls = null, string[] propertyNames = null)
+        protected override string SelectSql(string pfx = null, string appendFieldSqls = null, string[] propertyNames = null, string dataPermissionSql = null, string fieldPermissionSql = null)
         {
             string tbAlias = null;
             if (string.IsNullOrWhiteSpace(pfx))
@@ -99,11 +164,34 @@ namespace Hzdtf.MySql
                 tbAlias = pfx.Replace(".", null);
             }
 
-            return $"{BasicSelectSql(pfx, appendFieldSqls, propertyNames)} {GetTenantIdFilterSql(isBeforeAppWhere: true, pfx: tbAlias)}";
+            var whereSql = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(dataPermissionSql))
+            {
+                whereSql.AppendFormat(" WHERE ({0})", dataPermissionSql);
+            }
+            bool isAppWhere = false, isAppAnd = true;
+            if (whereSql.Length == 0)
+            {
+                isAppWhere = true;
+                isAppAnd = false;
+            }
+            whereSql.Append(GetTenantIdFilterSql(isBeforeAppWhere: isAppWhere, isBeforeAppAnd: isAppAnd, pfx: tbAlias));
+
+            string basicSelectSql = null;
+            if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
+            {
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM `{Table}` {Table}";
+            }
+            else
+            {
+                basicSelectSql = BasicSelectSql(pfx, appendFieldSqls, propertyNames);
+            }
+
+            return $"{basicSelectSql} {whereSql.ToString()}";
         }
 
         /// <summary>
-        /// 基本查询模型列表
+        /// 基本查询SQL
         /// </summary>
         /// <param name="pfx">前辍</param>
         /// <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
@@ -129,20 +217,43 @@ namespace Hzdtf.MySql
         /// </summary>
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="parameters">参数</param>
         /// <param name="filter">筛选</param>
         /// <param name="propertyNames">属性名称集合</param>
         /// <returns>SQL语句</returns>
-        protected override string SelectPageSql(int pageIndex, int pageSize, out DynamicParameters parameters, FilterInfo filter = null, string[] propertyNames = null)
+        protected override string SelectPageSql(int pageIndex, int pageSize, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, FilterInfo filter = null, string[] propertyNames = null)
         {
             StringBuilder whereSql = MergeWhereSql(filter, out parameters);
+            if (!string.IsNullOrWhiteSpace(dataPermissionSql))
+            {
+                if (whereSql.Length == 0)
+                {
+                    whereSql.AppendFormat(" WHERE ({0})", dataPermissionSql);
+                }
+                else
+                {
+                    whereSql.AppendFormat(" AND ({0})", dataPermissionSql);
+                }
+            }
             string sortSql = GetSelectPageSortSql(filter, GetSelectSortNamePfx(filter));
             if (string.IsNullOrWhiteSpace(sortSql))
             {
                 sortSql = DefaultPageSortSql();
             }
 
-            return $"{BasicSelectSql(appendFieldSqls: AppendSelectPageFieldsSql(), propertyNames: propertyNames)} " +
+            string basicSelectSql = null;
+            if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
+            {
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM `{Table}` {Table}";
+            }
+            else
+            {
+                basicSelectSql = BasicSelectSql(appendFieldSqls: AppendSelectPageFieldsSql(), propertyNames: propertyNames);
+            }
+
+            return $"{basicSelectSql} " +
                 $"{GetSelectPageJoinSql(parameters, filter)} {whereSql.ToString()}  {GetTenantIdFilterSql(isBeforeAppAnd: true)} {sortSql} {GetPartPageSql(pageIndex, pageSize)}";
         }
 
@@ -232,11 +343,24 @@ namespace Hzdtf.MySql
         /// 根据筛选信息统计模型数SQL语句
         /// </summary>
         /// <param name="filter">筛选信息</param>
+        /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <param name="parameters">参数</param>
         /// <returns>SQL语句</returns>
-        protected override string CountByFilterSql(FilterInfo filter, out DynamicParameters parameters)
+        protected override string CountByFilterSql(FilterInfo filter, string dataPermissionSql, out DynamicParameters parameters)
         {
             StringBuilder whereSql = MergeWhereSql(filter, out parameters);
+            if (!string.IsNullOrWhiteSpace(dataPermissionSql))
+            {
+                if (whereSql.Length == 0)
+                {
+                    whereSql.AppendFormat(" WHERE ({0})", dataPermissionSql);
+                }
+                else
+                {
+                    whereSql.AppendFormat(" AND ({0})", dataPermissionSql);
+                }
+            }
+
             return $"{BasicCountSql()} {GetSelectPageJoinSql(parameters, filter)} {whereSql.ToString()} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
         }
 
@@ -418,7 +542,7 @@ namespace Hzdtf.MySql
         /// </summary>
         /// <param name="table">表名</param>
         /// <returns>SQL语句</returns>
-        protected override string DeleteByTableSql(string table) => $"DELETE FROM `{table}` WHERE 1=1 {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        protected override string DeleteByTableSql(string table) => $"DELETE FROM `{table}` WHERE (true) {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
 
         /// <summary>
         /// 基本根据表名删除所有模型SQL语句

@@ -21,12 +21,12 @@ namespace Hzdtf.Utility.Utils
         }
 
         /// <summary>
-        /// 创建where语句，初始化内容(包含前面空格)：" WHERE 1=1"
+        /// 创建where语句，初始化内容(包含前面空格)：" WHERE (true) "
         /// </summary>
         /// <returns>where语句</returns>
         public static StringBuilder CreateWhereSql()
         {
-            return new StringBuilder(" WHERE 1=1");
+            return new StringBuilder(" WHERE (true) ");
         }
 
         /// <summary>

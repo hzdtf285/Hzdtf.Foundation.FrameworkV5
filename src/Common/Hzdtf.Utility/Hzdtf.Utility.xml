@@ -5626,6 +5626,41 @@
             服务提供者
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.RequestResource.IRequestResource">
+            <summary>
+            请求资源接口
+            key：请求ID，value：资源键
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.RequestResource.RequestResourceCache">
+            <summary>
+            请求资源缓存
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RequestResource.RequestResourceCache.dicCache">
+            <summary>
+            字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RequestResource.RequestResourceCache.syncDicCache">
+            <summary>
+            同步字典缓存
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.RequestResource.RequestResourceCache.GetCache">
+            <summary>
+            获取缓存
+            </summary>
+            <returns>缓存</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.RequestResource.RequestResourceCache.GetSyncCache">
+            <summary>
+            获取同步的缓存对象，是为了线程安全
+            </summary>
+            <returns>同步的缓存对象</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Resources.DatabasePoolBase">
             <summary>
             数据库池基类
@@ -5946,6 +5981,11 @@
         <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Disabled">
             <summary>
             是否禁用
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.ResourceKey">
+            <summary>
+            资源键
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Extend">
@@ -6967,7 +7007,7 @@
         </member>
         <member name="M:Hzdtf.Utility.Utils.SqlUtil.CreateWhereSql">
             <summary>
-            创建where语句，初始化内容(包含前面空格)：" WHERE 1=1"
+            创建where语句，初始化内容(包含前面空格)：" WHERE (true) "
             </summary>
             <returns>where语句</returns>
         </member>

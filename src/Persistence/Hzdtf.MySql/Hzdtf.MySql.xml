@@ -17,35 +17,41 @@
             带ID等于参数的条件SQL
             </summary>
         </member>
-        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectSql(`0,System.String[])">
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectSql(`0,System.String,System.String,System.String[])">
             <summary>
             根据ID查询模型SQL语句
             </summary>
             <param name="id">ID</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
             <param name="propertyNames">属性名称集合</param>
             <returns>SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectSql(`0[],Dapper.DynamicParameters@,System.String[])">
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectSql(`0[],System.String,System.String,Dapper.DynamicParameters@,System.String[])">
             <summary>
             根据ID集合查询模型列表SQL语句
             </summary>
             <param name="ids">ID集合</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
             <param name="parameters">参数</param>
             <param name="propertyNames">属性名称集合</param>
             <returns>SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.CountSql(`0)">
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.CountSql(`0,System.String)">
             <summary>
             根据ID统计模型数SQL语句
             </summary>
             <param name="id">ID</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
             <returns>SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.CountSql(System.String)">
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.CountSql(System.String,System.String)">
             <summary>
             统计模型数SQL语句
             </summary>
             <param name="pfx">前辍</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
             <returns>SQL语句</returns>
         </member>
         <member name="M:Hzdtf.MySql.MySqlDapperBase`2.BasicCountSql(System.String)">
@@ -55,30 +61,34 @@
             <param name="pfx">前辍</param>
             <returns>SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectSql(System.String,System.String,System.String[])">
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectSql(System.String,System.String,System.String[],System.String,System.String)">
             <summary>
-            查询模型列表
+            查询模型列表SQL语句
             </summary>
             <param name="pfx">前辍</param>
             <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
             <param name="propertyNames">属性名称集合</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
             <returns>SQL语句</returns>
         </member>
         <member name="M:Hzdtf.MySql.MySqlDapperBase`2.BasicSelectSql(System.String,System.String,System.String[])">
             <summary>
-            基本查询模型列表
+            基本查询SQL
             </summary>
             <param name="pfx">前辍</param>
             <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
             <param name="propertyNames">属性名称集合</param>
             <returns>SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectPageSql(System.Int32,System.Int32,Dapper.DynamicParameters@,Hzdtf.Utility.Model.FilterInfo,System.String[])">
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectPageSql(System.Int32,System.Int32,System.String,System.String,Dapper.DynamicParameters@,Hzdtf.Utility.Model.FilterInfo,System.String[])">
             <summary>
             查询模型列表并分页SQL语句
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
             <param name="parameters">参数</param>
             <param name="filter">筛选</param>
             <param name="propertyNames">属性名称集合</param>
@@ -113,11 +123,12 @@
             </summary>
             <returns>分页按关键字查询的字段集合</returns>
         </member>
-        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.CountByFilterSql(Hzdtf.Utility.Model.FilterInfo,Dapper.DynamicParameters@)">
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.CountByFilterSql(Hzdtf.Utility.Model.FilterInfo,System.String,Dapper.DynamicParameters@)">
             <summary>
             根据筛选信息统计模型数SQL语句
             </summary>
             <param name="filter">筛选信息</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
             <param name="parameters">参数</param>
             <returns>SQL语句</returns>
         </member>

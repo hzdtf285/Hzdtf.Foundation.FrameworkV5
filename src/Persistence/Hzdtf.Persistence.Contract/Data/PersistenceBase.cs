@@ -11,6 +11,7 @@ using Hzdtf.Utility.Utils;
 using Hzdtf.Utility.Model.Identitys;
 using System.Linq;
 using Hzdtf.Utility.Localization;
+using Hzdtf.Persistence.Contract.PermissionFilter;
 
 namespace Hzdtf.Persistence.Contract.Data
 {
@@ -38,6 +39,24 @@ namespace Hzdtf.Persistence.Contract.Data
         /// 本地化
         /// </summary>
         public ILocalization Localize
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 数据权限过滤
+        /// </summary>
+        public IDataPermissionFilter DataPermissionFilter
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 字段权限过滤
+        /// </summary>
+        public IFieldPermissionFilter FieldPermissionFilter
         {
             get;
             set;

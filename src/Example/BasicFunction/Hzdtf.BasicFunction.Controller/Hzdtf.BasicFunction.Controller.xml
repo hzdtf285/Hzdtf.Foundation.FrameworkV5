@@ -276,7 +276,7 @@
             用户服务
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.BasicFunction.Service.Contract.IUserService,Hzdtf.Utility.Localization.ILocalization)">
+        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.BasicFunction.Service.Contract.IUserService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.RequestResource.IRequestResource)">
             <summary>
             构造方法
             </summary>
@@ -285,6 +285,7 @@
             <param name="reader">读取API权限配置</param>
             <param name="userService">用户服务</param>
             <param name="localize">本地化</param>
+            <param name="requestResource">请求资源</param>
         </member>
         <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.IsHavePermission(Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
             <summary>

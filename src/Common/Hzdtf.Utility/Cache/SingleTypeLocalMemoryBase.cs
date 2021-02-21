@@ -68,7 +68,10 @@ namespace Hzdtf.Utility.Cache
                 {
                     GetCache().Add(key, value);
                 }
-                catch (ArgumentException) { }// 忽略添加相同的键异常，为了预防密集的线程过来
+                catch (ArgumentException) // 忽略添加相同的键异常，为了预防密集的线程过来
+                {
+                    System.Console.WriteLine($"{this.GetType().Name}.发生相同添加相同的key异常(程序忽略),key:{key}.value:{value}");
+                }
 
                 return true;
             }
