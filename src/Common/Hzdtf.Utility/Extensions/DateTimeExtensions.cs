@@ -65,6 +65,21 @@ namespace System
         }
 
         /// <summary>
+        /// 转换为小于日期，对于SQL查询则需要用小于，而不是小于或等于
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <returns>小于日期</returns>
+        public static DateTime? ToLessThanDate(this DateTime? dateTime)
+        {
+            if (dateTime == null)
+            {
+                return null;
+            }
+            var temp = ((DateTime)dateTime).AddDays(1);
+            return new DateTime(temp.Year, temp.Month, temp.Day);
+        }
+
+        /// <summary>
         /// 转换为固定长度的小于日期字符串，对于SQL查询则需要用小于，而不是小于或等于
         /// </summary>
         /// <param name="dateTime">日期时间</param>

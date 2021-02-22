@@ -624,11 +624,6 @@ namespace Hzdtf.Service.Impl
                 isClose = true;
             }
 
-            if (filter != null)
-            {
-                filter.EndCreateTime = filter.EndCreateTime.AddThisDayLastTime();
-            }
-
             try
             {
                 ReturnInfo<PagingInfo<ModelT>> returnInfo = new ReturnInfo<PagingInfo<ModelT>>();

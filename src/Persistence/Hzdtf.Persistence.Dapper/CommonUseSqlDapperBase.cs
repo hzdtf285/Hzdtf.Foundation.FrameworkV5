@@ -312,7 +312,7 @@ namespace Hzdtf.Persistence.Dapper
             }
             if (filter.EndCreateTime != null)
             {
-                parameters.Add("@EndCreateTime", filter.EndCreateTime.GetValueOrDefault().ToLessThanDate());
+                parameters.Add("@EndCreateTime", filter.EndCreateTime.ToLessThanDate());
 
                 whereSql.AppendFormat(" AND {2}{0}{3}.{1}<@EndCreateTime", Table, createTimeField, PfxEscapeChar, SufxEscapeChar);
             }
