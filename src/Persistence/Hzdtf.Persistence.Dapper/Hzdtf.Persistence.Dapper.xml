@@ -402,6 +402,12 @@
             <param name="id">ID</param>
             <returns>插入字段名集合</returns>
         </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CreateWhereSql">
+            <summary>
+            创建where语句
+            </summary>
+            <returns>where语句</returns>
+        </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CombineInsertSqlByFieldNames(System.String[])">
             <summary>
             根据字段名称集合组合插入SQL语句
@@ -798,6 +804,12 @@
             <param name="tbPfx">表前辍</param>
             <param name="sqlEmptyNotFilter">SQL为空时则不过滤，默认为是</param>
             <returns>过滤SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.EqualWhereSql">
+            <summary>
+            匹配条件SQL
+            </summary>
+            <returns>不匹配条件SQL</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.NoEqualWhereSql">
             <summary>

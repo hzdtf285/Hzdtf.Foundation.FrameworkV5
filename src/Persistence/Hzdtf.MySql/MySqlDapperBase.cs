@@ -58,6 +58,18 @@ namespace Hzdtf.MySql
         /// <returns>最后插入ID SQL语句</returns>
         protected override string GetLastInsertIdSql() => "SELECT LAST_INSERT_ID()";
 
+        /// <summary>
+        /// 匹配条件SQL
+        /// </summary>
+        /// <returns>不匹配条件SQL</returns>
+        protected override string EqualWhereSql() => " (true) ";
+
+        /// <summary>
+        /// 不匹配条件SQL
+        /// </summary>
+        /// <returns>不匹配条件SQL</returns>
+        protected override string NoEqualWhereSql() => " (false) ";
+
         #endregion
     }
 }

@@ -276,7 +276,7 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>条件SQL</returns>
         protected virtual StringBuilder MergeWhereSql(FilterInfo filter, out DynamicParameters parameters)
         {
-            StringBuilder whereSql = SqlUtil.CreateWhereSql();
+            StringBuilder whereSql = CreateWhereSql();
             parameters = new DynamicParameters();
             if (filter == null)
             {
@@ -546,7 +546,7 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <param name="table">表名</param>
         /// <returns>SQL语句</returns>
-        protected override string DeleteByTableSql(string table) => $"DELETE FROM {PfxEscapeChar}{table}{SufxEscapeChar} WHERE (true) {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
+        protected override string DeleteByTableSql(string table) => $"DELETE FROM {PfxEscapeChar}{table}{SufxEscapeChar} WHERE {EqualWhereSql()} {GetTenantIdFilterSql(isBeforeAppAnd: true)}";
 
         /// <summary>
         /// 基本根据表名删除所有模型SQL语句
@@ -890,6 +890,12 @@ namespace Hzdtf.Persistence.Dapper
 
             return fields;
         }
+
+        /// <summary>
+        /// 创建where语句
+        /// </summary>
+        /// <returns>where语句</returns>
+        protected virtual StringBuilder CreateWhereSql() => new StringBuilder($" WHERE {EqualWhereSql()}");
 
         #endregion
 

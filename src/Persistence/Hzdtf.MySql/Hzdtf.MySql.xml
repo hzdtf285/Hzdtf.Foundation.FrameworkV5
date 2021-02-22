@@ -43,5 +43,17 @@
             </summary>
             <returns>最后插入ID SQL语句</returns>
         </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.EqualWhereSql">
+            <summary>
+            匹配条件SQL
+            </summary>
+            <returns>不匹配条件SQL</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.NoEqualWhereSql">
+            <summary>
+            不匹配条件SQL
+            </summary>
+            <returns>不匹配条件SQL</returns>
+        </member>
     </members>
 </doc>

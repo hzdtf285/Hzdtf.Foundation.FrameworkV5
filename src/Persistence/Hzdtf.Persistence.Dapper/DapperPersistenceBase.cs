@@ -634,10 +634,16 @@ namespace Hzdtf.Persistence.Dapper
         }
 
         /// <summary>
+        /// 匹配条件SQL
+        /// </summary>
+        /// <returns>不匹配条件SQL</returns>
+        protected virtual string EqualWhereSql() => " (1=1) ";
+
+        /// <summary>
         /// 不匹配条件SQL
         /// </summary>
         /// <returns>不匹配条件SQL</returns>
-        protected virtual string NoEqualWhereSql() => " (false) ";
+        protected virtual string NoEqualWhereSql() => " (1=0) ";
 
         #endregion
     }

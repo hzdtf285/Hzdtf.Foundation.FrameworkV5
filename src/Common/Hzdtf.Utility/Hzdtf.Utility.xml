@@ -7007,7 +7007,7 @@
         </member>
         <member name="M:Hzdtf.Utility.Utils.SqlUtil.CreateWhereSql">
             <summary>
-            创建where语句，初始化内容(包含前面空格)：" WHERE (true) "
+            创建where语句，初始化内容(包含前面空格)：" WHERE (1=1) "
             </summary>
             <returns>where语句</returns>
         </member>
