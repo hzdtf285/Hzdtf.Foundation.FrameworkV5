@@ -48,9 +48,9 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
         /// <returns>返回信息</returns>
-        protected override Task<ReturnInfo<PagingInfo<WorkflowInfo>>> QueryPageFromServiceAsync(int pageIndex, int pageSize, ApplyFlowFilterInfo filter)
+        protected override ReturnInfo<PagingInfo<WorkflowInfo>> QueryPageFromService(int pageIndex, int pageSize, ApplyFlowFilterInfo filter)
         {
-            return Task<ReturnInfo<PagingInfo<WorkflowInfo>>>.Run(() => Service.QueryCurrUserApplyFlowPage(pageIndex, pageSize, filter));
+            return Service.QueryCurrUserApplyFlowPage(pageIndex, pageSize, filter);
         }
 
         /// <summary>

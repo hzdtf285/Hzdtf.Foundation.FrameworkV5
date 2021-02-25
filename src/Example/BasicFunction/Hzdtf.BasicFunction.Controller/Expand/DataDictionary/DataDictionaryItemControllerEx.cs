@@ -63,8 +63,7 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet("PageExpandList")]
         [Function(FunCodeDefine.QUERY_CODE)]
         public virtual Page1ReturnInfo<DataDictionaryItemExpandInfo> PageExpandList(int page, int rows)
-        {
-            
+        {            
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
             dicParams.RemoveKey("page");
             dicParams.RemoveKey("rows");

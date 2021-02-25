@@ -607,6 +607,12 @@
             字段权限过滤
             </summary>
         </member>
+        <member name="P:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SqlLogLevel">
+            <summary>
+            SQL日志等级，默认读取配置文件：Logging:LogLevel:SqlLog
+            如果配置文件没有，则默认trace
+            </summary>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,System.String)">
             <summary>
             根据ID查询模型
@@ -976,6 +982,16 @@
             <param name="accessMode">访问模式</param>
             <param name="level">事务等级</param>
             <param name="connectionId">连接ID</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ExecRecordSqlLog``1(System.String,System.Func{``0},System.String[])">
+            <summary>
+            执行记录SQL日志
+            </summary>
+            <typeparam name="ReturnT">返回类型</typeparam>
+            <param name="sql">SQL语句</param>
+            <param name="callbackExecDb">回调执行数据库</param>
+            <param name="tag">标签</param>
+            <returns>返回值</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectAsync(`0,System.String@)">
             <summary>

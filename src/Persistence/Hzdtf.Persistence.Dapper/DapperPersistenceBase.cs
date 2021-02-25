@@ -50,15 +50,16 @@ namespace Hzdtf.Persistence.Dapper
             }
 
             var sql = SelectSql(id, dataPermissionSql, fieldPermissionSql, propertyNames);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Select");
-
             if (dataParameter == null)
             {
                 dataParameter = new DynamicParameters();
             }
             dataParameter.Add("@Id", id);
 
-            return dbConnection.QueryFirstOrDefault<ModelT>(sql, dataParameter, dbTransaction);
+            return ExecRecordSqlLog<ModelT>(sql, () =>
+            {
+                return dbConnection.QueryFirstOrDefault<ModelT>(sql, dataParameter, dbTransaction);
+            }, "Select");
         }
 
         /// <summary>
@@ -83,8 +84,11 @@ namespace Hzdtf.Persistence.Dapper
 
             DynamicParameters parameters;
             var sql = SelectSql(ids, dataPermissionSql, fieldPermissionSql, out parameters, propertyNames);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Select");
-            return dbConnection.Query<ModelT>(sql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
+
+            return ExecRecordSqlLog<IList<ModelT>>(sql, () =>
+            {
+                return dbConnection.Query<ModelT>(sql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
+            }, "Select");
         }
 
         /// <summary>
@@ -99,7 +103,6 @@ namespace Hzdtf.Persistence.Dapper
             DynamicParameters dataParameter = null;
             var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter);
             var sql = CountSql(id, dataPermissionSql);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Count");
 
             if (dataParameter == null)
             {
@@ -107,7 +110,10 @@ namespace Hzdtf.Persistence.Dapper
             }
             dataParameter.Add("@Id", id);
 
-            return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
+            }, "Count");
         }
 
         /// <summary>
@@ -121,9 +127,11 @@ namespace Hzdtf.Persistence.Dapper
             DynamicParameters dataParameter = null;
             var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter);
             var sql = CountSql(dataPermissionSql: dataPermissionSql);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Count");
 
-            return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
+            }, "Count");
         }
 
         /// <summary>
@@ -146,8 +154,11 @@ namespace Hzdtf.Persistence.Dapper
             }
 
             var sql = SelectSql(propertyNames: propertyNames, dataPermissionSql: dataPermissionSql, fieldPermissionSql: fieldPermissionSql);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Select");
-            return dbConnection.Query<ModelT>(sql, dataParameter, dbTransaction).AsList();
+
+            return ExecRecordSqlLog<IList<ModelT>>(sql, () =>
+            {
+                return dbConnection.Query<ModelT>(sql, dataParameter, dbTransaction).AsList();
+            }, "Select");
         }
 
         /// <summary>
@@ -163,7 +174,6 @@ namespace Hzdtf.Persistence.Dapper
         protected override PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, IDbConnection dbConnection, FilterInfo filter = null, IDbTransaction dbTransaction = null, string[] propertyNames = null)
         {
             BeforeFilterInfo(filter);
-            var source = this.GetType().Name;
             DynamicParameters dataParameter = null;
             string dataPermissionSql = null;
             return PagingUtil.ExecPage<ModelT>(pageIndex, pageSize, () =>
@@ -172,8 +182,11 @@ namespace Hzdtf.Persistence.Dapper
 
                 DynamicParameters parameters;
                 var countSql = CountByFilterSql(filter, dataPermissionSql, out parameters);
-                Log.TraceAsync(countSql, source: source, tags: "SelectPage");
-                return dbConnection.ExecuteScalar<int>(countSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction);
+
+                return ExecRecordSqlLog<int>(countSql, () =>
+                {
+                    return dbConnection.ExecuteScalar<int>(countSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction);
+                }, "SelectPage");
             }, () =>
             {
                 bool sqlEmptyNotFilter;
@@ -185,8 +198,11 @@ namespace Hzdtf.Persistence.Dapper
 
                 DynamicParameters parameters;
                 var pageSql = SelectPageSql(pageIndex, pageSize, dataPermissionSql, fieldPermissionSql, out parameters, filter, propertyNames);
-                Log.TraceAsync(pageSql, source: source, tags: "SelectPage");
-                return dbConnection.Query<ModelT>(pageSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
+
+                return ExecRecordSqlLog<IList<ModelT>>(pageSql, () =>
+                {
+                    return dbConnection.Query<ModelT>(pageSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
+                }, "SelectPage");
             });
         }
 
@@ -200,8 +216,11 @@ namespace Hzdtf.Persistence.Dapper
         protected override ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
         {
             var sql = SelectModifyInfoByIdAndGeModifyTimeSql(model);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "SelectModifyInfoByIdAndGeModifyTime");
-            return dbConnection.QueryFirstOrDefault<ModelT>(sql: sql, param: model, transaction: dbTransaction);
+
+            return ExecRecordSqlLog<ModelT>(sql, () =>
+            {
+                return dbConnection.QueryFirstOrDefault<ModelT>(sql: sql, param: model, transaction: dbTransaction);
+            }, "SelectModifyInfoByIdAndGeModifyTime");
         }
 
         /// <summary>
@@ -215,8 +234,11 @@ namespace Hzdtf.Persistence.Dapper
         {
             DynamicParameters parameters;
             var sql = SelectModifyInfosByIdAndGeModifyTimeSql(models, out parameters);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "SelectModifyInfosByIdAndGeModifyTime");
-            return dbConnection.Query<ModelT>(sql: sql, param: parameters, transaction: dbTransaction).AsList();
+
+            return ExecRecordSqlLog<IList<ModelT>>(sql, () =>
+            {
+                return dbConnection.Query<ModelT>(sql: sql, param: parameters, transaction: dbTransaction).AsList();
+            }, "SelectModifyInfosByIdAndGeModifyTime");
         }
 
         #endregion
@@ -234,16 +256,21 @@ namespace Hzdtf.Persistence.Dapper
         {
             var isAuto = PrimaryKeyIncr(model.Id);
             var sql = InsertSql(model, isAuto);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Insert");
             if (isAuto)
             {
-                model.Id = dbConnection.ExecuteScalar<IdT>(sql, model, dbTransaction);
+                model.Id = ExecRecordSqlLog<IdT>(sql, () =>
+                {
+                    return dbConnection.ExecuteScalar<IdT>(sql, model, dbTransaction);
+                }, "Insert");
 
                 return 1;
             }
             else
             {
-                return dbConnection.Execute(sql, model, dbTransaction);
+                return ExecRecordSqlLog<int>(sql, () =>
+                {
+                    return dbConnection.Execute(sql, model, dbTransaction);
+                }, "Insert");
             }
         }
 
@@ -258,8 +285,11 @@ namespace Hzdtf.Persistence.Dapper
         {
             DynamicParameters parameters;
             var sql = InsertSql(models, out parameters);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Insert");
-            return dbConnection.Execute(sql, parameters, dbTransaction);
+
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.Execute(sql, parameters, dbTransaction);
+            }, "Insert");
         }
 
         /// <summary>
@@ -273,8 +303,11 @@ namespace Hzdtf.Persistence.Dapper
         protected override int UpdateById(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
         {
             var sql = UpdateByIdSql(model, propertyNames);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "UpdateById");
-            return dbConnection.Execute(sql, model, dbTransaction);
+
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.Execute(sql, model, dbTransaction);
+            }, "UpdateById");
         }
 
         /// <summary>
@@ -287,8 +320,11 @@ namespace Hzdtf.Persistence.Dapper
         protected override int DeleteById(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
         {
             var sql = DeleteByIdSql(id);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "DeleteById");
-            return dbConnection.Execute(sql, new SimpleInfo<IdT>() { Id = id }, dbTransaction);
+
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.Execute(sql, new SimpleInfo<IdT>() { Id = id }, dbTransaction);
+            }, "DeleteById");
         }
 
         /// <summary>
@@ -302,8 +338,11 @@ namespace Hzdtf.Persistence.Dapper
         {
             DynamicParameters parameters;
             var sql = DeleteByIdsSql(ids, out parameters);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "DeleteByIds");
-            return dbConnection.Execute(sql, parameters, dbTransaction);
+
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.Execute(sql, parameters, dbTransaction);
+            }, "DeleteByIds");
         }
 
         /// <summary>
@@ -315,8 +354,11 @@ namespace Hzdtf.Persistence.Dapper
         protected override int Delete(IDbConnection dbConnection, IDbTransaction dbTransaction = null)
         {
             var sql = DeleteSql();
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "Delete");
-            return dbConnection.Execute(sql, dbTransaction);
+
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.Execute(sql, dbTransaction);
+            }, "Delete");
         }
 
         #endregion
@@ -333,8 +375,11 @@ namespace Hzdtf.Persistence.Dapper
         protected override int DeleteSlaveTable(string table, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
         {
             var sql = DeleteByTableSql(table);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "DeleteSlaveTable");
-            return dbConnection.Execute(sql, dbTransaction);
+
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.Execute(sql, dbTransaction);
+            }, "DeleteSlaveTable");
         }
 
         /// <summary>
@@ -350,8 +395,11 @@ namespace Hzdtf.Persistence.Dapper
         {
             DynamicParameters parameters;
             var sql = DeleteByTableAndForignKeySql(table, foreignKeyName, foreignKeyValues, out parameters);
-            Log.TraceAsync(sql, source: this.GetType().Name, tags: "DeleteSlaveTableByForeignKeys");
-            return dbConnection.Execute(sql, parameters, dbTransaction);
+
+            return ExecRecordSqlLog<int>(sql, () =>
+            {
+                return dbConnection.Execute(sql, parameters, dbTransaction);
+            }, "DeleteSlaveTableByForeignKeys");
         }
 
         #endregion

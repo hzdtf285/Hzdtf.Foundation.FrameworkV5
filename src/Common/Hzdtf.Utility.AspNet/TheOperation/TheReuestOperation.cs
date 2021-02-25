@@ -1,12 +1,6 @@
-﻿using Hzdtf.Utility;
-using Hzdtf.Utility.Attr;
-using Hzdtf.Utility.TheOperation;
+﻿using Hzdtf.Utility.TheOperation;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace Hzdtf.Utility.AspNet.TheOperation
 {
@@ -14,7 +8,6 @@ namespace Hzdtf.Utility.AspNet.TheOperation
     /// 本次请求操作
     /// @ 黄振东
     /// </summary>
-    [Inject]
     public class TheReuestOperation : ITheOperation
     {
         #region 属性与字段
@@ -35,8 +28,14 @@ namespace Hzdtf.Utility.AspNet.TheOperation
         {
             get
             {
-                if (contextAccessor == null || contextAccessor.HttpContext == null)
+                if (contextAccessor == null)
                 {
+                    return null;
+                }
+                if (contextAccessor.HttpContext == null)
+                {
+                    Console.WriteLine("TheReuestOperation,contextAccessor.HttpContext为null");
+
                     return null;
                 }
 

@@ -4,7 +4,6 @@ using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Hzdtf.BasicController
 {
@@ -27,7 +26,7 @@ namespace Hzdtf.BasicController
         /// <param name="id">ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("{id}")]
-        public virtual async Task<ReturnInfo<ModelT>> Get(IdT id) => await Service.FindAsync(id);
+        public virtual ReturnInfo<ModelT> Get(IdT id) => Service.Find(id);
 
         /// <summary>
         /// 添加模型
@@ -35,7 +34,7 @@ namespace Hzdtf.BasicController
         /// <param name="model">模型</param>
         /// <returns>返回信息</returns>
         [HttpPost]
-        public virtual async Task<ReturnInfo<bool>> Post(ModelT model) => await Service.AddAsync(model);
+        public virtual ReturnInfo<bool> Post(ModelT model) => Service.Add(model);
 
         /// <summary>
         /// 修改模型
@@ -44,11 +43,11 @@ namespace Hzdtf.BasicController
         /// <param name="model">模型</param>
         /// <returns>返回信息</returns>
         [HttpPut("{id}")]
-        public virtual async Task<ReturnInfo<bool>> Put(IdT id, ModelT model)
+        public virtual ReturnInfo<bool> Put(IdT id, ModelT model)
         {
             model.Id = id;
 
-            return await Service.ModifyByIdAsync(model);
+            return Service.ModifyById(model);
         }
 
         /// <summary>
@@ -57,7 +56,7 @@ namespace Hzdtf.BasicController
         /// <param name="id">ID</param>
         /// <returns>返回信息</returns>
         [HttpDelete("{id}")]
-        public virtual async Task<ReturnInfo<bool>> Delete(IdT id) => await Service.RemoveByIdAsync(id);
+        public virtual ReturnInfo<bool> Delete(IdT id) => Service.RemoveById(id);
 
         /// <summary>
         /// 批量添加模型列表
@@ -65,7 +64,7 @@ namespace Hzdtf.BasicController
         /// <param name="models">模型列表</param>
         /// <returns>返回信息</returns>
         [HttpPost("BatchAdd")]
-        public virtual async Task<ReturnInfo<bool>> BatchAdd(IList<ModelT> models) => await Service.AddAsync(models);
+        public virtual ReturnInfo<bool> BatchAdd(IList<ModelT> models) => Service.Add(models);
 
         /// <summary>
         /// 根据ID集合批量移除模型
@@ -73,20 +72,20 @@ namespace Hzdtf.BasicController
         /// <param name="ids">ID集合</param>
         /// <returns>返回信息</returns>
         [HttpDelete("BatchRemove")]
-        public virtual async Task<ReturnInfo<bool>> BatchRemove(IdT[] ids) => await Service.RemoveByIdsAsync(ids);
+        public virtual ReturnInfo<bool> BatchRemove(IdT[] ids) => Service.RemoveByIds(ids);
 
         /// <summary>
         /// 统计模型数量
         /// </summary>
         /// <returns>返回信息</returns>
         [HttpDelete("Count")]
-        public virtual async Task<ReturnInfo<int>> Count() => await Service.CountAsync();
+        public virtual ReturnInfo<int> Count() => Service.Count();
 
         /// <summary>
         /// 根据ID获取是否存在模型
         /// </summary>
         /// <returns>返回信息</returns>
         [HttpGet("Exists/{id}")]
-        public virtual async Task<ReturnInfo<bool>> Exists(IdT id) => await Service.ExistsAsync(id);
+        public virtual ReturnInfo<bool> Exists(IdT id) => Service.Exists(id);
     }
 }

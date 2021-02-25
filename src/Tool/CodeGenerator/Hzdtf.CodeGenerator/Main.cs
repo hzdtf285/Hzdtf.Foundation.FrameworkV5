@@ -39,7 +39,7 @@ namespace Hzdtf.CodeGenerator
             var dataSourceConfigFile = $"{AppContext.BaseDirectory}/Config/defaultDataConfig.json";
             var dataConfig = dataSourceConfigFile.ToJsonObjectFromFile<DataSourceConfigInfo>();
            
-            cbxPkType.SelectedItem = dataConfig.DataSource;
+            cbxDataSourceType.SelectedItem = dataConfig.DataSource;
             txtHost.Text = dataConfig.DataSource.Host;
             txtPort.Text = dataConfig.DataSource.Port.ToString();
             txtUser.Text = dataConfig.DataSource.User;

@@ -8,6 +8,7 @@ using Hzdtf.Logger.Contract;
 using Hzdtf.Logger.Integration.ENLog;
 using Hzdtf.Utility;
 using Hzdtf.Utility.ApiPermission;
+using Hzdtf.Utility.AspNet.TheOperation;
 using Hzdtf.Utility.Config.AssemblyConfig;
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Localization;
@@ -37,8 +38,9 @@ namespace Hzdtf.Example.WebApp.AppStart
                 RegisteringServiceAction = () =>
                 {
                     //builder.RegisterType<WorkflowConfigCache>().As<IWorkflowConfigReader>().AsSelf().PropertiesAutowired();
-                   // builder.RegisterType<WorkflowInitSequenceService>().As<IWorkflowFormService>().AsSelf().PropertiesAutowired();
+                    // builder.RegisterType<WorkflowInitSequenceService>().As<IWorkflowFormService>().AsSelf().PropertiesAutowired();
 
+                    builder.RegisterType<TheReuestOperation>().As<ITheOperation>().AsSelf().PropertiesAutowired().SingleInstance();
                     builder.RegisterType<AutofacInstance>().As<IInstance>().AsSelf().PropertiesAutowired().SingleInstance();
                     builder.RegisterType<IntegrationNLog>().As<ILogable>().AsSelf().PropertiesAutowired().SingleInstance();
                     builder.RegisterType<RoutePermissionCache>().As<IReader<RoutePermissionInfo[]>>().AsSelf().PropertiesAutowired().SingleInstance();

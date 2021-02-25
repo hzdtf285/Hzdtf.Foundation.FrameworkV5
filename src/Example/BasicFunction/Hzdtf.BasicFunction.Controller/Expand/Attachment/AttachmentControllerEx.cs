@@ -35,9 +35,9 @@ namespace Hzdtf.BasicFunction.Controller
         /// <param name="id">ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("{id}")]
-        public override async Task<ReturnInfo<AttachmentInfo>> Get(int id)
+        public override ReturnInfo<AttachmentInfo> Get(int id)
         {
-            ReturnInfo<AttachmentInfo> returnInfo = await Service.FindAsync(id);
+            ReturnInfo<AttachmentInfo> returnInfo = Service.Find(id);
             if (returnInfo.Failure())
             {
                 return returnInfo;
@@ -56,9 +56,9 @@ namespace Hzdtf.BasicFunction.Controller
         /// </summary>
         /// <returns>分页返回信息</returns>
         [HttpGet]
-        public override async Task<object> Page()
+        public override object Page()
         {
-            ReturnInfo<PagingInfo<AttachmentInfo>> returnInfo = await DoPageAsync();
+            ReturnInfo<PagingInfo<AttachmentInfo>> returnInfo = DoPage();
             ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data.Rows);
             if (reInfo.Failure())
             {
@@ -73,23 +73,20 @@ namespace Hzdtf.BasicFunction.Controller
         /// </summary>
         /// <returns>返回信息</returns>
         [HttpGet("List")]
-        public virtual async Task<ReturnInfo<IList<AttachmentInfo>>> List()
+        public virtual ReturnInfo<IList<AttachmentInfo>> List()
         {
-            return await Task<ReturnInfo<IList<AttachmentInfo>>>.Run(() =>
+            IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
+            ReturnInfo<IList<AttachmentInfo>> returnInfo = Service.QueryByOwner(Convert.ToInt16(dicParams.GetValue("ownerType")), Convert.ToInt32(dicParams.GetValue("ownerId")), dicParams.GetValue("blurTitle"));
+            if (returnInfo.Success())
             {
-                IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
-                ReturnInfo<IList<AttachmentInfo>> returnInfo = Service.QueryByOwner(Convert.ToInt16(dicParams.GetValue("ownerType")), Convert.ToInt32(dicParams.GetValue("ownerId")), dicParams.GetValue("blurTitle"));
-                if (returnInfo.Success())
+                ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data);
+                if (reInfo.Failure())
                 {
-                    ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data);
-                    if (reInfo.Failure())
-                    {
-                        returnInfo.FromBasic(reInfo);
-                    }
+                    returnInfo.FromBasic(reInfo);
                 }
+            }
 
-                return returnInfo;
-            });            
+            return returnInfo;
         }
 
         /// <summary>
@@ -100,13 +97,7 @@ namespace Hzdtf.BasicFunction.Controller
         /// <returns>返回信息</returns>
         [HttpDelete("DeleteByOwner/{ownerType}/{ownerId}")]
         [Function(FunCodeDefine.REMOVE_CODE)]
-        public virtual async Task<ReturnInfo<bool>> DeleteByOwner(short ownerType, int ownerId)
-        {
-            return await Task<ReturnInfo<bool>>.Run(() =>
-            {
-                return Service.RemoveByOwner(ownerType, ownerId);
-            });            
-        }
+        public virtual ReturnInfo<bool> DeleteByOwner(short ownerType, int ownerId) => Service.RemoveByOwner(ownerType, ownerId);
 
         /// <summary>
         /// 过滤下载权限的文件地址

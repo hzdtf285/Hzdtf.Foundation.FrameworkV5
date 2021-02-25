@@ -12,6 +12,8 @@ using Hzdtf.Utility.Model.Identitys;
 using System.Linq;
 using Hzdtf.Utility.Localization;
 using Hzdtf.Persistence.Contract.PermissionFilter;
+using System.Diagnostics;
+using Hzdtf.Logger.Contract;
 
 namespace Hzdtf.Persistence.Contract.Data
 {
@@ -60,6 +62,26 @@ namespace Hzdtf.Persistence.Contract.Data
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// SQL日志等级，默认读取配置文件：Logging:LogLevel:SqlLog
+        /// 如果配置文件没有，则默认trace
+        /// </summary>
+        protected LogLevelEnum SqlLogLevel
+        {
+            get
+            {
+                var logLevel = Config["Logging:LogLevel:SqlLog"];
+                if (string.IsNullOrWhiteSpace(logLevel))
+                {
+                    return LogLevelEnum.TRACE;
+                }
+                else
+                {
+                    return LogLevelHelper.Parse(logLevel);
+                }
+            }
         }
 
         #endregion
@@ -401,7 +423,7 @@ namespace Hzdtf.Persistence.Contract.Data
                         DeleteSlaveTableByForeignKeys(slTable.Key, slTable.Value, new IdT[] { id }, dbConn, GetDbTransaction(connId, AccessMode.MASTER));
                     }
                 }, AccessMode.MASTER);
-            }, AccessMode.MASTER, connectionId: connectionId);           
+            }, AccessMode.MASTER, connectionId: connectionId);
 
             return result;
         }
@@ -657,7 +679,7 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <param name="dbTransaction">数据库事务</param>
         /// <returns>影响行数</returns>
         protected virtual int DeleteSlaveTableByForeignKeys(string table, string foreignKeyName, IdT[] foreignKeyValues, IDbConnection dbConnection, IDbTransaction dbTransaction = null) => 0;
-        
+
         /// <summary>
         /// 过滤信息前
         /// </summary>
@@ -689,7 +711,7 @@ namespace Hzdtf.Persistence.Contract.Data
         protected virtual bool IsExistsTenantId(out IdT currUserTenantId)
         {
             currUserTenantId = default(IdT);
-            
+
             if (ModelContainerTenantId())
             {
                 var currUser = UserTool<IdT>.GetCurrUser();
@@ -788,6 +810,84 @@ namespace Hzdtf.Persistence.Contract.Data
             else
             {
                 action(connectionId);
+            }
+        }
+
+        /// <summary>
+        /// 执行记录SQL日志
+        /// </summary>
+        /// <typeparam name="ReturnT">返回类型</typeparam>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="callbackExecDb">回调执行数据库</param>
+        /// <param name="tag">标签</param>
+        /// <returns>返回值</returns>
+        protected ReturnT ExecRecordSqlLog<ReturnT>(string sql, Func<ReturnT> callbackExecDb, params string[] tag)
+        {
+            var level = SqlLogLevel;
+            if (level == LogLevelEnum.NONE)
+            {
+                return callbackExecDb();
+            }
+
+            Exception errEx = null;
+            var watch = new Stopwatch();
+            watch.Start();
+            try
+            {
+                var result = callbackExecDb();
+                watch.Stop();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                watch.Stop();
+                errEx = ex;
+
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                var msg = sql + $".耗时:{watch.ElapsedMilliseconds}ms.";
+                if (errEx == null)
+                {
+                    switch (level)
+                    {
+                        case LogLevelEnum.TRACE:
+                            Log.TraceAsync(msg, source: this.GetType().Name, tags: tag);
+
+                            break;
+
+                        case LogLevelEnum.DEBUG:
+                            Log.DebugAsync(msg, source: this.GetType().Name, tags: tag);
+
+                            break;
+
+                        case LogLevelEnum.INFO:
+                            Log.InfoAsync(msg, source: this.GetType().Name, tags: tag);
+
+                            break;
+
+                        case LogLevelEnum.WRAN:
+                            Log.WranAsync(msg, source: this.GetType().Name, tags: tag);
+
+                            break;
+
+                        case LogLevelEnum.ERROR:
+                            Log.ErrorAsync(msg, source: this.GetType().Name, tags: tag);
+
+                            break;
+
+                        case LogLevelEnum.FATAL:
+                            Log.FatalAsync(msg, source: this.GetType().Name, tags: tag);
+
+                            break;
+                    }
+                }
+                else
+                {
+                    Log.ErrorAsync(msg, ex: errEx, source: this.GetType().Name, tags: tag);
+                }
             }
         }
 

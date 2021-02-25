@@ -190,15 +190,15 @@
             </summary>
             <returns>分页返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.DoPageAsync">
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.DoPage">
             <summary>
-            异步去分页
+            去分页
             </summary>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.QueryPageFromServiceAsync(System.Int32,System.Int32,`4)">
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.QueryPageFromService(System.Int32,System.Int32,`4)">
             <summary>
-            异步从服务里查询分页
+            从服务里查询分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>

@@ -153,17 +153,26 @@ namespace Hzdtf.Logger.Contract
         protected string[] AppendLocalIdTags(params string[] tag)
         {
             var tags = localIdTags.Merge(tag);
-            if (TheOperation != null)
+            if (TheOperation == null)
             {
-                try
+                return tags;
+            }
+
+            try
+            {
+                var eventId = TheOperation.EventId;
+                if (string.IsNullOrWhiteSpace(eventId))
                 {
-                    var eventId = TheOperation.EventId;
-                    if (!string.IsNullOrWhiteSpace(eventId))
-                    {
-                        return tags.Merge(new string[] { eventId });
-                    }
+                    return tags;
                 }
-                catch { }
+                else
+                {
+                    return tags.Merge(new string[] { eventId });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
             }
 
             return tags;

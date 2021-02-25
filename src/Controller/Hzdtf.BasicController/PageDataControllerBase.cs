@@ -27,19 +27,19 @@ namespace Hzdtf.BasicController
         /// </summary>
         /// <returns>返回信息</returns>
         [HttpGet("PageData")]
-        public virtual async Task<ReturnInfo<PageInfoT>> PageData()
+        public virtual ReturnInfo<PageInfoT> PageData()
         {
             var pageData = CreatePageData();
             if (pageData == null)
             {
-                await Task<ReturnInfo<PageInfoT>>.Delay(0);
+                Task<ReturnInfo<PageInfoT>>.Delay(0);
                 return null;
             }
             else
             {
                 var returnInfo = new ReturnInfo<PageInfoT>();
                 returnInfo.Data = pageData;
-                await Task.Run(() => FillPageData(returnInfo));
+                FillPageData(returnInfo);
 
                 return returnInfo;
             }
