@@ -13,6 +13,7 @@ using static Hzdtf.Utility.ApiPermission.RoutePermissionInfo;
 using Microsoft.AspNetCore.Routing;
 using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.RequestResource;
+using Hzdtf.Utility.TheOperation;
 
 namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
 {
@@ -48,6 +49,11 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
         private readonly IRequestResource requestSource;
 
         /// <summary>
+        /// 本次操作
+        /// </summary>
+        private readonly ITheOperation theOperation;
+
+        /// <summary>
         /// 构造方法
         /// </summary>
         /// <param name="next">下一个中间件处理委托</param>
@@ -55,8 +61,10 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
         /// <param name="reader">读取API权限配置</param>
         /// <param name="localize">本地化</param>
         /// <param name="requestResource">请求资源</param>
-        public RoutePermissionMiddlewareBase(RequestDelegate next, IOptions<RoutePermissionOptions> options, 
-            IReader<RoutePermissionInfo[]> reader, ILocalization localize, IRequestResource requestResource)
+        /// <param name="theOperation">本次操作</param>
+        public RoutePermissionMiddlewareBase(RequestDelegate next, IOptions<RoutePermissionOptions> options,
+            IReader<RoutePermissionInfo[]> reader, ILocalization localize, IRequestResource requestResource,
+            ITheOperation theOperation = null)
         {
             if (reader == null)
             {
@@ -68,6 +76,7 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
             this.reader = reader;
             this.localize = localize;
             this.requestSource = requestResource;
+            this.theOperation = theOperation;
         }
 
         /// <summary>
@@ -144,7 +153,7 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
                     {
                         if (!string.IsNullOrWhiteSpace(actionConfig.ResourceKey))
                         {
-                            requestKey = context.GetContextKey();
+                            requestKey = theOperation.EventId;
                             requestSource.Add(requestKey, actionConfig.ResourceKey);
                         }
                         await next(context);

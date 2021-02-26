@@ -32,7 +32,6 @@ namespace Hzdtf.BasicController
             var pageData = CreatePageData();
             if (pageData == null)
             {
-                Task<ReturnInfo<PageInfoT>>.Delay(0);
                 return null;
             }
             else

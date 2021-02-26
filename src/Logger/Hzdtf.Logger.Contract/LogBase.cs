@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Hzdtf.Utility.TheOperation;
 using Hzdtf.Utility.Utils;
 
@@ -127,9 +128,23 @@ namespace Hzdtf.Logger.Contract
         /// <param name="ex">异常</param>
         protected virtual void BeforeWriteStorage(string level, string msg, Exception ex = null, string source = null, params string[] tags)
         {
+            BeforeWriteStorage(level, msg, null, ex, source, tags);
+        }
+
+        /// <summary>
+        /// 将消息与异常写入到存储设备里前
+        /// </summary>
+        /// <param name="level">级别</param>
+        /// <param name="msg">消息</param>
+        /// <param name="eventId">事件ID</param>
+        /// <param name="tags">标签</param>
+        /// <param name="source">来源</param>
+        /// <param name="ex">异常</param>
+        protected virtual void BeforeWriteStorage(string level, string msg, string eventId, Exception ex = null, string source = null, params string[] tags)
+        {
             if (LogLevelHelper.IsNeedWriteLog(level, LogRecordLevel.GetRecordLevel()))
             {
-                WriteStorage(level, msg, ex.GetLastInnerException(), source, tags);
+                WriteStorage(level, msg, eventId, ex.GetLastInnerException(), source, tags);
             }
         }
 
@@ -138,44 +153,64 @@ namespace Hzdtf.Logger.Contract
         /// </summary>
         /// <param name="level">级别</param>
         /// <param name="msg">消息</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
         /// <param name="tags">标签</param>
-        protected abstract void WriteStorage(string level, string msg, Exception ex = null, string source = null, params string[] tags);
+        protected abstract void WriteStorage(string level, string msg, string eventId, Exception ex = null, string source = null, params string[] tags);
 
         #endregion
 
         /// <summary>
         /// 追加本地标识标签
         /// </summary>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tag">标签</param>
         /// <returns>本地标识标签</returns>
-        protected string[] AppendLocalIdTags(params string[] tag)
+        protected string[] AppendLocalIdTags(string eventId, params string[] tag)
         {
             var tags = localIdTags.Merge(tag);
-            if (TheOperation == null)
+            if (string.IsNullOrWhiteSpace(eventId))
             {
-                return tags;
-            }
-
-            try
-            {
-                var eventId = TheOperation.EventId;
+                eventId = GetEventId();
                 if (string.IsNullOrWhiteSpace(eventId))
                 {
                     return tags;
                 }
-                else
+
+                return tags.Merge(new string[] { eventId });
+            }
+            else
+            {
+                return tags.Merge(new string[] { eventId });
+            }
+        }
+
+        /// <summary>
+        /// 获取事件ID
+        /// </summary>
+        /// <returns>事件ID</returns>
+        protected virtual string GetEventId()
+        {
+            if (TheOperation == null)
+            {
+                return null;
+            }
+            try
+            {
+                var e = TheOperation.EventId;
+                if (string.IsNullOrWhiteSpace(e))
                 {
-                    return tags.Merge(new string[] { eventId });
+                    return null;
                 }
+                return e;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
-            }
 
-            return tags;
+                return null;
+            }            
         }
     }
 
