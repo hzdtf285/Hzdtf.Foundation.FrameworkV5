@@ -3978,6 +3978,32 @@
             <param name="methodName">方法名</param>
             <returns>方法</returns>
         </member>
+        <member name="T:Hzdtf.Utility.Model.JqGridTreeInfo`1">
+            <summary>
+            JqG网格树信息
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.Level">
+            <summary>
+            层级，从0开始
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.IsLeaf">
+            <summary>
+            是否叶子节点
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.Epanded">
+            <summary>
+            是否展开
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Model.KeyValueInfo`2">
             <summary>
             键值信息
