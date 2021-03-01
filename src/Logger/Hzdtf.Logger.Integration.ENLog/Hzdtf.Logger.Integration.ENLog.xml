@@ -32,12 +32,13 @@
             </summary>
             <param name="name">名称</param>
         </member>
-        <member name="M:Hzdtf.Logger.Integration.ENLog.IntegrationNLog.WriteStorage(System.String,System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Integration.ENLog.IntegrationNLog.WriteStorage(System.String,System.String,System.String,System.Exception,System.String,System.String[])">
             <summary>
             将消息与异常写入到存储设备里
             </summary>
             <param name="level">级别</param>
             <param name="msg">消息</param>
+            <param name="eventId">事件ID</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
             <param name="tags">标签</param>

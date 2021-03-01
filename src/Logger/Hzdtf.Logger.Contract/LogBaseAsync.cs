@@ -21,7 +21,7 @@ namespace Hzdtf.Logger.Contract
         /// <returns>任务</returns>
         public Task TraceAsync(string msg, Exception ex = null, string source = null, params string[] tags)
         {
-            return Task.Factory.StartNew(() => Trace(msg, ex, source, tags));
+            return Task.Factory.StartNew(() => BeforeWriteStorage("trace", msg, GetEventId(), ex, source, tags));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Hzdtf.Logger.Contract
         /// <returns>任务</returns>
         public Task DebugAsync(string msg, Exception ex = null, string source = null, params string[] tags)
         {
-            return Task.Factory.StartNew(() => Debug(msg, ex, source, tags));
+            return Task.Factory.StartNew(() => BeforeWriteStorage("debug", msg, GetEventId(), ex, source, tags));
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Hzdtf.Logger.Contract
         /// <returns>任务</returns>
         public Task InfoAsync(string msg, Exception ex = null, string source = null, params string[] tags)
         {
-            return Task.Factory.StartNew(() => Info(msg, ex, source, tags));
+            return Task.Factory.StartNew(() => BeforeWriteStorage("info", msg, GetEventId(), ex, source, tags));
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Hzdtf.Logger.Contract
         /// <returns>任务</returns>
         public Task WranAsync(string msg, Exception ex = null, string source = null, params string[] tags)
         {
-            return Task.Factory.StartNew(() => Wran(msg, ex, source, tags));
+            return Task.Factory.StartNew(() => BeforeWriteStorage("wran", msg, GetEventId(), ex, source, tags));
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Hzdtf.Logger.Contract
         /// <returns>任务</returns>
         public Task ErrorAsync(string msg, Exception ex = null, string source = null, params string[] tags)
         {
-            return Task.Factory.StartNew(() => Error(msg, ex, source, tags));
+            return Task.Factory.StartNew(() => BeforeWriteStorage("error", msg, GetEventId(), ex, source, tags));
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Hzdtf.Logger.Contract
         /// <returns>任务</returns>
         public Task FatalAsync(string msg, Exception ex = null, string source = null, params string[] tags)
         {
-            return Task.Factory.StartNew(() => Fatal(msg, ex, source, tags));
+            return Task.Factory.StartNew(() => BeforeWriteStorage("fatal", msg, GetEventId(), ex, source, tags));
         }
     }
 }

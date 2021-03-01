@@ -2,7 +2,6 @@
 using Exceptionless.Logging;
 using Hzdtf.Logger.Contract;
 using System;
-using Hzdtf.Utility.Utils;
 using Hzdtf.Utility.Attr;
 
 namespace Hzdtf.Logger.Exceptionless
@@ -27,10 +26,11 @@ namespace Hzdtf.Logger.Exceptionless
         /// </summary>
         /// <param name="level">级别</param>
         /// <param name="msg">消息</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
         /// <param name="tags">标签</param>
-        protected override void WriteStorage(string level, string msg, Exception ex = null, string source = null, params string[] tags)
+        protected override void WriteStorage(string level, string msg, string eventId, Exception ex = null, string source = null, params string[] tags)
         {
             if (string.IsNullOrWhiteSpace(source) && ex != null)
             {
@@ -92,7 +92,7 @@ namespace Hzdtf.Logger.Exceptionless
                     builder.SetMessage(msg);
                 }
             }
-            builder.AddTags(AppendLocalIdTags(tags));
+            builder.AddTags(AppendLocalIdTags(eventId, tags));
             builder.Submit();
         }
     }

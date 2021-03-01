@@ -6269,6 +6269,23 @@
             事件ID
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.TheOperation.TheOperation">
+            <summary>
+            本次操作
+            使用AsyncLocal进行存储，在本次操作范围内，最好不要跨线程，因为AsyncLocal是线程不安全
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.TheOperation.TheOperation.local">
+            <summary>
+            本地缓存
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.TheOperation.TheOperation.EventId">
+            <summary>
+            事件ID
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Utils.AuthUtil">
             <summary>
             身份认证辅助类

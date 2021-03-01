@@ -49,6 +49,7 @@ namespace Hzdtf.Example.WebApp
                 options.LocalAuth.LoginPath = "/login.html";
             });
 
+            services.AddTheReuestOperation();
             services.AddRequestLog();
             services.AddApiExceptionHandle();
             services.AddRoutePermission();
@@ -99,6 +100,7 @@ namespace Hzdtf.Example.WebApp
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseTheReuestOperation();
             app.UseCulture();
             app.UseRoutePermission<RoutePermissionMiddleware>();
             app.UseRequestLog();

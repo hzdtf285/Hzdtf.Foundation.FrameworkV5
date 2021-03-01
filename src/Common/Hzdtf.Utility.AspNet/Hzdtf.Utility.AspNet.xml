@@ -302,7 +302,12 @@
             请求资源
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.RequestResource.IRequestResource)">
+        <member name="F:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.theOperation">
+            <summary>
+            本次操作
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.RequestResource.IRequestResource,Hzdtf.Utility.TheOperation.ITheOperation)">
             <summary>
             构造方法
             </summary>
@@ -311,6 +316,7 @@
             <param name="reader">读取API权限配置</param>
             <param name="localize">本地化</param>
             <param name="requestResource">请求资源</param>
+            <param name="theOperation">本次操作</param>
         </member>
         <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -354,6 +360,53 @@
             Api路径前辍，默认是/api/
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationMiddleware">
+            <summary>
+            本次请求操作中间件
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationMiddleware.next">
+            <summary>
+            下一个中间件处理委托
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationMiddleware.theOperation">
+            <summary>
+            本次操作
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationMiddleware.options">
+            <summary>
+            本次请求操作选项配置
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Hzdtf.Utility.TheOperation.ITheOperation,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationOptions})">
+            <summary>
+            构造方法
+            </summary>
+            <param name="next">下一个中间件处理委托</param>
+            <param name="theOperation">本次操作</param>
+            <param name="options">本次请求操作选项配置</param>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context">http上下文</param>
+            <returns>任务</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationOptions">
+            <summary>
+            本次操作选项配置
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationOptions.PfxApiPath">
+            <summary>
+            Api路径前辍，默认是/api/
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.AspNet.ModelValidate.ModelValidateActionFilter">
             <summary>
             模型验证动作过滤器
@@ -386,28 +439,6 @@
             <param name="validationState">验证状态</param>
             <param name="prefix">前辍</param>
             <param name="model">模型</param>
-        </member>
-        <member name="T:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation">
-            <summary>
-            本次请求操作
-            @ 黄振东
-            </summary>
-        </member>
-        <member name="F:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation.contextAccessor">
-            <summary>
-            上下文访问
-            </summary>
-        </member>
-        <member name="P:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation.EventId">
-            <summary>
-            事件ID
-            </summary>
-        </member>
-        <member name="M:Hzdtf.Utility.AspNet.TheOperation.TheReuestOperation.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
-            <summary>
-            构造方法
-            </summary>
-            <param name="contextAccessor">上下文访问</param>
         </member>
         <member name="T:Hzdtf.Utility.AspNet.WebApp">
             <summary>
@@ -495,6 +526,19 @@
         <member name="M:Microsoft.AspNetCore.Builder.RoutePermissionMiddlewareExtensions.UseRoutePermission``1(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             使用路由权限，必须在UseRouting中间件后面执行
+            </summary>
+            <param name="app">应用</param>
+            <returns>应用</returns>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Builder.TheReuestOperationMiddlewareExtensions">
+            <summary>
+            本次请求操作中间件扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.TheReuestOperationMiddlewareExtensions.UseTheReuestOperation(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            使用本次请求操作
             </summary>
             <param name="app">应用</param>
             <returns>应用</returns>
@@ -680,6 +724,20 @@
             </summary>
             <param name="services">服务收藏</param>
             <param name="options">路由权限选项配置</param>
+            <returns>服务收藏</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.TheReuestOperationServiceExtensions">
+            <summary>
+            本次请求操作服务扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.TheReuestOperationServiceExtensions.AddTheReuestOperation(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationOptions})">
+            <summary>
+            添加本次请求操作服务
+            </summary>
+            <param name="services">服务收藏</param>
+            <param name="options">Api异常处理选项配置</param>
             <returns>服务收藏</returns>
         </member>
     </members>

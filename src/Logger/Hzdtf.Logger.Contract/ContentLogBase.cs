@@ -17,12 +17,13 @@ namespace Hzdtf.Logger.Contract
         /// </summary>
         /// <param name="level">级别</param>
         /// <param name="msg">消息</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
         /// <param name="tags">标签</param>
-        protected override void WriteStorage(string level, string msg, Exception ex = null, string source = null, params string[] tags)
+        protected override void WriteStorage(string level, string msg, string eventId, Exception ex = null, string source = null, params string[] tags)
         {
-            WriteStorage(GetLogContent(level, msg, ex, source, tags), level);
+            WriteStorage(GetLogContent(level, msg, eventId, ex, source, tags), level);
         }
 
         #endregion
@@ -45,14 +46,15 @@ namespace Hzdtf.Logger.Contract
         /// </summary>
         /// <param name="level">级别</param>
         /// <param name="msg">消息</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
         /// <param name="tags">标签</param>
         /// <returns>日志内容</returns>
-        private string GetLogContent(string level, string msg, Exception ex = null, string source = null, params string[] tags)
+        private string GetLogContent(string level, string msg, string eventId, Exception ex = null, string source = null, params string[] tags)
         {
             string exMsg = ex == null ? null : string.Format("{0}异常:Message:{1}.StackTrace:{2}", SectionPartitionSymbol(), ex.Message, ex.StackTrace);
-            string tagMsg = tags == null || tags.Length == 0 ? null : string.Format("{0}标签:{1}", SectionPartitionSymbol(), string.Join(",", AppendLocalIdTags(tags)));
+            string tagMsg = tags == null || tags.Length == 0 ? null : string.Format("{0}标签:{1}", SectionPartitionSymbol(), string.Join(",", AppendLocalIdTags(eventId, tags)));
             if (string.IsNullOrWhiteSpace(source) && ex != null)
             {
                 source = ex.Source;

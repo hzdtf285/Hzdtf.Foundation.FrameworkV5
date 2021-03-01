@@ -16,6 +16,6 @@ namespace Hzdtf.Utility.TheOperation
         /// <summary>
         /// 事件ID
         /// </summary>
-        string EventId { get; }
+        string EventId { get; set; }
     }
 }

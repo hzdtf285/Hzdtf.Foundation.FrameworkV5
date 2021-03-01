@@ -62,12 +62,13 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Hzdtf.Logger.Contract.ContentLogBase.WriteStorage(System.String,System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Contract.ContentLogBase.WriteStorage(System.String,System.String,System.String,System.Exception,System.String,System.String[])">
             <summary>
             将消息与异常写入到存储设备里
             </summary>
             <param name="level">级别</param>
             <param name="msg">消息</param>
+            <param name="eventId">事件ID</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
             <param name="tags">标签</param>
@@ -79,12 +80,13 @@
             <param name="logContent">日志内容</param>
             <param name="level">等级</param>
         </member>
-        <member name="M:Hzdtf.Logger.Contract.ContentLogBase.GetLogContent(System.String,System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Contract.ContentLogBase.GetLogContent(System.String,System.String,System.String,System.Exception,System.String,System.String[])">
             <summary>
             获取日志内容
             </summary>
             <param name="level">级别</param>
             <param name="msg">消息</param>
+            <param name="eventId">事件ID</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
             <param name="tags">标签</param>
@@ -357,22 +359,41 @@
             <param name="source">来源</param>
             <param name="ex">异常</param>
         </member>
-        <member name="M:Hzdtf.Logger.Contract.LogBase.WriteStorage(System.String,System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Contract.LogBase.BeforeWriteStorage(System.String,System.String,System.String,System.Exception,System.String,System.String[])">
+            <summary>
+            将消息与异常写入到存储设备里前
+            </summary>
+            <param name="level">级别</param>
+            <param name="msg">消息</param>
+            <param name="eventId">事件ID</param>
+            <param name="tags">标签</param>
+            <param name="source">来源</param>
+            <param name="ex">异常</param>
+        </member>
+        <member name="M:Hzdtf.Logger.Contract.LogBase.WriteStorage(System.String,System.String,System.String,System.Exception,System.String,System.String[])">
             <summary>
             将消息与异常写入到存储设备里
             </summary>
             <param name="level">级别</param>
             <param name="msg">消息</param>
+            <param name="eventId">事件ID</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
             <param name="tags">标签</param>
         </member>
-        <member name="M:Hzdtf.Logger.Contract.LogBase.AppendLocalIdTags(System.String[])">
+        <member name="M:Hzdtf.Logger.Contract.LogBase.AppendLocalIdTags(System.String,System.String[])">
             <summary>
             追加本地标识标签
             </summary>
+            <param name="eventId">事件ID</param>
             <param name="tag">标签</param>
             <returns>本地标识标签</returns>
+        </member>
+        <member name="M:Hzdtf.Logger.Contract.LogBase.GetEventId">
+            <summary>
+            获取事件ID
+            </summary>
+            <returns>事件ID</returns>
         </member>
         <member name="M:Hzdtf.Logger.Contract.LogBase.TraceAsync(System.String,System.Exception,System.String,System.String[])">
             <summary>
