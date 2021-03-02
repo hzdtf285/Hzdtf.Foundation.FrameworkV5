@@ -37,13 +37,13 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(implementAssemblyName));
             }
 
-            var interfaceAssembly = RuntimeUtil.GetAssembly(interfaceAssemblyName);
+            var interfaceAssembly = Assembly.Load(interfaceAssemblyName);
             if (interfaceAssembly == null)
             {
                 throw new DllNotFoundException($"the dll \"{interfaceAssemblyName}\" not be found");
             }
 
-            var implementAssembly = RuntimeUtil.GetAssembly(implementAssemblyName);
+            var implementAssembly = Assembly.Load(implementAssemblyName);
             if (implementAssembly == null)
             {
                 throw new DllNotFoundException($"the dll \"{implementAssemblyName}\" not be found");
