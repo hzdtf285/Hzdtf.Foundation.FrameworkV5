@@ -839,6 +839,15 @@
             <param name="mode">访问模式，默认为主库</param>
             <param name="connectionId">连接ID</param>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1,`1,Hzdtf.Utility.Model.Return.ReturnInfo{``0})">
+            <summary>
+            乐观锁处理，注意：根据修改时间来判断，如果源模型修改时间大于新模型修改时间，则代表数据已被别人修改过
+            </summary>
+            <typeparam name="ReturnDataT">返回数据类型</typeparam>
+            <param name="sourceModel">源模型</param>
+            <param name="newModel">新模型</param>
+            <param name="returnInfo">返回信息</param>
+        </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.DbBuilderId">
             <summary>
             是否由DB生成ID，默认为是。如果为是，则由数据库自增生成。如果为否则，默认添加方法会自动调用Identity.New()生成ID

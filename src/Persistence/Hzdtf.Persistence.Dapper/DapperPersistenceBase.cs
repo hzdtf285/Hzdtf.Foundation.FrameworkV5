@@ -482,7 +482,7 @@ namespace Hzdtf.Persistence.Dapper
         /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
         /// </summary>
         /// <param name="model">模型</param>
-        /// <returns>只有修改信息的模型</returns>
+        /// <returns>只有修改信息的SQL语句</returns>
         protected abstract string SelectModifyInfoByIdAndGeModifyTimeSql(ModelT model);
 
         /// <summary>
@@ -490,7 +490,7 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <param name="models">模型数组</param>
         /// <param name="parameters">参数</param>
-        /// <returns>只有修改信息的模型列表</returns>
+        /// <returns>只有修改信息的SQL语句</returns>
         protected abstract string SelectModifyInfosByIdAndGeModifyTimeSql(ModelT[] models, out DynamicParameters parameters);
 
         #endregion

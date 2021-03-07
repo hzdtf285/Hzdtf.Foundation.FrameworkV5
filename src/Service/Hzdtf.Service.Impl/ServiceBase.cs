@@ -1810,6 +1810,32 @@ namespace Hzdtf.Service.Impl
         }
 
         /// <summary>
+        /// 乐观锁处理，注意：根据修改时间来判断，如果源模型修改时间大于新模型修改时间，则代表数据已被别人修改过
+        /// </summary>
+        /// <typeparam name="ReturnDataT">返回数据类型</typeparam>
+        /// <param name="sourceModel">源模型</param>
+        /// <param name="newModel">新模型</param>
+        /// <param name="returnInfo">返回信息</param>
+        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT sourceModel, ModelT newModel, ReturnInfo<ReturnDataT> returnInfo)
+        {
+            if (sourceModel == null || newModel == null)
+            {
+                return;
+            }
+
+            if (sourceModel is PersonTimeInfo<IdT> && newModel is PersonTimeInfo<IdT>)
+            {
+                var s = sourceModel as PersonTimeInfo<IdT>;
+                var n = newModel as PersonTimeInfo<IdT>;
+                if (s.ModifyTime > n.ModifyTime)
+                {
+                    var msg = Localize.Get(ServiceCodeDefine.DATA_MODIFIED_CULTURE_KEY, "数据已被[{0}]修改过,请重新加载数据");
+                    returnInfo.SetCodeMsg(ServiceCodeDefine.DATA_MODIFIED, string.Format(msg, s.Modifier));
+                }
+            }            
+        }
+
+        /// <summary>
         /// 是否由DB生成ID，默认为是。如果为是，则由数据库自增生成。如果为否则，默认添加方法会自动调用Identity.New()生成ID
         /// </summary>
         /// <returns>是否由DB生成ID</returns>

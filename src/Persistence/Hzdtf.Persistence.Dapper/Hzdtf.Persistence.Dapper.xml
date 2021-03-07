@@ -163,7 +163,7 @@
             根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
             </summary>
             <param name="model">模型</param>
-            <returns>只有修改信息的模型</returns>
+            <returns>只有修改信息的SQL语句</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectModifyInfosByIdAndGeModifyTimeSql(`1[],Dapper.DynamicParameters@)">
             <summary>
@@ -171,7 +171,7 @@
             </summary>
             <param name="models">模型数组</param>
             <param name="parameters">参数</param>
-            <returns>只有修改信息的模型列表</returns>
+            <returns>只有修改信息的SQL语句</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.InsertSql(`1,System.Boolean)">
             <summary>
@@ -677,7 +677,7 @@
             根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
             </summary>
             <param name="model">模型</param>
-            <returns>只有修改信息的模型</returns>
+            <returns>只有修改信息的SQL语句</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfosByIdAndGeModifyTimeSql(`1[],Dapper.DynamicParameters@)">
             <summary>
@@ -685,7 +685,7 @@
             </summary>
             <param name="models">模型数组</param>
             <param name="parameters">参数</param>
-            <returns>只有修改信息的模型列表</returns>
+            <returns>只有修改信息的SQL语句</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.InsertSql(`1,System.Boolean)">
             <summary>
