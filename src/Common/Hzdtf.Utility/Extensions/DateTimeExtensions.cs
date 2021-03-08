@@ -12,6 +12,11 @@ namespace System
     public static class DateTimeExtensions
     {
         /// <summary>
+        /// 最大日期
+        /// </summary>
+        public static readonly DateTime MAX_DATE = DateTime.Now.Date;
+
+        /// <summary>
         /// 转换为全部日期时间字符串 yyyy-M-d H:m:s.fff
         /// </summary>
         /// <param name="dateTime">日期时间</param>

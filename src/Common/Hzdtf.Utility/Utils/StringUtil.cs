@@ -252,5 +252,15 @@ namespace Hzdtf.Utility.Utils
 
             return htmlString;
         }
+
+        /// <summary>
+        /// 判断字符是否默认值或空值
+        /// </summary>
+        /// <param name="chr">字符</param>
+        /// <returns>字符是否默认值或空值</returns>
+        public static bool IsDefaultOrEmpty(this char chr)
+        {
+            return chr == default(char) || chr == ' ';
+        }
     }
 }

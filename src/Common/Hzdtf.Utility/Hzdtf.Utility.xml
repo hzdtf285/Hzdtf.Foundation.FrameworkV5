@@ -7341,6 +7341,13 @@
             <param name="isFilterSpace">是否过滤空格</param>
             <returns>过虑后的字符串</returns>
         </member>
+        <member name="M:Hzdtf.Utility.Utils.StringUtil.IsDefaultOrEmpty(System.Char)">
+            <summary>
+            判断字符是否默认值或空值
+            </summary>
+            <param name="chr">字符</param>
+            <returns>字符是否默认值或空值</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Utils.ValidateUtil">
             <summary>
             验证辅助类
@@ -7908,6 +7915,11 @@
             <summary>
             日期时间扩展类
             @ 黄振东
+            </summary>
+        </member>
+        <member name="F:System.DateTimeExtensions.MAX_DATE">
+            <summary>
+            最大日期
             </summary>
         </member>
         <member name="M:System.DateTimeExtensions.ToFullDateTime(System.DateTime)">
