@@ -14,7 +14,7 @@ namespace System
         /// <summary>
         /// 最大日期
         /// </summary>
-        public static readonly DateTime MAX_DATE = DateTime.Now.Date;
+        public static readonly DateTime MAX_DATE = DateTime.MaxValue.Date;
 
         /// <summary>
         /// 转换为全部日期时间字符串 yyyy-M-d H:m:s.fff
