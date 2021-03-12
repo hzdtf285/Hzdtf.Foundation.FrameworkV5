@@ -1,4 +1,6 @@
 ﻿using Hzdtf.Logger.Contract;
+using Hzdtf.Utility.Utils;
+using Grpc.Net.Client;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
@@ -7,8 +9,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using Hzdtf.Utility.Utils;
-using Grpc.Net.Client;
 
 namespace Hzdtf.Utility.AspNet.Extensions.RequestLog
 {

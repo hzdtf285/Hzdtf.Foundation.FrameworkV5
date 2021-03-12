@@ -224,6 +224,33 @@
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>
+        <member name="T:Hzdtf.Logger.Contract.ILogBusiness">
+            <summary>
+            日志业务接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Logger.Contract.ILogBusiness.TryLogExec(System.Action,System.Action{Hzdtf.Utility.Model.Return.BasicReturnInfo},System.String[])">
+            <summary>
+            捕获日志执行
+            当发生异常时，会记录异常日志，同时触发异常回调
+            </summary>
+            <param name="action">执行核心</param>
+            <param name="exceptionCallback">异常回调</param>
+            <param name="logTags">日志标签</param>
+            <returns>返回类型</returns>
+        </member>
+        <member name="M:Hzdtf.Logger.Contract.ILogBusiness.TryLogExec``1(System.Func{``0},System.Func{Hzdtf.Utility.Model.Return.BasicReturnInfo,``0},System.String[])">
+            <summary>
+            捕获日志执行
+            当发生异常时，会记录异常日志，同时触发异常回调
+            </summary>
+            <typeparam name="ReturnT">返回类型</typeparam>
+            <param name="func">执行核心</param>
+            <param name="exceptionCallback">异常回调</param>
+            <param name="logTags">日志标签</param>
+            <returns>返回类型</returns>
+        </member>
         <member name="T:Hzdtf.Logger.Contract.ILogRecordLevel">
             <summary>
             日志记录级别接口
@@ -475,6 +502,43 @@
             <param name="level">级别</param>
             <param name="recordLogLevel">记录日志级别</param>
             <returns>是否需要写入日志</returns>
+        </member>
+        <member name="T:Hzdtf.Logger.Contract.LogBusiness">
+            <summary>
+            日志业务
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Logger.Contract.LogBusiness.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Logger.Contract.LogBusiness.Localize">
+            <summary>
+            本地化
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Logger.Contract.LogBusiness.TryLogExec(System.Action,System.Action{Hzdtf.Utility.Model.Return.BasicReturnInfo},System.String[])">
+            <summary>
+            捕获日志执行
+            当发生异常时，会记录异常日志，同时触发异常回调
+            </summary>
+            <param name="action">执行核心</param>
+            <param name="exceptionCallback">异常回调</param>
+            <param name="logTags">日志标签</param>
+            <returns>返回类型</returns>
+        </member>
+        <member name="M:Hzdtf.Logger.Contract.LogBusiness.TryLogExec``1(System.Func{``0},System.Func{Hzdtf.Utility.Model.Return.BasicReturnInfo,``0},System.String[])">
+            <summary>
+            捕获日志执行
+            当发生异常时，会记录异常日志，同时触发异常回调
+            </summary>
+            <typeparam name="ReturnT">返回类型</typeparam>
+            <param name="func">执行核心</param>
+            <param name="exceptionCallback">异常回调</param>
+            <param name="logTags">日志标签</param>
+            <returns>返回类型</returns>
         </member>
         <member name="T:Hzdtf.Logger.Contract.LogLevelEnum">
             <summary>

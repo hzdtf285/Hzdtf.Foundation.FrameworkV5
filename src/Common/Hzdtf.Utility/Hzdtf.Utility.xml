@@ -7315,6 +7315,20 @@
             <param name="isFilterSpace">是否过滤空格</param>
             <returns>过虑后的字符串</returns>
         </member>
+        <member name="M:Hzdtf.Utility.Utils.StringUtil.IsDefaultOrEmpty(System.Char)">
+            <summary>
+            判断字符是否默认值或空值
+            </summary>
+            <param name="chr">字符</param>
+            <returns>字符是否默认值或空值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.StringUtil.NullOutEmpty(System.String)">
+            <summary>
+            如果字符串为null则输出空字符串
+            </summary>
+            <param name="str">字符串</param>
+            <returns>字符串</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Utils.ValidateUtil">
             <summary>
             验证辅助类
@@ -8895,12 +8909,7 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="F:Grpc.Net.Client.GRpcChannelUtil.defaultCustomerOptions">
-            <summary>
-            默认渠道自定义配置选项
-            </summary>
-        </member>
-        <member name="M:Grpc.Net.Client.GRpcChannelUtil.CreateChannel(System.String,System.Action{Grpc.Net.Client.GrpcChannel,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException},Grpc.Net.Client.GrpcChannelCustomerOptions,Grpc.Net.Client.GrpcChannelOptions)">
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.CreateChannel(System.String,System.Action{Grpc.Net.Client.GrpcChannel,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException},System.Action{Grpc.Net.Client.GrpcChannelCustomerOptions},Grpc.Net.Client.GrpcChannelOptions)">
             <summary>
             创建一个渠道，执行完业务处理方法后，会自动关闭渠道连接
             </summary>
@@ -8940,6 +8949,11 @@
             <summary>
             是否添加Token，设置后，会调用App.GetTokenFunc获取Token
             默认为是
+            </summary>
+        </member>
+        <member name="P:Grpc.Net.Client.GrpcChannelCustomerOptions.GetTokenFunc">
+            <summary>
+            获取Token回调
             </summary>
         </member>
         <member name="P:Grpc.Net.Client.GrpcChannelCustomerOptions.IsAddEventId">

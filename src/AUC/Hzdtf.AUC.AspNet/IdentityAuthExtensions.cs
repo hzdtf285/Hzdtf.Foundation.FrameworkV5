@@ -54,6 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IIdentityAuthReader<IdT, UserT>, IdentityAuthClaimReader<IdT, UserT>>();
+            services.AddSingleton<IIdentityAuthContextReader<IdT, UserT>, IdentityAuthClaimReader<IdT, UserT>>();
 
             var localOption = config.LocalAuth;
             switch (config.AuthType)

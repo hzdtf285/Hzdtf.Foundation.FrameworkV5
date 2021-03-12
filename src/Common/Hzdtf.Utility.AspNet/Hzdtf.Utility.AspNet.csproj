@@ -18,6 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.35.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Logger\Hzdtf.Logger.Contract\Hzdtf.Logger.Contract.csproj" />
     <ProjectReference Include="..\Hzdtf.Utility\Hzdtf.Utility.csproj" />
   </ItemGroup>

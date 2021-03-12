@@ -18,11 +18,6 @@ namespace Grpc.Net.Client
     public static class GRpcChannelUtil
     {
         /// <summary>
-        /// 默认渠道自定义配置选项
-        /// </summary>
-        private readonly static GrpcChannelCustomerOptions defaultCustomerOptions = new GrpcChannelCustomerOptions();
-
-        /// <summary>
         /// 创建一个渠道，执行完业务处理方法后，会自动关闭渠道连接
         /// </summary>
         /// <param name="address">地址</param>
@@ -30,20 +25,21 @@ namespace Grpc.Net.Client
         /// <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
         /// <param name="customerOptions">自定义选项配置</param>
         /// <param name="options">选项配置</param>
-        public static void CreateChannel(string address, Action<GrpcChannel, Metadata> action, Action<RpcException> exAction = null, GrpcChannelCustomerOptions customerOptions = null, GrpcChannelOptions options = null)
+        public static void CreateChannel(string address, Action<GrpcChannel, Metadata> action, Action<RpcException> exAction = null, Action<GrpcChannelCustomerOptions> customerOptions = null, GrpcChannelOptions options = null)
         {
             var headers = new Metadata();
-            if (customerOptions == null)
+            var cusOptions = new GrpcChannelCustomerOptions();
+            if (customerOptions != null)
             {
-                customerOptions = defaultCustomerOptions;
+                customerOptions(cusOptions);
             }
 
-            if (customerOptions.IsAddToken && App.GetTokenFunc != null)
+            if (cusOptions.IsAddToken && (cusOptions.GetTokenFunc != null || App.GetTokenFunc != null))
             {
-                var token = App.GetTokenFunc();
+                var token = cusOptions.GetTokenFunc != null ? cusOptions.GetTokenFunc() : App.GetTokenFunc();
                 headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
             }
-            if (customerOptions.IsAddEventId && App.GetEventIdFunc != null)
+            if (cusOptions.IsAddEventId && App.GetEventIdFunc != null)
             {
                 headers.Add(App.EVENT_ID_KEY, App.GetEventIdFunc());
             }
@@ -147,6 +143,15 @@ namespace Grpc.Net.Client
             get;
             set;
         } = true;
+
+        /// <summary>
+        /// 获取Token回调
+        /// </summary>
+        public Func<string> GetTokenFunc
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 是否添加事件ID，设置后，会调用App.GetEventIdFunc获取事件ID
