@@ -60,5 +60,11 @@ namespace Hzdtf.BasicController
         /// </summary>
         /// <returns>菜单编码</returns>
         protected virtual string MenuCode() => null;
+
+        /// <summary>
+        /// 获取当前用户
+        /// </summary>
+        /// <returns>当前用户</returns>
+        protected virtual BasicUserInfo<IdT> GetCurrUser() => null;
     }
 }

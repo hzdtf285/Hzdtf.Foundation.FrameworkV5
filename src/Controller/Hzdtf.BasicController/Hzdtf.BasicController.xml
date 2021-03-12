@@ -38,6 +38,12 @@
             </summary>
             <returns>菜单编码</returns>
         </member>
+        <member name="M:Hzdtf.BasicController.BasicControllerBase`3.GetCurrUser">
+            <summary>
+            获取当前用户
+            </summary>
+            <returns>当前用户</returns>
+        </member>
         <member name="T:Hzdtf.BasicController.IPagingParseFilter">
             <summary>
             分页解析筛选接口

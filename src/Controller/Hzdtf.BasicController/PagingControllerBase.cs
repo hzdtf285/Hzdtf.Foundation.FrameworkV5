@@ -78,7 +78,7 @@ namespace Hzdtf.BasicController
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
         /// <returns>返回信息任务</returns>
-        protected virtual ReturnInfo<PagingInfo<ModelT>> QueryPageFromService(int pageIndex, int pageSize, PageFilterT filter) => Service.QueryPage(pageIndex, pageSize, filter);
+        protected virtual ReturnInfo<PagingInfo<ModelT>> QueryPageFromService(int pageIndex, int pageSize, PageFilterT filter) => Service.QueryPage(pageIndex, pageSize, filter, currUser: GetCurrUser());
 
         /// <summary>
         /// 分页后
