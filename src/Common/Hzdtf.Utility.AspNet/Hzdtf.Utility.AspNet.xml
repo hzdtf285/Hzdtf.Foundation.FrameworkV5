@@ -656,7 +656,7 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.RegisterAssemblyExtensions.RegisterAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+        <member name="M:Microsoft.Extensions.DependencyInjection.RegisterAssemblyExtensions.RegisterAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,Microsoft.Extensions.DependencyInjection.ServiceLifetime,System.Func{System.Type,System.Boolean})">
             <summary>
             用DI批量注入接口程序集中对应的实现类。
             </summary>
@@ -664,6 +664,7 @@
             <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
             <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）</param>
             <param name="lifecycle">生命周期，默认为瞬时</param>
+            <param name="interfacTypeCallback">接口类型回调，key：接口类型；value：是否忽略</param>
             <returns>服务收藏</returns>
         </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.UnityServicesBuilderExtensions">

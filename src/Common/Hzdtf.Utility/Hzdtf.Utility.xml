@@ -3978,6 +3978,32 @@
             <param name="methodName">方法名</param>
             <returns>方法</returns>
         </member>
+        <member name="T:Hzdtf.Utility.Model.JqGridTreeInfo`1">
+            <summary>
+            JqG网格树信息
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.Level">
+            <summary>
+            层级，从0开始
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.IsLeaf">
+            <summary>
+            是否叶子节点
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.JqGridTreeInfo`1.Epanded">
+            <summary>
+            是否展开
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Model.KeyValueInfo`2">
             <summary>
             键值信息
@@ -7315,20 +7341,6 @@
             <param name="isFilterSpace">是否过滤空格</param>
             <returns>过虑后的字符串</returns>
         </member>
-        <member name="M:Hzdtf.Utility.Utils.StringUtil.IsDefaultOrEmpty(System.Char)">
-            <summary>
-            判断字符是否默认值或空值
-            </summary>
-            <param name="chr">字符</param>
-            <returns>字符是否默认值或空值</returns>
-        </member>
-        <member name="M:Hzdtf.Utility.Utils.StringUtil.NullOutEmpty(System.String)">
-            <summary>
-            如果字符串为null则输出空字符串
-            </summary>
-            <param name="str">字符串</param>
-            <returns>字符串</returns>
-        </member>
         <member name="T:Hzdtf.Utility.Utils.ValidateUtil">
             <summary>
             验证辅助类
@@ -7896,6 +7908,11 @@
             <summary>
             日期时间扩展类
             @ 黄振东
+            </summary>
+        </member>
+        <member name="F:System.DateTimeExtensions.MAX_DATE">
+            <summary>
+            最大日期
             </summary>
         </member>
         <member name="M:System.DateTimeExtensions.ToFullDateTime(System.DateTime)">
