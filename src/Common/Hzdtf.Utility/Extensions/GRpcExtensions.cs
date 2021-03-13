@@ -34,14 +34,24 @@ namespace Grpc.Net.Client
                 customerOptions(cusOptions);
             }
 
-            if (cusOptions.IsAddToken && (cusOptions.GetTokenFunc != null || App.GetTokenFunc != null))
+            string token = cusOptions.ComData != null ? cusOptions.ComData.Token : null;
+            if (string.IsNullOrWhiteSpace(token) && cusOptions.IsAddToken && (cusOptions.GetTokenFunc != null || App.GetTokenFunc != null))
             {
-                var token = cusOptions.GetTokenFunc != null ? cusOptions.GetTokenFunc() : App.GetTokenFunc();
+                token = cusOptions.GetTokenFunc != null ? cusOptions.GetTokenFunc() : App.GetTokenFunc();                
+            }
+            if (!string.IsNullOrWhiteSpace(token))
+            {
                 headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
             }
-            if (cusOptions.IsAddEventId && App.GetEventIdFunc != null)
+
+            string eventId = cusOptions.ComData != null ? cusOptions.ComData.EventId : null;
+            if (string.IsNullOrWhiteSpace(token) && cusOptions.IsAddEventId && App.GetEventIdFunc != null)
             {
-                headers.Add(App.EVENT_ID_KEY, App.GetEventIdFunc());
+                eventId = App.GetEventIdFunc();
+            }
+            if (!string.IsNullOrWhiteSpace(eventId))
+            {
+                headers.Add(App.EVENT_ID_KEY, eventId);
             }
 
             if (exAction == null)
@@ -162,5 +172,14 @@ namespace Grpc.Net.Client
             get;
             set;
         } = true;
+
+        /// <summary>
+        /// 通用数据
+        /// </summary>
+        public CommonUseData ComData
+        {
+            get;
+            set;
+        }
     }
 }

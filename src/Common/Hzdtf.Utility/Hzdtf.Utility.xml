@@ -9109,5 +9109,10 @@
             默认为是
             </summary>
         </member>
+        <member name="P:Grpc.Net.Client.GrpcChannelCustomerOptions.ComData">
+            <summary>
+            通用数据
+            </summary>
+        </member>
     </members>
 </doc>
