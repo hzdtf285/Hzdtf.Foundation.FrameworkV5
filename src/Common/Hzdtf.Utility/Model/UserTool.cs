@@ -53,6 +53,28 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 获取当前用户，如果传入的用户不为null，则取传入的用户。否则调GetCurrUserFunc委托
         /// </summary>
+        /// <param name="comUse">通用数据</param>
+        /// <param name="notExistsIsOutTestUser">如果不存在是否输出测试用户</param>
+        /// <returns>当前用户</returns>
+        public static BasicUserInfo<IdT> GetCurrUser(CommonUseData comUse, bool notExistsIsOutTestUser = false)
+        {            
+            return GetCurrUser(comUse.GetCurrUser(), notExistsIsOutTestUser);
+        }
+
+        /// <summary>
+        /// 获取当前用户，如果传入的用户不为null，则取传入的用户。否则调GetCurrUserFunc委托
+        /// </summary>
+        /// <param name="currUser">当前用户</param>
+        /// <param name="notExistsIsOutTestUser">如果不存在是否输出测试用户</param>
+        /// <returns>当前用户</returns>
+        public static BasicUserInfo<IdT> GetCurrUser(object currUser = null, bool notExistsIsOutTestUser = false)
+        {
+            return GetCurrUser(currUser as BasicUserInfo<IdT>, notExistsIsOutTestUser);
+        }
+
+        /// <summary>
+        /// 获取当前用户，如果传入的用户不为null，则取传入的用户。否则调GetCurrUserFunc委托
+        /// </summary>
         /// <typeparam name="UserT">用户类型</typeparam>
         /// <param name="currUser">当前用户</param>
         /// <param name="notExistsIsOutTestUser">如果不存在是否输出测试用户</param>

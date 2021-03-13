@@ -53,11 +53,11 @@ namespace Hzdtf.Example.WebApp.AppStart
 
                 attachmentService.AttachmentOwnerReader = attachmentOwnerLocalMember;
 
-                App.GetEventIdFunc = () =>
-                {
-                    var theOper = container.Resolve<ITheOperation>();
-                    return theOper != null ? theOper.EventId : null;
-                };
+                //App.GetEventIdFunc = () =>
+                //{
+                //    var theOper = container.Resolve<ITheOperation>();
+                //    return theOper != null ? theOper.EventId : null;
+                //};
             });
         }
     }

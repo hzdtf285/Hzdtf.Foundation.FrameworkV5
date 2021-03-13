@@ -19,8 +19,8 @@ namespace Hzdtf.Workflow.Service.Contract
         /// </summary>
         /// <param name="code">编码</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<WorkflowDefineInfo> FindByCode(string code, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<WorkflowDefineInfo> FindByCode(string code, CommonUseData comData = null, string connectionId = null);
     }
 }

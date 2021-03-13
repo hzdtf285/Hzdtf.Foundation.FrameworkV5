@@ -15,14 +15,14 @@
             用户服务
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Workflow.FindHandlerConcreteUser.FindById(System.Int32,System.Int32,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+        <member name="M:Hzdtf.BasicFunction.Workflow.FindHandlerConcreteUser.FindById(System.Int32,System.Int32,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID查找用户信息数组
             </summary>
             <param name="id">ID</param>
             <param name="userId">用户ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="T:Hzdtf.BasicFunction.Workflow.FindHandlerRoleUser">
@@ -41,14 +41,14 @@
             角色用户服务
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Workflow.FindHandlerRoleUser.FindById(System.Int32,System.Int32,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+        <member name="M:Hzdtf.BasicFunction.Workflow.FindHandlerRoleUser.FindById(System.Int32,System.Int32,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID查找用户信息数组
             </summary>
             <param name="id">ID</param>
             <param name="userId">用户ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="T:Hzdtf.BasicFunction.Workflow.UserWorkflowUtil">
@@ -63,23 +63,23 @@
             注册用户删除前判断是否有处理的事件
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Workflow.UserWorkflowUtil.UserService_RemoveByIdsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Int32[],System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+        <member name="M:Hzdtf.BasicFunction.Workflow.UserWorkflowUtil.UserService_RemoveByIdsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Int32[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据用户ID移除前事件
             </summary>
             <param name="arg1">返回信息</param>
             <param name="arg2">用户ID</param>
+            <param name="comData">通用数据</param>
             <param name="arg3">连接ID</param>
-            <param name="arg4">当前用户</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Workflow.UserWorkflowUtil.UserService_RemoveByIding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Int32,System.String,Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+        <member name="M:Hzdtf.BasicFunction.Workflow.UserWorkflowUtil.UserService_RemoveByIding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Int32,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据用户ID移除前事件
             </summary>
             <param name="arg1">返回信息</param>
             <param name="arg2">用户ID</param>
+            <param name="comData">通用数据</param>
             <param name="arg3">连接ID</param>
-            <param name="arg4">当前用户</param>
         </member>
         <member name="T:Hzdtf.BasicFunction.Workflow.WorkflowInitSequenceService">
             <summary>
@@ -92,14 +92,14 @@
             序列服务
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Workflow.WorkflowInitSequenceService.BuilderApplyNo``1(Hzdtf.Workflow.Model.Expand.FlowInitInfo{``0},Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Workflow.Model.Expand.WorkflowBasicInfo},Hzdtf.Utility.Model.BasicUserInfo{System.Int32})">
+        <member name="M:Hzdtf.BasicFunction.Workflow.WorkflowInitSequenceService.BuilderApplyNo``1(Hzdtf.Workflow.Model.Expand.FlowInitInfo{``0},Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Workflow.Model.Expand.WorkflowBasicInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             生成申请单号
             </summary>
             <typeparam name="FormT">表单类型</typeparam>
             <param name="flowInit">流程初始化</param>
             <param name="returnInfo">返回信息</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>申请单号</returns>
         </member>
     </members>

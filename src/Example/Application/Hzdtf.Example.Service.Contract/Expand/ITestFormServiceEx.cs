@@ -18,8 +18,8 @@ namespace Hzdtf.Example.Service.Contract
         /// </summary>
         /// <param name="testForm">测试表单</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> ModifyFlowStatusByWorkflowId(TestFormInfo testForm, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> ModifyFlowStatusByWorkflowId(TestFormInfo testForm, CommonUseData comData = null, string connectionId = null);
     }
 }

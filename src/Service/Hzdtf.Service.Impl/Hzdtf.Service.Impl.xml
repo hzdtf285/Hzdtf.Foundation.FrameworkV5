@@ -59,36 +59,36 @@
             根据ID查找模型前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFinding(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFinding(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID查找模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Finded">
             <summary>
             根据ID查找模型后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFinded(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFinded(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID查找模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Find(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Find(`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID查找模型
             </summary>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Findsing">
@@ -96,36 +96,36 @@
             根据ID查找模型列表前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFindsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFindsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID查找模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Findsed">
             <summary>
             根据ID查找模型列表后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFindsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnFindsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID查找模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Find(`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Find(`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID查找模型列表
             </summary>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Existsing">
@@ -133,36 +133,36 @@
             根据ID判断模型是否存在前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnExistsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnExistsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID判断模型是否存在前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Existsed">
             <summary>
             根据ID判断模型是否存在后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnExistsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnExistsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID判断模型是否存在后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Exists(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Exists(`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID判断模型是否存在
             </summary>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Counting">
@@ -170,33 +170,33 @@
             统计模型数前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnCounting(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnCounting(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行统计模型数前事件
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Counted">
             <summary>
             统计模型数后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnCounted(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnCounted(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行统计模型数后事件
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Count(System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Count(Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             统计模型数
             </summary>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Querying">
@@ -204,33 +204,33 @@
             查询模型列表前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQuerying(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQuerying(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行查询模型列表前事件
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Queryed">
             <summary>
             查询模型列表后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQueryed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQueryed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行查询模型列表后事件
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Query(System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Query(Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             查询模型列表
             </summary>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.QueryPaging">
@@ -238,7 +238,7 @@
             查询模型列表并分页前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQueryPaging(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQueryPaging(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行查询模型列表并分页前事件
             </summary>
@@ -246,15 +246,15 @@
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.QueryPaged">
             <summary>
             查询模型列表并分页后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQueryPaged(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnQueryPaged(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行查询模型列表并分页后事件
             </summary>
@@ -262,18 +262,18 @@
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryPage(System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryPage(System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             查询模型列表并分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Adding">
@@ -281,36 +281,36 @@
             添加模型前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAdding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAdding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Added">
             <summary>
             添加模型后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAdded(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAdded(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Add(`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Add(`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             添加模型
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Addsing">
@@ -318,36 +318,36 @@
             添加模型列表前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAddsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAddsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行模型列表前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Addsed">
             <summary>
             添加模型列表后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAddsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnAddsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行模型列表后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Add(System.Collections.Generic.IList{`1},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Add(System.Collections.Generic.IList{`1},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             添加模型列表
             </summary>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Seting">
@@ -355,37 +355,37 @@
             设置模型前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnSeting(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnSeting(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行设置模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Seted">
             <summary>
             设置模型后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnSeted(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnSeted(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行设置模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Set(`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Set(`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             设置模型
             如果ID存在则修改，否则添加
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.ModifyByIding">
@@ -393,36 +393,36 @@
             根据ID修改模型前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnModifyByIding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnModifyByIding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID修改模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.ModifyByIded">
             <summary>
             根据ID修改模型后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnModifyByIded(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnModifyByIded(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID修改模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ModifyById(`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ModifyById(`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID修改模型
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIding">
@@ -430,36 +430,36 @@
             根据ID移除模型前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIding(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID移除模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIded">
             <summary>
             根据ID移除模型后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIded(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIded(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID移除模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveById(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveById(`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID移除模型
             </summary>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIdsing">
@@ -467,36 +467,36 @@
             根据ID数组移除模型前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIdsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIdsing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID数组移除模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIdsed">
             <summary>
             根据ID数组移除模型后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIdsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnRemoveByIdsed(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行根据ID数组移除模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIds(`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIds(`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID数组移除模型
             </summary>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Clearing">
@@ -504,33 +504,33 @@
             清空所有模型前事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnClearing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnClearing(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行清空所有模型前事件
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Cleared">
             <summary>
             清空所有模型后事件
             </summary>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnCleared(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OnCleared(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             执行清空所有模型后事件
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Clear(System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Clear(Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             清空所有模型
             </summary>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息</returns>
         </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ExecReturnFuncAndConnectionId``1(System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,``0},Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,Hzdtf.Utility.Enums.AccessMode)">
@@ -562,108 +562,108 @@
             <param name="connectionId">连接ID</param>
             <param name="accessMode">访问模式</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.SetCreateInfo(`1,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.SetCreateInfo(`1,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             设置创建信息
             </summary>
             <param name="model">模型</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.SetModifyInfo(`1,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.SetModifyInfo(`1,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             设置修改信息
             </summary>
             <param name="model">模型</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeFind(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeFind(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID查找模型前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterFind(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterFind(Hzdtf.Utility.Model.Return.ReturnInfo{`1},`0,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID查找模型后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeFind(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeFind(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID集合查找模型列表前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterFind(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterFind(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},`0[],System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID集合查找模型列表后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeExists(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeExists(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID判断模型是否存在前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterExists(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterExists(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID判断模型是否存在后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeCount(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeCount(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             统计模型数前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterCount(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterCount(Hzdtf.Utility.Model.Return.ReturnInfo{System.Int32},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             统计模型数后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeQuery(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeQuery(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             查询模型列表前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterQuery(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterQuery(Hzdtf.Utility.Model.Return.ReturnInfo{System.Collections.Generic.IList{`1}},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             查询模型列表后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeQueryPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,System.String@,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeQueryPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,System.String@,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             执行查询模型列表并分页前
             </summary>
@@ -672,9 +672,9 @@
             <param name="pageSize">每页记录数</param>
             <param name="connectionId">连接ID</param>
             <param name="filter">筛选</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterQueryPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,System.String@,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterQueryPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,System.String@,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             执行查询模型列表并分页后
             </summary>
@@ -683,135 +683,135 @@
             <param name="pageSize">每页记录数</param>
             <param name="connectionId">连接ID</param>
             <param name="filter">筛选</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             添加模型前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             添加模型后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             添加模型列表前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="models">模型列表</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterAdd(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{`1},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             添加模型列表后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="models">模型列表</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeSet(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeSet(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             设置模型前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterSet(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterSet(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             设置模型后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeModifyById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeModifyById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID修改模型前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterModifyById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterModifyById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`1,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID修改模型后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="model">模型</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeRemoveById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeRemoveById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID移除模型前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterRemoveById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterRemoveById(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0,System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID移除模型后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="id">ID</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeRemoveByIds(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeRemoveByIds(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID集合移除模型前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterRemoveByIds(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterRemoveByIds(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},`0[],System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID集合移除模型后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="ids">ID集合</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeClear(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.BeforeClear(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             清空所有模型前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterClear(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.String@,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AfterClear(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.String@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             清空所有模型后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
+            <param name="comData">通用数据</param>
         </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.IsSupportOptimisticLock">
             <summary>
@@ -819,7 +819,7 @@
             </summary>
             <returns>是否支持乐观锁</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1,Hzdtf.Utility.Model.Return.ReturnInfo{``0},Hzdtf.Utility.Enums.AccessMode,System.String)">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1,Hzdtf.Utility.Model.Return.ReturnInfo{``0},Hzdtf.Utility.Enums.AccessMode,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             乐观锁处理，注意：根据ID和修改时间来判断
             </summary>
@@ -827,9 +827,10 @@
             <param name="model">模型</param>
             <param name="returnInfo">返回信息</param>
             <param name="mode">访问模式，默认为主库</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1[],Hzdtf.Utility.Model.Return.ReturnInfo{``0},Hzdtf.Utility.Enums.AccessMode,System.String)">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1[],Hzdtf.Utility.Model.Return.ReturnInfo{``0},Hzdtf.Utility.Enums.AccessMode,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             乐观锁处理，注意：根据ID和修改时间来判断
             </summary>
@@ -837,9 +838,10 @@
             <param name="models">模型列表</param>
             <param name="returnInfo">返回信息</param>
             <param name="mode">访问模式，默认为主库</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1,`1,Hzdtf.Utility.Model.Return.ReturnInfo{``0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.OptimissticLockHandle``1(`1,`1,Hzdtf.Utility.Model.Return.ReturnInfo{``0},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             乐观锁处理，注意：根据修改时间来判断，如果源模型修改时间大于新模型修改时间，则代表数据已被别人修改过
             </summary>
@@ -847,6 +849,7 @@
             <param name="sourceModel">源模型</param>
             <param name="newModel">新模型</param>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.DbBuilderId">
             <summary>
@@ -854,121 +857,121 @@
             </summary>
             <returns>是否由DB生成ID</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID查找模型
             </summary>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID集合查找模型列表
             </summary>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ExistsAsync(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ExistsAsync(`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID判断模型是否存在
             </summary>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.CountAsync(System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.CountAsync(Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步统计模型数
             </summary>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryAsync(System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryAsync(Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步查询模型列表
             </summary>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryPageAsync(System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryPageAsync(System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步执行查询模型列表并分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AddAsync(`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AddAsync(`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步添加模型
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AddAsync(System.Collections.Generic.IList{`1},System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AddAsync(System.Collections.Generic.IList{`1},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步添加模型列表
             </summary>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.SetAsync(`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.SetAsync(`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步设置模型
             如果ID存在则修改，否则添加
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ModifyByIdAsync(`1,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ModifyByIdAsync(`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID修改模型
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIdAsync(`0,System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIdAsync(`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID移除模型
             </summary>
             <param name="id">ID</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIdsAsync(`0[],System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.RemoveByIdsAsync(`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID集合移除模型
             </summary>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ClearAsync(System.String,Hzdtf.Utility.Model.BasicUserInfo{`0})">
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ClearAsync(Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步清空所有模型
             </summary>
+            <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
-            <param name="currUser">当前用户</param>
             <returns>返回信息任务</returns>
         </member>
     </members>

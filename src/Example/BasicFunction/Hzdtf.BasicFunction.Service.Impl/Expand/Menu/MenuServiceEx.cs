@@ -18,9 +18,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// 查询菜单树列表
         /// </summary>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<MenuTreeInfo>> QueryMenuTrees(string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<MenuTreeInfo>> QueryMenuTrees(CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<MenuTreeInfo>>((reInfo) =>
             {

@@ -37,9 +37,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="dataDictionaryId">数据字典ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryId([DisplayName2("数据字典ID"), Id] int dataDictionaryId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryId([DisplayName2("数据字典ID"), Id] int dataDictionaryId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<DataDictionaryItemInfo>>((reInfo) =>
             {
@@ -52,9 +52,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="dataDictionaryCode">数据字典编码</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryCode([DisplayName2("数据字典编码"), Required] string dataDictionaryCode, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryCode([DisplayName2("数据字典编码"), Required] string dataDictionaryCode, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<DataDictionaryItemInfo>>((reInfo) =>
             {
@@ -72,8 +72,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, DataDictionaryItemInfo model, ref string connectionId, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, DataDictionaryItemInfo model, ref string connectionId, CommonUseData comData = null)
         {
             bool idClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -104,8 +104,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void BeforeModifyById(ReturnInfo<bool> returnInfo, DataDictionaryItemInfo model, ref string connectionId, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void BeforeModifyById(ReturnInfo<bool> returnInfo, DataDictionaryItemInfo model, ref string connectionId, CommonUseData comData = null)
         {
             bool idClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -136,8 +136,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="models">模型列表</param>        
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, IList<DataDictionaryItemInfo> models, ref string connectionId, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, IList<DataDictionaryItemInfo> models, ref string connectionId, CommonUseData comData = null)
         {
             for (var i = 0; i < models.Count; i++)
             {
@@ -156,8 +156,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void AfterFind(ReturnInfo<DataDictionaryItemInfo> returnInfo, int id, ref string connectionId, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void AfterFind(ReturnInfo<DataDictionaryItemInfo> returnInfo, int id, ref string connectionId, CommonUseData comData = null)
         {
             if (returnInfo.Success() && returnInfo.Data != null && !string.IsNullOrWhiteSpace(returnInfo.Data.ExpandTable))
             {
@@ -174,11 +174,11 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected override void BeforeRemoveById(ReturnInfo<bool> returnInfo, int id, ref string connectionId, BasicUserInfo<int> currUser = null)
+        protected override void BeforeRemoveById(ReturnInfo<bool> returnInfo, int id, ref string connectionId, CommonUseData comData = null)
         {
-            ValiCanRemove(returnInfo, Persistence.Select(id, connectionId));
+            ValiCanRemove(returnInfo, Persistence.Select(id, connectionId: connectionId, comData: comData));
         }
 
         /// <summary>
@@ -187,11 +187,11 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected override void BeforeRemoveByIds(ReturnInfo<bool> returnInfo, int[] ids, ref string connectionId, BasicUserInfo<int> currUser = null)
+        protected override void BeforeRemoveByIds(ReturnInfo<bool> returnInfo, int[] ids, ref string connectionId, CommonUseData comData = null)
         {
-            IList<DataDictionaryItemInfo> users = Persistence.Select(ids, connectionId);
+            IList<DataDictionaryItemInfo> users = Persistence.Select(ids, connectionId: connectionId, comData: comData);
             if (users.IsNullOrCount0())
             {
                 return;

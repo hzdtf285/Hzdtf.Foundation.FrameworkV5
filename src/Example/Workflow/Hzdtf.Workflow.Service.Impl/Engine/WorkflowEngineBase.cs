@@ -136,15 +136,14 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// </summary>
         /// <param name="flowIn">流程输入</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> Execute(FlowInT flowIn, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> Execute(FlowInT flowIn, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {
                 WorkflowInfo workflow;
-                WorkflowDefineInfo workflowDefine = ValiFlowIn(reInfo, flowIn, out workflow, connId, currUser);
+                WorkflowDefineInfo workflowDefine = ValiFlowIn(reInfo, flowIn, out workflow, connectionId: connId, comData: comData);
                 if (reInfo.Failure())
                 {
                     return false;
@@ -157,14 +156,14 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 };
                 AppendSetFindFlowCensorshipIn(flowIn, findFlowCensorshipIn);
 
-                ReturnInfo<FlowCensorshipOutInfo> reOut = FindFlowCensorship.NextHandler(findFlowCensorshipIn, connId, currUser);
+                ReturnInfo<FlowCensorshipOutInfo> reOut = FindFlowCensorship.NextHandler(findFlowCensorshipIn, connectionId: connId, comData: comData);
                 if (reOut.Failure())
                 {
                     reInfo.FromBasic(reOut);
                     return false;
                 }
 
-                ReturnInfo<bool> reTrans = ExecTransaction(reInfo, workflowDefine, flowIn, reOut.Data, connId, currUser);
+                ReturnInfo<bool> reTrans = ExecTransaction(reInfo, workflowDefine, flowIn, reOut.Data, connectionId: connId, comData: comData);
                 reInfo.FromBasic(reTrans);
 
                 if (reTrans.Failure())
@@ -188,11 +187,11 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="flowIn">流程输入</param>
         /// <param name="findFlowCensorshipOut">查找流程关卡输出</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Transaction(ConnectionIdIndex = 4)]
+        [Transaction(ConnectionIdIndex = 5)]
         protected virtual ReturnInfo<bool> ExecTransaction(ReturnInfo<bool> returnInfo, WorkflowDefineInfo workflowDefine,
-            FlowInT flowIn, FlowCensorshipOutInfo findFlowCensorshipOut, string connectionId = null, BasicUserInfo<int> currUser = null)
+            FlowInT flowIn, FlowCensorshipOutInfo findFlowCensorshipOut, CommonUseData comData = null, string connectionId = null)
         {          
             IFormEngine formEngine = FormEngineFactory.Create(workflowDefine.Code);
             if (formEngine == null)
@@ -202,7 +201,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 return returnInfo;
             }
 
-            ReturnInfo<bool> basicReturn = formEngine.BeforeExecFlow(findFlowCensorshipOut, flowIn, connectionId, currUser);
+            ReturnInfo<bool> basicReturn = formEngine.BeforeExecFlow(findFlowCensorshipOut, flowIn, connectionId : connectionId, comData: comData);
             if (basicReturn.Failure())
             {
                 returnInfo.FromBasic(basicReturn);
@@ -210,9 +209,9 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 return returnInfo;
             }
 
-            ExecCore(returnInfo, flowIn, findFlowCensorshipOut, connectionId, currUser);
+            ExecCore(returnInfo, flowIn, findFlowCensorshipOut, connectionId : connectionId, comData: comData);
 
-            basicReturn = formEngine.AfterExecFlow(findFlowCensorshipOut, flowIn, returnInfo.Success(), connectionId, currUser);
+            basicReturn = formEngine.AfterExecFlow(findFlowCensorshipOut, flowIn, returnInfo.Success(), connectionId : connectionId, comData: comData);
             if (basicReturn.Failure())
             {
                 returnInfo.FromBasic(basicReturn);
@@ -232,17 +231,17 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="flowIn">流程输入</param>
         /// <param name="workflow">工作流</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>工作流定义</returns>
-        protected abstract WorkflowDefineInfo ValiFlowIn(ReturnInfo<bool> returnInfo, FlowInT flowIn, out WorkflowInfo workflow, string connectionId = null, BasicUserInfo<int> currUser = null);
+        protected abstract WorkflowDefineInfo ValiFlowIn(ReturnInfo<bool> returnInfo, FlowInT flowIn, out WorkflowInfo workflow, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 追加设置查找流程关卡输入信息
         /// </summary>
         /// <param name="flowIn">流程输入</param>
         /// <param name="findFlowCensorshipIn">查找流程关卡输入信息</param>
-        /// <param name="currUser">当前用户</param>
-        protected abstract void AppendSetFindFlowCensorshipIn(FlowInT flowIn, FlowCensorshipInInfo findFlowCensorshipIn, BasicUserInfo<int> currUser = null);
+        /// <param name="comData">通用数据</param>
+        protected abstract void AppendSetFindFlowCensorshipIn(FlowInT flowIn, FlowCensorshipInInfo findFlowCensorshipIn, CommonUseData comData = null);
 
         /// <summary>
         /// 执行核心
@@ -251,8 +250,8 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="flowIn">流程输入</param>
         /// <param name="findFlowCensorshipOut">查找流程关卡输出</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected abstract void ExecCore(ReturnInfo<bool> returnInfo, FlowInT flowIn, FlowCensorshipOutInfo findFlowCensorshipOut, string connectionId = null, BasicUserInfo<int> currUser = null);
+        /// <param name="comData">通用数据</param>
+        protected abstract void ExecCore(ReturnInfo<bool> returnInfo, FlowInT flowIn, FlowCensorshipOutInfo findFlowCensorshipOut, CommonUseData comData = null, string connectionId = null);
 
         #endregion
 

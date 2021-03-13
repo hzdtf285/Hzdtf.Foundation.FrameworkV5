@@ -20,13 +20,13 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="flowCensorshipId">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>任务</returns>
-        public virtual async Task<ReturnInfo<IList<ReturnFlowRouteInfo>>> QueryByFlowCensorshipIdAsync(int flowCensorshipId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual async Task<ReturnInfo<IList<ReturnFlowRouteInfo>>> QueryByFlowCensorshipIdAsync(int flowCensorshipId, CommonUseData comData = null, string connectionId = null)
         {
             return await Task.Run<ReturnInfo<IList<ReturnFlowRouteInfo>>>(() =>
             {
-                return QueryByFlowCensorshipId(flowCensorshipId, connectionId, currUser);
+                return QueryByFlowCensorshipId(flowCensorshipId, connectionId : connectionId, comData: comData);
             });
         }
 
@@ -35,13 +35,13 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="flowCensorshipIds">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>任务</returns>
-        public virtual async Task<ReturnInfo<IList<ReturnFlowRouteInfo>>> QueryByFlowCensorshipIdsAsync(int[] flowCensorshipIds, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual async Task<ReturnInfo<IList<ReturnFlowRouteInfo>>> QueryByFlowCensorshipIdsAsync(int[] flowCensorshipIds, CommonUseData comData = null, string connectionId = null)
         {
             return await Task.Run<ReturnInfo<IList<ReturnFlowRouteInfo>>>(() =>
             {
-                return QueryByFlowCensorshipIds(flowCensorshipIds, connectionId, currUser);
+                return QueryByFlowCensorshipIds(flowCensorshipIds, connectionId : connectionId, comData: comData);
             });
         }
     }

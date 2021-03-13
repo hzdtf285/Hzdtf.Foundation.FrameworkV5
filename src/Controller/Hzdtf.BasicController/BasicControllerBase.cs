@@ -1,8 +1,10 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Service.Contract;
 using Hzdtf.Utility;
+using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -56,15 +58,18 @@ namespace Hzdtf.BasicController
         }
 
         /// <summary>
+        /// 通用数据工厂
+        /// </summary>
+        public ISimpleFactory<HttpContext, CommonUseData> ComUseDataFactory
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 菜单编码
         /// </summary>
         /// <returns>菜单编码</returns>
         protected virtual string MenuCode() => null;
-
-        /// <summary>
-        /// 获取当前用户
-        /// </summary>
-        /// <returns>当前用户</returns>
-        protected virtual BasicUserInfo<IdT> GetCurrUser() => null;
     }
 }

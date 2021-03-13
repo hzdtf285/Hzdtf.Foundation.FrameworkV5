@@ -10,6 +10,7 @@ using System.Text;
 using Hzdtf.Utility.Utils;
 using Hzdtf.BasicFunction.Model.Expand.DataDictionaryItem;
 using Hzdtf.Utility.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace Hzdtf.BasicFunction.Controller
 {
@@ -52,7 +53,7 @@ namespace Hzdtf.BasicFunction.Controller
         /// <returns>数据字典列表</returns>
         [HttpGet("DataDictionarys")]
         [Function(FunCodeDefine.QUERY_CODE)]
-        public virtual IList<DataDictionaryInfo> DataDictionarys() => DataDictionaryService.Query().Data;
+        public virtual IList<DataDictionaryInfo> DataDictionarys() => DataDictionaryService.Query(HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE)).Data;
 
         /// <summary>
         /// 执行分页获取数据
@@ -63,7 +64,8 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet("PageExpandList")]
         [Function(FunCodeDefine.QUERY_CODE)]
         public virtual Page1ReturnInfo<DataDictionaryItemExpandInfo> PageExpandList(int page, int rows)
-        {            
+        {
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
             dicParams.RemoveKey("page");
             dicParams.RemoveKey("rows");
@@ -85,26 +87,28 @@ namespace Hzdtf.BasicFunction.Controller
                 }
             }
 
-            return Page1ReturnInfo<DataDictionaryItemExpandInfo>.From(DataDictionaryItemExpandService.QueryPage(page - 1, rows, filter));
+            return Page1ReturnInfo<DataDictionaryItemExpandInfo>.From(DataDictionaryItemExpandService.QueryPage(page - 1, rows, filter, comData));
         }
 
         /// <summary>
         /// 填充页面数据，包含当前用户所拥有的权限功能列表
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
-        protected override void FillPageData(ReturnInfo<PageInfo<int>> returnInfo)
+        /// <param name="comData">通用数据</param>
+        protected override void FillPageData(ReturnInfo<PageInfo<int>> returnInfo, CommonUseData comData = null)
         {
             var re = UserService.QueryPageData<PageInfo<int>>(MenuCode(), () =>
             {
                 return returnInfo.Data;
-            });
+            }, comData: comData);
             returnInfo.FromBasic(re);
         }
 
         /// <summary>
         /// 创建页面数据
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>页面数据</returns>
-        protected override PageInfo<int> CreatePageData() => new PageInfo<int>();
+        protected override PageInfo<int> CreatePageData(CommonUseData comData = null) => new PageInfo<int>();
     }
 }

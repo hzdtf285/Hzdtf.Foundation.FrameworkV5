@@ -17,8 +17,8 @@ namespace Hzdtf.BasicFunction.Service.Contract.Expand.Attachment
         /// 根据归属类型读取附件归属信息
         /// </summary>
         /// <param name="type">归属类型</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>附件归属信息</returns>
-        AttachmentOwnerInfo ReaderByOwnerType(short type, BasicUserInfo<int> currUser = null);
+        AttachmentOwnerInfo ReaderByOwnerType(short type, CommonUseData comData = null);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Hzdtf.Utility.Attr;
+using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
 using Hzdtf.Workflow.Model.Expand;
 using Hzdtf.Workflow.Service.Contract.Engine;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -64,6 +66,15 @@ namespace Hzdtf.Workflow.Controller
         }
 
         /// <summary>
+        /// 通用数据工厂
+        /// </summary>
+        public ISimpleFactory<HttpContext, CommonUseData> ComDataFactory
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 保存
         /// </summary>
         /// <param name="flowInit">流程初始</param>
@@ -71,9 +82,10 @@ namespace Hzdtf.Workflow.Controller
         [HttpPost("Save")]
         public virtual ReturnInfo<WorkflowBasicInfo> Save(FlowInitInfo<FormT> flowInit)
         {
+            var comData = HttpContext.CreateCommonUseData(ComDataFactory, functionCode: FunCodeDefine.SAVE_CODE);
             return Execute(flowInit, () =>
             {
-                return WorkflowInitService.Save(flowInit);
+                return WorkflowInitService.Save(flowInit, comData);
             });
         }
 
@@ -85,9 +97,10 @@ namespace Hzdtf.Workflow.Controller
         [HttpPost("Apply")]
         public virtual ReturnInfo<WorkflowBasicInfo> Apply(FlowInitInfo<FormT> flowInit)
         {
+            var comData = HttpContext.CreateCommonUseData(ComDataFactory, functionCode: FunCodeDefine.APPLY);
             return Execute(flowInit, () =>
             {
-                return WorkflowInitService.Apply(flowInit);
+                return WorkflowInitService.Apply(flowInit, comData);
             });
         }
 
@@ -97,7 +110,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="workflowId">工作流ID</param>
         /// <returns>返回信息</returns>
         [HttpDelete("RemoveByWorkflowId")]
-        public virtual ReturnInfo<bool> RemoveByWorkflowId(int workflowId) => WorkflowRemove.Execute(workflowId);
+        public virtual ReturnInfo<bool> RemoveByWorkflowId(int workflowId) => WorkflowRemove.Execute(workflowId, HttpContext.CreateCommonUseData(ComDataFactory, functionCode: FunCodeDefine.REMOVE_CODE));
 
         /// <summary>
         /// 根据工作流ID强制移除
@@ -105,7 +118,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="workflowId">工作流ID</param>
         /// <returns>返回信息</returns>
         [HttpDelete("ForceRemoveByWorkflowId")]
-        public virtual ReturnInfo<bool> ForceRemoveByWorkflowId(int workflowId) => WorkflowForceRemove.Execute(workflowId);
+        public virtual ReturnInfo<bool> ForceRemoveByWorkflowId(int workflowId) => WorkflowForceRemove.Execute(workflowId, HttpContext.CreateCommonUseData(ComDataFactory, functionCode: FunCodeDefine.REMOVE_CODE));
 
         /// <summary>
         /// 根据工作流ID撤消
@@ -113,7 +126,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="workflowId">工作流ID</param>
         /// <returns>返回信息</returns>
         [HttpDelete("UndoByWorkflowId")]
-        public virtual ReturnInfo<bool> UndoByWorkflowId(int workflowId) => WorkflowUndo.Execute(workflowId);
+        public virtual ReturnInfo<bool> UndoByWorkflowId(int workflowId) => WorkflowUndo.Execute(workflowId, HttpContext.CreateCommonUseData(ComDataFactory, functionCode: FunCodeDefine.UNDO));
 
         /// <summary>
         /// 根据工作流ID获取表单明细
@@ -123,7 +136,7 @@ namespace Hzdtf.Workflow.Controller
         [HttpGet("GetFormDetail")]
         public virtual ReturnInfo<FormT> GetFormDetail(int workflowId)
         {
-            return FormDataReader.ReaderByWorkflowId(workflowId);
+            return FormDataReader.ReaderByWorkflowId(workflowId, HttpContext.CreateCommonUseData(ComDataFactory, functionCode: FunCodeDefine.QUERY_CODE));
         }
 
         /// <summary>

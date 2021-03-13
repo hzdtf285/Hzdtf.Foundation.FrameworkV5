@@ -22,9 +22,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<RoleInfo>> OwnRolesByUserId([DisplayName2("用户ID"), Id] int userId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<RoleInfo>> OwnRolesByUserId([DisplayName2("用户ID"), Id] int userId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<RoleInfo>>((reInfo) =>
             {
@@ -37,9 +37,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="roleId">角色ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<UserInfo>> OwnUsersByRoleId([DisplayName2("角色ID"), Id] int roleId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<UserInfo>> OwnUsersByRoleId([DisplayName2("角色ID"), Id] int roleId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<UserInfo>>((reInfo) =>
             {
@@ -63,9 +63,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="roleCode">角色编码</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<UserInfo>> OwnUsersByRoleCode([DisplayName2("角色编码"), Required] string roleCode, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<UserInfo>> OwnUsersByRoleCode([DisplayName2("角色编码"), Required] string roleCode, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<UserInfo>>((reInfo) =>
             {

@@ -62,13 +62,13 @@
             </summary>
             <param name="userVali">用户验证</param>
         </member>
-        <member name="M:Hzdtf.AUC.Contract.IdentityAuth.IdentityAuthBase`2.Accredit(System.String,System.String,System.Object)">
+        <member name="M:Hzdtf.AUC.Contract.IdentityAuth.IdentityAuthBase`2.Accredit(System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             授权
             </summary>
             <param name="user">用户</param>
             <param name="password">密码</param>
-            <param name="otherData">其他数据</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="M:Hzdtf.AUC.Contract.IdentityAuth.IdentityAuthBase`2.SaveUserInfo(`1)">
@@ -129,13 +129,13 @@
             <typeparam name="IdT">ID类型</typeparam>
             <typeparam name="UserT">用户类型</typeparam>
         </member>
-        <member name="M:Hzdtf.AUC.Contract.IdentityAuth.IIdentityAuth`2.Accredit(System.String,System.String,System.Object)">
+        <member name="M:Hzdtf.AUC.Contract.IdentityAuth.IIdentityAuth`2.Accredit(System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             授权
             </summary>
             <param name="user">用户</param>
             <param name="password">密码</param>
-            <param name="otherData">其他数据</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="T:Hzdtf.AUC.Contract.IdentityAuth.IIdentityAuthReader`2">
@@ -170,13 +170,13 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Hzdtf.AUC.Contract.IdentityAuth.Token.IIdentityTokenAuth.AccreditToToken(System.String,System.String,System.Object)">
+        <member name="M:Hzdtf.AUC.Contract.IdentityAuth.Token.IIdentityTokenAuth.AccreditToToken(System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             授权并生成令牌
             </summary>
             <param name="user">用户</param>
             <param name="password">密码</param>
-            <param name="otherData">其他数据</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="T:Hzdtf.AUC.Contract.User.AuthUserDataBase`2">
@@ -262,13 +262,13 @@
             <typeparam name="IdT">ID类型</typeparam>
             <typeparam name="UserT">用户类型</typeparam>
         </member>
-        <member name="M:Hzdtf.AUC.Contract.User.IUserVali`2.Vali(System.String,System.String,System.Object)">
+        <member name="M:Hzdtf.AUC.Contract.User.IUserVali`2.Vali(System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             验证
             </summary>
             <param name="user">用户</param>
             <param name="password">密码</param>
-            <param name="otherData">其他数据</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="T:Hzdtf.AUC.Contract.User.UserIdentity">

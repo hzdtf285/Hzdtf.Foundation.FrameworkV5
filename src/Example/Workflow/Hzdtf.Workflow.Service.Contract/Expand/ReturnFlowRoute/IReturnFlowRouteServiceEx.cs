@@ -18,17 +18,17 @@ namespace Hzdtf.Workflow.Service.Contract
         /// </summary>
         /// <param name="flowCensorshipId">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<ReturnFlowRouteInfo>> QueryByFlowCensorshipId(int flowCensorshipId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<ReturnFlowRouteInfo>> QueryByFlowCensorshipId(int flowCensorshipId, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据流程关卡ID数组查询退件流程路线列表
         /// </summary>
         /// <param name="flowCensorshipIds">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<ReturnFlowRouteInfo>> QueryByFlowCensorshipIds(int[] flowCensorshipIds, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<ReturnFlowRouteInfo>> QueryByFlowCensorshipIds(int[] flowCensorshipIds, CommonUseData comData = null, string connectionId = null);
     }
 }

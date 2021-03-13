@@ -21,14 +21,14 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> ModifyToReadedById([DisplayName2("ID"), Id] int id, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> ModifyToReadedById([DisplayName2("ID"), Id] int id, CommonUseData comData = null, string connectionId = null)
         {
+            var currUser = UserTool<int>.GetCurrUser(comData);
             return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {
-                WorkflowHandleInfo wh = Persistence.Select(id, connId);
+                WorkflowHandleInfo wh = Persistence.Select(id, comData, connId);
                 if (wh == null)
                 {
                     reInfo.SetFailureMsg("找不到该工作流处理记录");
@@ -58,9 +58,9 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="handlerId">处理人ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> ExistsAuditAndUnhandleByHandleId([DisplayName2("处理人ID"), Id] int handlerId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> ExistsAuditAndUnhandleByHandleId([DisplayName2("处理人ID"), Id] int handlerId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<bool>((reInfo) =>
             {
@@ -73,9 +73,9 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="handlerIds">处理人ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool[]> ExistsAuditAndUnhandleByHandleIds([DisplayName2("处理人ID集合"), ArrayNotEmpty] int[] handlerIds, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool[]> ExistsAuditAndUnhandleByHandleIds([DisplayName2("处理人ID集合"), ArrayNotEmpty] int[] handlerIds, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<bool[]>((reInfo, connId) =>
             {
@@ -96,9 +96,9 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="flowCensorshipId">流程关卡ID</param>
         /// <param name="handleId">处理人ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<WorkflowHandleInfo> FindByWorkflowIdAndFlowCensorshipIdAndHandlerId([DisplayName2("工作流ID"), Id] int workflowId, [DisplayName2("流程关卡ID"), Id] int flowCensorshipId, [DisplayName2("处理人ID"), Id] int handleId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowHandleInfo> FindByWorkflowIdAndFlowCensorshipIdAndHandlerId([DisplayName2("工作流ID"), Id] int workflowId, [DisplayName2("流程关卡ID"), Id] int flowCensorshipId, [DisplayName2("处理人ID"), Id] int handleId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<WorkflowHandleInfo>((reInfo, connId) =>
             {

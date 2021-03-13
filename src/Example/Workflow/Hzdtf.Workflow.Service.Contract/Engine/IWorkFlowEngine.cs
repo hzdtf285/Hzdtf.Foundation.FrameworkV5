@@ -19,8 +19,8 @@ namespace Hzdtf.Workflow.Service.Contract.Engine
         /// </summary>
         /// <param name="flowIn">流程输入</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> Execute(FlowInT flowIn, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> Execute(FlowInT flowIn, CommonUseData comData = null, string connectionId = null);
     }
 }

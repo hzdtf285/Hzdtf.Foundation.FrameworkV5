@@ -21,9 +21,9 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
         /// <param name="workflow">工作流</param>
         /// <param name="removeType">移除类型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> BeforeExecFlow(WorkflowInfo workflow, RemoveType removeType, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> BeforeExecFlow(WorkflowInfo workflow, RemoveType removeType, CommonUseData comData = null, string connectionId = null)
         {
             return new ReturnInfo<bool>();
         }
@@ -35,9 +35,9 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
         /// <param name="removeType">移除类型</param>
         /// <param name="isSuccess">是否成功</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> AfterExecFlow(WorkflowInfo workflow, RemoveType removeType, bool isSuccess, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> AfterExecFlow(WorkflowInfo workflow, RemoveType removeType, bool isSuccess, CommonUseData comData = null, string connectionId = null)
         {
             return new ReturnInfo<bool>();
         }

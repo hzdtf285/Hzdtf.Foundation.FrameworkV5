@@ -42,10 +42,10 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="attachments">附件信息列表</param>
         /// <param name="streams">文件流列表</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
         [ProcTrackLog(IgnoreParamValues = true)]
-        public virtual ReturnInfo<bool> Upload(IList<AttachmentInfo> attachments, IList<Stream> streams, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> Upload(IList<AttachmentInfo> attachments, IList<Stream> streams, CommonUseData comData = null)
         {
             ReturnInfo<bool> re = new ReturnInfo<bool>();
             AttachmentStreamInfo[] attachmentStreams = new AttachmentStreamInfo[attachments.Count];
@@ -64,7 +64,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     Stream = streams[i]
                 };
             }
-            ReturnInfo<IList<string>> returnInfo = AttachmentUploadStore.Upload(currUser, attachmentStreams);
+            ReturnInfo<IList<string>> returnInfo = AttachmentUploadStore.Upload(comData, attachmentStreams);
             if (returnInfo.Failure())
             {
                 ReturnInfo<bool> result = new ReturnInfo<bool>();
@@ -79,7 +79,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 attachments[i].ExpandName = attachments[i].FileName.FileExpandName();
             }
 
-            return Add(attachments, currUser: currUser);
+            return Add(attachments, comData: comData);
         }
 
         /// <summary>
@@ -87,17 +87,17 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="attachment">附件信息</param>
         /// <param name="stream">文件流列表</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
         [ProcTrackLog(IgnoreParamValues = true)]
-        public virtual ReturnInfo<bool> Upload([DisplayName2("附件"), Model] AttachmentInfo attachment, Stream stream, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> Upload([DisplayName2("附件"), Model] AttachmentInfo attachment, Stream stream, CommonUseData comData = null)
         {
             AttachmentStreamInfo attachmentStream = new AttachmentStreamInfo()
             {
                 FileName = attachment.FileName,
                 Stream = stream
             };
-            ReturnInfo<IList<string>> returnInfo = AttachmentUploadStore.Upload(currUser, attachmentStream);
+            ReturnInfo<IList<string>> returnInfo = AttachmentUploadStore.Upload(comData, attachmentStream);
             if (returnInfo.Failure())
             {
                 ReturnInfo<bool> result = new ReturnInfo<bool>();
@@ -110,7 +110,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
             attachment.ExpandName = attachment.FileName.FileExpandName();
             attachment.FileSize = Convert.ToSingle(stream.Length / 1024.00);
 
-            return Add(attachment, currUser: currUser);
+            return Add(attachment, comData: comData);
         }
 
         /// <summary>
@@ -118,14 +118,14 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public override ReturnInfo<bool> RemoveById([Id] int id, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public override ReturnInfo<bool> RemoveById([Id] int id, CommonUseData comData = null, string connectionId = null)
         {
             ReturnInfo<bool> re = new ReturnInfo<bool>();
 
             // 先取出当前ID的文件地址
-            ReturnInfo<AttachmentInfo> returnInfo = Find(id, connectionId, currUser);
+            ReturnInfo<AttachmentInfo> returnInfo = Find(id, connectionId: connectionId, comData: comData);
             if (returnInfo.Failure() || returnInfo.Data == null)
             {
                 re.FromBasic(returnInfo);
@@ -133,7 +133,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 return re;
             }
 
-            re = base.RemoveById(id, connectionId, currUser);
+            re = base.RemoveById(id, connectionId: connectionId, comData: comData);
             if (re.Failure())
             {
                 return re;
@@ -141,7 +141,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
 
             if (!string.IsNullOrWhiteSpace(returnInfo.Data.FileAddress))
             {
-                AttachmentUploadStore.Remove(currUser, returnInfo.Data.FileAddress);
+                AttachmentUploadStore.Remove(comData, returnInfo.Data.FileAddress);
             }
 
             return re;
@@ -152,14 +152,14 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public override ReturnInfo<bool> RemoveByIds([DisplayName2("ID集合"), ArrayNotEmpty] int[] ids, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public override ReturnInfo<bool> RemoveByIds([DisplayName2("ID集合"), ArrayNotEmpty] int[] ids, CommonUseData comData = null, string connectionId = null)
         {
             ReturnInfo<bool> re = new ReturnInfo<bool>();
 
             // 先取出当前ID集合的文件地址
-            ReturnInfo<IList<AttachmentInfo>> returnInfo = Find(ids, connectionId, currUser);
+            ReturnInfo<IList<AttachmentInfo>> returnInfo = Find(ids, connectionId: connectionId, comData: comData);
             if (returnInfo.Failure() || returnInfo.Data.IsNullOrCount0())
             {
                 re.FromBasic(returnInfo);
@@ -173,13 +173,13 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 fileAddress[i] = returnInfo.Data[i].FileAddress;
             }
 
-            re = base.RemoveByIds(ids, connectionId, currUser);
+            re = base.RemoveByIds(ids, connectionId: connectionId, comData: comData);
             if (re.Failure())
             {
                 return re;
             }
 
-            AttachmentUploadStore.Remove(currUser, fileAddress);
+            AttachmentUploadStore.Remove(comData, fileAddress);
 
             return re;
         }
@@ -191,9 +191,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="ownerId">归属ID</param>
         /// <param name="blurTitle">模糊标题</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<AttachmentInfo>> QueryByOwner(short ownerType, int ownerId, string blurTitle = null, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<AttachmentInfo>> QueryByOwner(short ownerType, int ownerId, string blurTitle = null, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<AttachmentInfo>>((reInfo) =>
             {
@@ -208,9 +208,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="ownerId">归属ID</param>
         /// <param name="blurTitle">模糊标题</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<int> CountByOwner(short ownerType, int ownerId, string blurTitle = null, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<int> CountByOwner(short ownerType, int ownerId, string blurTitle = null, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<int>((reInfo) =>
             {
@@ -225,9 +225,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="ownerId">归属ID</param>
         /// <param name="blurTitle">模糊标题</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> ExistsByOwner(short ownerType, int ownerId, string blurTitle = null, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> ExistsByOwner(short ownerType, int ownerId, string blurTitle = null, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<bool>((reInfo) =>
             {
@@ -241,12 +241,12 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="ownerType">归属类型</param>
         /// <param name="ownerId">归属ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> RemoveByOwner(short ownerType, int ownerId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> RemoveByOwner(short ownerType, int ownerId, CommonUseData comData = null, string connectionId = null)
         {
             ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-            ReturnInfo<IList<AttachmentInfo>> ownerReturnInfo = QueryByOwner(ownerType, ownerId, connectionId: connectionId, currUser: currUser);
+            ReturnInfo<IList<AttachmentInfo>> ownerReturnInfo = QueryByOwner(ownerType, ownerId, connectionId: connectionId, comData: comData);
             if (returnInfo.Failure() || ownerReturnInfo.Data.IsNullOrCount0())
             {
                 returnInfo.FromBasic(ownerReturnInfo);
@@ -263,7 +263,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 fileAddress[i] = ownerReturnInfo.Data[i].FileAddress;
             }
 
-            AttachmentUploadStore.Remove(currUser, fileAddress);
+            AttachmentUploadStore.Remove(comData, fileAddress);
 
             return returnInfo;
         }
@@ -273,10 +273,10 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="attachment">附件</param>
         /// <param name="returnInfo">返回信息</param>
-        /// <param name="currUser">当前用户</param>
-        private ReturnInfo<bool> ValiFile(AttachmentInfo attachment, ReturnInfo<bool> returnInfo, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        private ReturnInfo<bool> ValiFile(AttachmentInfo attachment, ReturnInfo<bool> returnInfo, CommonUseData comData = null)
         {
-            AttachmentOwnerInfo attachmentOwner = AttachmentOwnerReader.ReaderByOwnerType(attachment.OwnerType, currUser);
+            AttachmentOwnerInfo attachmentOwner = AttachmentOwnerReader.ReaderByOwnerType(attachment.OwnerType, comData);
             if (attachmentOwner == null)
             {
                 return returnInfo;

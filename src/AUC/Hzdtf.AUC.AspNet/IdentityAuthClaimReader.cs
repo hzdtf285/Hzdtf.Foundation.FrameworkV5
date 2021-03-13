@@ -41,12 +41,12 @@ namespace Hzdtf.AUC.AspNet
         /// <summary>
         /// 构造方法
         /// </summary>
-        /// <param name="httpContext">Http上下文访问</param>
         /// <param name="authUserData">授权用户数据</param>
-        public IdentityAuthClaimReader(IHttpContextAccessor httpContext, IAuthUserData<IdT, UserT> authUserData)
+        /// <param name="httpContext">Http上下文访问</param>
+        public IdentityAuthClaimReader(IAuthUserData<IdT, UserT> authUserData, IHttpContextAccessor httpContext)
         {
-            this.httpContext = httpContext;
             this.authUserData = authUserData;
+            this.httpContext = httpContext;
         }
 
         /// <summary>

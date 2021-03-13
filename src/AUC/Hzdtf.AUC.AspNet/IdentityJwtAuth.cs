@@ -54,6 +54,17 @@ namespace Hzdtf.AUC.AspNet
         /// </summary>
         /// <param name="userVali">用户验证</param>
         /// <param name="authUserData">授权用户数据</param>
+        public IdentityJwtAuth(IUserVali<IdT, UserT> userVali, IAuthUserData<IdT, UserT> authUserData)
+        {
+            this.userVali = userVali;
+            this.authUserData = authUserData;
+        }
+
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        /// <param name="userVali">用户验证</param>
+        /// <param name="authUserData">授权用户数据</param>
         /// <param name="httpContext">Http上下文访问</param>
         public IdentityJwtAuth(IUserVali<IdT, UserT> userVali, IAuthUserData<IdT, UserT> authUserData, IHttpContextAccessor httpContext)
         {
@@ -71,9 +82,9 @@ namespace Hzdtf.AUC.AspNet
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="password">密码</param>
-        /// <param name="otherData">其他数据</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public ReturnInfo<string> AccreditToToken(string user, string password, object otherData = null)
+        public ReturnInfo<string> AccreditToToken(string user, string password, CommonUseData comData = null)
         {
             if (userVali == null)
             {
@@ -81,7 +92,7 @@ namespace Hzdtf.AUC.AspNet
             }
 
             var re = new ReturnInfo<string>();
-            ReturnInfo<UserT> returnInfo = userVali.Vali(user, password, otherData);
+            ReturnInfo<UserT> returnInfo = userVali.Vali(user, password, comData);
             re.FromBasic(returnInfo);
             if (re.Failure())
             {

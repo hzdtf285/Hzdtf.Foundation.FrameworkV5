@@ -248,6 +248,11 @@
             获取事件ID回调
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.App.TheOperation">
+            <summary>
+            本次操作
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Attr.AuthAttribute">
             <summary>
             授权特性
@@ -3622,6 +3627,115 @@
             @ 黄振东
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.Model.CommonUseData">
+            <summary>
+            通用数据
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.Key">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.Controller">
+            <summary>
+            控制器
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.Action">
+            <summary>
+            动作
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.Path">
+            <summary>
+            路径，小写
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.IsGRpc">
+            <summary>
+            是否GRpc，默认为否
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.FunctionCode">
+            <summary>
+            功能编码
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.CurrUser">
+            <summary>
+            当前用户
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.EventId">
+            <summary>
+            事件ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.Extend">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.Tag">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.Model.CommonUseDataExtensions">
+            <summary>
+            通用数据扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.CommonUseDataExtensions.GetCurrUser(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取当前用户
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>当前用户</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.CommonUseDataExtensions.GetToken(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取Token，如果里面的为空，则会执行App.GetTokenFunc() 
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>Token</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.CommonUseDataExtensions.GetEventId(Hzdtf.Utility.Model.CommonUseData,Hzdtf.Utility.TheOperation.ITheOperation)">
+            <summary>
+            获取事件ID，如果里面的为空，则会执行theOperation.EventId,如果传入的theOperation为null，则会执行 App.TheOperation.EventId
+            </summary>
+            <param name="comData">通用数据</param>
+            <param name="theOperation">本次操作</param>
+            <returns>事件ID</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.CommonUseDataExtensions.GetExtendValue(Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            获取扩展字典值
+            </summary>
+            <param name="comData">通用数据</param>
+            <param name="key">键</param>
+            <returns>扩展字典值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.CommonUseDataExtensions.GetTag(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取标签
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>扩展字典值</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Model.DateRangePageInfo">
             <summary>
             日期范围页信息，默认为1个月内
@@ -4738,6 +4852,22 @@
             </summary>
         </member>
         <member name="M:Hzdtf.Utility.Model.UserTool`1.GetCurrUser(Hzdtf.Utility.Model.BasicUserInfo{`0},System.Boolean)">
+            <summary>
+            获取当前用户，如果传入的用户不为null，则取传入的用户。否则调GetCurrUserFunc委托
+            </summary>
+            <param name="currUser">当前用户</param>
+            <param name="notExistsIsOutTestUser">如果不存在是否输出测试用户</param>
+            <returns>当前用户</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.UserTool`1.GetCurrUser(Hzdtf.Utility.Model.CommonUseData,System.Boolean)">
+            <summary>
+            获取当前用户，如果传入的用户不为null，则取传入的用户。否则调GetCurrUserFunc委托
+            </summary>
+            <param name="comUse">通用数据</param>
+            <param name="notExistsIsOutTestUser">如果不存在是否输出测试用户</param>
+            <returns>当前用户</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.UserTool`1.GetCurrUser(System.Object,System.Boolean)">
             <summary>
             获取当前用户，如果传入的用户不为null，则取传入的用户。否则调GetCurrUserFunc委托
             </summary>

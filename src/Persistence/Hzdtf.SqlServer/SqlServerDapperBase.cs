@@ -14,7 +14,8 @@ namespace Hzdtf.SqlServer
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public abstract partial class SqlServerDapperBase<IdT, ModelT> : CommonUseSqlDapperBase<IdT, ModelT> where ModelT : SimpleInfo<IdT>
+    public abstract partial class SqlServerDapperBase<IdT, ModelT> : CommonUseSqlDapperBase<IdT, ModelT>
+        where ModelT : SimpleInfo<IdT>
     {
         #region 属性与字段
 

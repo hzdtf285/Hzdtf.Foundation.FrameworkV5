@@ -11,6 +11,7 @@ using Hzdtf.Utility.Model.Page;
 using System.Threading.Tasks;
 using Hzdtf.BasicFunction.Service.Contract;
 using Hzdtf.Utility;
+using Microsoft.AspNetCore.Http;
 
 namespace Hzdtf.BasicFunction.Controller
 {
@@ -37,7 +38,8 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet("{id}")]
         public override ReturnInfo<AttachmentInfo> Get(int id)
         {
-            ReturnInfo<AttachmentInfo> returnInfo = Service.Find(id);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            ReturnInfo<AttachmentInfo> returnInfo = Service.Find(id, comData);
             if (returnInfo.Failure())
             {
                 return returnInfo;
@@ -58,8 +60,9 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet]
         public override object Page()
         {
-            ReturnInfo<PagingInfo<AttachmentInfo>> returnInfo = DoPage();
-            ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data.Rows);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            ReturnInfo<PagingInfo<AttachmentInfo>> returnInfo = DoPage(comData);
+            ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data.Rows, comData);
             if (reInfo.Failure())
             {
                 returnInfo.FromBasic(reInfo);
@@ -75,11 +78,12 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet("List")]
         public virtual ReturnInfo<IList<AttachmentInfo>> List()
         {
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
-            ReturnInfo<IList<AttachmentInfo>> returnInfo = Service.QueryByOwner(Convert.ToInt16(dicParams.GetValue("ownerType")), Convert.ToInt32(dicParams.GetValue("ownerId")), dicParams.GetValue("blurTitle"));
+            ReturnInfo<IList<AttachmentInfo>> returnInfo = Service.QueryByOwner(Convert.ToInt16(dicParams.GetValue("ownerType")), Convert.ToInt32(dicParams.GetValue("ownerId")), dicParams.GetValue("blurTitle"), comData);
             if (returnInfo.Success())
             {
-                ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data);
+                ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data, comData);
                 if (reInfo.Failure())
                 {
                     returnInfo.FromBasic(reInfo);
@@ -97,21 +101,22 @@ namespace Hzdtf.BasicFunction.Controller
         /// <returns>返回信息</returns>
         [HttpDelete("DeleteByOwner/{ownerType}/{ownerId}")]
         [Function(FunCodeDefine.REMOVE_CODE)]
-        public virtual ReturnInfo<bool> DeleteByOwner(short ownerType, int ownerId) => Service.RemoveByOwner(ownerType, ownerId);
+        public virtual ReturnInfo<bool> DeleteByOwner(short ownerType, int ownerId) => Service.RemoveByOwner(ownerType, ownerId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.REMOVE_CODE));
 
         /// <summary>
         /// 过滤下载权限的文件地址
         /// </summary>
         /// <param name="attachments">附件列表</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected ReturnInfo<bool> FilterDownLoadPermissionFileAddress(IList<AttachmentInfo> attachments)
+        protected ReturnInfo<bool> FilterDownLoadPermissionFileAddress(IList<AttachmentInfo> attachments, CommonUseData comData = null)
         {
             if (attachments.IsNullOrCount0())
             {
                 return new ReturnInfo<bool>();
             }
 
-            ReturnInfo<bool> returnInfo = UserService.IsCurrUserPermission(MenuCode(), FunCodeDefine.DOWNLOAD_CODE);
+            ReturnInfo<bool> returnInfo = UserService.IsCurrUserPermission(MenuCode(), FunCodeDefine.DOWNLOAD_CODE, comData);
             if (returnInfo.Code == CommonCodeDefine.NOT_PERMISSION)
             {
                 foreach (var a in attachments)
@@ -128,15 +133,16 @@ namespace Hzdtf.BasicFunction.Controller
         /// 过滤下载权限的文件地址
         /// </summary>
         /// <param name="attachment">附件</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected ReturnInfo<bool> FilterDownLoadPermissionFileAddress(AttachmentInfo attachment)
+        protected ReturnInfo<bool> FilterDownLoadPermissionFileAddress(AttachmentInfo attachment, CommonUseData comData = null)
         {
             if (attachment == null)
             {
                 return new ReturnInfo<bool>();
             }
 
-            ReturnInfo<bool> returnInfo = UserService.IsCurrUserPermission(MenuCode(), FunCodeDefine.DOWNLOAD_CODE);
+            ReturnInfo<bool> returnInfo = UserService.IsCurrUserPermission(MenuCode(), FunCodeDefine.DOWNLOAD_CODE, comData);
             if (returnInfo.Code == CommonCodeDefine.NOT_PERMISSION)
             {
                 attachment.FileAddress = null;
@@ -149,20 +155,22 @@ namespace Hzdtf.BasicFunction.Controller
         /// <summary>
         /// 填充页面数据，包含当前用户所拥有的权限功能列表
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <param name="returnInfo">返回信息</param>
-        protected override void FillPageData(ReturnInfo<PageInfo<int>> returnInfo)
+        protected override void FillPageData(ReturnInfo<PageInfo<int>> returnInfo, CommonUseData comData = null)
         {
             var re = UserService.QueryPageData<PageInfo<int>>(MenuCode(), () =>
             {
                 return returnInfo.Data;
-            });
+            }, comData: comData);
             returnInfo.FromBasic(re);
         }
 
         /// <summary>
         /// 创建页面数据
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>页面数据</returns>
-        protected override PageInfo<int> CreatePageData() => new PageInfo<int>();
+        protected override PageInfo<int> CreatePageData(CommonUseData comData = null) => new PageInfo<int>();
     }
 }

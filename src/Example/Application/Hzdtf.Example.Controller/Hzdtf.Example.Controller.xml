@@ -19,16 +19,18 @@
             用户服务
             </summary>
         </member>
-        <member name="M:Hzdtf.Example.Controller.TestFormController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}})">
+        <member name="M:Hzdtf.Example.Controller.TestFormController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Example.Controller.TestFormController.CreatePageData">
+        <member name="M:Hzdtf.Example.Controller.TestFormController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="M:Hzdtf.Example.Controller.TestFormController.MenuCode">

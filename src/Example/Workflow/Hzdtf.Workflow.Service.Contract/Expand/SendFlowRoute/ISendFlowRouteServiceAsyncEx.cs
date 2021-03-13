@@ -19,17 +19,17 @@ namespace Hzdtf.Workflow.Service.Contract
         /// </summary>
         /// <param name="flowCensorshipId">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>任务</returns>
-        Task<ReturnInfo<IList<SendFlowRouteInfo>>> QueryByFlowCensorshipIdAsync(int flowCensorshipId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        Task<ReturnInfo<IList<SendFlowRouteInfo>>> QueryByFlowCensorshipIdAsync(int flowCensorshipId, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 异步根据流程关卡ID数组查询送件流程路线列表
         /// </summary>
         /// <param name="flowCensorshipIds">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>任务</returns>
-        Task<ReturnInfo<IList<SendFlowRouteInfo>>> QueryByFlowCensorshipIdsAsync(int[] flowCensorshipIds, string connectionId = null, BasicUserInfo<int> currUser = null);
+        Task<ReturnInfo<IList<SendFlowRouteInfo>>> QueryByFlowCensorshipIdsAsync(int[] flowCensorshipIds, CommonUseData comData = null, string connectionId = null);
     }
 }

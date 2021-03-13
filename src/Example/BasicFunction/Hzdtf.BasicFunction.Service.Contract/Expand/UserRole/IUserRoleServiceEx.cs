@@ -18,26 +18,26 @@ namespace Hzdtf.BasicFunction.Service.Contract
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<RoleInfo>> OwnRolesByUserId(int userId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<RoleInfo>> OwnRolesByUserId(int userId, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据角色ID查询拥有的用户列表
         /// </summary>
         /// <param name="roleId">角色ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<UserInfo>> OwnUsersByRoleId(int roleId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<UserInfo>> OwnUsersByRoleId(int roleId, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据角色编码查询拥有的用户列表
         /// </summary>
         /// <param name="roleCode">角色编码</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<UserInfo>> OwnUsersByRoleCode(string roleCode, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<UserInfo>> OwnUsersByRoleCode(string roleCode, CommonUseData comData = null, string connectionId = null);
     }
 }

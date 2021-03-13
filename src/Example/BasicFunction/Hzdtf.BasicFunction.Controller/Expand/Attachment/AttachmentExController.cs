@@ -3,8 +3,11 @@ using Hzdtf.BasicFunction.Model.Expand.Attachment;
 using Hzdtf.BasicFunction.Service.Contract;
 using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.AutoMapperExtensions;
+using Hzdtf.Utility.Factory;
+using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -32,6 +35,15 @@ namespace Hzdtf.BasicFunction.Controller.Expand.Attachment
         }
 
         /// <summary>
+        /// 通用数据工厂
+        /// </summary>
+        public ISimpleFactory<HttpContext, CommonUseData> ComUseDataFactory
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 上传附件
         /// </summary>
         /// <param name="simpleAttachment">简单附件</param>
@@ -47,8 +59,9 @@ namespace Hzdtf.BasicFunction.Controller.Expand.Attachment
                 return returnInfo;
             }
 
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: "Attachment", functionCode: FunCodeDefine.UPLOAD_CODE);
             var attachment = AutoMapperUtil.Mapper.Map<SimpleAttachmentInfo, AttachmentInfo>(simpleAttachment);
-            BeforeUpload(returnInfo, attachment);
+            BeforeUpload(returnInfo, attachment, comData);
             if (returnInfo.Failure())
             {
                 return returnInfo;
@@ -63,13 +76,13 @@ namespace Hzdtf.BasicFunction.Controller.Expand.Attachment
                 streams.Add(file.OpenReadStream());
             }
 
-            returnInfo = AttachmentService.Upload(attachments, streams);
+            returnInfo = AttachmentService.Upload(attachments, streams, comData);
             if (returnInfo.Failure())
             {
                 return returnInfo;
             }
 
-            AfterUpload(returnInfo, attachments);           
+            AfterUpload(returnInfo, attachments, comData);           
 
             return returnInfo;
         }
@@ -79,13 +92,15 @@ namespace Hzdtf.BasicFunction.Controller.Expand.Attachment
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="attachment">附件</param>
-        protected virtual void BeforeUpload(ReturnInfo<bool> returnInfo, AttachmentInfo attachment) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeUpload(ReturnInfo<bool> returnInfo, AttachmentInfo attachment, CommonUseData comData = null) { }
 
         /// <summary>
         /// 上传附件后
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="attachments">附件列表</param>
-        protected virtual void AfterUpload(ReturnInfo<bool> returnInfo, IList<AttachmentInfo> attachments) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterUpload(ReturnInfo<bool> returnInfo, IList<AttachmentInfo> attachments, CommonUseData comData = null) { }
     }
 }

@@ -20,9 +20,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// 查询角色列表并去掉系统隐藏
         /// </summary>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<RoleInfo>> QueryAndNotSystemHide(string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<RoleInfo>> QueryAndNotSystemHide(CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<RoleInfo>>((reInfo) =>
             {
@@ -35,9 +35,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="filter">筛选</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<RoleInfo>> QueryByFilter(KeywordFilterInfo filter, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<RoleInfo>> QueryByFilter(KeywordFilterInfo filter, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFunc<IList<RoleInfo>>((reInfo) =>
             {
@@ -55,8 +55,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, RoleInfo model, ref string connectionId, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, RoleInfo model, ref string connectionId, CommonUseData comData = null)
         {
             bool idClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -87,8 +87,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void BeforeModifyById(ReturnInfo<bool> returnInfo, RoleInfo model, ref string connectionId, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void BeforeModifyById(ReturnInfo<bool> returnInfo, RoleInfo model, ref string connectionId, CommonUseData comData = null)
         {
             bool idClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -119,8 +119,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="models">模型列表</param>        
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, IList<RoleInfo> models, ref string connectionId, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void BeforeAdd(ReturnInfo<bool> returnInfo, IList<RoleInfo> models, ref string connectionId, CommonUseData comData = null)
         {
             for (var i = 0; i < models.Count; i++)
             {
@@ -139,11 +139,11 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected override void BeforeRemoveById(ReturnInfo<bool> returnInfo, int id, ref string connectionId, BasicUserInfo<int> currUser = null)
+        protected override void BeforeRemoveById(ReturnInfo<bool> returnInfo, int id, ref string connectionId, CommonUseData comData = null)
         {
-            ValiCanRemove(returnInfo, Persistence.Select(id, connectionId));
+            ValiCanRemove(returnInfo, Persistence.Select(id, connectionId: connectionId, comData: comData));
         }
 
         /// <summary>
@@ -152,11 +152,11 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected override void BeforeRemoveByIds(ReturnInfo<bool> returnInfo, int[] ids, ref string connectionId, BasicUserInfo<int> currUser = null)
+        protected override void BeforeRemoveByIds(ReturnInfo<bool> returnInfo, int[] ids, ref string connectionId, CommonUseData comData = null)
         {
-            IList<RoleInfo> roles = Persistence.Select(ids, connectionId);
+            IList<RoleInfo> roles = Persistence.Select(ids, connectionId: connectionId, comData: comData);
             if (roles.IsNullOrCount0())
             {
                 return;

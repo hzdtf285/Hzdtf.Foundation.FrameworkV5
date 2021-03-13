@@ -44,11 +44,6 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
         private readonly ILocalization localize;
 
         /// <summary>
-        /// 请求资源
-        /// </summary>
-        private readonly IRequestResource requestSource;
-
-        /// <summary>
         /// 本次操作
         /// </summary>
         private readonly ITheOperation theOperation;
@@ -60,10 +55,9 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
         /// <param name="options">路由权限选项配置</param>
         /// <param name="reader">读取API权限配置</param>
         /// <param name="localize">本地化</param>
-        /// <param name="requestResource">请求资源</param>
         /// <param name="theOperation">本次操作</param>
         public RoutePermissionMiddlewareBase(RequestDelegate next, IOptions<RoutePermissionOptions> options,
-            IReader<RoutePermissionInfo[]> reader, ILocalization localize, IRequestResource requestResource,
+            IReader<RoutePermissionInfo[]> reader, ILocalization localize,
             ITheOperation theOperation = null)
         {
             if (reader == null)
@@ -75,7 +69,6 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
             this.options = options.Value;
             this.reader = reader;
             this.localize = localize;
-            this.requestSource = requestResource;
             this.theOperation = theOperation;
         }
 
@@ -140,7 +133,7 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
                 }
 
                 var basicReturn = new BasicReturnInfo();
-                var isPer = IsHavePermission(controllerConfig, actionConfig, basicReturn);
+                var isPer = IsHavePermission(context, controllerConfig, actionConfig, basicReturn);
                 if (basicReturn.Failure())
                 {
                     await WriteContent(context, basicReturn);
@@ -148,24 +141,7 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
                 }
                 if (isPer)
                 {
-                    string requestKey = null;
-                    try
-                    {
-                        if (!string.IsNullOrWhiteSpace(actionConfig.ResourceKey))
-                        {
-                            requestKey = theOperation.EventId;
-                            requestSource.Add(requestKey, actionConfig.ResourceKey);
-                        }
-                        await next(context);
-                        return;
-                    }
-                    finally
-                    {
-                        if (requestKey != null)
-                        {
-                            requestSource.Remove(requestKey);
-                        }
-                    }
+                    await next(context);
                 }
                 else
                 {
@@ -181,11 +157,12 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
         /// <summary>
         /// 判断是否拥有权限
         /// </summary>
+        /// <param name="context">上下文</param>
         /// <param name="controller">控制器信息</param>
         /// <param name="action">动作信息</param>
         /// <param name="basicReturn">基本返回</param>
         /// <returns>获取是否拥有权限</returns>
-        protected abstract bool IsHavePermission(RoutePermissionInfo controller, ActionInfo action, BasicReturnInfo basicReturn);
+        protected abstract bool IsHavePermission(HttpContext context, RoutePermissionInfo controller, ActionInfo action, BasicReturnInfo basicReturn);
 
         /// <summary>
         /// 无权限处理

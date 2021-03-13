@@ -81,14 +81,13 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// </summary>
         /// <param name="flowIn">流程输入</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> Execute(int flowIn, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> Execute(int flowIn, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {
-                var workflow = WorkflowPersistence.Select(flowIn, connId);
+                var workflow = WorkflowPersistence.Select(flowIn, connectionId: connId, comData: comData);
                 if (workflow == null)
                 {
                     reInfo.SetFailureMsg($"找不到ID[{flowIn}]的工作流");
@@ -96,7 +95,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                     return false;
                 }
 
-                workflow.WorkflowDefine = WorkflowDefinePersistence.Select(workflow.WorkflowDefineId, connId);
+                workflow.WorkflowDefine = WorkflowDefinePersistence.Select(workflow.WorkflowDefineId, connectionId: connId, comData: comData);
                 if (workflow.WorkflowDefine == null)
                 {
                     reInfo.SetFailureMsg($"找不到ID[{flowIn}]的工作流定义");
@@ -106,13 +105,13 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
 
                 workflow.Handles = WorkflowHandlePersistence.SelectByWorkflowId(flowIn, connId);
                 
-                Vali(reInfo, workflow, currUser);
+                Vali(reInfo, workflow, comData);
                 if (reInfo.Failure())
                 {
                     return false;
                 }
 
-                ReturnInfo<bool> reTrans = ExecTransaction(reInfo, workflow, connId, currUser);
+                ReturnInfo<bool> reTrans = ExecTransaction(reInfo, workflow, connectionId: connId, comData: comData);
                 reInfo.FromBasic(reTrans);
 
                 if (reTrans.Failure())
@@ -140,10 +139,10 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="returnInfo">返回信息</param>
         /// <param name="workflow">工作流</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Transaction(ConnectionIdIndex = 2)]
-        protected virtual ReturnInfo<bool> ExecTransaction(ReturnInfo<bool> returnInfo, WorkflowInfo workflow, string connectionId = null, BasicUserInfo<int> currUser = null)
+        [Transaction(ConnectionIdIndex = 3)]
+        protected virtual ReturnInfo<bool> ExecTransaction(ReturnInfo<bool> returnInfo, WorkflowInfo workflow, CommonUseData comData = null, string connectionId = null)
         {
             IFormRemove formRemove = FormRemoveFactory.Create(workflow.WorkflowDefine.Code);
             if (formRemove == null)
@@ -153,7 +152,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 return returnInfo;
             }
 
-            ReturnInfo<bool> basicReturn = formRemove.BeforeExecFlow(workflow, GetRemoveType(), connectionId, currUser);
+            ReturnInfo<bool> basicReturn = formRemove.BeforeExecFlow(workflow, GetRemoveType(), connectionId : connectionId, comData: comData);
             if (basicReturn.Failure())
             {
                 returnInfo.FromBasic(basicReturn);
@@ -161,9 +160,9 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 return returnInfo;
             }
 
-            ExecCore(returnInfo, workflow, connectionId, currUser);
+            ExecCore(returnInfo, workflow, connectionId : connectionId, comData: comData);
 
-            basicReturn = formRemove.AfterExecFlow(workflow, GetRemoveType(), returnInfo.Success(), connectionId, currUser);
+            basicReturn = formRemove.AfterExecFlow(workflow, GetRemoveType(), returnInfo.Success(), connectionId : connectionId, comData: comData);
             if (basicReturn.Failure())
             {
                 returnInfo.FromBasic(basicReturn);
@@ -181,8 +180,8 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="workflow">工作流</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void Vali(ReturnInfo<bool> returnInfo, WorkflowInfo workflow, BasicUserInfo<int> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void Vali(ReturnInfo<bool> returnInfo, WorkflowInfo workflow, CommonUseData comData = null) { }
 
         /// <summary>
         /// 执行核心
@@ -190,11 +189,11 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="returnInfo">返回信息</param>
         /// <param name="workflow">工作流</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void ExecCore(ReturnInfo<bool> returnInfo, WorkflowInfo workflow, string connectionId = null, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected virtual void ExecCore(ReturnInfo<bool> returnInfo, WorkflowInfo workflow, CommonUseData comData = null, string connectionId = null)
         {
             WorkflowHandlePersistence.DeleteByWorkflowId(workflow.Id, connectionId);
-            WorkflowPersistence.DeleteById(workflow.Id, connectionId);
+            WorkflowPersistence.DeleteById(workflow.Id, connectionId: connectionId, comData: comData);
         }
 
         #endregion

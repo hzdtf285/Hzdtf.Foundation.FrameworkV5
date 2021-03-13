@@ -44,13 +44,13 @@ namespace Hzdtf.BasicFunction.Workflow
         /// <param name="id">ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<FindHandlerUserOutInfo> FindById([DisplayName2("ID"), Id] int id, int userId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<FindHandlerUserOutInfo> FindById([DisplayName2("ID"), Id] int id, int userId, CommonUseData comData = null, string connectionId = null)
         {
             ReturnInfo<FindHandlerUserOutInfo> returnInfo = new ReturnInfo<FindHandlerUserOutInfo>();
 
-            ReturnInfo<RoleInfo> reRole = RoleService.Find(id, connectionId, currUser);
+            ReturnInfo<RoleInfo> reRole = RoleService.Find(id, connectionId : connectionId, comData: comData);
             if (reRole.Failure())
             {
                 returnInfo.FromBasic(reRole);
@@ -61,7 +61,7 @@ namespace Hzdtf.BasicFunction.Workflow
                 return returnInfo;
             }
 
-            ReturnInfo<IList<UserInfo>> reUser = UserRoleService.OwnUsersByRoleId(id, connectionId, currUser);
+            ReturnInfo<IList<UserInfo>> reUser = UserRoleService.OwnUsersByRoleId(id, connectionId : connectionId, comData: comData);
             if (reUser.Failure())
             {
                 returnInfo.FromBasic(reRole);

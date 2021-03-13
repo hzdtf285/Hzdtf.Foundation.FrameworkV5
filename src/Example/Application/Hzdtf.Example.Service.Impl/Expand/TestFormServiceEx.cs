@@ -23,9 +23,9 @@ namespace Hzdtf.Example.Service.Impl
         /// </summary>
         /// <param name="testForm">测试表单</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> ModifyFlowStatusByWorkflowId(TestFormInfo testForm, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> ModifyFlowStatusByWorkflowId(TestFormInfo testForm, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {
@@ -38,9 +38,9 @@ namespace Hzdtf.Example.Service.Impl
         /// </summary>
         /// <param name="workflowId">工作流ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<TestFormInfo> IFormDataReader<TestFormInfo>.ReaderByWorkflowId([DisplayName2("工作流ID"), Id] int workflowId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        ReturnInfo<TestFormInfo> IFormDataReader<TestFormInfo>.ReaderByWorkflowId([DisplayName2("工作流ID"), Id] int workflowId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<TestFormInfo>((reInfo, connId) =>
             {
@@ -53,9 +53,9 @@ namespace Hzdtf.Example.Service.Impl
         /// </summary>
         /// <param name="workflowId">工作流ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<ConcreteFormInfo> IFormDataReader<ConcreteFormInfo>.ReaderByWorkflowId([DisplayName2("工作流ID"), Id] int workflowId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        ReturnInfo<ConcreteFormInfo> IFormDataReader<ConcreteFormInfo>.ReaderByWorkflowId([DisplayName2("工作流ID"), Id] int workflowId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<ConcreteFormInfo>((reInfo, connId) =>
             {
@@ -68,9 +68,9 @@ namespace Hzdtf.Example.Service.Impl
         /// </summary>
         /// <param name="workflowId">工作流ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> RemoveByWorkflowId([DisplayName2("工作流ID"), Id] int workflowId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<bool> RemoveByWorkflowId([DisplayName2("工作流ID"), Id] int workflowId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {

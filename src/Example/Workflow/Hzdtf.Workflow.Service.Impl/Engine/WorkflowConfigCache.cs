@@ -59,9 +59,9 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// </summary>
         /// <param name="workflowDefineId">工作流定义ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<WorkflowDefineInfo> ReaderAllConfig([DisplayName2("工作流定义ID"), Id] int workflowDefineId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowDefineInfo> ReaderAllConfig([DisplayName2("工作流定义ID"), Id] int workflowDefineId, CommonUseData comData = null, string connectionId = null)
         {
             if (dicCache.ContainsKey(workflowDefineId))
             {
@@ -72,7 +72,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
             }
             else
             {
-                ReturnInfo<WorkflowDefineInfo> returnInfo = ProtoWorkflowConfigReader.ReaderAllConfig(workflowDefineId, connectionId, currUser);
+                ReturnInfo<WorkflowDefineInfo> returnInfo = ProtoWorkflowConfigReader.ReaderAllConfig(workflowDefineId, connectionId : connectionId, comData: comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -88,17 +88,17 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// </summary>
         /// <param name="workflowCode">工作流编码</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<WorkflowDefineInfo> ReaderAllConfig([DisplayName2("工作流编码"), Required] string workflowCode, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowDefineInfo> ReaderAllConfig([DisplayName2("工作流编码"), Required] string workflowCode, CommonUseData comData = null, string connectionId = null)
         {
             if (dicCodeMapId.ContainsKey(workflowCode))
             {
-                return ReaderAllConfig(dicCodeMapId[workflowCode], connectionId);
+                return ReaderAllConfig(dicCodeMapId[workflowCode], comData, connectionId);
             }
             else
             {
-                ReturnInfo<WorkflowDefineInfo> returnInfo = ProtoWorkflowConfigReader.ReaderAllConfig(workflowCode, connectionId, currUser);
+                ReturnInfo<WorkflowDefineInfo> returnInfo = ProtoWorkflowConfigReader.ReaderAllConfig(workflowCode, connectionId : connectionId, comData: comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;

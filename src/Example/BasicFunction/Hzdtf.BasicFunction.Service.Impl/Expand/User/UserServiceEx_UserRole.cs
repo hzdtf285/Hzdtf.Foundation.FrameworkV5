@@ -38,13 +38,13 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public override ReturnInfo<bool> Add([Model] UserInfo model, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public override ReturnInfo<bool> Add([Model] UserInfo model, CommonUseData comData = null, string connectionId = null)
         {
             if (model is PersonTimeInfo<int>)
             {
-                SetCreateInfo(model, currUser);
+                SetCreateInfo(model, comData);
             }
 
             bool isClose = false;
@@ -60,7 +60,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 return returnInfo;
             }
 
-            ExecAdd(returnInfo, model, connectionId, currUser);
+            ExecAdd(returnInfo, model, connectionId: connectionId, comData: comData);
 
             AfterAdd(returnInfo, model, ref connectionId);
 
@@ -77,11 +77,11 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public override ReturnInfo<bool> ModifyById([Model] UserInfo model, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public override ReturnInfo<bool> ModifyById([Model] UserInfo model, CommonUseData comData = null, string connectionId = null)
         {
-            SetModifyInfo(model, currUser);
+            SetModifyInfo(model, comData);
 
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -96,7 +96,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 return returnInfo;
             }
 
-            ExecModifyById(returnInfo, model, connectionId, currUser);
+            ExecModifyById(returnInfo, model, connectionId: connectionId, comData: comData);
 
             AfterModifyById(returnInfo, model, ref connectionId);
 
@@ -116,8 +116,8 @@ namespace Hzdtf.BasicFunction.Service.Impl
          /// <param name="pageSize">每页记录数</param>
          /// <param name="connectionId">连接ID</param>
          /// <param name="filter">筛选</param>
-         /// <param name="currUser">当前用户</param>
-        protected override void AfterQueryPage(ReturnInfo<PagingInfo<UserInfo>> returnInfo, int pageIndex, int pageSize, ref string connectionId, FilterInfo filter = null, BasicUserInfo<int> currUser = null)
+         /// <param name="comData">通用数据</param>
+        protected override void AfterQueryPage(ReturnInfo<PagingInfo<UserInfo>> returnInfo, int pageIndex, int pageSize, ref string connectionId, FilterInfo filter = null, CommonUseData comData = null)
         {
             // 查找每个用户所属的角色
             if (returnInfo.Data.Rows.IsNullOrCount0())
@@ -162,14 +162,14 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        [Transaction(ConnectionIdIndex = 2)]
-        protected virtual void ExecAdd(ReturnInfo<bool> returnInfo, UserInfo model, string connectionId = null, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        [Transaction(ConnectionIdIndex = 3)]
+        protected virtual void ExecAdd(ReturnInfo<bool> returnInfo, UserInfo model, CommonUseData comData = null, string connectionId = null)
         {
-            returnInfo.Data = Persistence.Insert(model, connectionId) > 0;
+            returnInfo.Data = Persistence.Insert(model, connectionId: connectionId, comData: comData) > 0;
             if (returnInfo.Data)
             {
-                AddUserRoles(model, connectionId, currUser);
+                AddUserRoles(model, connectionId: connectionId, comData: comData);
             }
         }
 
@@ -179,15 +179,15 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        [Transaction(ConnectionIdIndex = 2)]
-        protected virtual void ExecModifyById(ReturnInfo<bool> returnInfo, UserInfo model, string connectionId = null, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        [Transaction(ConnectionIdIndex = 3)]
+        protected virtual void ExecModifyById(ReturnInfo<bool> returnInfo, UserInfo model, CommonUseData comData = null, string connectionId = null)
         {
-            returnInfo.Data = Persistence.UpdateById(model, connectionId) > 0;
+            returnInfo.Data = Persistence.UpdateById(model, connectionId: connectionId, comData: comData) > 0;
             if (returnInfo.Data)
             {
                 UserRolePersistence.DeleteByUserId(model.Id, connectionId);
-                AddUserRoles(model, connectionId, currUser);
+                AddUserRoles(model, connectionId: connectionId, comData: comData);
             }
         }
 
@@ -200,9 +200,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        private int AddUserRoles(UserInfo model, string connectionId = null, BasicUserInfo<int> currUser = null)
+        private int AddUserRoles(UserInfo model, CommonUseData comData = null, string connectionId = null)
         {
             if (model.OwnRoles.IsNullOrCount0())
             {
@@ -217,7 +217,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     UserId = model.Id,
                     RoleId = r.Id
                 };
-                ur.SetCreateInfo(currUser);
+                ur.SetCreateInfo(UserTool<int>.GetCurrUser(comData));
 
                 userRoles.Add(ur);
             }
@@ -226,7 +226,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 return 0;
             }
 
-            return UserRolePersistence.Insert(userRoles, connectionId);
+            return UserRolePersistence.Insert(userRoles, connectionId: connectionId, comData: comData);
         }
 
         #endregion

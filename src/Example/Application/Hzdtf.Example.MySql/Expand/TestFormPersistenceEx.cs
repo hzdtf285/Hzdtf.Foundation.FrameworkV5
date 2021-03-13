@@ -74,8 +74,9 @@ namespace Hzdtf.Example.MySql
         /// </summary>
         /// <param name="parameters">参数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>连接SQL语句</returns>
-        protected override string GetSelectPageJoinSql(DynamicParameters parameters, FilterInfo filter = null)
+        protected override string GetSelectPageJoinSql(DynamicParameters parameters, FilterInfo filter = null, CommonUseData comData = null)
         {
             return $"LEFT JOIN `workflow` w ON w.apply_no=`{Table}`.apply_no";
         }
@@ -83,7 +84,8 @@ namespace Hzdtf.Example.MySql
         /// <summary>
         /// 追加查询分页字段SQL
         /// </summary>
-        protected override string AppendSelectPageFieldsSql()
+        /// <param name="comData">通用数据</param>
+        protected override string AppendSelectPageFieldsSql(CommonUseData comData = null)
         {
             return ",w.`title` Title";
         }
@@ -94,7 +96,8 @@ namespace Hzdtf.Example.MySql
         /// <param name="whereSql">where语句</param>
         /// <param name="parameters">参数</param>
         /// <param name="filter">筛选</param>
-        protected override void AppendSelectPageWhereSql(StringBuilder whereSql, DynamicParameters parameters, FilterInfo filter = null)
+        /// <param name="comData">通用数据</param>
+        protected override void AppendSelectPageWhereSql(StringBuilder whereSql, DynamicParameters parameters, FilterInfo filter = null, CommonUseData comData = null)
         {
             if (filter is KeywordFilterInfo)
             {

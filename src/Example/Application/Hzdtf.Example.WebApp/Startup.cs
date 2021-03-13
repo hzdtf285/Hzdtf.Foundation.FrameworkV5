@@ -104,7 +104,7 @@ namespace Hzdtf.Example.WebApp
             app.UseCulture();
             app.UseRoutePermission<RoutePermissionMiddleware>();
             app.UseRequestLog();
-            app.UseIdentityAuth<int>();
+            //app.UseIdentityAuth<int>();
 
             app.UseApiExceptionHandle();
 

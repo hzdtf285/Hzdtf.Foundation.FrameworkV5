@@ -27,19 +27,21 @@ namespace Hzdtf.Example.Controller
         /// 填充页面数据，包含当前用户所拥有的权限功能列表
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
-        protected override void FillPageData(ReturnInfo<PageInfo<int>> returnInfo)
+        /// <param name="comData">通用数据</param>
+        protected override void FillPageData(ReturnInfo<PageInfo<int>> returnInfo, CommonUseData comData = null)
         {
             var re = UserService.QueryPageData<PageInfo<int>>(MenuCode(), () =>
             {
                 return returnInfo.Data;
-            });
+            }, comData: comData);
             returnInfo.FromBasic(re);
         }
 
         /// <summary>
         /// 创建页面数据
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>页面数据</returns>
-        protected override PageInfo<int> CreatePageData() => new PageInfo<int>();
+        protected override PageInfo<int> CreatePageData(CommonUseData comData = null) => new PageInfo<int>();
     }
 }

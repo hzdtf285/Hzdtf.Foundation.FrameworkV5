@@ -19,26 +19,26 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
         /// </summary>
         /// <param name="formInfo">表单信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> Set(ConcreteFormInfoT formInfo, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> Set(ConcreteFormInfoT formInfo, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据流程ID修改流程状态
         /// </summary>
         /// <param name="formInfo">表单信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> ModifyFlowStatusByWorkflowId(ConcreteFormInfoT formInfo, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> ModifyFlowStatusByWorkflowId(ConcreteFormInfoT formInfo, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据工作流ID移除
         /// </summary>
         /// <param name="workflowId">工作流ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> RemoveByWorkflowId(int workflowId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> RemoveByWorkflowId(int workflowId, CommonUseData comData = null, string connectionId = null);
     }
 }

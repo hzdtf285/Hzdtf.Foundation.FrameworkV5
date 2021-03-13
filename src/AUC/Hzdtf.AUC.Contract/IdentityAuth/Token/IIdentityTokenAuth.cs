@@ -1,4 +1,5 @@
-﻿using Hzdtf.Utility.Model.Return;
+﻿using Hzdtf.Utility.Model;
+using Hzdtf.Utility.Model.Return;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,8 +17,8 @@ namespace Hzdtf.AUC.Contract.IdentityAuth.Token
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="password">密码</param>
-        /// <param name="otherData">其他数据</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<string> AccreditToToken(string user, string password, object otherData = null);
+        ReturnInfo<string> AccreditToToken(string user, string password, CommonUseData comData = null);
     }
 }

@@ -43,117 +43,129 @@
             <param name="protoLog">原生日志</param>
             <param name="logRecordLevel">日志记录等级</param>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Trace(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Trace(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             跟踪
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Debug(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Debug(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             调试
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Info(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Info(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             信息
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Wran(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Wran(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             警告
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Error(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Error(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             错误
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Fatal(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.Fatal(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             致命
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.TraceAsync(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.TraceAsync(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             异步跟踪
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.DebugAsync(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.DebugAsync(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             异步调试
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.InfoAsync(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.InfoAsync(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             异步信息
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.WranAsync(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.WranAsync(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             异步警告
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.ErrorAsync(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.ErrorAsync(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             异步错误
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>
-        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.FatalAsync(System.String,System.Exception,System.String,System.String[])">
+        <member name="M:Hzdtf.Logger.Text.Integration.MicrosoftLog.IntegrationLog.FatalAsync(System.String,System.Exception,System.String,System.String,System.String[])">
             <summary>
             异步致命
             </summary>
             <param name="msg">消息</param>
             <param name="ex">异常</param>
             <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>

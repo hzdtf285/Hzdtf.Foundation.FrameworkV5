@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Safety;
+using Hzdtf.Utility.TheOperation;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -255,5 +256,9 @@ namespace Hzdtf.Utility
         /// </summary>
         public static Func<string> GetEventIdFunc;
 
+        /// <summary>
+        /// 本次操作
+        /// </summary>
+        public static ITheOperation TheOperation;
     }
 }

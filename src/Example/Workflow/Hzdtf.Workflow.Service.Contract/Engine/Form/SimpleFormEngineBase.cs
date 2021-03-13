@@ -44,13 +44,14 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
         /// <param name="flowIn">流程输入</param>
         /// <param name="isSuccess">是否成功</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public override ReturnInfo<bool> AfterExecFlow(FlowCensorshipOutInfo flowCensorshipOut, object flowIn, bool isSuccess, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public override ReturnInfo<bool> AfterExecFlow(FlowCensorshipOutInfo flowCensorshipOut, object flowIn, bool isSuccess, CommonUseData comData = null, string connectionId = null)
         {
             ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
             if (isSuccess)
             {
+                var currUser = UserTool<int>.GetCurrUser(comData);
                 // 当前为申请者关卡
                 if (flowCensorshipOut.IsCurrApplicantCensorship() 
                     && (flowCensorshipOut.ActionType == ActionType.SAVE || flowCensorshipOut.ActionType == ActionType.SEND))
@@ -62,13 +63,14 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
                         return returnInfo;
                     }
                     
-                    ReturnInfo<ConcreteFormInfo> reFormInfo = FormDataReaderFactory.Create(conFlowIn.Flow.WorkflowCode).ReaderByWorkflowId(flowCensorshipOut.Workflow.Id, connectionId, currUser);
+                    ReturnInfo<ConcreteFormInfo> reFormInfo = FormDataReaderFactory.Create(conFlowIn.Flow.WorkflowCode).ReaderByWorkflowId(flowCensorshipOut.Workflow.Id, connectionId : connectionId, comData: comData);
                     if (reFormInfo.Failure())
                     {
                         returnInfo.FromBasic(reFormInfo);
 
                         return returnInfo;
                     }
+
                     if (reFormInfo.Data != null)
                     {                        
                         switch (reFormInfo.Data.FlowStatus)
@@ -100,7 +102,7 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
                     form.WorkflowId = flowCensorshipOut.Workflow.Id;
                     form.FlowStatus = flowCensorshipOut.Workflow.FlowStatus;
 
-                    returnInfo = FormService.Set(form, connectionId, currUser);
+                    returnInfo = FormService.Set(form, connectionId : connectionId, comData: comData);
                 } // 下一关卡如果是结束关卡（送件）或是申请关卡（退件）
                 else if ((flowCensorshipOut.IsNextEndCensorship() && flowCensorshipOut.ActionType == ActionType.SEND)
                     || (flowCensorshipOut.IsNextApplicantCensorship() && flowCensorshipOut.ActionType == ActionType.RETURN))
@@ -110,7 +112,7 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
                     form.FlowStatus = flowCensorshipOut.Workflow.FlowStatus;
                     form.SetModifyInfo(currUser);
 
-                    returnInfo = FormService.ModifyFlowStatusByWorkflowId(form, connectionId, currUser);
+                    returnInfo = FormService.ModifyFlowStatusByWorkflowId(form, connectionId : connectionId, comData: comData);
                 }
             }
 

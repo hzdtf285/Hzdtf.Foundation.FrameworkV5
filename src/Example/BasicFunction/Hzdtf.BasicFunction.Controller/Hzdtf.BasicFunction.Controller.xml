@@ -46,30 +46,34 @@
             <param name="ownerId">归属ID</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FilterDownLoadPermissionFileAddress(System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.AttachmentInfo})">
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FilterDownLoadPermissionFileAddress(System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.AttachmentInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             过滤下载权限的文件地址
             </summary>
             <param name="attachments">附件列表</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FilterDownLoadPermissionFileAddress(Hzdtf.BasicFunction.Model.AttachmentInfo)">
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FilterDownLoadPermissionFileAddress(Hzdtf.BasicFunction.Model.AttachmentInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             过滤下载权限的文件地址
             </summary>
             <param name="attachment">附件</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}})">
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
+            <param name="comData">通用数据</param>
             <param name="returnInfo">返回信息</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.CreatePageData">
+        <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="M:Hzdtf.BasicFunction.Controller.AttachmentController.MenuCode">
@@ -89,25 +93,32 @@
             附件服务
             </summary>
         </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.ComUseDataFactory">
+            <summary>
+            通用数据工厂
+            </summary>
+        </member>
         <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.Upload(Hzdtf.BasicFunction.Model.Expand.Attachment.SimpleAttachmentInfo)">
             <summary>
             上传附件
             </summary>
             <param name="simpleAttachment">简单附件</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.BeforeUpload(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},Hzdtf.BasicFunction.Model.AttachmentInfo)">
+        <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.BeforeUpload(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},Hzdtf.BasicFunction.Model.AttachmentInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             上传附件前
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="attachment">附件</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.AfterUpload(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.AttachmentInfo})">
+        <member name="M:Hzdtf.BasicFunction.Controller.Expand.Attachment.AttachmentExController.AfterUpload(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.AttachmentInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             上传附件后
             </summary>
             <param name="returnInfo">返回信息</param>
             <param name="attachments">附件列表</param>
+            <param name="comData">通用数据</param>
         </member>
         <member name="T:Hzdtf.BasicFunction.Controller.DataDictionaryItemController">
             <summary>
@@ -148,16 +159,18 @@
             <param name="rows">每页记录数</param>
             <returns>分页返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}})">
+        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo{System.Int32}},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.CreatePageData">
+        <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="M:Hzdtf.BasicFunction.Controller.DataDictionaryItemController.MenuCode">
@@ -187,16 +200,18 @@
             </summary>
             <returns>文件内容结果</returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo})">
+        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.CreatePageData">
+        <member name="M:Hzdtf.BasicFunction.Controller.RoleController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="M:Hzdtf.BasicFunction.Controller.RoleController.MenuCode">
@@ -247,16 +262,18 @@
             </summary>
             <param name="returnInfo">返回信息</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.UserController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.BasicFunction.Model.Expand.User.UserPageInfo})">
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.BasicFunction.Model.Expand.User.UserPageInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
+            <param name="comData">通用数据</param>
             <param name="returnInfo">返回信息</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.UserController.CreatePageData">
+        <member name="M:Hzdtf.BasicFunction.Controller.UserController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="M:Hzdtf.BasicFunction.Controller.UserController.MenuCode">
@@ -276,7 +293,12 @@
             用户服务
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.BasicFunction.Service.Contract.IUserService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.RequestResource.IRequestResource)">
+        <member name="F:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.comDataFactory">
+            <summary>
+            通用数据工厂
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.BasicFunction.Service.Contract.IUserService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData})">
             <summary>
             构造方法
             </summary>
@@ -285,12 +307,13 @@
             <param name="reader">读取API权限配置</param>
             <param name="userService">用户服务</param>
             <param name="localize">本地化</param>
-            <param name="requestResource">请求资源</param>
+            <param name="comDataFactory">通用数据工厂</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.IsHavePermission(Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
+        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.IsHavePermission(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
             <summary>
             判断是否拥有权限
             </summary>
+            <param name="context">上下文</param>
             <param name="controller">控制器信息</param>
             <param name="action">动作信息</param>
             <param name="basicReturn">基本返回</param>
@@ -320,6 +343,11 @@
         <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IdentityTokenAuth">
             <summary>
             身份令牌授权
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.ComDataFactory">
+            <summary>
+            通用数据工厂
             </summary>
         </member>
         <member name="P:Hzdtf.BasicFunction.Controller.Home.AuthorizationController.IsDisabledLogin">
@@ -376,6 +404,11 @@
         <member name="P:Hzdtf.BasicFunction.Controller.Home.HomeController.UserMenuService">
             <summary>
             用户菜单服务
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicFunction.Controller.Home.HomeController.ComUseDataFactory">
+            <summary>
+            通用数据工厂
             </summary>
         </member>
         <member name="M:Hzdtf.BasicFunction.Controller.Home.HomeController.Index">
@@ -443,16 +476,18 @@
             </summary>
             <returns>菜单编码</returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo})">
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.PageInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.CreatePageData">
+        <member name="M:Hzdtf.BasicFunction.Controller.PermissionSet.RolePermissionController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
     </members>

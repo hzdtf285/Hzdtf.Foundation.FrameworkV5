@@ -17,8 +17,8 @@ namespace Hzdtf.AUC.Contract.IdentityAuth
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="password">密码</param>
-        /// <param name="otherData">其他数据</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<UserT> Accredit(string user, string password, object otherData = null);
+        ReturnInfo<UserT> Accredit(string user, string password, CommonUseData comData = null);
     }
 }

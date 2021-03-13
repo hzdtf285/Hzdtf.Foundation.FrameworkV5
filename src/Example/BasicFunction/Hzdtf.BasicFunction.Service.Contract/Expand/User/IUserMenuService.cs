@@ -18,8 +18,8 @@ namespace Hzdtf.BasicFunction.Service.Contract.User
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<UserMenuInfo> CanAccessMenus(int userId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<UserMenuInfo> CanAccessMenus(int userId, CommonUseData comData = null, string connectionId = null);
     }
 }

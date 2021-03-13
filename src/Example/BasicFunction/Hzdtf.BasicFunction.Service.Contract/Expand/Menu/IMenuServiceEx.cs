@@ -17,8 +17,8 @@ namespace Hzdtf.BasicFunction.Service.Contract
         /// 查询菜单树列表
         /// </summary>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<MenuTreeInfo>> QueryMenuTrees(string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<MenuTreeInfo>> QueryMenuTrees(CommonUseData comData = null, string connectionId = null);
     }
 }

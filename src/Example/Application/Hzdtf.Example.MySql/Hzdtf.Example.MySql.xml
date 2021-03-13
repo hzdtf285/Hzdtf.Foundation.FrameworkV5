@@ -38,26 +38,29 @@
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:Hzdtf.Example.MySql.TestFormPersistence.GetSelectPageJoinSql(Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+        <member name="M:Hzdtf.Example.MySql.TestFormPersistence.GetSelectPageJoinSql(Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             获取查询分页连接SQL
             </summary>
             <param name="parameters">参数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <returns>连接SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.Example.MySql.TestFormPersistence.AppendSelectPageFieldsSql">
+        <member name="M:Hzdtf.Example.MySql.TestFormPersistence.AppendSelectPageFieldsSql(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             追加查询分页字段SQL
             </summary>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Example.MySql.TestFormPersistence.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo)">
+        <member name="M:Hzdtf.Example.MySql.TestFormPersistence.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             追加查询分页SQL
             </summary>
             <param name="whereSql">where语句</param>
             <param name="parameters">参数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
         </member>
         <member name="P:Hzdtf.Example.MySql.TestFormPersistence.Table">
             <summary>

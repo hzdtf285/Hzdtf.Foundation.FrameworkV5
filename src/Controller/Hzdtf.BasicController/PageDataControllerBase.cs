@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Hzdtf.BasicController
 {
@@ -29,7 +30,8 @@ namespace Hzdtf.BasicController
         [HttpGet("PageData")]
         public virtual ReturnInfo<PageInfoT> PageData()
         {
-            var pageData = CreatePageData();
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var pageData = CreatePageData(comData);
             if (pageData == null)
             {
                 return null;
@@ -38,7 +40,7 @@ namespace Hzdtf.BasicController
             {
                 var returnInfo = new ReturnInfo<PageInfoT>();
                 returnInfo.Data = pageData;
-                FillPageData(returnInfo);
+                FillPageData(returnInfo, comData);
 
                 return returnInfo;
             }
@@ -48,12 +50,14 @@ namespace Hzdtf.BasicController
         /// 填充页面数据，包含当前用户所拥有的权限功能列表
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
-        protected virtual void FillPageData(ReturnInfo<PageInfoT> returnInfo) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void FillPageData(ReturnInfo<PageInfoT> returnInfo, CommonUseData comData = null) { }
 
         /// <summary>
         /// 创建页面数据
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>页面数据</returns>
-        protected virtual PageInfoT CreatePageData() => null;
+        protected virtual PageInfoT CreatePageData(CommonUseData comData = null) => null;
     }
 }

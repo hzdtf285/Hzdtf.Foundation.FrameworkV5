@@ -19,9 +19,10 @@ namespace Hzdtf.Logger.Contract
         /// </summary>
         /// <param name="action">执行核心</param>
         /// <param name="exceptionCallback">异常回调</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="logTags">日志标签</param>
         /// <returns>返回类型</returns>
-        void TryLogExec(Action action, Action<BasicReturnInfo> exceptionCallback = null, params string[] logTags);
+        void TryLogExec(Action action, Action<BasicReturnInfo> exceptionCallback = null, string eventId = null, params string[] logTags);
 
         /// <summary>
         /// 捕获日志执行
@@ -30,8 +31,9 @@ namespace Hzdtf.Logger.Contract
         /// <typeparam name="ReturnT">返回类型</typeparam>
         /// <param name="func">执行核心</param>
         /// <param name="exceptionCallback">异常回调</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="logTags">日志标签</param>
         /// <returns>返回类型</returns>
-        ReturnT TryLogExec<ReturnT>(Func<ReturnT> func, Func<BasicReturnInfo, ReturnT> exceptionCallback = null, params string[] logTags);
+        ReturnT TryLogExec<ReturnT>(Func<ReturnT> func, Func<BasicReturnInfo, ReturnT> exceptionCallback = null, string eventId = null, params string[] logTags);
     }
 }

@@ -9,6 +9,7 @@ using Hzdtf.Utility.Model.Return;
 using Hzdtf.BasicFunction.Model;
 using System.Net;
 using Hzdtf.BasicFunction.Service.Contract;
+using Microsoft.AspNetCore.Http;
 
 namespace Hzdtf.BasicFunction.Controller
 {
@@ -35,9 +36,10 @@ namespace Hzdtf.BasicFunction.Controller
         [Function(FunCodeDefine.EXPORT_EXCEL_CODE)]
         public virtual FileContentResult Export()
         {
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.EXPORT_EXCEL_CODE);
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
             KeywordFilterInfo filter = dicParams.ToObject<KeywordFilterInfo, string>();
-            ReturnInfo<IList<RoleInfo>> returnInfo = Service.QueryByFilter(filter);
+            ReturnInfo<IList<RoleInfo>> returnInfo = Service.QueryByFilter(filter, comData);
             if (returnInfo.Failure())
             {
                 return File(new byte[] { 0 }, null);
@@ -60,19 +62,21 @@ namespace Hzdtf.BasicFunction.Controller
         /// 填充页面数据，包含当前用户所拥有的权限功能列表
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
-        protected override void FillPageData(ReturnInfo<PageInfo> returnInfo)
+        /// <param name="comData">通用数据</param>
+        protected override void FillPageData(ReturnInfo<PageInfo> returnInfo, CommonUseData comData = null)
         {
             var re = UserService.QueryPageData<PageInfo>(MenuCode(), () =>
             {
                 return returnInfo.Data;
-            });
+            }, comData: comData);
             returnInfo.FromBasic(re);
         }
 
         /// <summary>
         /// 创建页面数据
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>页面数据</returns>
-        protected override PageInfo CreatePageData() => new PageInfo();
+        protected override PageInfo CreatePageData(CommonUseData comData = null) => new PageInfo();
     }
 }

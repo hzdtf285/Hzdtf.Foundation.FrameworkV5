@@ -19,8 +19,8 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Diversion
         /// <param name="id">ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<FindHandlerUserOutInfo> FindById(int id, int userId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<FindHandlerUserOutInfo> FindById(int id, int userId, CommonUseData comData = null, string connectionId = null);
     }
 }

@@ -297,17 +297,12 @@
             本地化
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.requestSource">
-            <summary>
-            请求资源
-            </summary>
-        </member>
         <member name="F:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.theOperation">
             <summary>
             本次操作
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.RequestResource.IRequestResource,Hzdtf.Utility.TheOperation.ITheOperation)">
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.TheOperation.ITheOperation)">
             <summary>
             构造方法
             </summary>
@@ -315,7 +310,6 @@
             <param name="options">路由权限选项配置</param>
             <param name="reader">读取API权限配置</param>
             <param name="localize">本地化</param>
-            <param name="requestResource">请求资源</param>
             <param name="theOperation">本次操作</param>
         </member>
         <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
@@ -325,10 +319,11 @@
             <param name="context">http上下文</param>
             <returns>任务</returns>
         </member>
-        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.IsHavePermission(Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.IsHavePermission(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
             <summary>
             判断是否拥有权限
             </summary>
+            <param name="context">上下文</param>
             <param name="controller">控制器信息</param>
             <param name="action">动作信息</param>
             <param name="basicReturn">基本返回</param>
@@ -576,6 +571,27 @@
             </summary>
             <param name="context">上下文</param>
             <returns>上下文键</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateCommonUseData(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData},System.String,System.String,System.String)">
+            <summary>
+            创建通用数据
+            </summary>
+            <param name="context">上下文</param>
+            <param name="factory">通用数据工厂</param>
+            <param name="key">键</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="functionCode">功能编码</param>
+            <returns>通用数据</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateBasicCommonUseData(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.String)">
+            <summary>
+            创建基本的通用数据
+            </summary>
+            <param name="context">上下文</param>
+            <param name="key">键</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="functionCode">功能编码</param>
+            <returns>基本的通用数据</returns>
         </member>
         <member name="T:Microsoft.AspNetCore.Http.HttpRequestExtensions">
             <summary>

@@ -16,7 +16,8 @@ namespace Hzdtf.Persistence.Dapper
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT> where ModelT : SimpleInfo<IdT>
+    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT> 
+        where ModelT : SimpleInfo<IdT>
     {
         #region 属性与字段
 
@@ -36,20 +37,21 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>模型</returns>
-        protected override ModelT Select(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
+        protected override ModelT Select(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null, CommonUseData comData = null)
         {
             DynamicParameters dataParameter = null;
-            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter);
+            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter, comData: comData);
 
             bool sqlEmptyNotFilter;
-            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter, comData: comData);
             if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
             {
                 return null;
             }
 
-            var sql = SelectSql(id, dataPermissionSql, fieldPermissionSql, propertyNames);
+            var sql = SelectSql(id, dataPermissionSql, fieldPermissionSql, propertyNames, comData: comData);
             if (dataParameter == null)
             {
                 dataParameter = new DynamicParameters();
@@ -59,7 +61,7 @@ namespace Hzdtf.Persistence.Dapper
             return ExecRecordSqlLog<ModelT>(sql, () =>
             {
                 return dbConnection.QueryFirstOrDefault<ModelT>(sql, dataParameter, dbTransaction);
-            }, "Select");
+            }, comData: comData, "Select");
         }
 
         /// <summary>
@@ -69,26 +71,27 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>模型列表</returns>
-        protected override IList<ModelT> Select(IdT[] ids, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
+        protected override IList<ModelT> Select(IdT[] ids, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null, CommonUseData comData = null)
         {
             DynamicParameters dataParameter = null;
-            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter);
+            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter, comData: comData);
 
             bool sqlEmptyNotFilter;
-            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter, comData: comData);
             if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
             {
                 return null;
             }
 
             DynamicParameters parameters;
-            var sql = SelectSql(ids, dataPermissionSql, fieldPermissionSql, out parameters, propertyNames);
+            var sql = SelectSql(ids, dataPermissionSql, fieldPermissionSql, out parameters, propertyNames, comData: comData);
 
             return ExecRecordSqlLog<IList<ModelT>>(sql, () =>
             {
                 return dbConnection.Query<ModelT>(sql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
-            }, "Select");
+            }, comData: comData, "Select");
         }
 
         /// <summary>
@@ -97,12 +100,13 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="id">ID</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>模型数</returns>
-        protected override int Count(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override int Count(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             DynamicParameters dataParameter = null;
-            var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter);
-            var sql = CountSql(id, dataPermissionSql);
+            var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter, comData: comData);
+            var sql = CountSql(id, dataPermissionSql, comData: comData);
 
             if (dataParameter == null)
             {
@@ -113,7 +117,7 @@ namespace Hzdtf.Persistence.Dapper
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
-            }, "Count");
+            }, comData: comData, "Count");
         }
 
         /// <summary>
@@ -122,16 +126,17 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>模型数</returns>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
-        protected override int Count(IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        /// <param name="comData">通用数据</param>
+        protected override int Count(IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             DynamicParameters dataParameter = null;
-            var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter);
-            var sql = CountSql(dataPermissionSql: dataPermissionSql);
+            var dataPermissionSql = ExecDataPermissionFilter("Count", dbConnection, dbTransaction, ref dataParameter, comData: comData);
+            var sql = CountSql(dataPermissionSql: dataPermissionSql, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.ExecuteScalar<int>(sql, dataParameter, dbTransaction);
-            }, "Count");
+            }, comData: comData, "Count");
         }
 
         /// <summary>
@@ -141,24 +146,25 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="propertyNames">属性名称集合</param>
-        protected override IList<ModelT> Select(IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
+        /// <param name="comData">通用数据</param>
+        protected override IList<ModelT> Select(IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null, CommonUseData comData = null)
         {
             DynamicParameters dataParameter = null;
-            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter);
+            var dataPermissionSql = ExecDataPermissionFilter("Select", dbConnection, dbTransaction, ref dataParameter, comData: comData);
 
             bool sqlEmptyNotFilter;
-            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+            var fieldPermissionSql = ExecFieldPermissionFilter("Select", dbConnection, dbTransaction, out sqlEmptyNotFilter, comData: comData);
             if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
             {
                 return null;
             }
 
-            var sql = SelectSql(propertyNames: propertyNames, dataPermissionSql: dataPermissionSql, fieldPermissionSql: fieldPermissionSql);
+            var sql = SelectSql(propertyNames: propertyNames, dataPermissionSql: dataPermissionSql, fieldPermissionSql: fieldPermissionSql, comData: comData);
 
             return ExecRecordSqlLog<IList<ModelT>>(sql, () =>
             {
                 return dbConnection.Query<ModelT>(sql, dataParameter, dbTransaction).AsList();
-            }, "Select");
+            }, comData: comData, "Select");
         }
 
         /// <summary>
@@ -170,39 +176,40 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>分页信息</returns>
-        protected override PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, IDbConnection dbConnection, FilterInfo filter = null, IDbTransaction dbTransaction = null, string[] propertyNames = null)
+        protected override PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, IDbConnection dbConnection, FilterInfo filter = null, IDbTransaction dbTransaction = null, string[] propertyNames = null, CommonUseData comData = null)
         {
-            BeforeFilterInfo(filter);
+            BeforeFilterInfo(filter, comData);
             DynamicParameters dataParameter = null;
             string dataPermissionSql = null;
             return PagingUtil.ExecPage<ModelT>(pageIndex, pageSize, () =>
             {
-                dataPermissionSql = ExecDataPermissionFilter("SelectPage", dbConnection, dbTransaction, ref dataParameter);
+                dataPermissionSql = ExecDataPermissionFilter("SelectPage", dbConnection, dbTransaction, ref dataParameter, comData: comData);
 
                 DynamicParameters parameters;
-                var countSql = CountByFilterSql(filter, dataPermissionSql, out parameters);
+                var countSql = CountByFilterSql(filter, dataPermissionSql, out parameters, comData: comData);
 
                 return ExecRecordSqlLog<int>(countSql, () =>
                 {
                     return dbConnection.ExecuteScalar<int>(countSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction);
-                }, "SelectPage");
+                }, comData: comData, "SelectPage");
             }, () =>
             {
                 bool sqlEmptyNotFilter;
-                var fieldPermissionSql = ExecFieldPermissionFilter("SelectPage", dbConnection, dbTransaction, out sqlEmptyNotFilter);
+                var fieldPermissionSql = ExecFieldPermissionFilter("SelectPage", dbConnection, dbTransaction, out sqlEmptyNotFilter, comData: comData);
                 if (string.IsNullOrWhiteSpace(fieldPermissionSql) && !sqlEmptyNotFilter)
                 {
                     return null;
                 }
 
                 DynamicParameters parameters;
-                var pageSql = SelectPageSql(pageIndex, pageSize, dataPermissionSql, fieldPermissionSql, out parameters, filter, propertyNames);
+                var pageSql = SelectPageSql(pageIndex, pageSize, dataPermissionSql, fieldPermissionSql, out parameters, filter, propertyNames, comData: comData);
 
                 return ExecRecordSqlLog<IList<ModelT>>(pageSql, () =>
                 {
                     return dbConnection.Query<ModelT>(pageSql, DapperUtil.MergeParams(dataParameter, parameters), dbTransaction).AsList();
-                }, "SelectPage");
+                }, comData: comData, "SelectPage");
             });
         }
 
@@ -212,15 +219,16 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="model">模型</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>只有修改信息的模型</returns>
-        protected override ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
-            var sql = SelectModifyInfoByIdAndGeModifyTimeSql(model);
+            var sql = SelectModifyInfoByIdAndGeModifyTimeSql(model, comData: comData);
 
             return ExecRecordSqlLog<ModelT>(sql, () =>
             {
                 return dbConnection.QueryFirstOrDefault<ModelT>(sql: sql, param: model, transaction: dbTransaction);
-            }, "SelectModifyInfoByIdAndGeModifyTime");
+            }, comData: comData, "SelectModifyInfoByIdAndGeModifyTime");
         }
 
         /// <summary>
@@ -229,16 +237,17 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="models">模型数组</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>只有修改信息的模型列表</returns>
-        protected override IList<ModelT> SelectModifyInfosByIdAndGeModifyTime(ModelT[] models, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override IList<ModelT> SelectModifyInfosByIdAndGeModifyTime(ModelT[] models, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             DynamicParameters parameters;
-            var sql = SelectModifyInfosByIdAndGeModifyTimeSql(models, out parameters);
+            var sql = SelectModifyInfosByIdAndGeModifyTimeSql(models, out parameters, comData: comData);
 
             return ExecRecordSqlLog<IList<ModelT>>(sql, () =>
             {
                 return dbConnection.Query<ModelT>(sql: sql, param: parameters, transaction: dbTransaction).AsList();
-            }, "SelectModifyInfosByIdAndGeModifyTime");
+            }, comData: comData, "SelectModifyInfosByIdAndGeModifyTime");
         }
 
         #endregion
@@ -251,17 +260,18 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="model">模型</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int Insert(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override int Insert(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             var isAuto = PrimaryKeyIncr(model.Id);
-            var sql = InsertSql(model, isAuto);
+            var sql = InsertSql(model, isAuto, comData: comData);
             if (isAuto)
             {
                 model.Id = ExecRecordSqlLog<IdT>(sql, () =>
                 {
                     return dbConnection.ExecuteScalar<IdT>(sql, model, dbTransaction);
-                }, "Insert");
+                }, comData: comData, "Insert");
 
                 return 1;
             }
@@ -270,7 +280,7 @@ namespace Hzdtf.Persistence.Dapper
                 return ExecRecordSqlLog<int>(sql, () =>
                 {
                     return dbConnection.Execute(sql, model, dbTransaction);
-                }, "Insert");
+                }, comData: comData, "Insert");
             }
         }
 
@@ -280,16 +290,17 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="models">模型列表</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int Insert(IList<ModelT> models, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override int Insert(IList<ModelT> models, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             DynamicParameters parameters;
-            var sql = InsertSql(models, out parameters);
+            var sql = InsertSql(models, out parameters, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.Execute(sql, parameters, dbTransaction);
-            }, "Insert");
+            }, comData: comData, "Insert");
         }
 
         /// <summary>
@@ -299,15 +310,16 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int UpdateById(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null)
+        protected override int UpdateById(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null, CommonUseData comData = null)
         {
-            var sql = UpdateByIdSql(model, propertyNames);
+            var sql = UpdateByIdSql(model, propertyNames, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.Execute(sql, model, dbTransaction);
-            }, "UpdateById");
+            }, comData: comData, "UpdateById");
         }
 
         /// <summary>
@@ -316,15 +328,16 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="id">ID</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int DeleteById(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override int DeleteById(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
-            var sql = DeleteByIdSql(id);
+            var sql = DeleteByIdSql(id, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.Execute(sql, new SimpleInfo<IdT>() { Id = id }, dbTransaction);
-            }, "DeleteById");
+            }, comData: comData, "DeleteById");
         }
 
         /// <summary>
@@ -333,16 +346,17 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="ids">ID数组</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int DeleteByIds(IdT[] ids, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override int DeleteByIds(IdT[] ids, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             DynamicParameters parameters;
-            var sql = DeleteByIdsSql(ids, out parameters);
+            var sql = DeleteByIdsSql(ids, out parameters, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.Execute(sql, parameters, dbTransaction);
-            }, "DeleteByIds");
+            }, comData: comData, "DeleteByIds");
         }
 
         /// <summary>
@@ -351,14 +365,15 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>影响行数</returns>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
-        protected override int Delete(IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        /// <param name="comData">通用数据</param>
+        protected override int Delete(IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
-            var sql = DeleteSql();
+            var sql = DeleteSql(comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.Execute(sql, dbTransaction);
-            }, "Delete");
+            }, comData: comData, "Delete");
         }
 
         #endregion
@@ -371,15 +386,16 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="table">从表</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int DeleteSlaveTable(string table, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override int DeleteSlaveTable(string table, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
-            var sql = DeleteByTableSql(table);
+            var sql = DeleteByTableSql(table, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.Execute(sql, dbTransaction);
-            }, "DeleteSlaveTable");
+            }, comData: comData, "DeleteSlaveTable");
         }
 
         /// <summary>
@@ -390,16 +406,17 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="foreignKeyValues">外键值集合</param>
         /// <param name="dbConnection">数据库连接</param>
         /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int DeleteSlaveTableByForeignKeys(string table, string foreignKeyName, IdT[] foreignKeyValues, IDbConnection dbConnection, IDbTransaction dbTransaction = null)
+        protected override int DeleteSlaveTableByForeignKeys(string table, string foreignKeyName, IdT[] foreignKeyValues, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             DynamicParameters parameters;
-            var sql = DeleteByTableAndForignKeySql(table, foreignKeyName, foreignKeyValues, out parameters);
+            var sql = DeleteByTableAndForignKeySql(table, foreignKeyName, foreignKeyValues, out parameters, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
                 return dbConnection.Execute(sql, parameters, dbTransaction);
-            }, "DeleteSlaveTableByForeignKeys");
+            }, comData: comData, "DeleteSlaveTableByForeignKeys");
         }
 
         #endregion
@@ -415,8 +432,9 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectSql(IdT id, string dataPermissionSql, string fieldPermissionSql, string[] propertyNames = null);
+        protected abstract string SelectSql(IdT id, string dataPermissionSql, string fieldPermissionSql, string[] propertyNames = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID集合查询模型列表SQL语句
@@ -426,24 +444,27 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="fieldPermissionSql">字段权限SQL</param>
         /// <param name="parameters">参数</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectSql(IdT[] ids, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, string[] propertyNames = null);
+        protected abstract string SelectSql(IdT[] ids, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, string[] propertyNames = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID统计模型数SQL语句
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string CountSql(IdT id, string dataPermissionSql);
+        protected abstract string CountSql(IdT id, string dataPermissionSql, CommonUseData comData = null);
 
         /// <summary>
         /// 统计模型数SQL语句
         /// </summary>
         /// <param name="pfx">前辍</param>
         /// <param name="dataPermissionSql">数据权限SQL</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string CountSql(string pfx = null, string dataPermissionSql = null);
+        protected abstract string CountSql(string pfx = null, string dataPermissionSql = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据筛选信息统计模型数SQL语句
@@ -451,8 +472,9 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="filter">筛选信息</param>
         /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <param name="parameters">参数</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string CountByFilterSql(FilterInfo filter, string dataPermissionSql, out DynamicParameters parameters);
+        protected abstract string CountByFilterSql(FilterInfo filter, string dataPermissionSql, out DynamicParameters parameters, CommonUseData comData = null);
 
         /// <summary>
         /// 查询模型列表
@@ -462,8 +484,9 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="propertyNames">属性名称集合</param>
         /// <param name="dataPermissionSql">数据权限SQL</param>
         /// <param name="fieldPermissionSql">字段权限SQL</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectSql(string pfx = null, string appendFieldSqls = null, string[] propertyNames = null, string dataPermissionSql = null, string fieldPermissionSql = null);
+        protected abstract string SelectSql(string pfx = null, string appendFieldSqls = null, string[] propertyNames = null, string dataPermissionSql = null, string fieldPermissionSql = null, CommonUseData comData = null);
 
         /// <summary>
         /// 查询模型列表并分页SQL语句
@@ -475,23 +498,26 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="parameters">参数</param>
         /// <param name="filter">筛选</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string SelectPageSql(int pageIndex, int pageSize, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, FilterInfo filter = null, string[] propertyNames = null);
+        protected abstract string SelectPageSql(int pageIndex, int pageSize, string dataPermissionSql, string fieldPermissionSql, out DynamicParameters parameters, FilterInfo filter = null, string[] propertyNames = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
         /// </summary>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>只有修改信息的SQL语句</returns>
-        protected abstract string SelectModifyInfoByIdAndGeModifyTimeSql(ModelT model);
+        protected abstract string SelectModifyInfoByIdAndGeModifyTimeSql(ModelT model, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
         /// </summary>
         /// <param name="models">模型数组</param>
         /// <param name="parameters">参数</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>只有修改信息的SQL语句</returns>
-        protected abstract string SelectModifyInfosByIdAndGeModifyTimeSql(ModelT[] models, out DynamicParameters parameters);
+        protected abstract string SelectModifyInfosByIdAndGeModifyTimeSql(ModelT[] models, out DynamicParameters parameters, CommonUseData comData = null);
 
         #endregion
 
@@ -502,45 +528,51 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="isGetInsertId">是否获取自增ID</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string InsertSql(ModelT model, bool isGetInsertId = false);
+        protected abstract string InsertSql(ModelT model, bool isGetInsertId = false, CommonUseData comData = null);
 
         /// <summary>
         /// 插入模型列表SQL语句
         /// </summary>
         /// <param name="models">模型列表</param>
         /// <param name="parameters">动态参数</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string InsertSql(IList<ModelT> models, out DynamicParameters parameters);
+        protected abstract string InsertSql(IList<ModelT> models, out DynamicParameters parameters, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID更新模型SQL语句
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string UpdateByIdSql(ModelT model, string[] propertyNames = null);
+        protected abstract string UpdateByIdSql(ModelT model, string[] propertyNames = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID删除模型SQL语句
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string DeleteByIdSql(IdT id);
+        protected abstract string DeleteByIdSql(IdT id, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID数组删除模型SQL语句
         /// </summary>
         /// <param name="ids">ID数组</param>
         /// <param name="parameters">参数</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string DeleteByIdsSql(IdT[] ids, out DynamicParameters parameters);
+        protected abstract string DeleteByIdsSql(IdT[] ids, out DynamicParameters parameters, CommonUseData comData = null);
 
         /// <summary>
         /// 删除所有模型SQL语句
         /// </summary>
         /// <returns>SQL语句</returns>
-        protected abstract string DeleteSql();
+        /// <param name="comData">通用数据</param>
+        protected abstract string DeleteSql(CommonUseData comData = null);
 
         #endregion
 
@@ -552,8 +584,9 @@ namespace Hzdtf.Persistence.Dapper
         /// 根据表名删除所有模型SQL语句
         /// </summary>
         /// <param name="table">表名</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected virtual string DeleteByTableSql(string table) => null;
+        protected virtual string DeleteByTableSql(string table, CommonUseData comData = null) => null;
 
         /// <summary>
         /// 根据表名、外键字段和外键值删除模型SQL语句
@@ -562,8 +595,9 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="foreignKeyName">外键名称</param>
         /// <param name="foreignKeyValues">外键值集合</param>
         /// <param name="parameters">参数</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected virtual string DeleteByTableAndForignKeySql(string table, string foreignKeyName, IdT[] foreignKeyValues, out DynamicParameters parameters)
+        protected virtual string DeleteByTableAndForignKeySql(string table, string foreignKeyName, IdT[] foreignKeyValues, out DynamicParameters parameters, CommonUseData comData = null)
         {
             parameters = null;
             return null;
@@ -573,8 +607,9 @@ namespace Hzdtf.Persistence.Dapper
         /// 获取查询的排序名称前辍，如果是主表，可以为null或空
         /// </summary>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>查询分页的排序名称前辍</returns>
-        protected virtual string GetSelectSortNamePfx(FilterInfo filter) => filter != null ? GetSelectSortNamePfx(filter.SortName) : null;
+        protected virtual string GetSelectSortNamePfx(FilterInfo filter, CommonUseData comData = null) => filter != null ? GetSelectSortNamePfx(filter.SortName) : null;
 
         /// <summary>
         /// 获取查询的排序名称前辍，如果是主表，可以为null或空
@@ -590,15 +625,17 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="conn">数据库连接</param>
         /// <param name="trans">数据库事务</param>
         /// <param name="tbPfx">表前辍</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>数据权限过滤</returns>
-        protected virtual DataPermissionFilterInfo CreateDataPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, string tbPfx = null) => new DataPermissionFilterInfo()
+        protected virtual DataPermissionFilterInfo CreateDataPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, string tbPfx = null, CommonUseData comData = null) => new DataPermissionFilterInfo()
         {
             PersistenceClassName = this.GetType().Name,
             Table = Table,
             TablePfx = string.IsNullOrWhiteSpace(tbPfx) ? Table : tbPfx,
             PersistenceMethodName = methodName,
             DbTransaction = trans,
-            DbConnection = conn
+            DbConnection = conn,
+            ComData = comData
         };
 
         /// <summary>
@@ -608,15 +645,17 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="conn">数据库连接</param>
         /// <param name="trans">数据库事务</param>
         /// <param name="tbPfx">表前辍</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>字段权限过滤</returns>
-        protected virtual FieldPermissionFilterInfo CreateFieldPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, string tbPfx = null) => new FieldPermissionFilterInfo()
+        protected virtual FieldPermissionFilterInfo CreateFieldPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, string tbPfx = null, CommonUseData comData = null) => new FieldPermissionFilterInfo()
         {
             PersistenceClassName = this.GetType().Name,
             Table = Table,
             TablePfx = string.IsNullOrWhiteSpace(tbPfx) ? Table : tbPfx,
             PersistenceMethodName = methodName,
             DbTransaction = trans,
-            DbConnection = conn
+            DbConnection = conn,
+            ComData = comData
         };
 
         /// <summary>
@@ -627,14 +666,15 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="trans">数据库事务</param>
         /// <param name="param">参数</param>
         /// <param name="tbPfx">表前辍</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>过滤SQL</returns>
-        protected virtual string ExecDataPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, ref DynamicParameters param, string tbPfx = null)
+        protected virtual string ExecDataPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, ref DynamicParameters param, string tbPfx = null, CommonUseData comData = null)
         {
             if (DataPermissionFilter == null)
             {
                 return null;
             }
-            var perFilter = CreateDataPermissionFilter(methodName, conn, trans, tbPfx);
+            var perFilter = CreateDataPermissionFilter(methodName, conn, trans, tbPfx, comData);
             DataPermissionFilter.DoFilter(perFilter);
             if (string.IsNullOrWhiteSpace(perFilter.Sql))
             {
@@ -666,15 +706,16 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="trans">数据库事务</param>
         /// <param name="tbPfx">表前辍</param>
         /// <param name="sqlEmptyNotFilter">SQL为空时则不过滤，默认为是</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>过滤SQL</returns>
-        protected virtual string ExecFieldPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, out bool sqlEmptyNotFilter, string tbPfx = null)
+        protected virtual string ExecFieldPermissionFilter(string methodName, IDbConnection conn, IDbTransaction trans, out bool sqlEmptyNotFilter, string tbPfx = null, CommonUseData comData = null)
         {
             sqlEmptyNotFilter = true;
             if (FieldPermissionFilter == null)
             {
                 return null;
             }
-            var perFilter = CreateFieldPermissionFilter(methodName, conn, trans, tbPfx);
+            var perFilter = CreateFieldPermissionFilter(methodName, conn, trans, tbPfx, comData);
             FieldPermissionFilter.DoFilter(perFilter);
             sqlEmptyNotFilter = perFilter.SqlEmptyNotFilter;
 

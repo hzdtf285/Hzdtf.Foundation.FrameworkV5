@@ -117,7 +117,8 @@ namespace Hzdtf.BasicFunction.MySql
         /// <param name="whereSql">where语句</param>
         /// <param name="parameters">参数</param>
         /// <param name="filter">筛选</param>
-        protected override void AppendSelectPageWhereSql(StringBuilder whereSql, DynamicParameters parameters, FilterInfo filter = null)
+        /// <param name="comData">通用数据</param>
+        protected override void AppendSelectPageWhereSql(StringBuilder whereSql, DynamicParameters parameters, FilterInfo filter = null, CommonUseData comData = null)
         {
             if (filter is DataDictionaryItemFilterInfo)
             {

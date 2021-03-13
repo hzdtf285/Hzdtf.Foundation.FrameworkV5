@@ -31,9 +31,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="seqType">序列类型</param>
         /// <param name="noLength">序列号长度</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<string> BuildNo([DisplayName2("序列类型"), Required, MinLength(2), MaxLength(2)] string seqType, byte noLength = 13, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<string> BuildNo([DisplayName2("序列类型"), Required, MinLength(2), MaxLength(2)] string seqType, byte noLength = 13, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<string>((reInfo, connId) =>
             {
@@ -48,9 +48,9 @@ namespace Hzdtf.BasicFunction.Service.Impl
                         UpdateDate = currTime,
                         Increment = 1
                     };
-                    SetCreateInfo(sequenceInfo, currUser);
+                    SetCreateInfo(sequenceInfo, comData);
 
-                    Persistence.Insert(sequenceInfo, connId);                    
+                    Persistence.Insert(sequenceInfo, connectionId: connectionId, comData: comData);                    
                 }
                 else
                 {
@@ -67,12 +67,12 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     }
 
                     sequenceInfo.UpdateDate = currTime;
-                    SetModifyInfo(sequenceInfo, currUser);
+                    SetModifyInfo(sequenceInfo, comData);
 
                     Persistence.UpdateIncrementById(sequenceInfo, connId);
                 }
 
-                return SequenceRule.BuilderNo(seqType, noLength, incr, currUser);
+                return SequenceRule.BuilderNo(seqType, noLength, incr, comData);
             }, null, connectionId);
         }
     }

@@ -16,8 +16,9 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        void Trace(string msg, Exception ex = null, string source = null, params string[] tags);
+        void Trace(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 调试
@@ -25,8 +26,9 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        void Debug(string msg, Exception ex = null, string source = null, params string[] tags);
+        void Debug(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 信息
@@ -34,8 +36,9 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        void Info(string msg, Exception ex = null, string source = null, params string[] tags);
+        void Info(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 警告
@@ -43,8 +46,9 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        void Wran(string msg, Exception ex = null, string source = null, params string[] tags);
+        void Wran(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 错误
@@ -52,8 +56,9 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        void Error(string msg, Exception ex = null, string source = null, params string[] tags);
+        void Error(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 致命
@@ -61,7 +66,8 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        void Fatal(string msg, Exception ex = null, string source = null, params string[] tags);
+        void Fatal(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
     }
 }

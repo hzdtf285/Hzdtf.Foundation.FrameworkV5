@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Hzdtf.Workflow.Controller
 {
@@ -47,10 +48,11 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected override ReturnInfo<PagingInfo<WorkflowInfo>> QueryPageFromService(int pageIndex, int pageSize, ApplyFlowFilterInfo filter)
+        protected override ReturnInfo<PagingInfo<WorkflowInfo>> QueryPageFromService(int pageIndex, int pageSize, ApplyFlowFilterInfo filter, CommonUseData comData = null)
         {
-            return Service.QueryCurrUserApplyFlowPage(pageIndex, pageSize, filter);
+            return Service.QueryCurrUserApplyFlowPage(pageIndex, pageSize, filter, comData);
         }
 
         /// <summary>
@@ -59,25 +61,27 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="workflowId">工作流ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("GetFlowDetail/{workflowId}")]
-        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId) => Service.FindCurrUserApplyDetail(workflowId);
+        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId) => Service.FindCurrUserApplyDetail(workflowId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE));
 
         /// <summary>
         /// 填充页面数据，包含当前用户所拥有的权限功能列表
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
-        protected override void FillPageData(ReturnInfo<DateRangePageInfo> returnInfo)
+        /// <param name="comData">通用数据</param>
+        protected override void FillPageData(ReturnInfo<DateRangePageInfo> returnInfo, CommonUseData comData = null)
         {
             var re = UserService.QueryPageData<DateRangePageInfo>(MenuCode(), () =>
             {
                 return returnInfo.Data;
-            });
+            }, comData: comData);
             returnInfo.FromBasic(re);
         }
 
         /// <summary>
         /// 创建页面数据
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>页面数据</returns>
-        protected override DateRangePageInfo CreatePageData() => new DateRangePageInfo();
+        protected override DateRangePageInfo CreatePageData(CommonUseData comData = null) => new DateRangePageInfo();
     }
 }

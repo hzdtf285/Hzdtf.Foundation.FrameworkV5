@@ -20,9 +20,9 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="flowCensorshipId">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<SendFlowRouteInfo>> QueryByFlowCensorshipId([DisplayName2("流程关卡ID"), Id] int flowCensorshipId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<SendFlowRouteInfo>> QueryByFlowCensorshipId([DisplayName2("流程关卡ID"), Id] int flowCensorshipId, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<IList<SendFlowRouteInfo>>((reInfo, connId) =>
             {
@@ -35,9 +35,9 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="flowCensorshipIds">流程关卡ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<SendFlowRouteInfo>> QueryByFlowCensorshipIds(int[] flowCensorshipIds, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<IList<SendFlowRouteInfo>> QueryByFlowCensorshipIds(int[] flowCensorshipIds, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<IList<SendFlowRouteInfo>>((reInfo, connId) =>
             {

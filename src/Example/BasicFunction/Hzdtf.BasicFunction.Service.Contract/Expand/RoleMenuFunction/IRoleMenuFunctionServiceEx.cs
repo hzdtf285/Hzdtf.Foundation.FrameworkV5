@@ -18,9 +18,9 @@ namespace Hzdtf.BasicFunction.Service.Contract
         /// </summary>
         /// <param name="roleId">角色ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<MenuFunctionInfo>> QueryMenuFunctionsByRoleId(int roleId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<MenuFunctionInfo>> QueryMenuFunctionsByRoleId(int roleId, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 保存角色拥有的菜单功能信息列表
@@ -28,8 +28,8 @@ namespace Hzdtf.BasicFunction.Service.Contract
         /// <param name="roleId">角色ID</param>
         /// <param name="menuFunctionIds">菜单功能ID列表</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> SaveRoleMenuFunctions(int roleId, IList<int> menuFunctionIds, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> SaveRoleMenuFunctions(int roleId, IList<int> menuFunctionIds, CommonUseData comData = null, string connectionId = null);
     }
 }

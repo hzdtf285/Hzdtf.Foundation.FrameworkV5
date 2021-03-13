@@ -17,17 +17,17 @@ namespace Hzdtf.BasicFunction.Service.Contract
         /// 查询角色列表并去掉系统隐藏
         /// </summary>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<RoleInfo>> QueryAndNotSystemHide(string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<RoleInfo>> QueryAndNotSystemHide(CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据筛选条件查询角色列表
         /// </summary>
         /// <param name="filter">筛选</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<RoleInfo>> QueryByFilter(KeywordFilterInfo filter, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<RoleInfo>> QueryByFilter(KeywordFilterInfo filter, CommonUseData comData = null, string connectionId = null);
     }
 }

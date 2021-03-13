@@ -48,10 +48,11 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Trace(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Trace(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
-            BeforeWriteStorage("trace", msg, ex, source, tags);
+            BeforeWriteStorage("trace", msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -60,10 +61,11 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Debug(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Debug(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
-            BeforeWriteStorage("debug", msg, ex, source, tags);
+            BeforeWriteStorage("debug", msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -72,10 +74,11 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Info(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Info(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
-            BeforeWriteStorage("info", msg, ex, source, tags);
+            BeforeWriteStorage("info", msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -84,10 +87,11 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Wran(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Wran(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
-            BeforeWriteStorage("wran", msg, ex, source, tags);
+            BeforeWriteStorage("wran", msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -96,10 +100,11 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Error(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Error(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
-            BeforeWriteStorage("error", msg, ex, source, tags);
+            BeforeWriteStorage("error", msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -108,10 +113,11 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Fatal(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Fatal(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
-            BeforeWriteStorage("fatal", msg, ex, source, tags);
+            BeforeWriteStorage("fatal", msg, ex, source, eventId, tags);
         }
 
         #endregion
@@ -125,10 +131,11 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="tags">标签</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="ex">异常</param>
-        protected virtual void BeforeWriteStorage(string level, string msg, Exception ex = null, string source = null, params string[] tags)
+        protected virtual void BeforeWriteStorage(string level, string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
-            BeforeWriteStorage(level, msg, null, ex, source, tags);
+            BeforeWriteStorage(level, msg, eventId, ex, source, tags);
         }
 
         /// <summary>
@@ -189,28 +196,36 @@ namespace Hzdtf.Logger.Contract
         /// <summary>
         /// 获取事件ID
         /// </summary>
+        /// <param name="eventId">事件ID</param>
         /// <returns>事件ID</returns>
-        protected virtual string GetEventId()
+        protected virtual string GetEventId(string eventId = null)
         {
-            if (TheOperation == null)
+            if (string.IsNullOrWhiteSpace(eventId))
             {
-                return null;
-            }
-            try
-            {
-                var e = TheOperation.EventId;
-                if (string.IsNullOrWhiteSpace(e))
+                if (TheOperation == null)
                 {
                     return null;
                 }
-                return e;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
+                try
+                {
+                    var e = TheOperation.EventId;
+                    if (string.IsNullOrWhiteSpace(e))
+                    {
+                        return null;
+                    }
+                    return e;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
 
-                return null;
-            }            
+                    return null;
+                }
+            }
+            else
+            {
+                return eventId;
+            }
         }
     }
 

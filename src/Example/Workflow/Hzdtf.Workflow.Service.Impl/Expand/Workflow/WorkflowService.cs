@@ -45,8 +45,8 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="applyNo">申请单号</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>申请单号判断是否存在</returns>
-        /// <param name="currUser">当前用户</param>
-        public virtual ReturnInfo<bool> ExistsByApplyNo([DisplayName2("申请单号"), Required] string applyNo, string connectionId = null, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        public virtual ReturnInfo<bool> ExistsByApplyNo([DisplayName2("申请单号"), Required] string applyNo, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {
@@ -61,16 +61,15 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 4)]
-        public virtual ReturnInfo<PagingInfo<WorkflowInfo>> QueryCurrUserWaitHandlePage(int pageIndex, int pageSize, WaitHandleFilterInfo filter, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<PagingInfo<WorkflowInfo>> QueryCurrUserWaitHandlePage(int pageIndex, int pageSize, WaitHandleFilterInfo filter, CommonUseData comData = null, string connectionId = null)
         {
             if (filter == null)
             {
                 filter = new WaitHandleFilterInfo();
             }
-            var user = UserTool<int>.GetCurrUser(currUser);
+            var user = UserTool<int>.GetCurrUser(comData);
             filter.HandlerId = user.Id;
             filter.EndCreateTime = filter.EndCreateTime.AddThisDayLastTime();
 
@@ -87,16 +86,15 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 4)]
-        public virtual ReturnInfo<PagingInfo<WorkflowInfo>> QueryCurrUserAuditedFlowPage(int pageIndex, int pageSize, AuditFlowFilterInfo filter, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<PagingInfo<WorkflowInfo>> QueryCurrUserAuditedFlowPage(int pageIndex, int pageSize, AuditFlowFilterInfo filter, CommonUseData comData = null, string connectionId = null)
         {
             if (filter == null)
             {
                 filter = new AuditFlowFilterInfo();
             }
-            var user = UserTool<int>.GetCurrUser(currUser);
+            var user = UserTool<int>.GetCurrUser(comData);
             filter.HandlerId = user.Id;
             filter.EndCreateTime = filter.EndCreateTime.AddThisDayLastTime();
 
@@ -113,16 +111,15 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 4)]
-        public virtual ReturnInfo<PagingInfo<WorkflowInfo>> QueryCurrUserApplyFlowPage(int pageIndex, int pageSize, ApplyFlowFilterInfo filter, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<PagingInfo<WorkflowInfo>> QueryCurrUserApplyFlowPage(int pageIndex, int pageSize, ApplyFlowFilterInfo filter, CommonUseData comData = null, string connectionId = null)
         {
             if (filter == null)
             {
                 filter = new ApplyFlowFilterInfo();
             }
-            var user = UserTool<int>.GetCurrUser(currUser);
+            var user = UserTool<int>.GetCurrUser(comData);
             filter.HandlerId = user.Id;
             filter.EndCreateTime = filter.EndCreateTime.AddThisDayLastTime();
 
@@ -137,9 +134,9 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<WorkflowInfo> FindContainHandlesAndAllConfigs([DisplayName2("ID"), Id] int id, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowInfo> FindContainHandlesAndAllConfigs([DisplayName2("ID"), Id] int id, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<WorkflowInfo>((reInfo, connId) =>
             {
@@ -157,7 +154,7 @@ namespace Hzdtf.Workflow.Service.Impl
                     return null;
                 }
 
-                ReturnInfo<WorkflowDefineInfo> reDefine = WorkflowConfigReader.ReaderAllConfig(workflow.WorkflowDefineId, connId, currUser);
+                ReturnInfo<WorkflowDefineInfo> reDefine = WorkflowConfigReader.ReaderAllConfig(workflow.WorkflowDefineId, connectionId: connId, comData: comData);
                 if (reDefine.Failure())
                 {
                     reInfo.FromBasic(reDefine);
@@ -183,12 +180,11 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="id">ID</param>
         /// <param name="handleId">处理ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 3)]
-        public virtual ReturnInfo<WorkflowInfo> FindAuditDetail([DisplayName2("ID"), Id] int id, [DisplayName2("处理ID"), Id] int handleId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowInfo> FindAuditDetail([DisplayName2("ID"), Id] int id, [DisplayName2("处理ID"), Id] int handleId, CommonUseData comData = null, string connectionId = null)
         {
-            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId, currUser);
+            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId : connectionId, comData: comData);
             if (returnInfo.Failure())
             {
                 return returnInfo;
@@ -204,7 +200,7 @@ namespace Hzdtf.Workflow.Service.Impl
                 }
             }
 
-            BasicReturnInfo basicReturn = WorkflowUtil.CanCurrUserAudit(currHandle, currUser);
+            BasicReturnInfo basicReturn = WorkflowUtil.CanCurrUserAudit(currHandle, comData);
             if (basicReturn.Failure())
             {
                 returnInfo.FromBasic(basicReturn);
@@ -219,12 +215,11 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="id">ID</param>
         /// <param name="handleId">处理ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 3)]
-        public virtual ReturnInfo<WorkflowInfo> FindWaitDetail([DisplayName2("ID"), Id] int id, [DisplayName2("处理ID"), Id] int handleId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowInfo> FindWaitDetail([DisplayName2("ID"), Id] int id, [DisplayName2("处理ID"), Id] int handleId, CommonUseData comData = null, string connectionId = null)
         {
-            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId, currUser);
+            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId : connectionId, comData: comData);
             if (returnInfo.Failure())
             {
                 return returnInfo;
@@ -254,12 +249,11 @@ namespace Hzdtf.Workflow.Service.Impl
         /// <param name="id">ID</param>
         /// <param name="handleId">处理ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 3)]
-        public virtual ReturnInfo<WorkflowInfo> FindAuditedDetail([DisplayName2("ID"), Id] int id, [DisplayName2("处理ID"), Id] int handleId, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowInfo> FindAuditedDetail([DisplayName2("ID"), Id] int id, [DisplayName2("处理ID"), Id] int handleId, CommonUseData comData = null, string connectionId = null)
         {
-            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId, currUser);
+            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId : connectionId, comData: comData);
             if (returnInfo.Failure())
             {
                 return returnInfo;
@@ -294,18 +288,17 @@ namespace Hzdtf.Workflow.Service.Impl
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<WorkflowInfo> FindCurrUserApplyDetail([DisplayName2("ID"), Id] int id, string connectionId = null, BasicUserInfo<int> currUser = null)
+        public virtual ReturnInfo<WorkflowInfo> FindCurrUserApplyDetail([DisplayName2("ID"), Id] int id, CommonUseData comData = null, string connectionId = null)
         {
-            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId, currUser);
+            ReturnInfo<WorkflowInfo> returnInfo = FindContainHandlesAndAllConfigs(id, connectionId : connectionId, comData: comData);
             if (returnInfo.Failure())
             {
                 return returnInfo;
             }
 
-            var user = UserTool<int>.GetCurrUser(currUser);
+            var user = UserTool<int>.GetCurrUser(comData);
             if (returnInfo.Data.CreaterId != user.Id)
             {
                 returnInfo.SetFailureMsg("此工作流不是您申请的，无权限查看");

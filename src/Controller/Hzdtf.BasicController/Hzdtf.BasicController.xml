@@ -32,17 +32,16 @@
             本地化
             </summary>
         </member>
+        <member name="P:Hzdtf.BasicController.BasicControllerBase`3.ComUseDataFactory">
+            <summary>
+            通用数据工厂
+            </summary>
+        </member>
         <member name="M:Hzdtf.BasicController.BasicControllerBase`3.MenuCode">
             <summary>
             菜单编码
             </summary>
             <returns>菜单编码</returns>
-        </member>
-        <member name="M:Hzdtf.BasicController.BasicControllerBase`3.GetCurrUser">
-            <summary>
-            获取当前用户
-            </summary>
-            <returns>当前用户</returns>
         </member>
         <member name="T:Hzdtf.BasicController.IPagingParseFilter">
             <summary>
@@ -157,16 +156,18 @@
             </summary>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{`3})">
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{`3},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.CreatePageData">
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="T:Hzdtf.BasicController.PagingControllerBase`5">
@@ -196,22 +197,24 @@
             </summary>
             <returns>分页返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.DoPage">
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.DoPage(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             去分页
             </summary>
+            <param name="comData">通用数据</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.QueryPageFromService(System.Int32,System.Int32,`4)">
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.QueryPageFromService(System.Int32,System.Int32,`4,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             从服务里查询分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息任务</returns>
         </member>
-        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AfterPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,`4)">
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AfterPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,`4,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             分页后
             </summary>
@@ -219,13 +222,15 @@
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AppendFilterParams(`4)">
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AppendFilterParams(`4,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             追加筛选参数
             </summary>
             <param name="pageFilter">分页筛选</param>
+            <param name="comData">通用数据</param>
         </member>
         <member name="T:Hzdtf.BasicController.SystemController">
             <summary>

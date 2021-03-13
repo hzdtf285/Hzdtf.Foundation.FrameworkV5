@@ -13,7 +13,8 @@ namespace Hzdtf.Persistence.Contract.Data
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public interface IPersistence<IdT, ModelT> : IPersistenceAsync<IdT, ModelT> where ModelT : SimpleInfo<IdT>
+    public interface IPersistence<IdT, ModelT> : IPersistenceAsync<IdT, ModelT> 
+        where ModelT : SimpleInfo<IdT>
     {
         #region 读取方法
 
@@ -21,65 +22,73 @@ namespace Hzdtf.Persistence.Contract.Data
         /// 根据ID查询模型
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型</returns>
-        ModelT Select(IdT id, string connectionId = null);
+        ModelT Select(IdT id, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID查询模型
         /// </summary>
         /// <param name="id">ID</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型</returns>
-        ModelT Select(IdT id, string[] propertyNames, string connectionId = null);
+        ModelT Select(IdT id, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID集合查询模型
         /// </summary>
         /// <param name="ids">ID集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型</returns>
-        IList<ModelT> Select(IdT[] ids, string connectionId = null);
+        IList<ModelT> Select(IdT[] ids, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID集合查询模型
         /// </summary>
         /// <param name="ids">ID集合</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型</returns>
-        IList<ModelT> Select(IdT[] ids, string[] propertyNames, string connectionId = null);
+        IList<ModelT> Select(IdT[] ids, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID统计模型数
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型数</returns>
-        int Count(IdT id, string connectionId = null);
+        int Count(IdT id, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 统计模型数
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型数</returns>
-        int Count(string connectionId = null);
+        int Count(CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 查询模型列表
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型列表</returns>
-        IList<ModelT> Select(string connectionId = null);
+        IList<ModelT> Select(CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 查询模型列表
         /// </summary>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>模型列表</returns>
-        IList<ModelT> Select(string[] propertyNames, string connectionId = null);
+        IList<ModelT> Select(string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 查询模型列表并分页
@@ -87,9 +96,10 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>分页信息</returns>
-        PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, FilterInfo filter = null, string connectionId = null);
+        PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, FilterInfo filter = null, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 查询模型列表并分页
@@ -98,9 +108,10 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <param name="pageSize">每页记录数</param>
         /// <param name="propertyNames">属性名称集合</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>分页信息</returns>
-        PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, string[] propertyNames, FilterInfo filter = null, string connectionId = null);
+        PagingInfo<ModelT> SelectPage(int pageIndex, int pageSize, string[] propertyNames, FilterInfo filter = null, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 所有字段映射集合
@@ -113,18 +124,20 @@ namespace Hzdtf.Persistence.Contract.Data
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>只有修改信息的模型</returns>
-        ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, AccessMode mode = AccessMode.MASTER, string connectionId = null);
+        ModelT SelectModifyInfoByIdAndGeModifyTime(ModelT model, AccessMode mode = AccessMode.MASTER, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
         /// </summary>
         /// <param name="models">模型数组</param>
         /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>只有修改信息的模型列表</returns>
-        IList<ModelT> SelectModifyInfosByIdAndGeModifyTime(ModelT[] models, AccessMode mode = AccessMode.MASTER, string connectionId = null);
+        IList<ModelT> SelectModifyInfosByIdAndGeModifyTime(ModelT[] models, AccessMode mode = AccessMode.MASTER, CommonUseData comData = null, string connectionId = null);
 
         #endregion
 
@@ -134,57 +147,64 @@ namespace Hzdtf.Persistence.Contract.Data
         /// 插入模型
         /// </summary>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
-        int Insert(ModelT model, string connectionId = null);
+        int Insert(ModelT model, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 插入模型列表
         /// </summary>
         /// <param name="models">模型列表</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
-        int Insert(IList<ModelT> models, string connectionId = null);
+        int Insert(IList<ModelT> models, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID更新模型
         /// </summary>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
-        int UpdateById(ModelT model, string connectionId = null);
+        int UpdateById(ModelT model, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID更新模型
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
-        int UpdateById(ModelT model, string[] propertyNames, string connectionId = null);
+        int UpdateById(ModelT model, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID删除模型
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
-        int DeleteById(IdT id, string connectionId = null);
+        int DeleteById(IdT id, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID数组删除模型
         /// </summary>
         /// <param name="ids">ID数组</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
-        int DeleteByIds(IdT[] ids, string connectionId = null);
+        int DeleteByIds(IdT[] ids, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 删除所有模型
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
-        int Delete(string connectionId = null);
+        int Delete(CommonUseData comData = null, string connectionId = null);
 
         #endregion
     }

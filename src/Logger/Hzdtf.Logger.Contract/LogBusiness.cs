@@ -41,9 +41,10 @@ namespace Hzdtf.Logger.Contract
         /// </summary>
         /// <param name="action">执行核心</param>
         /// <param name="exceptionCallback">异常回调</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="logTags">日志标签</param>
         /// <returns>返回类型</returns>
-        public void TryLogExec(Action action, Action<BasicReturnInfo> exceptionCallback = null, params string[] logTags)
+        public void TryLogExec(Action action, Action<BasicReturnInfo> exceptionCallback = null, string eventId = null, params string[] logTags)
         {
             try
             {
@@ -51,7 +52,7 @@ namespace Hzdtf.Logger.Contract
             }
             catch (Exception ex)
             {
-                Log.ErrorAsync(ex.Message, ex, "LogBusiness", logTags);
+                Log.ErrorAsync(ex.Message, ex, source: "LogBusiness", eventId: eventId, tags: logTags);
 
                 var re = new BasicReturnInfo();
                 var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPER_FAILURE_KEY, "操作失败") : "操作失败";
@@ -68,9 +69,10 @@ namespace Hzdtf.Logger.Contract
         /// <typeparam name="ReturnT">返回类型</typeparam>
         /// <param name="func">执行核心</param>
         /// <param name="exceptionCallback">异常回调</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="logTags">日志标签</param>
         /// <returns>返回类型</returns>
-        public ReturnT TryLogExec<ReturnT>(Func<ReturnT> func, Func<BasicReturnInfo, ReturnT> exceptionCallback = null, params string[] logTags)
+        public ReturnT TryLogExec<ReturnT>(Func<ReturnT> func, Func<BasicReturnInfo, ReturnT> exceptionCallback = null, string eventId = null, params string[] logTags)
         {
             try
             {
@@ -78,7 +80,7 @@ namespace Hzdtf.Logger.Contract
             }
             catch (Exception ex)
             {
-                Log.ErrorAsync(ex.Message, ex, "LogBusiness", logTags);
+                Log.ErrorAsync(ex.Message, ex, source: "LogBusiness", eventId: eventId, tags: logTags);
 
                 var re = new BasicReturnInfo();
                 var msg = Localize != null ? Localize.Get(CommonCodeDefine.OPER_FAILURE_KEY, "操作失败") : "操作失败";

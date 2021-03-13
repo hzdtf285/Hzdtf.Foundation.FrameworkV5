@@ -17,9 +17,10 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        Task TraceAsync(string msg, Exception ex = null, string source = null, params string[] tags);
+        Task TraceAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 异步调试
@@ -27,9 +28,10 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        Task DebugAsync(string msg, Exception ex = null, string source = null, params string[] tags);
+        Task DebugAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 异步信息
@@ -37,9 +39,10 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        Task InfoAsync(string msg, Exception ex = null, string source = null, params string[] tags);
+        Task InfoAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 异步警告
@@ -47,9 +50,10 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        Task WranAsync(string msg, Exception ex = null, string source = null, params string[] tags);
+        Task WranAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 异步错误
@@ -57,9 +61,10 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        Task ErrorAsync(string msg, Exception ex = null, string source = null, params string[] tags);
+        Task ErrorAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
 
         /// <summary>
         /// 异步致命
@@ -67,8 +72,9 @@ namespace Hzdtf.Logger.Contract
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        Task FatalAsync(string msg, Exception ex = null, string source = null, params string[] tags);
+        Task FatalAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags);
     }
 }

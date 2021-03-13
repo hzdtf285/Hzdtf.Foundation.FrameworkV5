@@ -81,11 +81,12 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Trace(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Trace(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            ProtoLog.Trace(msg, ex, source, tags);
+            ProtoLog.Trace(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -94,11 +95,12 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Debug(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Debug(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            ProtoLog.Debug(msg, ex, source, tags);
+            ProtoLog.Debug(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -107,11 +109,12 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Info(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Info(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            ProtoLog.Info(msg, ex, source, tags);
+            ProtoLog.Info(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -120,11 +123,12 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Wran(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Wran(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            ProtoLog.Wran(msg, ex, source, tags);
+            ProtoLog.Wran(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -133,11 +137,12 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Error(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Error(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            ProtoLog.Error(msg, ex, source, tags);
+            ProtoLog.Error(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -146,11 +151,12 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
-        public void Fatal(string msg, Exception ex = null, string source = null, params string[] tags)
+        public void Fatal(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            ProtoLog.Fatal(msg, ex, source, tags);
+            ProtoLog.Fatal(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -159,12 +165,13 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        public Task TraceAsync(string msg, Exception ex = null, string source = null, params string[] tags)
+        public Task TraceAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            return ProtoLog.TraceAsync(msg, ex, source, tags);
+            return ProtoLog.TraceAsync(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -173,12 +180,13 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        public Task DebugAsync(string msg, Exception ex = null, string source = null, params string[] tags)
+        public Task DebugAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            return ProtoLog.DebugAsync(msg, ex, source, tags);
+            return ProtoLog.DebugAsync(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -187,12 +195,13 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        public Task InfoAsync(string msg, Exception ex = null, string source = null, params string[] tags)
+        public Task InfoAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            return ProtoLog.InfoAsync(msg, ex, source, tags);
+            return ProtoLog.InfoAsync(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -201,12 +210,13 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        public Task WranAsync(string msg, Exception ex = null, string source = null, params string[] tags)
+        public Task WranAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            return ProtoLog.WranAsync(msg, ex, source, tags);
+            return ProtoLog.WranAsync(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -215,12 +225,13 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        public Task ErrorAsync(string msg, Exception ex = null, string source = null, params string[] tags)
+        public Task ErrorAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            return ProtoLog.ErrorAsync(msg, ex, source, tags);
+            return ProtoLog.ErrorAsync(msg, ex, source, eventId, tags);
         }
 
         /// <summary>
@@ -229,12 +240,13 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
         /// <param name="msg">消息</param>
         /// <param name="ex">异常</param>
         /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
         /// <param name="tags">标签</param>
         /// <returns>任务</returns>
-        public Task FatalAsync(string msg, Exception ex = null, string source = null, params string[] tags)
+        public Task FatalAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
         {
             HandleMsgAndSource(ref msg, ref source);
-            return ProtoLog.FatalAsync(msg, ex, source, tags);
+            return ProtoLog.FatalAsync(msg, ex, source, eventId, tags);
         }
 
         #endregion

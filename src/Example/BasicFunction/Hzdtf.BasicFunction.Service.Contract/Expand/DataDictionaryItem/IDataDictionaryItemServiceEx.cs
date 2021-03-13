@@ -18,17 +18,17 @@ namespace Hzdtf.BasicFunction.Service.Contract
         /// </summary>
         /// <param name="dataDictionaryId">数据字典ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryId(int dataDictionaryId, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryId(int dataDictionaryId, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据数据字典编码获取数据字典子项列表
         /// </summary>
         /// <param name="dataDictionaryCode">数据字典编码</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryCode(string dataDictionaryCode, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<IList<DataDictionaryItemInfo>> QueryByDataDictionaryCode(string dataDictionaryCode, CommonUseData comData = null, string connectionId = null);
     }
 }

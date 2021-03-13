@@ -18,8 +18,8 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Diversion
         /// </summary>
         /// <param name="findFlowCensorshipIn">查找流程关卡输入</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<FlowCensorshipOutInfo> NextHandler(FlowCensorshipInInfo findFlowCensorshipIn, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<FlowCensorshipOutInfo> NextHandler(FlowCensorshipInInfo findFlowCensorshipIn, CommonUseData comData = null, string connectionId = null);
     }
 }

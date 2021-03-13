@@ -6,6 +6,7 @@ using System.Text;
 using Dapper;
 using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Utils;
+using Hzdtf.Utility.Model;
 
 namespace Hzdtf.BasicFunction.MySql
 {

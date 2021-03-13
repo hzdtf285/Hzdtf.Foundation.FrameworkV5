@@ -77,40 +77,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 根据ID查找模型前事件
         /// </summary>
-        public event Action<ReturnInfo<ModelT>, IdT, string, BasicUserInfo<IdT>> Finding;
+        public event Action<ReturnInfo<ModelT>, IdT, CommonUseData, string> Finding;
 
         /// <summary>
         /// 执行根据ID查找模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnFinding(ReturnInfo<ModelT> returnInfo, IdT id, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnFinding(ReturnInfo<ModelT> returnInfo, IdT id, CommonUseData comData = null, string connectionId = null)
         {
             if (Finding != null)
             {
-                Finding(returnInfo, id, connectionId, currUser);
+                Finding(returnInfo, id, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 根据ID查找模型后事件
         /// </summary>
-        public event Action<ReturnInfo<ModelT>, IdT, string, BasicUserInfo<IdT>> Finded;
+        public event Action<ReturnInfo<ModelT>, IdT, CommonUseData, string> Finded;
 
         /// <summary>
         /// 执行根据ID查找模型后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnFinded(ReturnInfo<ModelT> returnInfo, IdT id, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnFinded(ReturnInfo<ModelT> returnInfo, IdT id, CommonUseData comData = null, string connectionId = null)
         {
             if (Finded != null)
             {
-                Finded(returnInfo, id, connectionId, currUser);
+                Finded(returnInfo, id, comData, connectionId);
             }
         }
 
@@ -118,10 +118,10 @@ namespace Hzdtf.Service.Impl
         /// 根据ID查找模型
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<ModelT> Find([Id] IdT id, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<ModelT> Find([Id] IdT id, CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -132,13 +132,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<ModelT> returnInfo = new ReturnInfo<ModelT>();
-                BeforeFind(returnInfo, id, ref connectionId, currUser);
+                BeforeFind(returnInfo, id, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnFinding(returnInfo, id, connectionId, currUser);
+                OnFinding(returnInfo, id, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -146,16 +146,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<ModelT>((reInfo) =>
                 {
-                    return Persistence.Select(id, connectionId);
+                    return Persistence.Select(id, comData: comData, connectionId: connectionId);
                 }, returnInfo);
 
-                AfterFind(returnInfo, id, ref connectionId, currUser);
+                AfterFind(returnInfo, id, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnFinded(returnInfo, id, connectionId, currUser);
+                OnFinded(returnInfo, id, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -176,27 +176,27 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 根据ID查找模型列表前事件
         /// </summary>
-        public event Action<ReturnInfo<IList<ModelT>>, IdT[], string, BasicUserInfo<IdT>> Findsing;
+        public event Action<ReturnInfo<IList<ModelT>>, IdT[], CommonUseData, string> Findsing;
 
         /// <summary>
         /// 执行根据ID查找模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnFindsing(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnFindsing(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, CommonUseData comData = null, string connectionId = null)
         {
             if (Findsing != null)
             {
-                Findsing(returnInfo, ids, connectionId, currUser);
+                Findsing(returnInfo, ids, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 根据ID查找模型列表后事件
         /// </summary>
-        public event Action<ReturnInfo<IList<ModelT>>, IdT[], string, BasicUserInfo<IdT>> Findsed;
+        public event Action<ReturnInfo<IList<ModelT>>, IdT[], CommonUseData, string> Findsed;
 
         /// <summary>
         /// 执行根据ID查找模型后事件
@@ -204,12 +204,12 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnFindsed(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, string connectionId, BasicUserInfo<IdT> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected void OnFindsed(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, CommonUseData comData = null, string connectionId = null)
         {
             if (Findsed != null)
             {
-                Findsed(returnInfo, ids, connectionId, currUser);
+                Findsed(returnInfo, ids, comData, connectionId);
             }
         }
 
@@ -217,10 +217,10 @@ namespace Hzdtf.Service.Impl
         /// 根据ID查找模型列表
         /// </summary>
         /// <param name="ids">ID集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<ModelT>> Find([DisplayName2("Id集合"), ArrayNotEmpty] IdT[] ids, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<IList<ModelT>> Find([DisplayName2("Id集合"), ArrayNotEmpty] IdT[] ids, CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -231,13 +231,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<IList<ModelT>> returnInfo = new ReturnInfo<IList<ModelT>>();
-                BeforeFind(returnInfo, ids, ref connectionId, currUser);
+                BeforeFind(returnInfo, ids, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnFindsing(returnInfo, ids, connectionId, currUser);
+                OnFindsing(returnInfo, ids, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -245,16 +245,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<IList<ModelT>>((reInfo) =>
                 {
-                    return Persistence.Select(ids, connectionId);
+                    return Persistence.Select(ids, comData: comData, connectionId: connectionId);
                 }, returnInfo);
 
-                AfterFind(returnInfo, ids, ref connectionId, currUser);
+                AfterFind(returnInfo, ids, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnFindsed(returnInfo, ids, connectionId, currUser);
+                OnFindsed(returnInfo, ids, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -275,40 +275,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 根据ID判断模型是否存在前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IdT, string, BasicUserInfo<IdT>> Existsing;
+        public event Action<ReturnInfo<bool>, IdT, CommonUseData, string> Existsing;
 
         /// <summary>
         /// 执行根据ID判断模型是否存在前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnExistsing(ReturnInfo<bool> returnInfo, IdT id, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnExistsing(ReturnInfo<bool> returnInfo, IdT id, CommonUseData comData = null, string connectionId = null)
         {
             if (Existsing != null)
             {
-                Existsing(returnInfo, id, connectionId, currUser);
+                Existsing(returnInfo, id, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 根据ID判断模型是否存在后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IdT, string, BasicUserInfo<IdT>> Existsed;
+        public event Action<ReturnInfo<bool>, IdT, CommonUseData, string> Existsed;
 
         /// <summary>
         /// 执行根据ID判断模型是否存在后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnExistsed(ReturnInfo<bool> returnInfo, IdT id, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnExistsed(ReturnInfo<bool> returnInfo, IdT id, CommonUseData comData = null, string connectionId = null)
         {
             if (Existsed != null)
             {
-                Existsed(returnInfo, id, connectionId, currUser);
+                Existsed(returnInfo, id, comData, connectionId);
             }
         }
 
@@ -316,10 +316,10 @@ namespace Hzdtf.Service.Impl
         /// 根据ID判断模型是否存在
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> Exists([Id] IdT id, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> Exists([Id] IdT id, CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -330,13 +330,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeExists(returnInfo, id, ref connectionId, currUser);
+                BeforeExists(returnInfo, id, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnExistsing(returnInfo, id, connectionId, currUser);
+                OnExistsing(returnInfo, id, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -344,16 +344,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
                 {
-                    return Persistence.Count(id, connectionId) > 0;
+                    return Persistence.Count(id, comData: comData, connectionId: connectionId) > 0;
                 }, returnInfo);
 
-                AfterExists(returnInfo, id, ref connectionId, currUser);
+                AfterExists(returnInfo, id, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnExistsed(returnInfo, id, connectionId, currUser);
+                OnExistsed(returnInfo, id, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -374,48 +374,48 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 统计模型数前事件
         /// </summary>
-        public event Action<ReturnInfo<int>, string, BasicUserInfo<IdT>> Counting;
+        public event Action<ReturnInfo<int>, CommonUseData, string> Counting;
 
         /// <summary>
         /// 执行统计模型数前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnCounting(ReturnInfo<int> returnInfo, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnCounting(ReturnInfo<int> returnInfo, CommonUseData comData = null, string connectionId = null)
         {
             if (Counting != null)
             {
-                Counting(returnInfo, connectionId, currUser);
+                Counting(returnInfo, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 统计模型数后事件
         /// </summary>
-        public event Action<ReturnInfo<int>, string, BasicUserInfo<IdT>> Counted;
+        public event Action<ReturnInfo<int>, CommonUseData, string> Counted;
 
         /// <summary>
         /// 执行统计模型数后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnCounted(ReturnInfo<int> returnInfo, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnCounted(ReturnInfo<int> returnInfo, CommonUseData comData = null, string connectionId = null)
         {
             if (Counted != null)
             {
-                Counted(returnInfo, connectionId, currUser);
+                Counted(returnInfo, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 统计模型数
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<int> Count(string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<int> Count(CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -426,13 +426,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<int> returnInfo = new ReturnInfo<int>();
-                BeforeCount(returnInfo, ref connectionId, currUser);
+                BeforeCount(returnInfo, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnCounting(returnInfo, connectionId, currUser);
+                OnCounting(returnInfo, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -440,16 +440,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<int>((reInfo) =>
                 {
-                    return Persistence.Count(connectionId);
+                    return Persistence.Count(comData: comData, connectionId);
                 }, returnInfo);
 
-                AfterCount(returnInfo, ref connectionId, currUser);
+                AfterCount(returnInfo, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnCounted(returnInfo, connectionId, currUser);
+                OnCounted(returnInfo, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -470,48 +470,48 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 查询模型列表前事件
         /// </summary>
-        public event Action<ReturnInfo<IList<ModelT>>, string, BasicUserInfo<IdT>> Querying;
+        public event Action<ReturnInfo<IList<ModelT>>, CommonUseData, string> Querying;
 
         /// <summary>
         /// 执行查询模型列表前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnQuerying(ReturnInfo<IList<ModelT>> returnInfo, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnQuerying(ReturnInfo<IList<ModelT>> returnInfo, CommonUseData comData = null, string connectionId = null)
         {
             if (Querying != null)
             {
-                Querying(returnInfo, connectionId, currUser);
+                Querying(returnInfo, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 查询模型列表后事件
         /// </summary>
-        public event Action<ReturnInfo<IList<ModelT>>, string, BasicUserInfo<IdT>> Queryed;
+        public event Action<ReturnInfo<IList<ModelT>>, CommonUseData, string> Queryed;
 
         /// <summary>
         /// 执行查询模型列表后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnQueryed(ReturnInfo<IList<ModelT>> returnInfo, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnQueryed(ReturnInfo<IList<ModelT>> returnInfo, CommonUseData comData = null, string connectionId = null)
         {
             if (Queryed != null)
             {
-                Queryed(returnInfo, connectionId, currUser);
+                Queryed(returnInfo, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 查询模型列表
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<IList<ModelT>> Query(string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<IList<ModelT>> Query(CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -522,13 +522,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<IList<ModelT>> returnInfo = new ReturnInfo<IList<ModelT>>();
-                BeforeQuery(returnInfo, ref connectionId, currUser);
+                BeforeQuery(returnInfo, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnQuerying(returnInfo, connectionId, currUser);
+                OnQuerying(returnInfo, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -536,16 +536,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<IList<ModelT>>((reInfo) =>
                 {
-                    return Persistence.Select(connectionId);
+                    return Persistence.Select(comData: comData, connectionId);
                 }, returnInfo);
 
-                AfterQuery(returnInfo, ref connectionId, currUser);
+                AfterQuery(returnInfo, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnQueryed(returnInfo, connectionId, currUser);
+                OnQueryed(returnInfo, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -566,7 +566,7 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 查询模型列表并分页前事件
         /// </summary>
-        public event Action<ReturnInfo<PagingInfo<ModelT>>, int, int, FilterInfo, string, BasicUserInfo<IdT>> QueryPaging;
+        public event Action<ReturnInfo<PagingInfo<ModelT>>, int, int, FilterInfo, CommonUseData, string> QueryPaging;
 
         /// <summary>
         /// 执行查询模型列表并分页前事件
@@ -575,20 +575,20 @@ namespace Hzdtf.Service.Impl
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnQueryPaging(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, FilterInfo filter, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnQueryPaging(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, FilterInfo filter, CommonUseData comData = null, string connectionId = null)
         {
             if (QueryPaging != null)
             {
-                QueryPaging(returnInfo, pageIndex, pageSize, filter, connectionId, currUser);
+                QueryPaging(returnInfo, pageIndex, pageSize, filter, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 查询模型列表并分页后事件
         /// </summary>
-        public event Action<ReturnInfo<PagingInfo<ModelT>>, int, int, FilterInfo, string, BasicUserInfo<IdT>> QueryPaged;
+        public event Action<ReturnInfo<PagingInfo<ModelT>>, int, int, FilterInfo, CommonUseData, string> QueryPaged;
 
         /// <summary>
         /// 执行查询模型列表并分页后事件
@@ -597,13 +597,13 @@ namespace Hzdtf.Service.Impl
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnQueryPaged(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, FilterInfo filter, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnQueryPaged(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, FilterInfo filter, CommonUseData comData = null, string connectionId = null)
         {
             if (QueryPaged != null)
             {
-                QueryPaged(returnInfo, pageIndex, pageSize, filter, connectionId, currUser);
+                QueryPaged(returnInfo, pageIndex, pageSize, filter, comData, connectionId);
             }
         }
 
@@ -613,10 +613,10 @@ namespace Hzdtf.Service.Impl
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<PagingInfo<ModelT>> QueryPage([PageIndex] int pageIndex, [PageSize] int pageSize, FilterInfo filter = null, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<PagingInfo<ModelT>> QueryPage([PageIndex] int pageIndex, [PageSize] int pageSize, FilterInfo filter = null, CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -627,13 +627,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<PagingInfo<ModelT>> returnInfo = new ReturnInfo<PagingInfo<ModelT>>();
-                BeforeQueryPage(returnInfo, pageIndex, pageSize, ref connectionId, filter, currUser);
+                BeforeQueryPage(returnInfo, pageIndex, pageSize, ref connectionId, filter, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnQueryPaging(returnInfo, pageIndex, pageSize, filter, connectionId, currUser);
+                OnQueryPaging(returnInfo, pageIndex, pageSize, filter, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -641,16 +641,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<PagingInfo<ModelT>>((reInfo) =>
                 {
-                    return Persistence.SelectPage(pageIndex, pageSize, filter, connectionId);
+                    return Persistence.SelectPage(pageIndex, pageSize, filter, comData: comData, connectionId: connectionId);
                 }, returnInfo);
 
-                AfterQueryPage(returnInfo, pageIndex, pageSize, ref connectionId, filter, currUser);
+                AfterQueryPage(returnInfo, pageIndex, pageSize, ref connectionId, filter, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnQueryPaged(returnInfo, pageIndex, pageSize, filter, connectionId, currUser);
+                OnQueryPaged(returnInfo, pageIndex, pageSize, filter, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -675,40 +675,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 添加模型前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, ModelT, string, BasicUserInfo<IdT>> Adding;
+        public event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> Adding;
 
         /// <summary>
         /// 执行模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnAdding(ReturnInfo<bool> returnInfo, ModelT model, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnAdding(ReturnInfo<bool> returnInfo, ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             if (Adding != null)
             {
-                Adding(returnInfo, model, connectionId, currUser);
+                Adding(returnInfo, model, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 添加模型后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, ModelT, string, BasicUserInfo<IdT>> Added;
+        public event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> Added;
 
         /// <summary>
         /// 执行模型后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnAdded(ReturnInfo<bool> returnInfo, ModelT model, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnAdded(ReturnInfo<bool> returnInfo, ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             if (Added != null)
             {
-                Added(returnInfo, model, connectionId, currUser);
+                Added(returnInfo, model, comData, connectionId);
             }
         }
 
@@ -716,15 +716,14 @@ namespace Hzdtf.Service.Impl
         /// 添加模型
         /// </summary>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> Add([DisplayName2("模型"), Required, Model] ModelT model, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> Add([DisplayName2("模型"), Required, Model] ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             if (model is PersonTimeInfo<IdT>)
             {
-                SetCreateInfo(model, currUser);
+                SetCreateInfo(model, comData);
             }
 
             bool isClose = false;
@@ -736,13 +735,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeAdd(returnInfo, model, ref connectionId, currUser);
+                BeforeAdd(returnInfo, model, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnAdding(returnInfo, model, connectionId, currUser);
+                OnAdding(returnInfo, model, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -755,16 +754,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
                 {
-                    return Persistence.Insert(model, connectionId) > 0;
+                    return Persistence.Insert(model, comData: comData, connectionId: connectionId) > 0;
                 }, returnInfo);
 
-                AfterAdd(returnInfo, model, ref connectionId, currUser);
+                AfterAdd(returnInfo, model, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnAdded(returnInfo, model, connectionId, currUser);
+                OnAdded(returnInfo, model, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -785,40 +784,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 添加模型列表前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IList<ModelT>, string, BasicUserInfo<IdT>> Addsing;
+        public event Action<ReturnInfo<bool>, IList<ModelT>, CommonUseData, string> Addsing;
 
         /// <summary>
         /// 执行模型列表前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="models">模型列表</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnAddsing(ReturnInfo<bool> returnInfo, IList<ModelT> models, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnAddsing(ReturnInfo<bool> returnInfo, IList<ModelT> models, CommonUseData comData = null, string connectionId = null)
         {
             if (Addsing != null)
             {
-                Addsing(returnInfo, models, connectionId, currUser);
+                Addsing(returnInfo, models, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 添加模型列表后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IList<ModelT>, string, BasicUserInfo<IdT>> Addsed;
+        public event Action<ReturnInfo<bool>, IList<ModelT>, CommonUseData, string> Addsed;
 
         /// <summary>
         /// 执行模型列表后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="models">模型列表</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnAddsed(ReturnInfo<bool> returnInfo, IList<ModelT> models, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnAddsed(ReturnInfo<bool> returnInfo, IList<ModelT> models, CommonUseData comData = null, string connectionId = null)
         {
             if (Addsed != null)
             {
-                Addsed(returnInfo, models, connectionId, currUser);
+                Addsed(returnInfo, models, comData, connectionId);
             }
         }
 
@@ -826,15 +825,14 @@ namespace Hzdtf.Service.Impl
         /// 添加模型列表
         /// </summary>
         /// <param name="models">模型列表</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> Add([DisplayName2("模型列表"), MultiModel] IList<ModelT> models, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> Add([DisplayName2("模型列表"), MultiModel] IList<ModelT> models, CommonUseData comData = null, string connectionId = null)
         {
             foreach (ModelT model in models)
             {
-                SetCreateInfo(model, currUser);
+                SetCreateInfo(model, comData);
             }
 
             bool isClose = false;
@@ -846,13 +844,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeAdd(returnInfo, models, ref connectionId, currUser);
+                BeforeAdd(returnInfo, models, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnAddsing(returnInfo, models, connectionId, currUser);
+                OnAddsing(returnInfo, models, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -871,16 +869,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
                 {
-                    return Persistence.Insert(models, connectionId) > 0;
+                    return Persistence.Insert(models, comData: comData, connectionId: connectionId) > 0;
                 }, returnInfo);
 
-                AfterAdd(returnInfo, models, ref connectionId, currUser);
+                AfterAdd(returnInfo, models, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnAddsed(returnInfo, models, connectionId, currUser);
+                OnAddsed(returnInfo, models, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -901,40 +899,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 设置模型前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, ModelT, string, BasicUserInfo<IdT>> Seting;
+        public event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> Seting;
 
         /// <summary>
         /// 执行设置模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnSeting(ReturnInfo<bool> returnInfo, ModelT model, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnSeting(ReturnInfo<bool> returnInfo, ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             if (Seting != null)
             {
-                Seting(returnInfo, model, connectionId, currUser);
+                Seting(returnInfo, model, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 设置模型后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, ModelT, string, BasicUserInfo<IdT>> Seted;
+        public event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> Seted;
 
         /// <summary>
         /// 执行设置模型后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnSeted(ReturnInfo<bool> returnInfo, ModelT model, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnSeted(ReturnInfo<bool> returnInfo, ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             if (Seted != null)
             {
-                Seted(returnInfo, model, connectionId, currUser);
+                Seted(returnInfo, model, comData, connectionId);
             }
         }
 
@@ -943,11 +941,10 @@ namespace Hzdtf.Service.Impl
         /// 如果ID存在则修改，否则添加
         /// </summary>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> Set([DisplayName2("模型"), Required, Model] ModelT model, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> Set([DisplayName2("模型"), Required, Model] ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -958,13 +955,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeSet(returnInfo, model, ref connectionId, currUser);
+                BeforeSet(returnInfo, model, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnSeting(returnInfo, model, connectionId, currUser);
+                OnSeting(returnInfo, model, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -975,7 +972,7 @@ namespace Hzdtf.Service.Impl
                     bool exists = false;
                     if (!Identity.IsEmpty(model.Id))
                     {
-                        ReturnInfo<bool> existsReturnInfo = Exists(model.Id, connId, currUser);
+                        ReturnInfo<bool> existsReturnInfo = Exists(model.Id, comData, connId);
                         if (existsReturnInfo.Failure())
                         {
                             reInfo.FromBasic(existsReturnInfo);
@@ -984,19 +981,19 @@ namespace Hzdtf.Service.Impl
                         exists = existsReturnInfo.Data;
                     }
 
-                    ReturnInfo<bool> re = exists ? ModifyById(model, connId, currUser) : Add(model, connId, currUser);
+                    ReturnInfo<bool> re = exists ? ModifyById(model, comData, connId) : Add(model, comData, connId);
                     reInfo.FromBasic(re);
 
                     return re.Data;
-                }, returnInfo, connectionId);
+                }, returnInfo, connectionId: connectionId);
 
-                AfterSet(returnInfo, model, ref connectionId, currUser);
+                AfterSet(returnInfo, model, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnSeted(returnInfo, model, connectionId, currUser);
+                OnSeted(returnInfo, model, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -1017,40 +1014,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 根据ID修改模型前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, ModelT, string, BasicUserInfo<IdT>> ModifyByIding;
+        public event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> ModifyByIding;
 
         /// <summary>
         /// 执行根据ID修改模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnModifyByIding(ReturnInfo<bool> returnInfo, ModelT model, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnModifyByIding(ReturnInfo<bool> returnInfo, ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             if (ModifyByIding != null)
             {
-                ModifyByIding(returnInfo, model, connectionId, currUser);
+                ModifyByIding(returnInfo, model, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 根据ID修改模型后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, ModelT, string, BasicUserInfo<IdT>> ModifyByIded;
+        public event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> ModifyByIded;
 
         /// <summary>
         /// 执行根据ID修改模型后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnModifyByIded(ReturnInfo<bool> returnInfo, ModelT model, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnModifyByIded(ReturnInfo<bool> returnInfo, ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             if (ModifyByIded != null)
             {
-                ModifyByIded(returnInfo, model, connectionId, currUser);
+                ModifyByIded(returnInfo, model, comData, connectionId);
             }
         }
 
@@ -1058,43 +1055,42 @@ namespace Hzdtf.Service.Impl
         /// 根据ID修改模型
         /// </summary>
         /// <param name="model">模型</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> ModifyById([DisplayName2("模型"), Required, Model] ModelT model, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> ModifyById([DisplayName2("模型"), Required, Model] ModelT model, CommonUseData comData = null, string connectionId = null)
         {
             return ExecReturnFuncAndConnectionId<bool>((reInfo, connId) =>
             {
-                OptimissticLockHandle(model, reInfo, connectionId: connId);
+                OptimissticLockHandle(model, reInfo, comData: comData, connectionId: connId);
                 if (reInfo.Failure())
                 {
                     return false;
                 }
 
-                SetModifyInfo(model, currUser);
+                SetModifyInfo(model, comData);
 
-                BeforeModifyById(reInfo, model, ref connectionId, currUser);
+                BeforeModifyById(reInfo, model, ref connectionId, comData);
                 if (reInfo.Failure())
                 {
                     return false;
                 }
 
-                OnModifyByIding(reInfo, model, connectionId, currUser);
+                OnModifyByIding(reInfo, model, comData, connectionId: connectionId);
                 if (reInfo.Failure())
                 {
                     return false;
                 }
 
-                var result = Persistence.UpdateById(model, connectionId) > 0;
+                var result = Persistence.UpdateById(model, comData: comData, connectionId: connectionId) > 0;
 
-                AfterModifyById(reInfo, model, ref connectionId, currUser);
+                AfterModifyById(reInfo, model, ref connectionId, comData);
                 if (reInfo.Failure())
                 {
                     return false;
                 }
 
-                OnModifyByIded(reInfo, model, connectionId, currUser);
+                OnModifyByIded(reInfo, model, comData, connectionId: connectionId);
 
                 return result;
             }, connectionId: connectionId, accessMode: AccessMode.MASTER);
@@ -1103,40 +1099,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 根据ID移除模型前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IdT, string, BasicUserInfo<IdT>> RemoveByIding;
+        public event Action<ReturnInfo<bool>, IdT, CommonUseData, string> RemoveByIding;
 
         /// <summary>
         /// 执行根据ID移除模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnRemoveByIding(ReturnInfo<bool> returnInfo, IdT id, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnRemoveByIding(ReturnInfo<bool> returnInfo, IdT id, CommonUseData comData = null, string connectionId = null)
         {
             if (RemoveByIding != null)
             {
-                RemoveByIding(returnInfo, id, connectionId, currUser);
+                RemoveByIding(returnInfo, id, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 根据ID移除模型后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IdT, string, BasicUserInfo<IdT>> RemoveByIded;
+        public event Action<ReturnInfo<bool>, IdT, CommonUseData, string> RemoveByIded;
 
         /// <summary>
         /// 执行根据ID移除模型后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnRemoveByIded(ReturnInfo<bool> returnInfo, IdT id, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnRemoveByIded(ReturnInfo<bool> returnInfo, IdT id, CommonUseData comData = null, string connectionId = null)
         {
             if (RemoveByIded != null)
             {
-                RemoveByIded(returnInfo, id, connectionId, currUser);
+                RemoveByIded(returnInfo, id, comData, connectionId);
             }
         }
 
@@ -1144,11 +1140,10 @@ namespace Hzdtf.Service.Impl
         /// 根据ID移除模型
         /// </summary>
         /// <param name="id">ID</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> RemoveById([Id] IdT id, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> RemoveById([Id] IdT id, CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -1159,13 +1154,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeRemoveById(returnInfo, id, ref connectionId, currUser);
+                BeforeRemoveById(returnInfo, id, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnRemoveByIding(returnInfo, id, connectionId, currUser);
+                OnRemoveByIding(returnInfo, id, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -1173,16 +1168,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
                 {
-                    return Persistence.DeleteById(id, connectionId) > 0;
+                    return Persistence.DeleteById(id, comData: comData, connectionId: connectionId) > 0;
                 }, returnInfo);
 
-                AfterRemoveById(returnInfo, id, ref connectionId, currUser);
+                AfterRemoveById(returnInfo, id, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnRemoveByIded(returnInfo, id, connectionId, currUser);
+                OnRemoveByIded(returnInfo, id, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -1203,40 +1198,40 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 根据ID数组移除模型前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IdT[], string, BasicUserInfo<IdT>> RemoveByIdsing;
+        public event Action<ReturnInfo<bool>, IdT[], CommonUseData, string> RemoveByIdsing;
 
         /// <summary>
         /// 执行根据ID数组移除模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnRemoveByIdsing(ReturnInfo<bool> returnInfo, IdT[] ids, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnRemoveByIdsing(ReturnInfo<bool> returnInfo, IdT[] ids, CommonUseData comData = null, string connectionId = null)
         {
             if (RemoveByIdsing != null)
             {
-                RemoveByIdsing(returnInfo, ids, connectionId, currUser);
+                RemoveByIdsing(returnInfo, ids, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 根据ID数组移除模型后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, IdT[], string, BasicUserInfo<IdT>> RemoveByIdsed;
+        public event Action<ReturnInfo<bool>, IdT[], CommonUseData, string> RemoveByIdsed;
 
         /// <summary>
         /// 执行根据ID数组移除模型后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnRemoveByIdsed(ReturnInfo<bool> returnInfo, IdT[] ids, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnRemoveByIdsed(ReturnInfo<bool> returnInfo, IdT[] ids, CommonUseData comData = null, string connectionId = null)
         {
             if (RemoveByIdsed != null)
             {
-                RemoveByIdsed(returnInfo, ids, connectionId, currUser);
+                RemoveByIdsed(returnInfo, ids, comData, connectionId);
             }
         }
 
@@ -1244,11 +1239,10 @@ namespace Hzdtf.Service.Impl
         /// 根据ID数组移除模型
         /// </summary>
         /// <param name="ids">ID集合</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        [Auth(CurrUserParamIndex = 2)]
-        public virtual ReturnInfo<bool> RemoveByIds([DisplayName2("ID集合"), ArrayNotEmpty] IdT[] ids, string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> RemoveByIds([DisplayName2("ID集合"), ArrayNotEmpty] IdT[] ids, CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -1259,13 +1253,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeRemoveByIds(returnInfo, ids, ref connectionId, currUser);
+                BeforeRemoveByIds(returnInfo, ids, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnRemoveByIdsing(returnInfo, ids, connectionId, currUser);
+                OnRemoveByIdsing(returnInfo, ids, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -1273,16 +1267,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
                 {
-                    return Persistence.DeleteByIds(ids, connectionId) > 0;
+                    return Persistence.DeleteByIds(ids, comData: comData, connectionId: connectionId) > 0;
                 }, returnInfo);
 
-                AfterRemoveByIds(returnInfo, ids, ref connectionId, currUser);
+                AfterRemoveByIds(returnInfo, ids, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnRemoveByIdsed(returnInfo, ids, connectionId, currUser);
+                OnRemoveByIdsed(returnInfo, ids, comData, connectionId: connectionId);
 
                 return returnInfo;
             }
@@ -1303,48 +1297,48 @@ namespace Hzdtf.Service.Impl
         /// <summary>
         /// 清空所有模型前事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, string, BasicUserInfo<IdT>> Clearing;
+        public event Action<ReturnInfo<bool>, CommonUseData, string> Clearing;
 
         /// <summary>
         /// 执行清空所有模型前事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnClearing(ReturnInfo<bool> returnInfo, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnClearing(ReturnInfo<bool> returnInfo, CommonUseData comData = null, string connectionId = null)
         {
             if (Clearing != null)
             {
-                Clearing(returnInfo, connectionId, currUser);
+                Clearing(returnInfo, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 清空所有模型后事件
         /// </summary>
-        public event Action<ReturnInfo<bool>, string, BasicUserInfo<IdT>> Cleared;
+        public event Action<ReturnInfo<bool>, CommonUseData, string> Cleared;
 
         /// <summary>
         /// 执行清空所有模型后事件
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected void OnCleared(ReturnInfo<bool> returnInfo, string connectionId, BasicUserInfo<IdT> currUser = null)
+        protected void OnCleared(ReturnInfo<bool> returnInfo, CommonUseData comData = null, string connectionId = null)
         {
             if (Cleared != null)
             {
-                Cleared(returnInfo, connectionId, currUser);
+                Cleared(returnInfo, comData, connectionId);
             }
         }
 
         /// <summary>
         /// 清空所有模型
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
         /// <returns>返回信息</returns>
-        public virtual ReturnInfo<bool> Clear(string connectionId = null, BasicUserInfo<IdT> currUser = null)
+        public virtual ReturnInfo<bool> Clear(CommonUseData comData = null, string connectionId = null)
         {
             bool isClose = false;
             if (string.IsNullOrWhiteSpace(connectionId))
@@ -1355,13 +1349,13 @@ namespace Hzdtf.Service.Impl
             try
             {
                 ReturnInfo<bool> returnInfo = new ReturnInfo<bool>();
-                BeforeClear(returnInfo, ref connectionId, currUser);
+                BeforeClear(returnInfo, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnClearing(returnInfo, connectionId, currUser);
+                OnClearing(returnInfo, comData, connectionId: connectionId);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
@@ -1369,16 +1363,16 @@ namespace Hzdtf.Service.Impl
 
                 returnInfo = ExecReturnFunc<bool>((reInfo) =>
                 {
-                    return Persistence.Delete(connectionId) > 0;
+                    return Persistence.Delete(comData: comData, connectionId: connectionId) > 0;
                 });
 
-                AfterClear(returnInfo, ref connectionId, currUser);
+                AfterClear(returnInfo, ref connectionId, comData);
                 if (returnInfo.Failure())
                 {
                     return returnInfo;
                 }
 
-                OnCleared(returnInfo, connectionId, currUser);                
+                OnCleared(returnInfo, comData, connectionId: connectionId);                
                 
                 return returnInfo;
             }
@@ -1419,7 +1413,7 @@ namespace Hzdtf.Service.Impl
                 ExecProcConnectionId((connId) =>
                 {
                     result = func(reInfo, connId);
-                }, connectionId, accessMode);
+                }, connectionId: connectionId, accessMode);
 
                 return result;
             }, returnInfo);
@@ -1480,13 +1474,13 @@ namespace Hzdtf.Service.Impl
         /// 设置创建信息
         /// </summary>
         /// <param name="model">模型</param>
-        /// <param name="currUser">当前用户</param>
-        protected void SetCreateInfo(ModelT model, BasicUserInfo<IdT> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected void SetCreateInfo(ModelT model, CommonUseData comData = null)
         {
             if (model is PersonTimeInfo<IdT>)
             {
                 PersonTimeInfo<IdT> p = model as PersonTimeInfo<IdT>;
-                p.SetCreateInfo(currUser);
+                p.SetCreateInfo(comData.GetCurrUser() as BasicUserInfo<IdT>);
             }
         }
 
@@ -1494,13 +1488,13 @@ namespace Hzdtf.Service.Impl
         /// 设置修改信息
         /// </summary>
         /// <param name="model">模型</param>
-        /// <param name="currUser">当前用户</param>
-        protected void SetModifyInfo(ModelT model, BasicUserInfo<IdT> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected void SetModifyInfo(ModelT model, CommonUseData comData = null)
         {
             if (model is PersonTimeInfo<IdT>)
             {
                 PersonTimeInfo<IdT> p = model as PersonTimeInfo<IdT>;
-                p.SetModifyInfo(currUser);
+                p.SetModifyInfo(comData.GetCurrUser() as BasicUserInfo<IdT>);
             }
         }
 
@@ -1514,8 +1508,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeFind(ReturnInfo<ModelT> returnInfo, IdT id, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeFind(ReturnInfo<ModelT> returnInfo, IdT id, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID查找模型后
@@ -1523,8 +1517,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterFind(ReturnInfo<ModelT> returnInfo, IdT id, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterFind(ReturnInfo<ModelT> returnInfo, IdT id, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID集合查找模型列表前
@@ -1532,8 +1526,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeFind(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeFind(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID集合查找模型列表后
@@ -1541,8 +1535,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterFind(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterFind(ReturnInfo<IList<ModelT>> returnInfo, IdT[] ids, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID判断模型是否存在前
@@ -1550,8 +1544,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeExists(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeExists(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID判断模型是否存在后
@@ -1559,41 +1553,41 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterExists(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterExists(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 统计模型数前
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected virtual void BeforeCount(ReturnInfo<int> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        protected virtual void BeforeCount(ReturnInfo<int> returnInfo, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 统计模型数后
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterCount(ReturnInfo<int> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterCount(ReturnInfo<int> returnInfo, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 查询模型列表前
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeQuery(ReturnInfo<IList<ModelT>> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeQuery(ReturnInfo<IList<ModelT>> returnInfo, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 查询模型列表后
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterQuery(ReturnInfo<IList<ModelT>> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterQuery(ReturnInfo<IList<ModelT>> returnInfo, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 执行查询模型列表并分页前
@@ -1603,8 +1597,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="pageSize">每页记录数</param>
         /// <param name="connectionId">连接ID</param>
         /// <param name="filter">筛选</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeQueryPage(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, ref string connectionId, FilterInfo filter = null, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeQueryPage(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, ref string connectionId, FilterInfo filter = null, CommonUseData comData = null) { }
 
         /// <summary>
         /// 执行查询模型列表并分页后
@@ -1614,8 +1608,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="pageSize">每页记录数</param>
         /// <param name="connectionId">连接ID</param>
         /// <param name="filter">筛选</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterQueryPage(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, ref string connectionId, FilterInfo filter = null, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterQueryPage(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, ref string connectionId, FilterInfo filter = null, CommonUseData comData = null) { }
 
         /// <summary>
         /// 添加模型前
@@ -1623,8 +1617,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeAdd(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeAdd(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 添加模型后
@@ -1632,8 +1626,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterAdd(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterAdd(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 添加模型列表前
@@ -1641,8 +1635,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="models">模型列表</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeAdd(ReturnInfo<bool> returnInfo, IList<ModelT> models, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeAdd(ReturnInfo<bool> returnInfo, IList<ModelT> models, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 添加模型列表后
@@ -1650,8 +1644,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="models">模型列表</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterAdd(ReturnInfo<bool> returnInfo, IList<ModelT> models, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterAdd(ReturnInfo<bool> returnInfo, IList<ModelT> models, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 设置模型前
@@ -1659,8 +1653,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeSet(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeSet(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 设置模型后
@@ -1668,8 +1662,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterSet(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterSet(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID修改模型前
@@ -1677,8 +1671,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeModifyById(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeModifyById(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID修改模型后
@@ -1686,8 +1680,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="model">模型</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterModifyById(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterModifyById(ReturnInfo<bool> returnInfo, ModelT model, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID移除模型前
@@ -1695,9 +1689,9 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected virtual void BeforeRemoveById(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        protected virtual void BeforeRemoveById(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID移除模型后
@@ -1705,9 +1699,9 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="id">ID</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected virtual void AfterRemoveById(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        protected virtual void AfterRemoveById(ReturnInfo<bool> returnInfo, IdT id, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID集合移除模型前
@@ -1715,9 +1709,9 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected virtual void BeforeRemoveByIds(ReturnInfo<bool> returnInfo, IdT[] ids, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        protected virtual void BeforeRemoveByIds(ReturnInfo<bool> returnInfo, IdT[] ids, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 根据ID集合移除模型后
@@ -1725,25 +1719,25 @@ namespace Hzdtf.Service.Impl
         /// <param name="returnInfo">返回信息</param>
         /// <param name="ids">ID集合</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected virtual void AfterRemoveByIds(ReturnInfo<bool> returnInfo, IdT[] ids, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        protected virtual void AfterRemoveByIds(ReturnInfo<bool> returnInfo, IdT[] ids, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 清空所有模型前
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void BeforeClear(ReturnInfo<bool> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void BeforeClear(ReturnInfo<bool> returnInfo, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 清空所有模型后
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        protected virtual void AfterClear(ReturnInfo<bool> returnInfo, ref string connectionId, BasicUserInfo<IdT> currUser = null) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AfterClear(ReturnInfo<bool> returnInfo, ref string connectionId, CommonUseData comData = null) { }
 
         /// <summary>
         /// 是否支持乐观锁，如果支持，则会在更新时，会判断修改时间，默认不支持，如果要改为支持，请在子类重写
@@ -1758,13 +1752,14 @@ namespace Hzdtf.Service.Impl
         /// <param name="model">模型</param>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT model, ReturnInfo<ReturnDataT> returnInfo, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT model, ReturnInfo<ReturnDataT> returnInfo, AccessMode mode = AccessMode.MASTER, CommonUseData comData = null, string connectionId = null)
         {
             // 如果支持乐观锁，则需要先按修改时间来查询是否之前被修改过
             if (IsSupportOptimisticLock())
             {
-                var temp = Persistence.SelectModifyInfoByIdAndGeModifyTime(model, mode, connectionId);
+                var temp = Persistence.SelectModifyInfoByIdAndGeModifyTime(model, mode, comData: comData, connectionId: connectionId);
                 if (temp == null)
                 {
                     return;
@@ -1783,13 +1778,14 @@ namespace Hzdtf.Service.Impl
         /// <param name="models">模型列表</param>
         /// <param name="returnInfo">返回信息</param>
         /// <param name="mode">访问模式，默认为主库</param>
+        /// <param name="comData">通用数据</param>
         /// <param name="connectionId">连接ID</param>
-        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT[] models, ReturnInfo<ReturnDataT> returnInfo, AccessMode mode = AccessMode.MASTER, string connectionId = null)
+        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT[] models, ReturnInfo<ReturnDataT> returnInfo, AccessMode mode = AccessMode.MASTER, CommonUseData comData = null, string connectionId = null)
         {
             // 如果支持乐观锁，则需要先按修改时间来查询是否之前被修改过
             if (IsSupportOptimisticLock())
             {
-                var temp = Persistence.SelectModifyInfosByIdAndGeModifyTime(models, mode, connectionId);
+                var temp = Persistence.SelectModifyInfosByIdAndGeModifyTime(models, mode, comData: comData, connectionId: connectionId);
                 if (temp.IsNullOrCount0())
                 {
                     return;
@@ -1816,7 +1812,8 @@ namespace Hzdtf.Service.Impl
         /// <param name="sourceModel">源模型</param>
         /// <param name="newModel">新模型</param>
         /// <param name="returnInfo">返回信息</param>
-        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT sourceModel, ModelT newModel, ReturnInfo<ReturnDataT> returnInfo)
+        /// <param name="comData">通用数据</param>
+        protected virtual void OptimissticLockHandle<ReturnDataT>(ModelT sourceModel, ModelT newModel, ReturnInfo<ReturnDataT> returnInfo, CommonUseData comData = null)
         {
             if (sourceModel == null || newModel == null)
             {

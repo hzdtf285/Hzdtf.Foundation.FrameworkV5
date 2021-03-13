@@ -26,9 +26,9 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="flowIn">流程输入</param>
         /// <param name="workflow">工作流</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>工作流定义</returns>
-        protected override WorkflowDefineInfo ValiFlowIn(ReturnInfo<bool> returnInfo, FlowInInfo<FlowInitInfo<PersonTimeInfo<int>>> flowIn, out WorkflowInfo workflow, string connectionId = null, BasicUserInfo<int> currUser = null)
+        protected override WorkflowDefineInfo ValiFlowIn(ReturnInfo<bool> returnInfo, FlowInInfo<FlowInitInfo<PersonTimeInfo<int>>> flowIn, out WorkflowInfo workflow, CommonUseData comData = null, string connectionId = null)
         {
             workflow = null;
             ValiBasicInParam(returnInfo, flowIn);
@@ -37,14 +37,14 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 return null;
             }
 
-            ReturnInfo<WorkflowDefineInfo> reWorkFlowConfig = WorkflowConfigReader.ReaderAllConfig(flowIn.Flow.WorkflowCode, connectionId, currUser);
+            ReturnInfo<WorkflowDefineInfo> reWorkFlowConfig = WorkflowConfigReader.ReaderAllConfig(flowIn.Flow.WorkflowCode, connectionId : connectionId, comData: comData);
             if (reWorkFlowConfig.Failure())
             {
                 returnInfo.FromBasic(reWorkFlowConfig);
                 return null;
             }
 
-            ValiDbParam(returnInfo, flowIn, out workflow, connectionId, currUser);
+            ValiDbParam(returnInfo, flowIn, out workflow, connectionId : connectionId, comData: comData);
             if (returnInfo.Failure())
             {
                 return null;
@@ -58,8 +58,8 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// </summary>
         /// <param name="flowIn">流程输入</param>
         /// <param name="findFlowCensorshipIn">查找流程关卡输入信息</param>
-        /// <param name="currUser">当前用户</param>
-        protected override void AppendSetFindFlowCensorshipIn(FlowInInfo<FlowInitInfo<PersonTimeInfo<int>>> flowIn, FlowCensorshipInInfo findFlowCensorshipIn, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        protected override void AppendSetFindFlowCensorshipIn(FlowInInfo<FlowInitInfo<PersonTimeInfo<int>>> flowIn, FlowCensorshipInInfo findFlowCensorshipIn, CommonUseData comData = null)
         {
             findFlowCensorshipIn.ApplyNo = flowIn.Flow.ApplyNo;
             findFlowCensorshipIn.Title = flowIn.Flow.Title;
@@ -73,12 +73,12 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="flowIn">流程输入</param>
         /// <param name="findFlowCensorshipOut">查找流程关卡输出</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         protected override void ExecCore(ReturnInfo<bool> returnInfo, FlowInInfo<FlowInitInfo<PersonTimeInfo<int>>> flowIn,
-            FlowCensorshipOutInfo findFlowCensorshipOut, string connectionId = null, BasicUserInfo<int> currUser = null)
+            FlowCensorshipOutInfo findFlowCensorshipOut, CommonUseData comData = null, string connectionId = null)
         {
             // 操作工作流
-            ReturnInfo<bool> reWorkflow = WorkflowService.Set(findFlowCensorshipOut.Workflow, connectionId, currUser);
+            ReturnInfo<bool> reWorkflow = WorkflowService.Set(findFlowCensorshipOut.Workflow, connectionId : connectionId, comData: comData);
             if (reWorkflow.Failure())
             {
                 returnInfo.FromBasic(reWorkflow);
@@ -93,14 +93,14 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
             var currHandle = findFlowCensorshipOut.CurrConcreteCensorship.WorkflowHandles[0];
             currHandle.WorkflowId = findFlowCensorshipOut.Workflow.Id;
 
-            var existsHandleReturnInfo = WorkflowHandle.FindByWorkflowIdAndFlowCensorshipIdAndHandlerId(currHandle.WorkflowId, currHandle.FlowCensorshipId, currHandle.HandlerId, connectionId, currUser);
+            var existsHandleReturnInfo = WorkflowHandle.FindByWorkflowIdAndFlowCensorshipIdAndHandlerId(currHandle.WorkflowId, currHandle.FlowCensorshipId, currHandle.HandlerId, connectionId : connectionId, comData: comData);
             if (existsHandleReturnInfo.Failure())
             {
                 returnInfo.FromBasic(existsHandleReturnInfo);
                 return;
             }
 
-            var user = UserTool<int>.GetCurrUser(currUser);
+            var user = UserTool<int>.GetCurrUser(comData);
             if (existsHandleReturnInfo.Data != null)
             {
                 if (existsHandleReturnInfo.Data.HandlerId != user.Id)
@@ -111,10 +111,10 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 }
 
                 currHandle.Id = existsHandleReturnInfo.Data.Id;
-                currHandle.SetModifyInfo(currUser);            
+                currHandle.SetModifyInfo(user);            
             }
 
-            ReturnInfo<bool> reHandle = WorkflowHandle.Set(findFlowCensorshipOut.CurrConcreteCensorship.WorkflowHandles[0], connectionId, currUser);
+            ReturnInfo<bool> reHandle = WorkflowHandle.Set(findFlowCensorshipOut.CurrConcreteCensorship.WorkflowHandles[0], connectionId : connectionId, comData: comData);
             if (reHandle.Failure())
             {
                 returnInfo.FromBasic(reHandle);
@@ -137,7 +137,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                 }
             }
 
-            reHandle = WorkflowHandle.Add(handlers, connectionId, currUser);
+            reHandle = WorkflowHandle.Add(handlers, connectionId : connectionId, comData: comData);
             if (reHandle.Failure())
             {
                 returnInfo.FromBasic(reHandle);
@@ -197,21 +197,21 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="flowIn">流程输入</param>
         /// <param name="workflow">工作流</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
-        private void ValiDbParam(ReturnInfo<bool> returnInfo, FlowInInfo<FlowInitInfo<PersonTimeInfo<int>>> flowIn, out WorkflowInfo workflow, string connectionId = null, BasicUserInfo<int> currUser = null)
+        /// <param name="comData">通用数据</param>
+        private void ValiDbParam(ReturnInfo<bool> returnInfo, FlowInInfo<FlowInitInfo<PersonTimeInfo<int>>> flowIn, out WorkflowInfo workflow, CommonUseData comData = null, string connectionId = null)
         {
             workflow = null;
-            ReturnInfo<WorkflowDefineInfo> reWorkFlowConfig = WorkflowConfigReader.ReaderAllConfig(flowIn.Flow.WorkflowCode, connectionId, currUser);
+            ReturnInfo<WorkflowDefineInfo> reWorkFlowConfig = WorkflowConfigReader.ReaderAllConfig(flowIn.Flow.WorkflowCode, connectionId : connectionId, comData: comData);
             if (reWorkFlowConfig.Failure())
             {
                 returnInfo.FromBasic(reWorkFlowConfig);
                 return;
             }
 
-            var user = UserTool<int>.GetCurrUser(currUser);
+            var user = UserTool<int>.GetCurrUser(comData);
             if (flowIn.Flow.Id > 0)
             {
-                var reInfo = WorkflowService.Find(flowIn.Flow.Id, connectionId, currUser);
+                var reInfo = WorkflowService.Find(flowIn.Flow.Id, connectionId : connectionId, comData: comData);
                 if (reInfo.Failure())
                 {
                     returnInfo.FromBasic(reInfo);
@@ -239,7 +239,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
             }
             else
             {
-                ReturnInfo<bool> reInfo = WorkflowService.ExistsByApplyNo(flowIn.Flow.ApplyNo, connectionId, currUser);
+                ReturnInfo<bool> reInfo = WorkflowService.ExistsByApplyNo(flowIn.Flow.ApplyNo, connectionId : connectionId, comData: comData);
                 if (reInfo.Failure())
                 {
                     returnInfo.FromBasic(reInfo);

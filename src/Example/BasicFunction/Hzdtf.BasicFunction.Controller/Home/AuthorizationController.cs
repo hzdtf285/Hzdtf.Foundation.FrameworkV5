@@ -12,6 +12,7 @@ using Hzdtf.BasicFunction.Model;
 using Hzdtf.AUC.Contract.IdentityAuth;
 using Hzdtf.AUC.Contract.IdentityAuth.Token;
 using Hzdtf.Utility;
+using Hzdtf.Utility.Factory;
 
 namespace Hzdtf.BasicFunction.Controller.Home
 {
@@ -62,6 +63,15 @@ namespace Hzdtf.BasicFunction.Controller.Home
         }
 
         /// <summary>
+        /// 通用数据工厂
+        /// </summary>
+        public ISimpleFactory<HttpContext, CommonUseData> ComDataFactory
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 是否禁用登录
         /// </summary>
         protected bool IsDisabledLogin
@@ -101,16 +111,18 @@ namespace Hzdtf.BasicFunction.Controller.Home
                 return re;
             }
 
+
+            var comData = HttpContext.CreateCommonUseData(ComDataFactory, menuCode: "Authorization", functionCode: "Login");
             return ExecLogin(loginInfo, (user, pwd, reInfo) =>
             {
                 if (IdentityAuth != null)
                 {
-                    var busRe = IdentityAuth.Accredit(loginInfo.LoginId, loginInfo.Password);
+                    var busRe = IdentityAuth.Accredit(loginInfo.LoginId, loginInfo.Password, comData);
                     reInfo.FromBasic(busRe);
                 }
                 else
                 {
-                    var busRe = IdentityBasicAuth.Accredit(loginInfo.LoginId, loginInfo.Password);
+                    var busRe = IdentityBasicAuth.Accredit(loginInfo.LoginId, loginInfo.Password, comData);
                     reInfo.FromBasic(busRe);
                 }
 
@@ -134,9 +146,10 @@ namespace Hzdtf.BasicFunction.Controller.Home
 
                 return re;
             }
+            var comData = HttpContext.CreateCommonUseData(ComDataFactory, menuCode: "Authorization", functionCode: "LoginToToken");
             return ExecLogin(loginInfo, (user, pwd, reInfo) =>
             {
-                var busRe = IdentityTokenAuth.AccreditToToken(loginInfo.LoginId, loginInfo.Password);
+                var busRe = IdentityTokenAuth.AccreditToToken(loginInfo.LoginId, loginInfo.Password, comData);
                 reInfo.FromBasic(busRe);
                 if (reInfo.Success())
                 {

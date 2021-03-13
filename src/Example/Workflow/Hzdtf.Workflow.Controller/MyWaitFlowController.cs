@@ -10,6 +10,7 @@ using Hzdtf.Workflow.Model.Expand.Filter;
 using Hzdtf.Workflow.Service.Contract;
 using Hzdtf.Workflow.Service.Contract.Engine;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -67,10 +68,11 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息任务</returns>
-        protected override ReturnInfo<PagingInfo<WorkflowInfo>> QueryPageFromService(int pageIndex, int pageSize, WaitHandleFilterInfo filter)
+        protected override ReturnInfo<PagingInfo<WorkflowInfo>> QueryPageFromService(int pageIndex, int pageSize, WaitHandleFilterInfo filter, CommonUseData comData = null)
         {
-            return Service.QueryCurrUserWaitHandlePage(pageIndex, pageSize, filter);
+            return Service.QueryCurrUserWaitHandlePage(pageIndex, pageSize, filter, comData);
         }
 
         /// <summary>
@@ -79,7 +81,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="handleId">处理ID</param>
         /// <returns>返回信息</returns>
         [HttpPut("ModifyReadedByHandleId/{handleId}")]
-        public virtual ReturnInfo<bool> ModifyReadedByHandleId(int handleId) => WorkflowHandleService.ModifyToReadedById(handleId);
+        public virtual ReturnInfo<bool> ModifyReadedByHandleId(int handleId) => WorkflowHandleService.ModifyToReadedById(handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.EDIT_CODE));
 
         /// <summary>
         /// 获取审核明细信息
@@ -88,7 +90,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="handleId">处理ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("GetAuditDetail/{workflowId}/{handleId}")]
-        public virtual ReturnInfo<WorkflowInfo> GetAuditDetail(int workflowId, int handleId) => Service.FindAuditDetail(workflowId, handleId);
+        public virtual ReturnInfo<WorkflowInfo> GetAuditDetail(int workflowId, int handleId) => Service.FindAuditDetail(workflowId, handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE));
 
         /// <summary>
         /// 执行审核
@@ -96,7 +98,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="flowAudit">流程审核信息</param>
         /// <returns>返回信息</returns>
         [HttpPost("ExecAudit")]
-        public virtual ReturnInfo<bool> ExecAudit(FlowAuditInfo flowAudit) => WorkFlowAudit.Execute(flowAudit.ToFlowIn());
+        public virtual ReturnInfo<bool> ExecAudit(FlowAuditInfo flowAudit) => WorkFlowAudit.Execute(flowAudit.ToFlowIn(), HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.AUDIT));
 
         /// <summary>
         /// 获取流程明细信息
@@ -105,25 +107,27 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="handleId">处理ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("GetFlowDetail/{workflowId}/{handleId}")]
-        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId, int handleId) => Service.FindWaitDetail(workflowId, handleId);
+        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId, int handleId) => Service.FindWaitDetail(workflowId, handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE));
 
         /// <summary>
         /// 填充页面数据，包含当前用户所拥有的权限功能列表
         /// </summary>
         /// <param name="returnInfo">返回信息</param>
-        protected override void FillPageData(ReturnInfo<DateRangePageInfo> returnInfo)
+        /// <param name="comData">通用数据</param>
+        protected override void FillPageData(ReturnInfo<DateRangePageInfo> returnInfo, CommonUseData comData = null)
         {
             var re = UserService.QueryPageData<DateRangePageInfo>(MenuCode(), () =>
             {
                 return returnInfo.Data;
-            });
+            }, comData: comData);
             returnInfo.FromBasic(re);
         }
 
         /// <summary>
         /// 创建页面数据
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>页面数据</returns>
-        protected override DateRangePageInfo CreatePageData() => new DateRangePageInfo();
+        protected override DateRangePageInfo CreatePageData(CommonUseData comData = null) => new DateRangePageInfo();
     }
 }

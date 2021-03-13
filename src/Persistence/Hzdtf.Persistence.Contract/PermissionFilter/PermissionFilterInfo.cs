@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hzdtf.Utility.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -13,6 +14,15 @@ namespace Hzdtf.Persistence.Contract.PermissionFilter
     /// </summary>
     public class PermissionFilterInfo
     {
+        /// <summary>
+        /// 通用数据
+        /// </summary>
+        public CommonUseData ComData
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// SQL
         /// </summary>

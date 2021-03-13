@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Hzdtf.Utility.Model.Return;
 using Hzdtf.Utility.Model.Page;
+using Microsoft.AspNetCore.Http;
 
 namespace Hzdtf.BasicController
 {
@@ -51,22 +52,24 @@ namespace Hzdtf.BasicController
         [Function(FunCodeDefine.QUERY_CODE)]
         public virtual object Page()
         {
-            ReturnInfo<PagingInfo<ModelT>> returnInfo = DoPage();
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            ReturnInfo<PagingInfo<ModelT>> returnInfo = DoPage(comData);
             return PagingReturnConvert.Convert<ModelT>(returnInfo);
         }
 
         /// <summary>
         /// 去分页
         /// </summary>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息任务</returns>
-        protected virtual ReturnInfo<PagingInfo<ModelT>> DoPage()
+        protected virtual ReturnInfo<PagingInfo<ModelT>> DoPage(CommonUseData comData = null)
         {
             int pageIndex, pageSize;
             PageFilterT filter = PagingParseFilter.ToFilterObjectFromHttp<PageFilterT>(Request, out pageIndex, out pageSize);
-            AppendFilterParams(filter);
+            AppendFilterParams(filter, comData);
 
-            ReturnInfo<PagingInfo<ModelT>> returnInfo = QueryPageFromService(pageIndex, pageSize, filter);
-            AfterPage(returnInfo, pageIndex, pageSize, filter);
+            ReturnInfo<PagingInfo<ModelT>> returnInfo = QueryPageFromService(pageIndex, pageSize, filter, comData);
+            AfterPage(returnInfo, pageIndex, pageSize, filter, comData);
 
             return returnInfo;
         }
@@ -77,8 +80,9 @@ namespace Hzdtf.BasicController
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息任务</returns>
-        protected virtual ReturnInfo<PagingInfo<ModelT>> QueryPageFromService(int pageIndex, int pageSize, PageFilterT filter) => Service.QueryPage(pageIndex, pageSize, filter, currUser: GetCurrUser());
+        protected virtual ReturnInfo<PagingInfo<ModelT>> QueryPageFromService(int pageIndex, int pageSize, PageFilterT filter, CommonUseData comData = null) => Service.QueryPage(pageIndex, pageSize, filter, comData);
 
         /// <summary>
         /// 分页后
@@ -87,13 +91,15 @@ namespace Hzdtf.BasicController
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">每页记录数</param>
         /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        protected virtual void AfterPage(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, PageFilterT filter) { }
+        protected virtual void AfterPage(ReturnInfo<PagingInfo<ModelT>> returnInfo, int pageIndex, int pageSize, PageFilterT filter, CommonUseData comData = null) { }
 
         /// <summary>
         /// 追加筛选参数
         /// </summary>
         /// <param name="pageFilter">分页筛选</param>
-        protected virtual void AppendFilterParams(PageFilterT pageFilter) { }
+        /// <param name="comData">通用数据</param>
+        protected virtual void AppendFilterParams(PageFilterT pageFilter, CommonUseData comData = null) { }
     }
 }

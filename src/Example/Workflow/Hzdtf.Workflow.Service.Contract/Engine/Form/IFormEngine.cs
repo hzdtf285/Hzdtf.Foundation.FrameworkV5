@@ -19,9 +19,9 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
         /// <param name="flowCensorshipOut">流程关卡输出</param>
         /// <param name="flowIn">流程输入</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> BeforeExecFlow(FlowCensorshipOutInfo flowCensorshipOut, object flowIn, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> BeforeExecFlow(FlowCensorshipOutInfo flowCensorshipOut, object flowIn, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 执行流程后
@@ -30,8 +30,8 @@ namespace Hzdtf.Workflow.Service.Contract.Engine.Form
         /// <param name="flowIn">流程输入</param>
         /// <param name="isSuccess">是否成功</param>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="currUser">当前用户</param>
+        /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> AfterExecFlow(FlowCensorshipOutInfo flowCensorshipOut, object flowIn, bool isSuccess, string connectionId = null, BasicUserInfo<int> currUser = null);
+        ReturnInfo<bool> AfterExecFlow(FlowCensorshipOutInfo flowCensorshipOut, object flowIn, bool isSuccess, CommonUseData comData = null, string connectionId = null);
     }
 }

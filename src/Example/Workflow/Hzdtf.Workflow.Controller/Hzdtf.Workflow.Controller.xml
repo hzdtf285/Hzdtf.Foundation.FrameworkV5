@@ -21,13 +21,14 @@
             </summary>
             <returns>菜单编码</returns>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.ApplyFlowFilterInfo)">
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.ApplyFlowFilterInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             从服务里查询分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
         <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.GetFlowDetail(System.Int32)">
@@ -37,16 +38,18 @@
             <param name="workflowId">工作流ID</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo})">
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.CreatePageData">
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="T:Hzdtf.Workflow.Controller.MyAuditedFlowController">
@@ -66,13 +69,14 @@
             </summary>
             <returns>菜单编码</returns>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.AuditFlowFilterInfo)">
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.AuditFlowFilterInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             从服务里查询分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息任务</returns>
         </member>
         <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.GetFlowDetail(System.Int32,System.Int32)">
@@ -83,16 +87,18 @@
             <param name="handleId">处理ID</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo})">
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.CreatePageData">
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="T:Hzdtf.Workflow.Controller.MyWaitFlowController">
@@ -122,13 +128,14 @@
             </summary>
             <returns>菜单编码</returns>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.WaitHandleFilterInfo)">
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.WaitHandleFilterInfo,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             从服务里查询分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
             <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
             <returns>返回信息任务</returns>
         </member>
         <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.ModifyReadedByHandleId(System.Int32)">
@@ -161,16 +168,18 @@
             <param name="handleId">处理ID</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo})">
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo},Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             填充页面数据，包含当前用户所拥有的权限功能列表
             </summary>
             <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
         </member>
-        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.CreatePageData">
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             创建页面数据
             </summary>
+            <param name="comData">通用数据</param>
             <returns>页面数据</returns>
         </member>
         <member name="T:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1">
@@ -203,6 +212,11 @@
         <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.FormDataReader">
             <summary>
             表单数据读取
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.ComDataFactory">
+            <summary>
+            通用数据工厂
             </summary>
         </member>
         <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.Save(Hzdtf.Workflow.Model.Expand.FlowInitInfo{`0})">
