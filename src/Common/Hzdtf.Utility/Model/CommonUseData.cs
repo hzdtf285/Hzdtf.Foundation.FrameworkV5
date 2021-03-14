@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hzdtf.Utility.Utils;
+using Hzdtf.Utility.Enums;
 
 namespace Hzdtf.Utility.Model
 {
@@ -62,15 +63,15 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
-        /// 是否GRpc，默认为否
+        /// 通讯方式
         /// </summary>
-        [JsonProperty("isGRpc")]
-        [Key("isGRpc")]
-        public bool IsGRpc
+        [JsonProperty("commMode")]
+        [Key("commMode")]
+        public CommunicationMode CommMode
         {
             get;
             set;
-        }
+        } = CommunicationMode.NONE;
 
         /// <summary>
         /// 菜单编码

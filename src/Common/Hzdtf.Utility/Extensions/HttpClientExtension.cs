@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Hzdtf.Utility;
+using Hzdtf.Utility.Extensions;
 using Hzdtf.Utility.Utils;
 
 namespace System.Net.Http
@@ -21,12 +22,13 @@ namespace System.Net.Http
         /// Get请求
         /// </summary>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string Get(string url)
+        public static string Get(string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.Get(url);
+                return httpClient.Get(url, customerOptions);
             }
         }
 
@@ -35,23 +37,25 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string Get(this HttpClient httpClient, string url)
+        public static string Get(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
             return httpClient.RequestJson("Get", httpContent =>
             {
                 return httpClient.GetAsync(url);
-            });
+            }, customerOptions);
         }
 
         /// <summary>
         /// Get请求
         /// </summary>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> GetAsync(string url)
+        public static Task<string> GetAsync(string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => Get(url));
+            return Task<string>.Run(() => Get(url, customerOptions));
         }
 
         /// <summary>
@@ -59,10 +63,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> GetAsync(this HttpClient httpClient, string url)
+        public static Task<string> GetAsync(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => httpClient.Get(url));
+            return Task<string>.Run(() => httpClient.Get(url, customerOptions));
         }
 
         #endregion
@@ -74,12 +79,13 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string PostJson(string url, object data = null)
+        public static string PostJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.PostJson(url, data);
+                return httpClient.PostJson(url, data, customerOptions);
             }
         }
 
@@ -89,13 +95,14 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string PostJson(this HttpClient httpClient, string url, object data = null)
+        public static string PostJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             return httpClient.RequestJson("Post", httpContent =>
             {
                 return httpClient.PostAsync(url, httpContent);
-            }, data);
+            }, data, customerOptions);
         }
 
         /// <summary>
@@ -103,10 +110,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> PostJsonAsync(string url, object data = null)
+        public static Task<string> PostJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => PostJson(url, data));
+            return Task<string>.Run(() => PostJson(url, data, customerOptions));
         }
 
         /// <summary>
@@ -115,10 +123,11 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> PostJsonAsync(this HttpClient httpClient, string url, object data = null)
+        public static Task<string> PostJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => httpClient.PostJson(url, data));
+            return Task<string>.Run(() => httpClient.PostJson(url, data, customerOptions));
         }
 
         #endregion
@@ -129,12 +138,13 @@ namespace System.Net.Http
         /// Delete请求
         /// </summary>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string Delete(string url)
+        public static string Delete(string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.Delete(url);
+                return httpClient.Delete(url, customerOptions);
             }
         }
 
@@ -143,23 +153,25 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string Delete(this HttpClient httpClient, string url)
+        public static string Delete(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
             return httpClient.RequestJson("Delete", httpContent =>
             {
                 return httpClient.DeleteAsync(url);
-            });
+            }, customerOptions);
         }
 
         /// <summary>
         /// Delete请求
         /// </summary>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> DeleteAsync(string url)
+        public static Task<string> DeleteAsync(string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => Delete(url));
+            return Task<string>.Run(() => Delete(url, customerOptions));
         }
 
         /// <summary>
@@ -167,10 +179,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> DeleteAsync(this HttpClient httpClient, string url)
+        public static Task<string> DeleteAsync(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => httpClient.Delete(url));
+            return Task<string>.Run(() => httpClient.Delete(url, customerOptions));
         }
 
         #endregion
@@ -182,12 +195,13 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string PutJson(string url, object data = null)
+        public static string PutJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.PutJson(url, data);
+                return httpClient.PutJson(url, data, customerOptions);
             }
         }
 
@@ -197,13 +211,14 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string PutJson(this HttpClient httpClient, string url, object data = null)
+        public static string PutJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             return httpClient.RequestJson("Put", httpContent =>
             {
                 return httpClient.PutAsync(url, httpContent);
-            }, data);
+            }, data, customerOptions);
         }
 
         /// <summary>
@@ -211,10 +226,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> PutJsonAsync(string url, object data = null)
+        public static Task<string> PutJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => PutJson(url, data));
+            return Task<string>.Run(() => PutJson(url, data, customerOptions));
         }
 
         /// <summary>
@@ -223,10 +239,11 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> PutJsonAsync(this HttpClient httpClient, string url, object data = null)
+        public static Task<string> PutJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => httpClient.PutJson(url, data));
+            return Task<string>.Run(() => httpClient.PutJson(url, data, customerOptions));
         }
 
         #endregion
@@ -238,12 +255,13 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string PatchJson(string url, object data = null)
+        public static string PatchJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.PatchJson(url, data);
+                return httpClient.PatchJson(url, data, customerOptions);
             }
         }
 
@@ -253,13 +271,14 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string PatchJson(this HttpClient httpClient, string url, object data = null)
+        public static string PatchJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             return httpClient.RequestJson("Patch", httpContent =>
             {
                 return httpClient.PatchAsync(url, httpContent);
-            }, data);
+            }, data, customerOptions);
         }
 
         /// <summary>
@@ -267,10 +286,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> PatchJsonAsync(string url, object data = null)
+        public static Task<string> PatchJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => PatchJson(url, data));
+            return Task<string>.Run(() => PatchJson(url, data, customerOptions));
         }
 
         /// <summary>
@@ -279,10 +299,11 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>任务</returns>
-        public static Task<string> PatchJsonAsync(this HttpClient httpClient, string url, object data = null)
+        public static Task<string> PatchJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return Task<string>.Run(() => httpClient.PatchJson(url, data));
+            return Task<string>.Run(() => httpClient.PatchJson(url, data, customerOptions));
         }
 
         #endregion
@@ -310,39 +331,29 @@ namespace System.Net.Http
         /// <summary>
         /// 创建http客户端
         /// </summary>
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>http客户端</returns>
-        public static HttpClient CreateHttpClient()
+        public static HttpClient CreateHttpClient(Action<ChannelCustomerOptions> customerOptions = null)
         {
             var httpClient = new HttpClient();
-            if (App.GetTokenFunc != null)
+            var cusOptions = new ChannelCustomerOptions();
+            if (customerOptions != null)
             {
-                httpClient.AddBearerTokenToHeader(App.GetTokenFunc());
+                customerOptions(cusOptions);
             }
-            httpClient.AddEventIdToHeader();
+
+            var token = cusOptions.GetToken();
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                httpClient.DefaultRequestHeaders.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
+            }
+            var eventId = cusOptions.GetEventId();
+            if (!string.IsNullOrWhiteSpace(eventId))
+            {
+                httpClient.DefaultRequestHeaders.Add(App.EVENT_ID_KEY, eventId);
+            }
 
             return httpClient;
-        }
-
-        /// <summary>
-        /// 添加事件ID到头上
-        /// </summary>
-        /// <param name="httpClient">http客户端</param>
-        /// <param name="eventId">事件ID，如果为空，则会回调GetEventIdFunc</param>
-        public static void AddEventIdToHeader(this HttpClient httpClient, string eventId = null)
-        {
-            if (string.IsNullOrWhiteSpace(eventId))
-            {
-                if (App.GetEventIdFunc != null)
-                {
-                    eventId = App.GetEventIdFunc();
-                    if (string.IsNullOrWhiteSpace(eventId))
-                    {
-                        return;
-                    }
-                }
-            }
-
-            httpClient.DefaultRequestHeaders.Add(App.EVENT_ID_KEY, eventId);
         }
 
         /// <summary>
@@ -352,8 +363,9 @@ namespace System.Net.Http
         /// <param name="method">方法</param>
         /// <param name="callbackRequest">回调请求</param>
         /// <param name="data">数据</param>        
+        /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string RequestJson(this HttpClient httpClient, string method, Func<HttpContent, Task<HttpResponseMessage>> callbackRequest, object data = null)
+        public static string RequestJson(this HttpClient httpClient, string method, Func<HttpContent, Task<HttpResponseMessage>> callbackRequest, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             HttpContent content = null;
             if (data != null)
@@ -376,10 +388,25 @@ namespace System.Net.Http
 
             Task<HttpResponseMessage> task = null;
             httpClient.DefaultRequestHeaders.Add("Method", method);
-            if (!httpClient.DefaultRequestHeaders.Contains(App.EVENT_ID_KEY))
+
+
+            var cusOptions = new ChannelCustomerOptions();
+            if (customerOptions != null)
             {
-                httpClient.AddEventIdToHeader();
+                customerOptions(cusOptions);
             }
+
+            var token = cusOptions.GetToken();
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                content.Headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
+            }
+            var eventId = cusOptions.GetEventId();
+            if (!string.IsNullOrWhiteSpace(eventId))
+            {
+                content.Headers.Add(App.EVENT_ID_KEY, eventId);
+            }
+
             task = callbackRequest(content);
             task.Wait();
 

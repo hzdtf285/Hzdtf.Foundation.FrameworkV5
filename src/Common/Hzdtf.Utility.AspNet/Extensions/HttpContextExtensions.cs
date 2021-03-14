@@ -1,5 +1,6 @@
 ﻿using Grpc.Net.Client;
 using Hzdtf.Utility;
+using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Utils;
@@ -99,7 +100,7 @@ namespace Microsoft.AspNetCore.Http
                     result.EventId = context.Request.Headers[App.EVENT_ID_KEY];
                 }
 
-                result.IsGRpc = GRpcChannelUtil.IsRequestGRpc(context.Request.ContentType);
+                result.CommMode = GRpcChannelUtil.IsRequestGRpc(context.Request.ContentType) ? CommunicationMode.GRPC : CommunicationMode.HTTP;
             }
 
             return result;

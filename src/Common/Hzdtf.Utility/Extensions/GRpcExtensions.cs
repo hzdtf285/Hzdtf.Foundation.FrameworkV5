@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hzdtf.Utility.Extensions;
 
 namespace Grpc.Net.Client
 {
@@ -25,30 +26,21 @@ namespace Grpc.Net.Client
         /// <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
         /// <param name="customerOptions">自定义选项配置</param>
         /// <param name="options">选项配置</param>
-        public static void CreateChannel(string address, Action<GrpcChannel, Metadata> action, Action<RpcException> exAction = null, Action<GrpcChannelCustomerOptions> customerOptions = null, GrpcChannelOptions options = null)
+        public static void CreateChannel(string address, Action<GrpcChannel, Metadata> action, Action<RpcException> exAction = null, Action<ChannelCustomerOptions> customerOptions = null, GrpcChannelOptions options = null)
         {
             var headers = new Metadata();
-            var cusOptions = new GrpcChannelCustomerOptions();
+            var cusOptions = new ChannelCustomerOptions();
             if (customerOptions != null)
             {
                 customerOptions(cusOptions);
             }
 
-            string token = cusOptions.ComData != null ? cusOptions.ComData.Token : null;
-            if (string.IsNullOrWhiteSpace(token) && cusOptions.IsAddToken && (cusOptions.GetTokenFunc != null || App.GetTokenFunc != null))
-            {
-                token = cusOptions.GetTokenFunc != null ? cusOptions.GetTokenFunc() : App.GetTokenFunc();                
-            }
+            var token = cusOptions.GetToken();
             if (!string.IsNullOrWhiteSpace(token))
             {
                 headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
             }
-
-            string eventId = cusOptions.ComData != null ? cusOptions.ComData.EventId : null;
-            if (string.IsNullOrWhiteSpace(token) && cusOptions.IsAddEventId && App.GetEventIdFunc != null)
-            {
-                eventId = App.GetEventIdFunc();
-            }
+            var eventId = cusOptions.GetEventId();
             if (!string.IsNullOrWhiteSpace(eventId))
             {
                 headers.Add(App.EVENT_ID_KEY, eventId);
@@ -136,50 +128,5 @@ namespace Grpc.Net.Client
 
             new BusinessException(basicReturn.Code, basicReturn.Msg, basicReturn.Desc).ThrowRpcException(basicReturn.Msg);
         }
-    }
-
-    /// <summary>
-    /// GRpc渠道自定义选项配置
-    /// @ 黄振东
-    /// </summary>
-    public class GrpcChannelCustomerOptions
-    {
-        /// <summary>
-        /// 是否添加Token，设置后，会调用App.GetTokenFunc获取Token
-        /// 默认为是
-        /// </summary>
-        public bool IsAddToken
-        {
-            get;
-            set;
-        } = true;
-
-        /// <summary>
-        /// 获取Token回调
-        /// </summary>
-        public Func<string> GetTokenFunc
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 是否添加事件ID，设置后，会调用App.GetEventIdFunc获取事件ID
-        /// 默认为是
-        /// </summary>
-        public bool IsAddEventId
-        {
-            get;
-            set;
-        } = true;
-
-        /// <summary>
-        /// 通用数据
-        /// </summary>
-        public CommonUseData ComData
-        {
-            get;
-            set;
-        }
-    }
+    }    
 }

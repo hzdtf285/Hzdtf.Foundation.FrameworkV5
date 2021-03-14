@@ -1,10 +1,10 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:54449",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:51436/",
+      "sslPort": 44360
     }
   },
   "profiles": {
@@ -17,12 +17,12 @@
     },
     "Hzdtf.Utility.AspNetCore": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:5000"
     }
   }
 }
