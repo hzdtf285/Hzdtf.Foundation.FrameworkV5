@@ -245,13 +245,19 @@
             日志
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogOptions},Hzdtf.Logger.Contract.ILogable)">
+        <member name="F:Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogMiddleware.theOperation">
+            <summary>
+            本次操作
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogOptions},Hzdtf.Logger.Contract.ILogable,Hzdtf.Utility.TheOperation.ITheOperation)">
             <summary>
             构造方法
             </summary>
             <param name="next">下一个中间件处理委托</param>
             <param name="options">请求日志选项配置</param>
             <param name="log">日志</param>
+            <param name="theOperation">本次操作</param>
         </member>
         <member name="M:Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -613,6 +619,13 @@
             <param name="request">http请求</param>
             <returns>带有Bearer的票据</returns>
         </member>
+        <member name="M:Microsoft.AspNetCore.Http.HttpRequestExtensions.GetEventId(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            获取事件ID，如果header不存在则新创建
+            </summary>
+            <param name="request">http请求</param>
+            <returns>事件ID</returns>
+        </member>
         <member name="T:Microsoft.AspNetCore.Routing.RouteValueDictionaryExtensions">
             <summary>
             路由值字典扩展类
@@ -773,12 +786,18 @@
             日志
             </summary>
         </member>
-        <member name="M:Grpc.Core.Interceptors.GRpcRequestLogInterceptor.#ctor(Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogOptions},Hzdtf.Logger.Contract.ILogable)">
+        <member name="F:Grpc.Core.Interceptors.GRpcRequestLogInterceptor.theOperation">
+            <summary>
+            本次操作
+            </summary>
+        </member>
+        <member name="M:Grpc.Core.Interceptors.GRpcRequestLogInterceptor.#ctor(Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RequestLog.RequestLogOptions},Hzdtf.Logger.Contract.ILogable,Hzdtf.Utility.TheOperation.ITheOperation)">
             <summary>
             构造方法
             </summary>
             <param name="options">请求日志选项配置</param>
             <param name="log">日志</param>
+            <param name="theOperation">本次操作</param>
         </member>
         <member name="M:Grpc.Core.Interceptors.GRpcRequestLogInterceptor.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
             <summary>

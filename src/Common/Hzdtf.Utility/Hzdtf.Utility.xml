@@ -7540,6 +7540,13 @@
             <param name="isFilterSpace">是否过滤空格</param>
             <returns>过虑后的字符串</returns>
         </member>
+        <member name="M:Hzdtf.Utility.Utils.StringUtil.NullOutEmpty(System.String)">
+            <summary>
+            如果字符串为null，则输出空字符串
+            </summary>
+            <param name="str">字符串</param>
+            <returns>如果字符串为null，则输出空字符串</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Utils.ValidateUtil">
             <summary>
             验证辅助类

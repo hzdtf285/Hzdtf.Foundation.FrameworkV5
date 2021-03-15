@@ -1,4 +1,5 @@
-﻿using Hzdtf.Utility.Utils;
+﻿using Hzdtf.Utility;
+using Hzdtf.Utility.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,6 +37,30 @@ namespace Microsoft.AspNetCore.Http
             }
 
             return request.Headers[AuthUtil.AUTH_KEY].ToString();
+        }
+
+        /// <summary>
+        /// 获取事件ID，如果header不存在则新创建
+        /// </summary>
+        /// <param name="request">http请求</param>
+        /// <returns>事件ID</returns>
+        public static string GetEventId(this HttpRequest request)
+        {
+            string eventId = null;
+            if (request != null && request.Headers != null && request.Headers.ContainsKey(App.EVENT_ID_KEY))
+            {
+                eventId = request.Headers[App.EVENT_ID_KEY].ToString();
+                if (string.IsNullOrWhiteSpace(eventId))
+                {
+                    eventId = StringUtil.NewShortGuid();
+                }
+            }
+            else
+            {
+                eventId = StringUtil.NewShortGuid();
+            }
+
+            return eventId;
         }
     }
 }

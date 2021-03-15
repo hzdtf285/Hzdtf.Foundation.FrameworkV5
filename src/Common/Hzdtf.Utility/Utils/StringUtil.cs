@@ -252,5 +252,12 @@ namespace Hzdtf.Utility.Utils
 
             return htmlString;
         }
+
+        /// <summary>
+        /// 如果字符串为null，则输出空字符串
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <returns>如果字符串为null，则输出空字符串</returns>
+        public static string NullOutEmpty(this string str) => str != null ? str : string.Empty;
     }
 }

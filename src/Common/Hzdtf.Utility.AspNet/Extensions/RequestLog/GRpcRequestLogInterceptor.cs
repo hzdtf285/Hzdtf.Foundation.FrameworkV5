@@ -1,6 +1,7 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Utility.AspNet.Extensions.RequestLog;
 using Hzdtf.Utility.Attr;
+using Hzdtf.Utility.TheOperation;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Grpc.Core.Interceptors
 {
@@ -29,14 +31,21 @@ namespace Grpc.Core.Interceptors
         private readonly ILogable log;
 
         /// <summary>
+        /// 本次操作
+        /// </summary>
+        private readonly ITheOperation theOperation;
+
+        /// <summary>
         /// 构造方法
         /// </summary>
         /// <param name="options">请求日志选项配置</param>
         /// <param name="log">日志</param>
-        public GRpcRequestLogInterceptor(IOptions<RequestLogOptions> options, ILogable log)
+        /// <param name="theOperation">本次操作</param>
+        public GRpcRequestLogInterceptor(IOptions<RequestLogOptions> options, ILogable log, ITheOperation theOperation = null)
         {
             this.options = options.Value;
             this.log = log;
+            this.theOperation = theOperation;
         }
 
         /// <summary>
@@ -57,35 +66,44 @@ namespace Grpc.Core.Interceptors
             stop.Stop();
 
             var msg = $"GRpc请求:{path} 耗时:{stop.ElapsedMilliseconds}ms";
+            string eventId = null;
+            if (theOperation != null)
+            {
+                if (string.IsNullOrWhiteSpace(theOperation.EventId))
+                {
+                    theOperation.EventId = context.GetHttpContext().Request.GetEventId();
+                }
+                eventId = theOperation.EventId;
+            }
             switch (options.LogLevel)
             {
                 case LogLevelEnum.TRACE:
-                    _ = log.TraceAsync(msg, null, "GRpcRequestLogInterceptor", path);
+                    _ = log.TraceAsync(msg, null, "GRpcRequestLogInterceptor", eventId: eventId, path);
 
                     break;
 
                 case LogLevelEnum.DEBUG:
-                    _ = log.DebugAsync(msg, null, "GRpcRequestLogInterceptor", path);
+                    _ = log.DebugAsync(msg, null, "GRpcRequestLogInterceptor", eventId: eventId, path);
 
                     break;
 
                 case LogLevelEnum.WRAN:
-                    _ = log.WranAsync(msg, null, "GRpcRequestLogInterceptor", path);
+                    _ = log.WranAsync(msg, null, "GRpcRequestLogInterceptor", eventId: eventId, path);
 
                     break;
 
                 case LogLevelEnum.INFO:
-                    _ = log.InfoAsync(msg, null, "GRpcRequestLogInterceptor", path);
+                    _ = log.InfoAsync(msg, null, "GRpcRequestLogInterceptor", eventId: eventId, path);
 
                     break;
 
                 case LogLevelEnum.ERROR:
-                    _ = log.ErrorAsync(msg, null, "GRpcRequestLogInterceptor", path);
+                    _ = log.ErrorAsync(msg, null, "GRpcRequestLogInterceptor", eventId: eventId, path);
 
                     break;
 
                 case LogLevelEnum.FATAL:
-                    _ = log.FatalAsync(msg, null, "GRpcRequestLogInterceptor", path);
+                    _ = log.FatalAsync(msg, null, "GRpcRequestLogInterceptor", eventId: eventId, path);
 
                     break;
             }
