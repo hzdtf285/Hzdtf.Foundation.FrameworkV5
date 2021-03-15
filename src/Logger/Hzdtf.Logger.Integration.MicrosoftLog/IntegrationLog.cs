@@ -327,6 +327,24 @@ namespace Hzdtf.Logger.Text.Integration.MicrosoftLog
 
         #endregion
 
+        #region IInfoEvent 接口
+
+        /// <summary>
+        /// 异步记录
+        /// </summary>
+        /// <param name="msg">消息</param>
+        /// <param name="ex">异常</param>
+        /// <param name="source">来源</param>
+        /// <param name="eventId">事件ID</param>
+        /// <param name="tags">标签</param>
+        /// <returns>任务</returns>
+        public Task RecordAsync(string msg, Exception ex = null, string source = null, string eventId = null, params string[] tags)
+        {
+            return ex == null ? TraceAsync(msg, ex, source, eventId, tags) : ErrorAsync(msg, ex, source, eventId, tags);
+        }
+
+        #endregion
+
         #region ISetObject<ILogable>
 
         /// <summary>

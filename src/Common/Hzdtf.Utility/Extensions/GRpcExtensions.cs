@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hzdtf.Utility.Extensions;
+using System.Diagnostics;
 
 namespace Grpc.Net.Client
 {
@@ -46,46 +47,55 @@ namespace Grpc.Net.Client
                 headers.Add(App.EVENT_ID_KEY, eventId);
             }
 
-            if (exAction == null)
+            var channel = options == null ? GrpcChannel.ForAddress(address) : GrpcChannel.ForAddress(address, options);
+            ExecCallBusiness(address, cusOptions, channel, headers, eventId, action, exAction);
+        }
+
+        /// <summary>
+        /// 执行回调业务
+        /// </summary>
+        /// <param name="address">地址</param>
+        /// <param name="options">自定义配置</param>
+        /// <param name="channel">已经创建的渠道</param>
+        /// <param name="headers">头</param>
+        /// <param name="eventId">事件ID</param>
+        /// <param name="action">回调业务动作</param>
+        /// <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
+        private static void ExecCallBusiness(string address, ChannelCustomerOptions options, GrpcChannel channel, Metadata headers,
+            string eventId, Action<GrpcChannel, Metadata> action, Action<RpcException> exAction)
+        {
+            RpcException rpcEx = null;
+            Exception exce = null;
+            Stopwatch watch = new Stopwatch();
+            try
             {
-                if (options == null)
-                {
-                    using (var channel = GrpcChannel.ForAddress(address))
-                    {
-                        action(channel, headers);
-                    }
-                }
-                else
-                {
-                    using (var channel = GrpcChannel.ForAddress(address, options))
-                    {
-                        action(channel, headers);
-                    }
-                }
+                watch.Start();
+                action(channel, headers);
+                watch.Stop();
             }
-            else
+            catch (RpcException ex)
             {
-                try
-                {
-                    if (options == null)
-                    {
-                        using (var channel = GrpcChannel.ForAddress(address))
-                        {
-                            action(channel, headers);
-                        }
-                    }
-                    else
-                    {
-                        using (var channel = GrpcChannel.ForAddress(address, options))
-                        {
-                            action(channel, headers);
-                        }
-                    }
-                }
-                catch (RpcException ex)
-                {
-                    exAction(ex);
-                }
+                watch.Stop();
+                exce = rpcEx = ex;
+            }
+            catch (Exception ex)
+            {
+                watch.Stop();
+                exce = ex;
+            }
+            finally
+            {
+                channel.Dispose();
+            }
+
+            if (App.InfoEvent != null)
+            {
+                App.InfoEvent.RecordAsync($"grpc发起请求地址:{address}.接口:{options.Api}.耗时:{watch.ElapsedMilliseconds}ms",
+                    exce, "CreateChannel", eventId, address, options.Api);
+            }
+            if (rpcEx != null && exAction != null)
+            {
+                exAction(rpcEx);
             }
         }
 
@@ -128,5 +138,5 @@ namespace Grpc.Net.Client
 
             new BusinessException(basicReturn.Code, basicReturn.Msg, basicReturn.Desc).ThrowRpcException(basicReturn.Msg);
         }
-    }    
+    }
 }

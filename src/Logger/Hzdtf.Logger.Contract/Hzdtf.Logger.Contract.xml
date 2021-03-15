@@ -510,6 +510,17 @@
             <param name="tags">标签</param>
             <returns>任务</returns>
         </member>
+        <member name="M:Hzdtf.Logger.Contract.LogBase.RecordAsync(System.String,System.Exception,System.String,System.String,System.String[])">
+            <summary>
+            异步记录
+            </summary>
+            <param name="msg">消息</param>
+            <param name="ex">异常</param>
+            <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
+            <param name="tags">标签</param>
+            <returns>任务</returns>
+        </member>
         <member name="T:Hzdtf.Logger.Contract.LogLevelHelper">
             <summary>
             日志级别帮助类

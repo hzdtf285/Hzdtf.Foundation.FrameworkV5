@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -41,7 +42,7 @@ namespace System.Net.Http
         /// <returns>返回字符串</returns>
         public static string Get(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return httpClient.RequestJson("Get", httpContent =>
+            return httpClient.RequestJson(url, "Get", httpContent =>
             {
                 return httpClient.GetAsync(url);
             }, customerOptions);
@@ -99,7 +100,7 @@ namespace System.Net.Http
         /// <returns>返回字符串</returns>
         public static string PostJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return httpClient.RequestJson("Post", httpContent =>
+            return httpClient.RequestJson(url, "Post", httpContent =>
             {
                 return httpClient.PostAsync(url, httpContent);
             }, data, customerOptions);
@@ -157,7 +158,7 @@ namespace System.Net.Http
         /// <returns>返回字符串</returns>
         public static string Delete(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return httpClient.RequestJson("Delete", httpContent =>
+            return httpClient.RequestJson(url, "Delete", httpContent =>
             {
                 return httpClient.DeleteAsync(url);
             }, customerOptions);
@@ -215,7 +216,7 @@ namespace System.Net.Http
         /// <returns>返回字符串</returns>
         public static string PutJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return httpClient.RequestJson("Put", httpContent =>
+            return httpClient.RequestJson(url, "Put", httpContent =>
             {
                 return httpClient.PutAsync(url, httpContent);
             }, data, customerOptions);
@@ -275,7 +276,7 @@ namespace System.Net.Http
         /// <returns>返回字符串</returns>
         public static string PatchJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
-            return httpClient.RequestJson("Patch", httpContent =>
+            return httpClient.RequestJson(url, "Patch", httpContent =>
             {
                 return httpClient.PatchAsync(url, httpContent);
             }, data, customerOptions);
@@ -360,12 +361,13 @@ namespace System.Net.Http
         /// 请求请求JSON
         /// </summary>
         /// <param name="httpClient">http客户端</param>
+        /// <param name="url">URL</param>
         /// <param name="method">方法</param>
         /// <param name="callbackRequest">回调请求</param>
         /// <param name="data">数据</param>        
         /// <param name="customerOptions">自定义选项配置</param>
         /// <returns>返回字符串</returns>
-        public static string RequestJson(this HttpClient httpClient, string method, Func<HttpContent, Task<HttpResponseMessage>> callbackRequest, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string RequestJson(this HttpClient httpClient, string url, string method, Func<HttpContent, Task<HttpResponseMessage>> callbackRequest, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
         {
             HttpContent content = null;
             if (data != null)
@@ -389,7 +391,6 @@ namespace System.Net.Http
             Task<HttpResponseMessage> task = null;
             httpClient.DefaultRequestHeaders.Add("Method", method);
 
-
             var cusOptions = new ChannelCustomerOptions();
             if (customerOptions != null)
             {
@@ -407,8 +408,28 @@ namespace System.Net.Http
                 content.Headers.Add(App.EVENT_ID_KEY, eventId);
             }
 
-            task = callbackRequest(content);
-            task.Wait();
+            Exception exce = null;
+            var watch = new Stopwatch();
+            try
+            {
+                watch.Start();
+                task = callbackRequest(content);
+                task.Wait();
+                watch.Stop();
+            }
+            catch (Exception ex)
+            {
+                watch.Stop();
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (App.InfoEvent != null)
+                {
+                    App.InfoEvent.RecordAsync($"http发起请求地址:{url}.方法:{method}.接口:{cusOptions.Api}.耗时:{watch.ElapsedMilliseconds}ms",
+                        exce, "RequestJson", eventId, url, cusOptions.Api);
+                }
+            }
 
             if (task.Result.StatusCode == System.Net.HttpStatusCode.OK)
             {

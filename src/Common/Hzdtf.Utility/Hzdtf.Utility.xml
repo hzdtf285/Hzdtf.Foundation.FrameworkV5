@@ -253,6 +253,11 @@
             本次操作
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.App.InfoEvent">
+            <summary>
+            信息事件
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Attr.AuthAttribute">
             <summary>
             授权特性
@@ -2837,6 +2842,23 @@
             </summary>
             <param name="eventData">事件数据</param>
         </member>
+        <member name="T:Hzdtf.Utility.Event.IInfoEvent">
+            <summary>
+            信息事件接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Event.IInfoEvent.RecordAsync(System.String,System.Exception,System.String,System.String,System.String[])">
+            <summary>
+            异步记录
+            </summary>
+            <param name="msg">消息</param>
+            <param name="ex">异常</param>
+            <param name="source">来源</param>
+            <param name="eventId">事件ID</param>
+            <param name="tags">标签</param>
+            <returns>任务</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Expressions.PredicateBuilder">
             <summary>
             条件生成器
@@ -2901,6 +2923,11 @@
         <member name="P:Hzdtf.Utility.Extensions.ChannelCustomerOptions.ComData">
             <summary>
             通用数据
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Extensions.ChannelCustomerOptions.Api">
+            <summary>
+            接口
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.Extensions.ChannelCustomerOptionsExtensions">
@@ -8680,11 +8707,12 @@
             <param name="customerOptions">自定义选项配置</param>
             <returns>http客户端</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.RequestJson(System.Net.Http.HttpClient,System.String,System.Func{System.Net.Http.HttpContent,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}},System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.RequestJson(System.Net.Http.HttpClient,System.String,System.String,System.Func{System.Net.Http.HttpContent,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}},System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
             <summary>
             请求请求JSON
             </summary>
             <param name="httpClient">http客户端</param>
+            <param name="url">URL</param>
             <param name="method">方法</param>
             <param name="callbackRequest">回调请求</param>
             <param name="data">数据</param>        
@@ -9156,6 +9184,18 @@
             <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
             <param name="customerOptions">自定义选项配置</param>
             <param name="options">选项配置</param>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.ExecCallBusiness(System.String,Hzdtf.Utility.Extensions.ChannelCustomerOptions,Grpc.Net.Client.GrpcChannel,Grpc.Core.Metadata,System.String,System.Action{Grpc.Net.Client.GrpcChannel,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException})">
+            <summary>
+            执行回调业务
+            </summary>
+            <param name="address">地址</param>
+            <param name="options">自定义配置</param>
+            <param name="channel">已经创建的渠道</param>
+            <param name="headers">头</param>
+            <param name="eventId">事件ID</param>
+            <param name="action">回调业务动作</param>
+            <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
         </member>
         <member name="M:Grpc.Net.Client.GRpcChannelUtil.IsRequestGRpc(System.String)">
             <summary>

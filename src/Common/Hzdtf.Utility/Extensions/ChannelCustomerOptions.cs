@@ -50,6 +50,15 @@ namespace Hzdtf.Utility.Extensions
             get;
             set;
         }
+
+        /// <summary>
+        /// 接口
+        /// </summary>
+        public string Api
+        {
+            get;
+            set;
+        }
     }
 
     /// <summary>

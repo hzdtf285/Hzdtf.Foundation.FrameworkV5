@@ -1,4 +1,5 @@
-﻿using Hzdtf.Utility.Enums;
+﻿using Hzdtf.Utility.Event;
+using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Safety;
 using Hzdtf.Utility.TheOperation;
 using Microsoft.Extensions.Configuration;
@@ -260,5 +261,10 @@ namespace Hzdtf.Utility
         /// 本次操作
         /// </summary>
         public static ITheOperation TheOperation;
+
+        /// <summary>
+        /// 信息事件
+        /// </summary>
+        public static IInfoEvent InfoEvent;
     }
 }

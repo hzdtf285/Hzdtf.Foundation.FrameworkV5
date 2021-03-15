@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hzdtf.Utility.Event;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Hzdtf.Logger.Contract
     /// 可记录日志的异步接口
     /// @ 黄振东
     /// </summary>
-    public interface ILogableAsync
+    public interface ILogableAsync : IInfoEvent
     {
         /// <summary>
         /// 异步跟踪
