@@ -151,6 +151,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hzdtf.Workflow.Controller",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hzdtf.BasicFunction.Workflow", "Example\Workflow\Hzdtf.BasicFunction.Workflow\Hzdtf.BasicFunction.Workflow.csproj", "{4D2B6820-00C6-49F7-96F1-03D676A86AC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hzdtf.EntityFrameworkCore.Extensions", "Persistence\Hzdtf.EntityFrameworkCore.Extensions\Hzdtf.EntityFrameworkCore.Extensions.csproj", "{13DBD7FD-862B-4D2C-98F5-F66AC75B212B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -357,6 +359,10 @@ Global
 		{4D2B6820-00C6-49F7-96F1-03D676A86AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D2B6820-00C6-49F7-96F1-03D676A86AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D2B6820-00C6-49F7-96F1-03D676A86AC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13DBD7FD-862B-4D2C-98F5-F66AC75B212B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13DBD7FD-862B-4D2C-98F5-F66AC75B212B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13DBD7FD-862B-4D2C-98F5-F66AC75B212B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13DBD7FD-862B-4D2C-98F5-F66AC75B212B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -425,6 +431,7 @@ Global
 		{CA265DBF-2B1B-440C-B033-C37E5A9A0B9E} = {DCA77D5C-8278-44C7-BBE2-DBF3947B1DBF}
 		{407A3E9B-4D81-4DD3-9B72-C547C1A8C6AC} = {0C80FD8E-023C-4D18-AE5B-DAFF9545ED3E}
 		{4D2B6820-00C6-49F7-96F1-03D676A86AC0} = {DCA77D5C-8278-44C7-BBE2-DBF3947B1DBF}
+		{13DBD7FD-862B-4D2C-98F5-F66AC75B212B} = {CE674F4B-5C29-4DC6-9DE8-6BAFBBEB6F71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C1D4F84-3137-48AB-864E-FEBD1454E847}

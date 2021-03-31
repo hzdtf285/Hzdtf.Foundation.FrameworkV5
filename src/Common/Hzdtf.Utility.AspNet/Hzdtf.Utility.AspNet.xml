@@ -659,11 +659,12 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.JsonSerializerOptionsExtensioins.AddDefaultJsonOptions(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+        <member name="M:Microsoft.Extensions.DependencyInjection.JsonSerializerOptionsExtensioins.AddDefaultJsonOptions(Microsoft.Extensions.DependencyInjection.IMvcBuilder,System.Action{Microsoft.AspNetCore.Mvc.JsonOptions})">
             <summary>
             添加默认的JSON选项
             </summary>
             <param name="builder">MVC生成器</param>
+            <param name="jsonOptions">JSON配置回调</param>
             <returns>MVC生成器</returns>
         </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.HashIpPortLoadBalanceExtensions">

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.EntityFrameworkCore.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.EntityFrameworkCore.DbContextExtensions">
+            <summary>
+            数据库上下文扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.UpdateProps``2(``0,``1[],System.String[])">
+            <summary>
+            更新指定的属性实体数组
+            </summary>
+            <typeparam name="DbContextT">数据库上下文类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entitys">实体数组</param>
+            <param name="updatePropNames">更新属性名称</param>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.UpdateProps``2(``0,``1,System.String[])">
+            <summary>
+            更新指定的属性实体
+            </summary>
+            <typeparam name="DbContextT">数据库上下文类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体</param>
+            <param name="updatePropNames">更新属性名称</param>
+        </member>
+    </members>
+</doc>
