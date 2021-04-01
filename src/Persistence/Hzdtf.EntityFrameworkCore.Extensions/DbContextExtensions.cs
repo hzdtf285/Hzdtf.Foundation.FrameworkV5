@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Utility.Utils;
 using System;
+using System.Data.Common;
 
 namespace Microsoft.EntityFrameworkCore
 {
@@ -61,6 +62,116 @@ namespace Microsoft.EntityFrameworkCore
             foreach (var p in updatePropNames)
             {
                 context.Entry<T>(entity).Property(p).IsModified = true;
+            }
+        }
+
+        /// <summary>
+        /// 执行SQL并返回第1行第1列的值
+        /// </summary>
+        /// <typeparam name="DbContextT">数据库上下文类型</typeparam>
+        /// <param name="context">数据库上下文</param>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="param">参数</param>
+        /// <returns>第1行第1列的值</returns>
+        public static object ExecuteScalar<DbContextT>(this DbContextT context, string sql, params DbParameter[] param)
+            where DbContextT : DbContext
+        {
+            return context.ExecCommand<DbContextT, object>(sql, cmd =>
+            {
+                return cmd.ExecuteScalar();
+            }, param);
+        }
+
+        /// <summary>
+        /// 执行SQL并返回影响行数
+        /// </summary>
+        /// <typeparam name="DbContextT">数据库上下文类型</typeparam>
+        /// <param name="context">数据库上下文</param>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="param">参数</param>
+        /// <returns>第1行第1列的值</returns>
+        public static int ExecuteNonQuery<DbContextT>(this DbContextT context, string sql, params DbParameter[] param)
+            where DbContextT : DbContext
+        {
+            return context.ExecCommand<DbContextT, int>(sql, cmd =>
+            {
+                return cmd.ExecuteNonQuery();
+            }, param);
+        }
+
+        /// <summary>
+        /// 执行SQL并返回影响行数
+        /// </summary>
+        /// <typeparam name="DbContextT">数据库上下文类型</typeparam>
+        /// <param name="context">数据库上下文</param>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="callback">回调</param>
+        /// <param name="param">参数</param>
+        public static void ExecuteReader<DbContextT>(this DbContextT context, string sql, Action<DbDataReader> callback, params DbParameter[] param)
+            where DbContextT : DbContext
+        {
+            context.ExecCommand<DbContextT, object>(sql, cmd =>
+            {
+                var reader = cmd.ExecuteReader();
+                try
+                {
+                    callback(reader);
+
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message, ex);
+                }
+                finally
+                {
+                    reader.Close();
+                }
+            }, param);
+        }
+
+        /// <summary>
+        /// 执行SQL并返回第1行第1列的值
+        /// </summary>
+        /// <typeparam name="DbContextT"></typeparam>
+        /// <typeparam name="ReturnT">返回类型</typeparam>
+        /// <param name="context">数据库上下文</param>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="func">回调</param>
+        /// <param name="param">参数</param>
+        /// <returns>第1行第1列的值</returns>
+        private static ReturnT ExecCommand<DbContextT, ReturnT>(this DbContextT context, string sql, Func<DbCommand, ReturnT> func, params DbParameter[] param)
+            where DbContextT : DbContext
+        {
+            var conn = context.Database.GetDbConnection();
+            DbCommand cmd = null;
+            try
+            {
+                conn.Open();
+                cmd = conn.CreateCommand();
+                cmd.CommandText = sql;
+                if (!param.IsNullOrLength0())
+                {
+                    cmd.Parameters.AddRange(param);
+                }
+
+                return func(cmd);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (cmd != null)
+                {
+                    cmd.Dispose();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                    conn.Dispose();
+                }
             }
         }
     }
