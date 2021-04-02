@@ -76,5 +76,17 @@
             <param name="param">参数</param>
             <returns>第1行第1列的值</returns>
         </member>
+        <member name="T:Microsoft.EntityFrameworkCore.ScalarModel`1">
+            <summary>
+            首位数据模型
+            @ 黄振东
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+        </member>
+        <member name="P:Microsoft.EntityFrameworkCore.ScalarModel`1.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
     </members>
 </doc>
