@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Utility.Utils;
 using System;
+using System.Data;
 using System.Data.Common;
 
 namespace Microsoft.EntityFrameworkCore
@@ -71,15 +72,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="DbContextT">数据库上下文类型</typeparam>
         /// <param name="context">数据库上下文</param>
         /// <param name="sql">SQL语句</param>
+        /// <param name="isCloseConn">是否关闭连接</param>
         /// <param name="param">参数</param>
         /// <returns>第1行第1列的值</returns>
-        public static object ExecuteScalar<DbContextT>(this DbContextT context, string sql, params DbParameter[] param)
+        public static object ExecuteScalar<DbContextT>(this DbContextT context, string sql, bool isCloseConn = true, params DbParameter[] param)
             where DbContextT : DbContext
         {
             return context.ExecCommand<DbContextT, object>(sql, cmd =>
             {
                 return cmd.ExecuteScalar();
-            }, param);
+            }, isCloseConn, param);
         }
 
         /// <summary>
@@ -88,15 +90,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="DbContextT">数据库上下文类型</typeparam>
         /// <param name="context">数据库上下文</param>
         /// <param name="sql">SQL语句</param>
+        /// <param name="isCloseConn">是否关闭连接</param>
         /// <param name="param">参数</param>
         /// <returns>第1行第1列的值</returns>
-        public static int ExecuteNonQuery<DbContextT>(this DbContextT context, string sql, params DbParameter[] param)
+        public static int ExecuteNonQuery<DbContextT>(this DbContextT context, string sql, bool isCloseConn = true, params DbParameter[] param)
             where DbContextT : DbContext
         {
             return context.ExecCommand<DbContextT, int>(sql, cmd =>
             {
                 return cmd.ExecuteNonQuery();
-            }, param);
+            }, isCloseConn, param);
         }
 
         /// <summary>
@@ -106,8 +109,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="context">数据库上下文</param>
         /// <param name="sql">SQL语句</param>
         /// <param name="callback">回调</param>
+        /// <param name="isCloseConn">是否关闭连接</param>
         /// <param name="param">参数</param>
-        public static void ExecuteReader<DbContextT>(this DbContextT context, string sql, Action<DbDataReader> callback, params DbParameter[] param)
+        public static void ExecuteReader<DbContextT>(this DbContextT context, string sql, Action<DbDataReader> callback, bool isCloseConn = true, params DbParameter[] param)
             where DbContextT : DbContext
         {
             context.ExecCommand<DbContextT, object>(sql, cmd =>
@@ -127,7 +131,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     reader.Close();
                 }
-            }, param);
+            }, isCloseConn, param);
         }
 
         /// <summary>
@@ -138,16 +142,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="context">数据库上下文</param>
         /// <param name="sql">SQL语句</param>
         /// <param name="func">回调</param>
+        /// <param name="isCloseConn">是否关闭连接</param>
         /// <param name="param">参数</param>
         /// <returns>第1行第1列的值</returns>
-        private static ReturnT ExecCommand<DbContextT, ReturnT>(this DbContextT context, string sql, Func<DbCommand, ReturnT> func, params DbParameter[] param)
+        private static ReturnT ExecCommand<DbContextT, ReturnT>(this DbContextT context, string sql, Func<DbCommand, ReturnT> func, bool isCloseConn = true, params DbParameter[] param)
             where DbContextT : DbContext
         {
             var conn = context.Database.GetDbConnection();
             DbCommand cmd = null;
             try
             {
-                conn.Open();
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
                 cmd = conn.CreateCommand();
                 cmd.CommandText = sql;
                 if (!param.IsNullOrLength0())
@@ -167,7 +175,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     cmd.Dispose();
                 }
-                if (conn != null)
+                if (isCloseConn && conn != null)
                 {
                     conn.Close();
                     conn.Dispose();

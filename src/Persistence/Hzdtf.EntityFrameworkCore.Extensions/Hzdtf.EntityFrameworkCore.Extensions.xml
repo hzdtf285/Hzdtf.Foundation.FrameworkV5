@@ -30,27 +30,29 @@
             <param name="entity">实体</param>
             <param name="updatePropNames">更新属性名称</param>
         </member>
-        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteScalar``1(``0,System.String,System.Data.Common.DbParameter[])">
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteScalar``1(``0,System.String,System.Boolean,System.Data.Common.DbParameter[])">
             <summary>
             执行SQL并返回第1行第1列的值
             </summary>
             <typeparam name="DbContextT">数据库上下文类型</typeparam>
             <param name="context">数据库上下文</param>
             <param name="sql">SQL语句</param>
+            <param name="isCloseConn">是否关闭连接</param>
             <param name="param">参数</param>
             <returns>第1行第1列的值</returns>
         </member>
-        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteNonQuery``1(``0,System.String,System.Data.Common.DbParameter[])">
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteNonQuery``1(``0,System.String,System.Boolean,System.Data.Common.DbParameter[])">
             <summary>
             执行SQL并返回影响行数
             </summary>
             <typeparam name="DbContextT">数据库上下文类型</typeparam>
             <param name="context">数据库上下文</param>
             <param name="sql">SQL语句</param>
+            <param name="isCloseConn">是否关闭连接</param>
             <param name="param">参数</param>
             <returns>第1行第1列的值</returns>
         </member>
-        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteReader``1(``0,System.String,System.Action{System.Data.Common.DbDataReader},System.Data.Common.DbParameter[])">
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteReader``1(``0,System.String,System.Action{System.Data.Common.DbDataReader},System.Boolean,System.Data.Common.DbParameter[])">
             <summary>
             执行SQL并返回影响行数
             </summary>
@@ -58,9 +60,10 @@
             <param name="context">数据库上下文</param>
             <param name="sql">SQL语句</param>
             <param name="callback">回调</param>
+            <param name="isCloseConn">是否关闭连接</param>
             <param name="param">参数</param>
         </member>
-        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecCommand``2(``0,System.String,System.Func{System.Data.Common.DbCommand,``1},System.Data.Common.DbParameter[])">
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecCommand``2(``0,System.String,System.Func{System.Data.Common.DbCommand,``1},System.Boolean,System.Data.Common.DbParameter[])">
             <summary>
             执行SQL并返回第1行第1列的值
             </summary>
@@ -69,6 +72,7 @@
             <param name="context">数据库上下文</param>
             <param name="sql">SQL语句</param>
             <param name="func">回调</param>
+            <param name="isCloseConn">是否关闭连接</param>
             <param name="param">参数</param>
             <returns>第1行第1列的值</returns>
         </member>
