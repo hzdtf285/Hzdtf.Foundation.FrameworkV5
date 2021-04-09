@@ -54,7 +54,7 @@ namespace Hzdtf.CodeGenerator.SqlServer
                         + " ("
                         + " select a.name Name, c.name as DataType,case when a.is_nullable = 0 then 0 else 1 end as [IsNull],a.max_length[Length], a.column_id column_id,a.object_id"
                         + " from sys.columns a , sys.objects b, sys.types c"
-                        + " where a.object_id = b.object_id and b.name = @Table and a.system_type_id = c.system_type_id"
+                        + " where a.object_id = b.object_id and b.name = @Table and c.name != 'sysname' and a.system_type_id = c.system_type_id"
                         + " ) t"
                         + " left join sys.extended_properties p on p.major_id=t.object_id and p.minor_id = t.column_id and p.name = 'MS_Description'"
                         + " order by t.column_id";

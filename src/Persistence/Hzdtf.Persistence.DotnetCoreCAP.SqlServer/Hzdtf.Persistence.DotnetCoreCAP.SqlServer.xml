@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Persistence.DotnetCoreCAP.SqlServer</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Persistence.DotnetCoreCAP.SqlServer.DistributionTransactionFactory">
+            <summary>
+            分布式事务工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.DotnetCoreCAP.SqlServer.DistributionTransactionFactory.publisher">
+            <summary>
+            CAP发布者
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.DotnetCoreCAP.SqlServer.DistributionTransactionFactory.#ctor(DotNetCore.CAP.ICapPublisher)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="publisher">CAP发布者</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.DotnetCoreCAP.SqlServer.DistributionTransactionFactory.Begin(System.Data.IDbConnection,Hzdtf.Utility.Attr.TransactionAttribute)">
+            <summary>
+            开启事务
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="transAttr">事务特性</param>
+            <returns>数据库事务</returns>
+        </member>
+    </members>
+</doc>

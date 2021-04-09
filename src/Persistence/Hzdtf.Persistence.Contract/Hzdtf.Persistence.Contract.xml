@@ -33,6 +33,46 @@
             <param name="type">类型</param>
             <returns>产品</returns>
         </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.IDbTransactionFactory">
+            <summary>
+            数据库事务工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.IDbTransactionFactory.Begin(System.Data.IDbConnection,Hzdtf.Utility.Attr.TransactionAttribute)">
+            <summary>
+            开启事务
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="transAttr">事务特性</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.ILocalDbTransactionFactory">
+            <summary>
+            本地数据库事务工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.DefaultLocalDbTransactionFactory">
+            <summary>
+            默认本地数据库事务工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Basic.DefaultLocalDbTransactionFactory.Begin(System.Data.IDbConnection,Hzdtf.Utility.Attr.TransactionAttribute)">
+            <summary>
+            创建
+            </summary>
+            <param name="connection">数据库连接</param>
+            <param name="transAttr">事务特性</param>
+            <returns>数据库事务</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Contract.Basic.IDistributionDbTransactionFactory">
+            <summary>
+            分布式数据库事务工厂
+            @ 黄振东
+            </summary>
+        </member>
         <member name="T:Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString">
             <summary>
             默认连接字符串接口
@@ -85,12 +125,12 @@
             </summary>
             <param name="connectionId">连接ID</param>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.BeginTransaction(System.String,System.Data.IsolationLevel)">
+        <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.BeginTransaction(System.String,Hzdtf.Utility.Attr.TransactionAttribute)">
             <summary>
             开启事务
             </summary>
             <param name="connectionId">连接ID</param>
-            <param name="isolation">事务级别</param>
+            <param name="transAttr">事务特性</param>
             <returns>数据库事务</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Basic.IPersistenceConnection.GetDbTransaction(System.String,Hzdtf.Utility.Enums.AccessMode)">
@@ -189,12 +229,12 @@
             </summary>
             <param name="connectionId">连接ID</param>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.BeginTransaction(System.String,System.Data.IsolationLevel)">
+        <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.BeginTransaction(System.String,Hzdtf.Utility.Attr.TransactionAttribute)">
             <summary>
             开启事务
             </summary>
             <param name="connectionId">连接ID</param>
-            <param name="isolation">事务级别</param>
+            <param name="transAttr">事务特性</param>
             <returns>数据库事务</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Basic.PersistenceConnectionBase.GetDbTransaction(System.String,Hzdtf.Utility.Enums.AccessMode)">
@@ -1050,13 +1090,13 @@
             <param name="model">模型</param>
             <param name="tenantId">租赁ID</param>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ExecTransaction(System.Action{System.String},Hzdtf.Utility.Enums.AccessMode,System.Data.IsolationLevel,System.String)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ExecTransaction(System.Action{System.String},Hzdtf.Utility.Enums.AccessMode,Hzdtf.Utility.Attr.TransactionAttribute,System.String)">
             <summary>
             执行事务
             </summary>
             <param name="action">动作回调</param>
             <param name="accessMode">访问模式</param>
-            <param name="level">事务等级</param>
+            <param name="transAttr">事务特性</param>
             <param name="connectionId">连接ID</param>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ExecRecordSqlLog``1(System.String,System.Func{``0},Hzdtf.Utility.Model.CommonUseData,System.String[])">
@@ -1300,6 +1340,16 @@
             同步数据库事务字典
             </summary>
         </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbConnectionManager.LocalDbTransactionFactory">
+            <summary>
+            数据库事务工厂
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Contract.Management.DbConnectionManager.DistributionDbTransactionFactory">
+            <summary>
+            分布式事务工厂
+            </summary>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.GetDbConnection(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,System.String@,Hzdtf.Utility.Enums.AccessMode)">
             <summary>
             获取数据库连接
@@ -1328,13 +1378,13 @@
             <param name="accessMode">访问模式</param>
             <returns>连接ID</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.BeginTransaction(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,System.Data.IsolationLevel)">
+        <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.BeginTransaction(System.String,Hzdtf.Persistence.Contract.Basic.IPersistenceConnection,Hzdtf.Utility.Attr.TransactionAttribute)">
             <summary>
             开启事务
             </summary>
             <param name="connectionId">连接ID</param>
             <param name="persistenceConnection">持久化连接</param>
-            <param name="isolation">事务级别</param>
+            <param name="transAttr">事务特性</param>
             <returns>数据库事务</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Management.DbConnectionManager.ReleaseAll">

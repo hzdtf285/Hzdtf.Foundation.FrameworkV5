@@ -545,6 +545,21 @@
             事务等级
             </summary>
         </member>
+        <member name="P:Hzdtf.Utility.Attr.TransactionAttribute.IsDistribute">
+            <summary>
+            是否分布式事务，默认为否
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Attr.TransactionAttribute.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Attr.TransactionAttribute.Tag">
+            <summary>
+            标签
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Attr.ValiAttribute">
             <summary>
             验证特性

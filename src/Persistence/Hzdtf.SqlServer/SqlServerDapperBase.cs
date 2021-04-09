@@ -1,6 +1,6 @@
 ﻿using Hzdtf.Persistence.Dapper;
 using Hzdtf.Utility.Model;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;

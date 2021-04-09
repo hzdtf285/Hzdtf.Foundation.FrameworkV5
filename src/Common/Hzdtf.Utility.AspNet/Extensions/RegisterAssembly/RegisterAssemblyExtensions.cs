@@ -1,5 +1,4 @@
-﻿using Hzdtf.Utility.Enums;
-using Hzdtf.Utility.Utils;
+﻿using Hzdtf.Utility.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class RegisterAssemblyExtensions
     {
         /// <summary>
-        /// 用DI批量注入接口程序集中对应的实现类。
+        /// 用DI批量注入接口程序集中对应的实现类
         /// </summary>
         /// <param name="service">服务收藏</param>
         /// <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
@@ -23,9 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="lifecycle">生命周期，默认为瞬时</param>
         /// <param name="interfacTypeCallback">接口类型回调，key：接口类型；value：是否忽略</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection RegisterAssembly(this IServiceCollection service, string interfaceAssemblyName, string implementAssemblyName, 
+        public static IServiceCollection RegisterAssembly(this IServiceCollection service, string interfaceAssemblyName, string implementAssemblyName,
             ServiceLifetime lifecycle = ServiceLifetime.Transient, Func<Type, bool> interfacTypeCallback = null)
-        {            
+        {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -86,6 +85,70 @@ namespace Microsoft.Extensions.DependencyInjection
                         default:
                             throw new NotSupportedException($"不支持的生命周期:{lifecycle}");
                     }
+                }
+            }
+
+            return service;
+        }
+
+        /// <summary>
+        /// 用DI批量注入批定接口类型的实现类程序集中的实现类
+        /// </summary>
+        /// <param name="service">服务收藏</param>
+        /// <param name="interfaceType">接口类型</param>
+        /// <param name="lifecycle">生命周期，默认为瞬时</param>
+        /// <param name="implClassAssemblys">接口程序集的名称（不包含文件扩展名）</param>
+        /// <returns>服务收藏</returns>
+        public static IServiceCollection RegisterAssemblyWithInterfaceMapImpls(this IServiceCollection service, Type interfaceType,
+            ServiceLifetime lifecycle = ServiceLifetime.Transient, params string[] implClassAssemblys)
+        {
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
+            if (implClassAssemblys.IsNullOrLength0())
+            {
+                throw new ArgumentNullException(nameof(implClassAssemblys));
+            }
+
+            Assembly[] assemblies = new Assembly[implClassAssemblys.Length];
+            for (var i = 0; i < implClassAssemblys.Length; i++)
+            {
+                assemblies[i] = Assembly.Load(implClassAssemblys[i]);
+            }
+
+            var implTypes = ReflectExtensions.GetImplClassType(assemblies, interfaceType);
+            if (implTypes.IsNullOrLength0())
+            {
+                return service;
+            }
+
+            foreach (var it in implTypes)
+            {
+                if (it.IsAbstract)
+                {
+                    continue;
+                }
+
+                switch (lifecycle)
+                {
+                    case ServiceLifetime.Transient:
+                        service.AddTransient(interfaceType, it);
+
+                        break;
+
+                    case ServiceLifetime.Scoped:
+                        service.AddScoped(interfaceType, it);
+
+                        break;
+
+                    case ServiceLifetime.Singleton:
+                        service.AddSingleton(interfaceType, it);
+
+                        break;
+
+                    default:
+                        throw new NotSupportedException($"不支持的生命周期:{lifecycle}");
                 }
             }
 

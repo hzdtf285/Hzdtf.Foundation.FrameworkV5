@@ -30,5 +30,32 @@ namespace Hzdtf.Utility.Attr
             get;
             set;
         } = IsolationLevel.ReadCommitted;
+
+        /// <summary>
+        /// 是否分布式事务，默认为否
+        /// </summary>
+        public bool IsDistribute
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 标签
+        /// </summary>
+        public object Tag
+        {
+            get;
+            set;
+        }
     }
 }

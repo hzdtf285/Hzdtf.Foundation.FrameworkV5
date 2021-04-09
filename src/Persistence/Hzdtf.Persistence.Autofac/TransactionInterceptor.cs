@@ -66,8 +66,8 @@ namespace Hzdtf.Persistence.Autofac
             IDbTransaction dbTransaction = null;
             try
             {
-                dbTransaction = perConn.BeginTransaction(connectionId, attr.Level);
-                
+                dbTransaction = perConn.BeginTransaction(connectionId, attr);
+
                 invocation.SetArgumentValue(attr.ConnectionIdIndex, connectionId);
 
                 invocation.Proceed();

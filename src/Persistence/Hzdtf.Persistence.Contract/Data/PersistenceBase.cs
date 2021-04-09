@@ -24,7 +24,7 @@ namespace Hzdtf.Persistence.Contract.Data
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public abstract partial class PersistenceBase<IdT, ModelT> : PersistenceConnectionBase, IPersistence<IdT, ModelT> 
+    public abstract partial class PersistenceBase<IdT, ModelT> : PersistenceConnectionBase, IPersistence<IdT, ModelT>
         where ModelT : SimpleInfo<IdT>
     {
         #region 属性与字段
@@ -814,9 +814,9 @@ namespace Hzdtf.Persistence.Contract.Data
         /// </summary>
         /// <param name="action">动作回调</param>
         /// <param name="accessMode">访问模式</param>
-        /// <param name="level">事务等级</param>
+        /// <param name="transAttr">事务特性</param>
         /// <param name="connectionId">连接ID</param>
-        protected void ExecTransaction(Action<string> action, AccessMode accessMode = AccessMode.MASTER, IsolationLevel level = IsolationLevel.ReadCommitted, string connectionId = null)
+        protected void ExecTransaction(Action<string> action, AccessMode accessMode = AccessMode.MASTER, TransactionAttribute transAttr = null, string connectionId = null)
         {
             if (string.IsNullOrWhiteSpace(connectionId) || GetDbTransaction(connectionId, accessMode) == null)
             {
@@ -827,7 +827,14 @@ namespace Hzdtf.Persistence.Contract.Data
                     {
                         connectionId = NewConnectionId(accessMode);
                     }
-                    dbTransaction = BeginTransaction(connectionId, level);
+                    if (transAttr == null)
+                    {
+                        transAttr = new TransactionAttribute()
+                        {
+                            Level = IsolationLevel.ReadCommitted
+                        };
+                    }
+                    dbTransaction = BeginTransaction(connectionId, transAttr);
 
                     action(connectionId);
 

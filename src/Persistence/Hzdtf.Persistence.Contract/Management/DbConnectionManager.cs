@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Persistence.Contract.Basic;
+using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Utils;
 using System;
@@ -52,6 +53,24 @@ namespace Hzdtf.Persistence.Contract.Management
         /// </summary>
         private static readonly object syncDicDbTransaction = new object();
 
+        /// <summary>
+        /// 数据库事务工厂
+        /// </summary>
+        public static ILocalDbTransactionFactory LocalDbTransactionFactory
+        {
+            get;
+            set;
+        } = new DefaultLocalDbTransactionFactory();
+
+        /// <summary>
+        /// 分布式事务工厂
+        /// </summary>
+        public static IDistributionDbTransactionFactory DistributionDbTransactionFactory
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region 执行数据库方法
@@ -90,7 +109,7 @@ namespace Hzdtf.Persistence.Contract.Management
             bool isExistsConnection;
             string connectionString;
             IDbConnection dbConnection = GetDbConnection(connectionId, persistenceConnection, out isExistsConnection, out connectionString, accessMode);
-            
+
             // 如果不是新建连接ID且不存在连接，则需要本次连接关闭
             if (!isExistsConnection && !isClose)
             {
@@ -141,9 +160,9 @@ namespace Hzdtf.Persistence.Contract.Management
         /// </summary>
         /// <param name="connectionId">连接ID</param>
         /// <param name="persistenceConnection">持久化连接</param>
-        /// <param name="isolation">事务级别</param>
+        /// <param name="transAttr">事务特性</param>
         /// <returns>数据库事务</returns>
-        public static IDbTransaction BeginTransaction(string connectionId, IPersistenceConnection persistenceConnection, IsolationLevel isolation = IsolationLevel.ReadCommitted)
+        public static IDbTransaction BeginTransaction(string connectionId, IPersistenceConnection persistenceConnection, TransactionAttribute transAttr)
         {
             if (string.IsNullOrWhiteSpace(connectionId))
             {
@@ -157,7 +176,16 @@ namespace Hzdtf.Persistence.Contract.Management
                 dbConnection.Open();
             }
 
-            IDbTransaction dbTransaction = dbConnection.BeginTransaction(isolation);
+            IDbTransaction dbTransaction = null;
+            if (transAttr != null && transAttr.IsDistribute && DistributionDbTransactionFactory != null)
+            {
+                dbTransaction = DistributionDbTransactionFactory.Begin(dbConnection, transAttr);
+            }
+            else
+            {
+                dbTransaction = LocalDbTransactionFactory.Begin(dbConnection, transAttr);
+            }
+
             if (dicDbTransaction.ContainsKey(connectionId))
             {
                 lock (syncDicDbTransaction)
@@ -344,9 +372,18 @@ namespace Hzdtf.Persistence.Contract.Management
                     dicDbConnections.Remove(connectionId);
                 }
             }
-           
+
             if (dicDbTransaction.ContainsKey(connectionId))
             {
+                try
+                {
+                    var trans = dicDbTransaction[connectionId].DbTransaction;
+                    if (trans != null)
+                    {
+                        trans.Dispose();
+                    }
+                }
+                catch { }
                 lock (syncDicDbTransaction)
                 {
                     dicDbTransaction.Remove(connectionId);

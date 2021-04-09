@@ -1,4 +1,5 @@
-﻿using Hzdtf.Utility.Enums;
+﻿using Hzdtf.Utility.Attr;
+using Hzdtf.Utility.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -39,7 +40,7 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// </summary>
         /// <param name="accessMode">访问模式</param>
         /// <returns>连接ID</returns>
-        string NewConnectionId(AccessMode accessMode= AccessMode.MASTER);
+        string NewConnectionId(AccessMode accessMode = AccessMode.MASTER);
 
         /// <summary>
         /// 释放连接ID
@@ -51,9 +52,9 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// 开启事务
         /// </summary>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="isolation">事务级别</param>
+        /// <param name="transAttr">事务特性</param>
         /// <returns>数据库事务</returns>
-        IDbTransaction BeginTransaction(string connectionId, IsolationLevel isolation = IsolationLevel.ReadCommitted);
+        IDbTransaction BeginTransaction(string connectionId, TransactionAttribute transAttr = null);
 
         /// <summary>
         /// 根据连接ID获取数据库事务

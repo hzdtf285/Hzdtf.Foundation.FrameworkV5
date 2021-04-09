@@ -1,6 +1,7 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Persistence.Contract.Management;
 using Hzdtf.Utility;
+using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.Enums;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -68,7 +69,7 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// </summary>
         public PersistenceConectionInfo SlavePersistenceConnection
         {
-            get => GetPersistenceConnection(AccessMode.SLAVE, ()=>
+            get => GetPersistenceConnection(AccessMode.SLAVE, () =>
             {
                 return GetSlaveConnectionString();
             }, 1);
@@ -132,9 +133,9 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// 开启事务
         /// </summary>
         /// <param name="connectionId">连接ID</param>
-        /// <param name="isolation">事务级别</param>
+        /// <param name="transAttr">事务特性</param>
         /// <returns>数据库事务</returns>
-        public IDbTransaction BeginTransaction(string connectionId, IsolationLevel isolation = IsolationLevel.ReadCommitted) => DbConnectionManager.BeginTransaction(connectionId, this, isolation);
+        public IDbTransaction BeginTransaction(string connectionId, TransactionAttribute transAttr = null) => DbConnectionManager.BeginTransaction(connectionId, this, transAttr);
 
         /// <summary>
         /// 根据连接ID获取数据库事务
@@ -172,7 +173,7 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// <param name="setAction">设置动作</param>
         /// <returns>持久化连接信息</returns>
         private PersistenceConectionInfo CreatePersistenceConnection(PersistenceConectionInfo persistenceConection, string connectionString, AccessMode accessMode, Action<PersistenceConectionInfo> setAction = null)
-        { 
+        {
             if (persistenceConection != null || string.IsNullOrWhiteSpace(connectionString))
             {
                 return persistenceConection;

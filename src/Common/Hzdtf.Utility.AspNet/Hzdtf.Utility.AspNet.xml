@@ -688,13 +688,23 @@
         </member>
         <member name="M:Microsoft.Extensions.DependencyInjection.RegisterAssemblyExtensions.RegisterAssembly(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String,Microsoft.Extensions.DependencyInjection.ServiceLifetime,System.Func{System.Type,System.Boolean})">
             <summary>
-            用DI批量注入接口程序集中对应的实现类。
+            用DI批量注入接口程序集中对应的实现类
             </summary>
             <param name="service">服务收藏</param>
             <param name="interfaceAssemblyName">接口程序集的名称（不包含文件扩展名）</param>
             <param name="implementAssemblyName">实现程序集的名称（不包含文件扩展名）</param>
             <param name="lifecycle">生命周期，默认为瞬时</param>
             <param name="interfacTypeCallback">接口类型回调，key：接口类型；value：是否忽略</param>
+            <returns>服务收藏</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.RegisterAssemblyExtensions.RegisterAssemblyWithInterfaceMapImpls(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,Microsoft.Extensions.DependencyInjection.ServiceLifetime,System.String[])">
+            <summary>
+            用DI批量注入批定接口类型的实现类程序集中的实现类
+            </summary>
+            <param name="service">服务收藏</param>
+            <param name="interfaceType">接口类型</param>
+            <param name="lifecycle">生命周期，默认为瞬时</param>
+            <param name="implClassAssemblys">接口程序集的名称（不包含文件扩展名）</param>
             <returns>服务收藏</returns>
         </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.UnityServicesBuilderExtensions">
