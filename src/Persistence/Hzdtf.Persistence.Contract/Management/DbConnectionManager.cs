@@ -109,7 +109,7 @@ namespace Hzdtf.Persistence.Contract.Management
             bool isExistsConnection;
             string connectionString;
             IDbConnection dbConnection = GetDbConnection(connectionId, persistenceConnection, out isExistsConnection, out connectionString, accessMode);
-
+            
             // 如果不是新建连接ID且不存在连接，则需要本次连接关闭
             if (!isExistsConnection && !isClose)
             {
@@ -372,7 +372,7 @@ namespace Hzdtf.Persistence.Contract.Management
                     dicDbConnections.Remove(connectionId);
                 }
             }
-
+           
             if (dicDbTransaction.ContainsKey(connectionId))
             {
                 try
@@ -382,8 +382,7 @@ namespace Hzdtf.Persistence.Contract.Management
                     {
                         trans.Dispose();
                     }
-                }
-                catch { }
+                } catch { }
                 lock (syncDicDbTransaction)
                 {
                     dicDbTransaction.Remove(connectionId);

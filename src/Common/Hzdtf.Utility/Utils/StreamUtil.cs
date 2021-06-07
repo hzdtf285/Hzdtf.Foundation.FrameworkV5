@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
+using System.Buffers;
 
 namespace Hzdtf.Utility.Utils
 {
@@ -443,6 +445,87 @@ namespace Hzdtf.Utility.Utils
             }
 
             return new MemoryStream(Encoding.UTF8.GetBytes(str));
+        }
+
+        /// <summary>
+        /// 专门为web提供读取流并转换为字符串
+        /// </summary>
+        /// <param name="requestBody">请求流</param>
+        /// <param name="isCloseStream">是否关闭流</param>
+        /// <returns>字符串任务</returns>
+        public static async Task<string> ReadStringForWeb(this Stream requestBody, bool isCloseStream = true)
+        {
+            try
+            {
+                StringBuilder builder = new StringBuilder();
+                byte[] buffer = ArrayPool<byte>.Shared.Rent(4096);
+                List<string> results = new List<string>();
+
+                while (true)
+                {
+                    var bytesRemaining = await requestBody.ReadAsync(buffer, offset: 0, buffer.Length);
+
+                    if (bytesRemaining == 0)
+                    {
+                        results.Add(builder.ToString());
+                        break;
+                    }
+
+                    // Instead of adding the entire buffer into the StringBuilder
+                    // only add the remainder after the last \n in the array.
+                    var prevIndex = 0;
+                    int index;
+                    while (true)
+                    {
+                        index = Array.IndexOf(buffer, (byte)'\n', prevIndex);
+                        if (index == -1)
+                        {
+                            break;
+                        }
+
+                        var encodedString = Encoding.UTF8.GetString(buffer);
+
+                        if (builder.Length > 0)
+                        {
+                            // If there was a remainder in the string buffer, include it in the next string.
+                            results.Add(builder.Append(encodedString).ToString());
+                            builder.Clear();
+                        }
+                        else
+                        {
+                            results.Add(encodedString);
+                        }
+
+                        // Skip past last \n
+                        prevIndex = index + 1;
+                    }
+
+                    var remainingString = Encoding.UTF8.GetString(buffer);
+                    builder.Append(remainingString);
+                }
+
+                ArrayPool<byte>.Shared.Return(buffer);
+
+                var str = new StringBuilder();
+                foreach (var item in results)
+                {
+                    str.Append(item);
+                }
+
+                return str.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (isCloseStream)
+                {
+                    requestBody.Close();
+                    requestBody.Dispose();
+                }
+            }
         }
     }
 }

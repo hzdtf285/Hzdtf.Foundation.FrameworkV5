@@ -3,31 +3,29 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <Authors>黄振东</Authors>
-    <Company>Hzdtf</Company>
+    <Authors>网狐</Authors>
+    <Company>FoxUC</Company>
     <Product>鉴权中心AspNet类库</Product>
     <Description>鉴权中心AspNet类库，运行在Asp.Net5以上</Description>
+    <IsPackable>true</IsPackable>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>Hzdtf.AUC.AspNet.xml</DocumentationFile>
+    <DocumentationFile>FoxUC.AUC.AspNet.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>Hzdtf.AUC.AspNet.xml</DocumentationFile>
+    <DocumentationFile>FoxUC.AUC.AspNet.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="FoxUC.AUC.AspNet.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Hzdtf.Utility.AspNet\Hzdtf.Utility.AspNet.csproj" />
-    <ProjectReference Include="..\Hzdtf.AUC.Contract\Hzdtf.AUC.Contract.csproj" />
+    <ProjectReference Include="..\..\Common\FoxUC.Utility.AspNet\FoxUC.Utility.AspNet.csproj" />
+    <ProjectReference Include="..\FoxUC.AUC.Contract\FoxUC.AUC.Contract.csproj" />
   </ItemGroup>
 
 </Project>

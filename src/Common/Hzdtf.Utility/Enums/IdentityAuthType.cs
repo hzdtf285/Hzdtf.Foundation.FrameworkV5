@@ -18,6 +18,16 @@ namespace Hzdtf.Utility.Enums
         /// <summary>
         /// Jwt
         /// </summary>
-        JWT = 1
+        JWT = 1,
+
+        /// <summary>
+        /// Jwt_Cookie存储
+        /// </summary>
+        JWT_COOKIE = 2,
+
+        /// <summary>
+        ///  Jwt_Cookie存储，验证时，先从Cookie取，取不到再从Header取
+        /// </summary>
+        JWT_COOKIE_HEADER = 3
     }
 }

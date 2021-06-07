@@ -24,7 +24,7 @@ namespace Hzdtf.Persistence.Contract.Data
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public abstract partial class PersistenceBase<IdT, ModelT> : PersistenceConnectionBase, IPersistence<IdT, ModelT>
+    public abstract partial class PersistenceBase<IdT, ModelT> : PersistenceConnectionBase, IPersistence<IdT, ModelT> 
         where ModelT : SimpleInfo<IdT>
     {
         #region 属性与字段
@@ -82,6 +82,23 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     return LogLevelHelper.Parse(logLevel);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 是否支持幂等 注意：幂等操作不能使用主键自增，需要由业务自己生成主键ID
+        /// </summary>
+        protected bool IsSupportIdempotent
+        {
+            get
+            {
+                var isSupportIdempotent = Config["ConnectionStrings:IsSupportIdempotent"];
+                if (string.IsNullOrWhiteSpace(isSupportIdempotent))
+                {
+                    return false;
+                }
+
+                return Convert.ToBoolean(isSupportIdempotent);
             }
         }
 
@@ -330,9 +347,9 @@ namespace Hzdtf.Persistence.Contract.Data
             int result = 0;
 
             IdT tenantId;
-            if (IsExistsTenantId(out tenantId, comData))
+            if (!ModelIsSetMerchantId(model) && IsExistsMerchantId(out tenantId, comData))
             {
-                SetTenantId(model, tenantId);
+                SetMerchantId(model, tenantId);
             }
 
             DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
@@ -354,14 +371,20 @@ namespace Hzdtf.Persistence.Contract.Data
         {
             int result = 0;
 
-            IdT tenantId;
-            if (IsExistsTenantId(out tenantId, comData))
+            IdT tenantId = default(IdT);
+            foreach (var m in models)
             {
-                foreach (var m in models)
+                if (ModelIsSetMerchantId(m))
                 {
-                    SetTenantId(m, tenantId);
+                    continue;
+                }
+
+                if (!Identity.IsEmpty(tenantId) && IsExistsMerchantId(out tenantId, comData))
+                {
+                    SetMerchantId(m, tenantId);
                 }
             }
+
 
             DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
             {
@@ -735,23 +758,23 @@ namespace Hzdtf.Persistence.Contract.Data
         /// </summary>
         /// <param name="comData">通用数据</param>
         /// <returns>查询时是否需要追加租赁ID为过滤条件</returns>
-        protected virtual bool IsExistsTenantId(CommonUseData comData = null)
+        protected virtual bool IsExistsMerchantId(CommonUseData comData = null)
         {
-            IdT currUserTenantId;
-            return IsExistsTenantId(out currUserTenantId, comData);
+            IdT currUserMerchantId;
+            return IsExistsMerchantId(out currUserMerchantId, comData);
         }
 
         /// <summary>
         /// 是否存在租赁ID
         /// </summary>
-        /// <param name="currUserTenantId">当前用户租户ID</param>
+        /// <param name="currUserMerchantId">当前用户租户ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>是否存在租赁ID</returns>
-        protected virtual bool IsExistsTenantId(out IdT currUserTenantId, CommonUseData comData = null)
+        protected virtual bool IsExistsMerchantId(out IdT currUserMerchantId, CommonUseData comData = null)
         {
-            currUserTenantId = default(IdT);
+            currUserMerchantId = default(IdT);
 
-            if (ModelContainerTenantId())
+            if (ModelContainerMerchantId())
             {
                 var currUser = UserTool<IdT>.GetCurrUser(comData);
                 if (currUser == null)
@@ -762,7 +785,7 @@ namespace Hzdtf.Persistence.Contract.Data
                 {
                     throw new ArgumentException("当前用户的租户ID为空");
                 }
-                currUserTenantId = currUser.TenantId;
+                currUserMerchantId = currUser.TenantId;
 
                 return true;
             }
@@ -774,14 +797,27 @@ namespace Hzdtf.Persistence.Contract.Data
         /// 模型是否包含租户ID
         /// </summary>
         /// <returns>模型是否包含租户ID</returns>
-        protected virtual bool ModelContainerTenantId() => false;
+        protected virtual bool ModelContainerMerchantId() => false;
+
+        /// <summary>
+        /// 模型是否已设置租户ID
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <returns>模型是否已设置租户ID</returns>
+        protected virtual bool ModelIsSetMerchantId(ModelT model) => false;
+
+        /// <summary>
+        /// 查询是否追加租户ID，默认为是
+        /// </summary>
+        /// <returns>查询是否不追加租户ID</returns>
+        protected virtual bool SelectIsAppendMerchantId() => true;
 
         /// <summary>
         /// 设置模型的租赁ID
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="tenantId">租赁ID</param>
-        protected virtual void SetTenantId(ModelT model, IdT tenantId)
+        protected virtual void SetMerchantId(ModelT model, IdT tenantId)
         {
             if (model == null)
             {

@@ -691,6 +691,11 @@
             如果配置文件没有，则默认trace
             </summary>
         </member>
+        <member name="P:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsSupportIdempotent">
+            <summary>
+            是否支持幂等 注意：幂等操作不能使用主键自增，需要由业务自己生成主键ID
+            </summary>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             根据ID查询模型
@@ -1062,28 +1067,41 @@
             <param name="id">ID</param>
             <returns>主键是否自增</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsTenantId(Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsMerchantId(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             是否存在租赁ID
             </summary>
             <param name="comData">通用数据</param>
             <returns>查询时是否需要追加租赁ID为过滤条件</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsTenantId(`0@,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsMerchantId(`0@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             是否存在租赁ID
             </summary>
-            <param name="currUserTenantId">当前用户租户ID</param>
+            <param name="currUserMerchantId">当前用户租户ID</param>
             <param name="comData">通用数据</param>
             <returns>是否存在租赁ID</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelContainerTenantId">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelContainerMerchantId">
             <summary>
             模型是否包含租户ID
             </summary>
             <returns>模型是否包含租户ID</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SetTenantId(`1,`0)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelIsSetMerchantId(`1)">
+            <summary>
+            模型是否已设置租户ID
+            </summary>
+            <param name="model">模型</param>
+            <returns>模型是否已设置租户ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectIsAppendMerchantId">
+            <summary>
+            查询是否追加租户ID，默认为是
+            </summary>
+            <returns>查询是否不追加租户ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SetMerchantId(`1,`0)">
             <summary>
             设置模型的租赁ID
             </summary>

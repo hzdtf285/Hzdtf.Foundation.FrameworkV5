@@ -17,6 +17,11 @@ namespace System
         public static readonly DateTime MAX_DATE = DateTime.MaxValue.Date;
 
         /// <summary>
+        /// 1970的日期
+        /// </summary>
+        public static readonly DateTime DATE_1970 = new DateTime(1970, 1, 1);
+
+        /// <summary>
         /// 转换为全部日期时间字符串 yyyy-M-d H:m:s.fff
         /// </summary>
         /// <param name="dateTime">日期时间</param>
@@ -160,12 +165,6 @@ namespace System
         /// <param name="dateTime">日期时间</param>
         /// <returns>年月字符串</returns>
         public static string ToCompactFixedShortYM(this DateTime? dateTime) => dateTime != null ? ToCompactFixedShortYM((DateTime)dateTime) : null;
-
-        /// <summary>
-        /// 获取1970年日期
-        /// </summary>
-        /// <returns>1970年日期</returns>
-        public static DateTime Date1970() => new DateTime(1970, 1, 1);
 
         /// <summary>
         /// 如果时分秒毫秒都为0，则添加到本日的23:59:59.999
@@ -473,6 +472,36 @@ namespace System
         public static DateTime FilterTime(this DateTime dateTime)
         {
             return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day);
+        }
+
+        /// <summary>
+        /// 将时间戳转换成日期时间
+        /// </summary>
+        /// <param name="timeStamp">时间戳</param>
+        /// <returns>日期时间</returns>
+        public static DateTime ToDateTimeFromTimeStamp(this string timeStamp)
+        {
+#pragma warning disable CS0618 // 类型或成员已过时
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(DATE_1970);
+#pragma warning restore CS0618 // 类型或成员已过时
+            long lTime = long.Parse(timeStamp + "0000");
+            TimeSpan toNow = new TimeSpan(lTime);
+            DateTime targetDt = dtStart.Add(toNow);
+
+            return dtStart.Add(toNow);
+        }
+
+        /// <summary>  
+        /// 将DateTime时间格式转换为Unix时间戳格式  
+        /// </summary>  
+        /// <param name="dateTime">日期时间</param>  
+        /// <returns>时间戳</returns>  
+        public static long ToTimeStampFromDateTime(this DateTime dateTime)
+        {
+            var startTime = TimeZone.CurrentTimeZone.ToLocalTime(DATE_1970);
+            long t = (dateTime.Ticks - startTime.Ticks) / 10000;   //除10000调整为13位      
+
+            return t;
         }
     }
 }

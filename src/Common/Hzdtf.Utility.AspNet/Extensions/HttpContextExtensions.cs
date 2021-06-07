@@ -73,8 +73,9 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="key">键</param>
         /// <param name="menuCode">菜单编码</param>
         /// <param name="functionCode">功能编码</param>
+        /// <param name="authToken">授权票据</param>
         /// <returns>基本的通用数据</returns>
-        public static CommonUseData CreateBasicCommonUseData(this HttpContext context, string key = null, string menuCode = null, string functionCode = null)
+        public static CommonUseData CreateBasicCommonUseData(this HttpContext context, string key = null, string menuCode = null, string functionCode = null, IAuthToken authToken = null)
         {
             var result = new CommonUseData()
             {
@@ -93,7 +94,7 @@ namespace Microsoft.AspNetCore.Http
                     result.Action = routes[1];
                 }
 
-                result.Token = context.Request.GetBearerOriginTokenFromHeader();
+                result.Token = authToken == null? context.Request.GetBearerOriginTokenFromHeader() : authToken.GetToken();
 
                 if (context.Request.Headers != null && context.Request.Headers.ContainsKey(App.EVENT_ID_KEY))
                 {

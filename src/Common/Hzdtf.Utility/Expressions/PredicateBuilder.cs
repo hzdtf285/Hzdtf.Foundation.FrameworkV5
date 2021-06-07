@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
-using System.Linq;
 
-namespace Hzdtf.Utility.Expressions
+namespace System.Linq
 {
     /// <summary>
     /// 条件生成器

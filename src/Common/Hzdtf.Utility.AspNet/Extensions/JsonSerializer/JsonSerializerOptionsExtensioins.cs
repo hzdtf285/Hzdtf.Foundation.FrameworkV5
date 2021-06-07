@@ -26,21 +26,21 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddDefaultJsonOptions(this IMvcBuilder builder, Action<JsonOptions> jsonOptions = null)
         {
             builder.AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-                options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-                options.JsonSerializerOptions.Converters.Add(new DateTimeLocalJsonConvert());
-                options.JsonSerializerOptions.Converters.Add(new DateTimeNullLocalJsonConvert());
+             {
+                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+                 options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                 options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                 options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                 options.JsonSerializerOptions.Converters.Add(new DateTimeLocalJsonConvert());
+                 options.JsonSerializerOptions.Converters.Add(new DateTimeNullLocalJsonConvert());
 
-                if (jsonOptions == null)
-                {
-                    return;
-                }
+                 if (jsonOptions == null)
+                 {
+                     return;
+                 }
 
-                jsonOptions(options);
-            });
+                 jsonOptions(options);
+             });
 
             return builder;
         }

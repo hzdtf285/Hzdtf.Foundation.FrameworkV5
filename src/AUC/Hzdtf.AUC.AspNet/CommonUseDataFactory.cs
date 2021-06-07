@@ -1,4 +1,5 @@
-﻿using Hzdtf.Utility.Factory;
+﻿using Hzdtf.Utility.AspNet.Extensions;
+using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.TheOperation;
 using Hzdtf.Utility.Utils;
@@ -30,14 +31,21 @@ namespace Hzdtf.AUC.AspNet
         private readonly ITheOperation theOperation;
 
         /// <summary>
+        /// 授权票据
+        /// </summary>
+        private readonly IHttpContextAuthToken authToken;
+
+        /// <summary>
         /// 构造方法
         /// </summary>
         /// <param name="authReader">身份读取</param>
         /// <param name="theOperation">本次操作</param>
-        public CommonUseDataFactory(IIdentityAuthContextReader<IdT, UserT> authReader = null, ITheOperation theOperation = null)
+        /// <param name="authToken">授权票据</param>
+        public CommonUseDataFactory(IIdentityAuthContextReader<IdT, UserT> authReader = null, ITheOperation theOperation = null, IHttpContextAuthToken authToken = null)
         {
             this.authReader = authReader;
             this.theOperation = theOperation;
+            this.authToken = authToken;
         }
 
         /// <summary>
@@ -47,7 +55,11 @@ namespace Hzdtf.AUC.AspNet
         /// <returns>产品</returns>
         public CommonUseData Create(HttpContext context)
         {
-            var result = context.CreateBasicCommonUseData();
+            if (authToken != null)
+            {
+                authToken.SetHttpContext(context);
+            }
+            var result = context.CreateBasicCommonUseData(authToken: authToken);
             if (context != null && authReader != null)
             {
                 var re = authReader.Reader(context);

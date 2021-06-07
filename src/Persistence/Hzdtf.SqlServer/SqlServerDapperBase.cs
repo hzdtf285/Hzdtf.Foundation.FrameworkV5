@@ -29,6 +29,7 @@ namespace Hzdtf.SqlServer
         /// </summary>
         protected override string SufxEscapeChar { get => "]"; }
 
+
         #endregion
 
         #region 重写父类的方法
@@ -57,6 +58,22 @@ namespace Hzdtf.SqlServer
         /// </summary>
         /// <returns>最后插入ID SQL语句</returns>
         protected override string GetLastInsertIdSql() => "SELECT SCOPE_IDENTITY()";
+
+        /// <summary>
+        /// 判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        protected override bool IsExceptionPkRepeat(Exception ex)
+        {
+            if (ex is SqlException)
+            {
+                var sqlEx = ex as SqlException;
+                return sqlEx.Number == 2627;
+            }
+
+            return false;
+        }
 
         #endregion
     }

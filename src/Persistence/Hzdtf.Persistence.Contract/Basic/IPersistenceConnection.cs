@@ -40,7 +40,7 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// </summary>
         /// <param name="accessMode">访问模式</param>
         /// <returns>连接ID</returns>
-        string NewConnectionId(AccessMode accessMode = AccessMode.MASTER);
+        string NewConnectionId(AccessMode accessMode= AccessMode.MASTER);
 
         /// <summary>
         /// 释放连接ID

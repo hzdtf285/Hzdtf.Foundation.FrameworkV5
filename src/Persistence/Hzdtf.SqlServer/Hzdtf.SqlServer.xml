@@ -43,5 +43,12 @@
             </summary>
             <returns>最后插入ID SQL语句</returns>
         </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
     </members>
 </doc>

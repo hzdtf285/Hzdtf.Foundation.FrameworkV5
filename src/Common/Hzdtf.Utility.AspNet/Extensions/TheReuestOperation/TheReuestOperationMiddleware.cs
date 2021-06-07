@@ -1,5 +1,4 @@
 ﻿using Hzdtf.Utility.TheOperation;
-using Hzdtf.Utility.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
@@ -48,23 +47,9 @@ namespace Hzdtf.Utility.AspNet.Extensions.TheReuestOperation
         public async Task InvokeAsync(HttpContext context)
         {
             var path = context.Request.Path.Value.ToLower();
-            if (path.StartsWith(options.PfxApiPath))
+            if (path.StartsWith(options.PfxApiPath) && string.IsNullOrWhiteSpace(theOperation.EventId))
             {
-                var request = context.Request;
-                string eventId;
-                if (request != null && request.Headers != null && request.Headers.ContainsKey(App.EVENT_ID_KEY))
-                {
-                    eventId = request.Headers[App.EVENT_ID_KEY].ToString();
-                    if (string.IsNullOrWhiteSpace(eventId))
-                    {
-                        eventId = StringUtil.NewShortGuid();
-                    }
-                }
-                else
-                {
-                    eventId = StringUtil.NewShortGuid();
-                }
-                theOperation.EventId = eventId;
+                theOperation.EventId = context.Request.GetEventId();
             }
 
             await next(context);

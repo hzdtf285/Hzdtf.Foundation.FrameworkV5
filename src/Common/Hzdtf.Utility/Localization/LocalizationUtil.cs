@@ -33,6 +33,19 @@ namespace Hzdtf.Utility.Localization
         /// 获取当前语言文化
         /// </summary>
         /// <returns>文化</returns>
-        public static string GetCurrentCulture() => Thread.CurrentThread.CurrentUICulture.Name;
+        public static string GetCurrentCulture()
+        {
+            var str = Thread.CurrentThread.CurrentUICulture.Name;
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                str = Thread.CurrentThread.CurrentCulture.Name;
+                if (string.IsNullOrWhiteSpace(str))
+                {
+                    str = "zh-CN";
+                }
+            }
+
+            return str;
+        }
     }
 }

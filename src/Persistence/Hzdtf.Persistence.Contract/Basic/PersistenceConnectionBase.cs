@@ -69,7 +69,7 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// </summary>
         public PersistenceConectionInfo SlavePersistenceConnection
         {
-            get => GetPersistenceConnection(AccessMode.SLAVE, () =>
+            get => GetPersistenceConnection(AccessMode.SLAVE, ()=>
             {
                 return GetSlaveConnectionString();
             }, 1);
@@ -173,7 +173,7 @@ namespace Hzdtf.Persistence.Contract.Basic
         /// <param name="setAction">设置动作</param>
         /// <returns>持久化连接信息</returns>
         private PersistenceConectionInfo CreatePersistenceConnection(PersistenceConectionInfo persistenceConection, string connectionString, AccessMode accessMode, Action<PersistenceConectionInfo> setAction = null)
-        {
+        { 
             if (persistenceConection != null || string.IsNullOrWhiteSpace(connectionString))
             {
                 return persistenceConection;

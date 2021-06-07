@@ -2,6 +2,7 @@
 using Hzdtf.Utility.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Microsoft.AspNetCore.Http
@@ -61,6 +62,22 @@ namespace Microsoft.AspNetCore.Http
             }
 
             return eventId;
+        }
+
+        /// <summary>
+        /// 获取客户端请求IP
+        /// </summary>
+        /// <param name="request">http请求</param>
+        /// <returns>客户端请求IP</returns>
+        public static string GetClientRequestIP(this HttpRequest request)
+        {
+            var ip = request.Headers["X-Forwarded-For"].FirstOrDefault();
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = request.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            }
+
+            return ip;
         }
     }
 }

@@ -11,6 +11,15 @@ namespace Hzdtf.Utility.ApiPermission
     public class RoutePermissionInfo
     {
         /// <summary>
+        /// ID
+        /// </summary>
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 控制
         /// </summary>
         public string Controller { get; set; }
@@ -45,6 +54,15 @@ namespace Hzdtf.Utility.ApiPermission
         /// </summary>
         public class ActionInfo
         {
+            /// <summary>
+            /// ID
+            /// </summary>
+            public int Id
+            {
+                get;
+                set;
+            }
+
             /// <summary>
             /// 动作
             /// </summary>

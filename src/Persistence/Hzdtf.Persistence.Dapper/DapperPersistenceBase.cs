@@ -7,6 +7,7 @@ using System.Data;
 using Hzdtf.Utility.Utils;
 using Hzdtf.Persistence.Contract.Data;
 using Hzdtf.Persistence.Contract.PermissionFilter;
+using System.Linq;
 
 namespace Hzdtf.Persistence.Dapper
 {
@@ -16,7 +17,7 @@ namespace Hzdtf.Persistence.Dapper
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT> 
+    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT>
         where ModelT : SimpleInfo<IdT>
     {
         #region 属性与字段
@@ -266,21 +267,50 @@ namespace Hzdtf.Persistence.Dapper
         {
             var isAuto = PrimaryKeyIncr(model.Id);
             var sql = InsertSql(model, isAuto, comData: comData);
-            if (isAuto)
+            if (IsSupportIdempotent)
             {
-                model.Id = ExecRecordSqlLog<IdT>(sql, () =>
+                if (isAuto)
                 {
-                    return dbConnection.ExecuteScalar<IdT>(sql, model, dbTransaction);
-                }, comData: comData, "Insert");
+                    throw new NotSupportedException("幂等操作必须由业务生成主键，不能使用数据库自增生成");
+                }
 
-                return 1;
+                return ExecRecordSqlLog<int>(sql, () =>
+                {
+                    try
+                    {
+                        return dbConnection.Execute(sql, model, dbTransaction);
+                    }
+                    catch (Exception ex)
+                    {
+                        // 如果主键重复，则忽略异常，实现幂等
+                        if (IsExceptionPkRepeat(ex))
+                        {
+                            Log.InfoAsync($"插入.发生主键重复异常,幂等操作忽略该异常.主键:{model.Id}", ex, this.GetType().Name, comData.GetEventId(), "Insert");
+                            return 1;
+                        }
+
+                        throw new Exception(ex.Message, ex);
+                    }
+                }, comData: comData, "Insert");
             }
             else
             {
-                return ExecRecordSqlLog<int>(sql, () =>
+                if (isAuto)
                 {
-                    return dbConnection.Execute(sql, model, dbTransaction);
-                }, comData: comData, "Insert");
+                    model.Id = ExecRecordSqlLog<IdT>(sql, () =>
+                    {
+                        return dbConnection.ExecuteScalar<IdT>(sql, model, dbTransaction);
+                    }, comData: comData, "Insert");
+
+                    return 1;
+                }
+                else
+                {
+                    return ExecRecordSqlLog<int>(sql, () =>
+                    {
+                        return dbConnection.Execute(sql, model, dbTransaction);
+                    }, comData: comData, "Insert");
+                }
             }
         }
 
@@ -299,7 +329,29 @@ namespace Hzdtf.Persistence.Dapper
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
-                return dbConnection.Execute(sql, parameters, dbTransaction);
+                if (IsSupportIdempotent)
+                {
+                    try
+                    {
+                        return dbConnection.Execute(sql, parameters, dbTransaction);
+                    }
+                    catch (Exception ex)
+                    {
+                        // 如果主键重复，则忽略异常，实现幂等
+                        if (IsExceptionPkRepeat(ex))
+                        {
+                            var ids = models.Select(p => p.Id).ToArray();
+                            Log.InfoAsync($"批量插入.发生主键重复异常,幂等操作忽略该异常.主键:{ids.ToMergeString(",")}", ex, this.GetType().Name, comData.GetEventId(), "Insert");
+                            return models.Count;
+                        }
+
+                        throw new Exception(ex.Message, ex);
+                    }
+                }
+                else
+                {
+                    return dbConnection.Execute(sql, parameters, dbTransaction);
+                }
             }, comData: comData, "Insert");
         }
 
@@ -318,7 +370,8 @@ namespace Hzdtf.Persistence.Dapper
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
-                return dbConnection.Execute(sql, model, dbTransaction);
+                var rowCount = dbConnection.Execute(sql, model, dbTransaction);
+                return rowCount == 0 && IsSupportIdempotent ? 1 : rowCount;
             }, comData: comData, "UpdateById");
         }
 
@@ -336,7 +389,8 @@ namespace Hzdtf.Persistence.Dapper
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
-                return dbConnection.Execute(sql, new SimpleInfo<IdT>() { Id = id }, dbTransaction);
+                var rowCount = dbConnection.Execute(sql, new SimpleInfo<IdT>() { Id = id }, dbTransaction);
+                return rowCount == 0 && IsSupportIdempotent ? 1 : rowCount;
             }, comData: comData, "DeleteById");
         }
 
@@ -355,7 +409,8 @@ namespace Hzdtf.Persistence.Dapper
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
-                return dbConnection.Execute(sql, parameters, dbTransaction);
+                var rowCount = dbConnection.Execute(sql, parameters, dbTransaction);
+                return rowCount == 0 && IsSupportIdempotent ? ids.Length : rowCount;
             }, comData: comData, "DeleteByIds");
         }
 
@@ -372,7 +427,8 @@ namespace Hzdtf.Persistence.Dapper
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
-                return dbConnection.Execute(sql, dbTransaction);
+                var rowCount = dbConnection.Execute(sql, dbTransaction);
+                return rowCount == 0 && IsSupportIdempotent ? 1 : rowCount;
             }, comData: comData, "Delete");
         }
 
@@ -394,7 +450,8 @@ namespace Hzdtf.Persistence.Dapper
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
-                return dbConnection.Execute(sql, dbTransaction);
+                var rowCount = dbConnection.Execute(sql, dbTransaction);
+                return rowCount == 0 && IsSupportIdempotent ? 1 : rowCount;
             }, comData: comData, "DeleteSlaveTable");
         }
 
@@ -415,7 +472,8 @@ namespace Hzdtf.Persistence.Dapper
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
-                return dbConnection.Execute(sql, parameters, dbTransaction);
+                var rowCount = dbConnection.Execute(sql, parameters, dbTransaction);
+                return rowCount == 0 && IsSupportIdempotent ? 1 : rowCount;
             }, comData: comData, "DeleteSlaveTableByForeignKeys");
         }
 
@@ -733,6 +791,13 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <returns>不匹配条件SQL</returns>
         protected virtual string NoEqualWhereSql() => " (1=0) ";
+
+        /// <summary>
+        /// 判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        protected virtual bool IsExceptionPkRepeat(Exception ex) => false;
 
         #endregion
     }

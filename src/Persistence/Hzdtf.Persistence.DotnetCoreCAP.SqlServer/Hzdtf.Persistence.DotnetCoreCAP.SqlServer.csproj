@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Authors>黄振东</Authors>
+    <Description>Dotnet core cap集成SqlServer类库，运行在.Net5以上</Description>
     <Company>Hzdtf</Company>
-    <Product>持久化CAP SqlServer类库</Product>
-    <Description>持久化CAP SqlServer类库，运行在.net5以上</Description>
+    <Product>Dotnet core cap集成SqlServer类库</Product>
+    <Authors>黄振东</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="5.0.1" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>

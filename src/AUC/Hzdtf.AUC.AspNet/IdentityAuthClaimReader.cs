@@ -33,7 +33,7 @@ namespace Hzdtf.AUC.AspNet
         /// 构造方法
         /// </summary>
         /// <param name="authUserData">授权用户数据</param>
-        public IdentityAuthClaimReader(IAuthUserData<IdT, UserT> authUserData)
+        public IdentityAuthClaimReader(IAuthUserData<IdT, UserT> authUserData = null)
         {
             this.authUserData = authUserData;
         }
@@ -41,9 +41,9 @@ namespace Hzdtf.AUC.AspNet
         /// <summary>
         /// 构造方法
         /// </summary>
-        /// <param name="authUserData">授权用户数据</param>
         /// <param name="httpContext">Http上下文访问</param>
-        public IdentityAuthClaimReader(IAuthUserData<IdT, UserT> authUserData, IHttpContextAccessor httpContext)
+        /// <param name="authUserData">授权用户数据</param>
+        public IdentityAuthClaimReader(IHttpContextAccessor httpContext, IAuthUserData<IdT, UserT> authUserData = null)
         {
             this.authUserData = authUserData;
             this.httpContext = httpContext;
@@ -91,7 +91,10 @@ namespace Hzdtf.AUC.AspNet
                     return returnInfo;
                 }
 
-                returnInfo.Data = IdentityAuthUtil.GetUserDataFromClaims<IdT, UserT>(claims, authUserData);
+                if (authUserData != null)
+                {
+                    returnInfo.Data = IdentityAuthUtil.GetUserDataFromClaims<IdT, UserT>(claims, authUserData);
+                }
             }
 
             return returnInfo;

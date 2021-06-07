@@ -22,9 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="lifecycle">生命周期，默认为瞬时</param>
         /// <param name="interfacTypeCallback">接口类型回调，key：接口类型；value：是否忽略</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection RegisterAssembly(this IServiceCollection service, string interfaceAssemblyName, string implementAssemblyName,
+        public static IServiceCollection RegisterAssembly(this IServiceCollection service, string interfaceAssemblyName, string implementAssemblyName, 
             ServiceLifetime lifecycle = ServiceLifetime.Transient, Func<Type, bool> interfacTypeCallback = null)
-        {
+        {            
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
@@ -100,7 +100,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="implClassAssemblys">接口程序集的名称（不包含文件扩展名）</param>
         /// <returns>服务收藏</returns>
         public static IServiceCollection RegisterAssemblyWithInterfaceMapImpls(this IServiceCollection service, Type interfaceType,
-            ServiceLifetime lifecycle = ServiceLifetime.Transient, params string[] implClassAssemblys)
+            ServiceLifetime lifecycle = ServiceLifetime.Transient,  params string[] implClassAssemblys)
         {
             if (service == null)
             {

@@ -16,6 +16,11 @@ namespace Hzdtf.Utility.Utils
         public const string AUTH_KEY = "Authorization";
 
         /// <summary>
+        /// Cookie授权Key，值是：AccessToken
+        /// </summary>
+        public const string COOKIE_AUTH_KEY = "AccessToken";
+
+        /// <summary>
         /// 添加Bearer票据
         /// </summary>
         /// <param name="originalToken">原始票据</param>

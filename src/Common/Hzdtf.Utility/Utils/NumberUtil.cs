@@ -76,10 +76,17 @@ namespace Hzdtf.Utility.Utils
         /// <returns>随机数字字符串</returns>
         public static string Random(int length = 4)
         {
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i < length; i++)
+            var str = new StringBuilder();
+            var maxLengthStr = new StringBuilder("1");
+            for (var i = 0; i < length; i++)
             {
-                str.Append(ran.Next(0, 9));
+                maxLengthStr.Append("0");
+            }
+            str.Append(ran.Next(0, Convert.ToInt32(maxLengthStr.ToString())));
+            var tempLength = length - str.Length;
+            for (int i = 0; i < tempLength; i++)
+            {
+                str.Insert(0, "0");
             }
 
             return str.ToString();

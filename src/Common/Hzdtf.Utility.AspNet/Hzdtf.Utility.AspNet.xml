@@ -176,6 +176,18 @@
             Http状态码，默认返回200
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.AspNet.Extensions.IHttpContextAuthToken">
+            <summary>
+            Http上下文授权票据接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.IHttpContextAuthToken.SetHttpContext(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            设置Http上下文
+            </summary>
+            <param name="context">Http上下文</param>
+        </member>
         <member name="T:Hzdtf.Utility.AspNet.Extensions.RemoteService.UnityServicesOptionsConfiguration">
             <summary>
             统一服务配置来自微软配置对象里
@@ -589,7 +601,7 @@
             <param name="functionCode">功能编码</param>
             <returns>通用数据</returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateBasicCommonUseData(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.String)">
+        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateBasicCommonUseData(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.String,Hzdtf.Utility.Model.IAuthToken)">
             <summary>
             创建基本的通用数据
             </summary>
@@ -597,6 +609,7 @@
             <param name="key">键</param>
             <param name="menuCode">菜单编码</param>
             <param name="functionCode">功能编码</param>
+            <param name="authToken">授权票据</param>
             <returns>基本的通用数据</returns>
         </member>
         <member name="T:Microsoft.AspNetCore.Http.HttpRequestExtensions">
@@ -625,6 +638,25 @@
             </summary>
             <param name="request">http请求</param>
             <returns>事件ID</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.HttpRequestExtensions.GetClientRequestIP(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            获取客户端请求IP
+            </summary>
+            <param name="request">http请求</param>
+            <returns>客户端请求IP</returns>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Http.HttpResponseExtensions">
+            <summary>
+            Http响应扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.HttpResponseExtensions.AddCorsCookieHeader(Microsoft.AspNetCore.Http.HttpResponse)">
+            <summary>
+            为跨域Cookie添加必要的头
+            </summary>
+            <param name="response">http响应</param>
         </member>
         <member name="T:Microsoft.AspNetCore.Routing.RouteValueDictionaryExtensions">
             <summary>

@@ -172,7 +172,7 @@ namespace Hzdtf.Utility.Model
         /// 租户ID_名称
         /// 一般情况没有，特殊情况下有用，如SAAS中的租户
         /// </summary>
-        public const string TenantId_Name = "TenantId";
+        public const string MerchantId_Name = "TenantId";
 
         /// <summary>
         /// 租户ID
@@ -190,15 +190,15 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 租户ID字符串_名称
         /// </summary>
-        public const string TenantIdString_Name = "TenantIdString";
+        public const string MerchantIdString_Name = "MerchantIdString";
 
         /// <summary>
         /// 租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("tenantIdString")]
+        [JsonProperty("merchantIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("tenantIdString")]
-        public string TenantIdString
+        [MessagePack.Key("merchantIdString")]
+        public string MerchantIdString
         {
             get => TenantId.ToString();
         }

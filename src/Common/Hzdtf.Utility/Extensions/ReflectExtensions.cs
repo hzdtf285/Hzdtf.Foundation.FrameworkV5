@@ -773,6 +773,29 @@ namespace System.Reflection
             }
         }
 
+        /// <summary>
+        /// 设置对象的字符串类型如果为null则设置为默认值
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="obj">对象</param>
+        /// <param name="defaultValue">默认值</param>
+        public static void SetStringNullDefaultValue<T>(this T obj, string defaultValue = "")
+            where T : class
+        { 
+            if (obj == null)
+            {
+                return;
+            }
 
+            var props = typeof(T).GetProperties().Where(p => p.CanWrite && p.CanRead && p.PropertyType == typeof(string)).ToArray();
+            foreach (var p in props)
+            {
+                var value = p.GetValue(obj);
+                if (value == null)
+                {
+                    p.SetValue(obj, defaultValue);
+                }
+            }
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Hzdtf.AUC.AspNet;
+using Hzdtf.AUC.AspNet.JwtAuthHandler;
 using Hzdtf.AUC.Contract.IdentityAuth;
 using Hzdtf.AUC.Contract.IdentityAuth.Token;
 using Hzdtf.Utility;
+using Hzdtf.Utility.AspNet.Extensions;
 using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Model;
@@ -115,20 +117,32 @@ namespace Microsoft.Extensions.DependencyInjection
                     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options =>
                         {
-                            options.TokenValidationParameters = new TokenValidationParameters
-                            {
-                                ValidateIssuer = true,//是否验证Issuer
-                                ValidateAudience = true,//是否验证Audience
-                                ValidateLifetime = true,//是否验证失效时间
-                                ClockSkew = TimeSpan.FromSeconds(30),
-                                ValidateIssuerSigningKey = true,//是否验证SecurityKey
-                                ValidAudience = config.Config["Jwt:Domain"],//Audience
-                                ValidIssuer = config.Config["Jwt:Domain"],//Issuer，这两项和前面签发jwt的设置一致
-                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Config["Jwt:SecurityKey"]))//拿到SecurityKey
-                            };
+                            options.TokenValidationParameters = AUCUtility.CreateTokenValiParam(config);
                         });
 
                     services.AddSingleton<IIdentityTokenAuth, IdentityJwtAuth<IdT, UserT>>();
+
+                    break;
+
+                case IdentityAuthType.JWT_COOKIE:
+                    services.AddSingleton<IHttpContextAuthToken, CookieTokenAuthHandler>();
+                    services.AddAuthentication(options =>
+                    {
+                        options.AddScheme<CookieTokenAuthHandler>("DefaultJwtCookie", "DefaultJwtCookie");
+                        options.DefaultAuthenticateScheme = "DefaultJwtCookie";
+                        options.DefaultChallengeScheme = "DefaultJwtCookie";
+                    });
+
+                    break;
+
+                case IdentityAuthType.JWT_COOKIE_HEADER:
+                    services.AddSingleton<IHttpContextAuthToken, CookieHeaderTokenAuthHandler>();
+                    services.AddAuthentication(options =>
+                    {
+                        options.AddScheme<CookieHeaderTokenAuthHandler>("DefaultJwtCookieHeader", "DefaultJwtCookieHeader");
+                        options.DefaultAuthenticateScheme = "DefaultJwtCookieHeader";
+                        options.DefaultChallengeScheme = "DefaultJwtCookieHeader";
+                    });
 
                     break;
             }
