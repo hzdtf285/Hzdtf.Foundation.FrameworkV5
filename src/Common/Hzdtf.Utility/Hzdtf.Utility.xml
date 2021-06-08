@@ -7454,6 +7454,34 @@
             <param name="isCloseStream">是否关闭流</param>
             <returns>字节数组</returns>
         </member>
+        <member name="M:Hzdtf.Utility.Utils.StreamUtil.ReaderInsideAsyncStreamToString(System.IO.Stream,System.Boolean,System.Int32)">
+            <summary>
+            读取内部异步流并转换为字符串
+            </summary>
+            <param name="stream">流</param>
+            <param name="isCloseStream">是否关闭流</param>
+            <param name="initLength">初始化长度</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.StreamUtil.ReaderInsideAsyncStreamToString(System.IO.Stream,System.Text.Encoding,System.Boolean,System.Int32)">
+            <summary>
+            读取内部异步流并转换为字符串
+            </summary>
+            <param name="stream">流</param>
+            <param name="encoding">编码</param>
+            <param name="isCloseStream">是否关闭流</param>
+            <param name="initLength">初始化长度</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.StreamUtil.ReaderInsideAsyncStream(System.IO.Stream,System.Boolean,System.Int32)">
+            <summary>
+            读取内部异步流
+            </summary>
+            <param name="stream">流</param>
+            <param name="isCloseStream">是否关闭流</param>
+            <param name="initLength">初始化长度</param>
+            <returns>字节数组</returns>
+        </member>
         <member name="M:Hzdtf.Utility.Utils.StreamUtil.WriteFileContent(System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             写入文件内容

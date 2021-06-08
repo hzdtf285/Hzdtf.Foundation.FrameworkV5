@@ -120,6 +120,75 @@ namespace Hzdtf.Utility.Utils
         }
 
         /// <summary>
+        /// 读取内部异步流并转换为字符串
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <param name="isCloseStream">是否关闭流</param>
+        /// <param name="initLength">初始化长度</param>
+        /// <returns>字符串</returns>
+        public static string ReaderInsideAsyncStreamToString(this Stream stream, bool isCloseStream = true, int initLength = 1024) => ReaderInsideAsyncStreamToString(stream, Encoding.UTF8, isCloseStream, initLength);
+
+        /// <summary>
+        /// 读取内部异步流并转换为字符串
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <param name="encoding">编码</param>
+        /// <param name="isCloseStream">是否关闭流</param>
+        /// <param name="initLength">初始化长度</param>
+        /// <returns>字符串</returns>
+        public static string ReaderInsideAsyncStreamToString(this Stream stream, Encoding encoding, bool isCloseStream = true, int initLength = 1024) => encoding.GetString(ReaderInsideAsyncStream(stream, isCloseStream, initLength));
+
+        /// <summary>
+        /// 读取内部异步流
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <param name="isCloseStream">是否关闭流</param>
+        /// <param name="initLength">初始化长度</param>
+        /// <returns>字节数组</returns>
+        public static byte[] ReaderInsideAsyncStream(this Stream stream, bool isCloseStream = true, int initLength = 1024)
+        {
+            try
+            {
+                var list = new List<byte>(initLength);
+                while (true)
+                {
+                    var data = new byte[initLength];
+                    var thisReaderLength = stream.ReadAsync(data, 0, data.Length).Result;
+                    if (thisReaderLength < 1)
+                    {
+                        break;
+                    }
+                    if (data.Length == thisReaderLength)
+                    {
+                        list.AddRange(data);
+                    }
+                    else
+                    {
+                        for (var i = 0; i < thisReaderLength; i++)
+                        {
+                            list.Add(data[i]);
+                        }
+                    }
+                }
+
+                return list.Count > 0 ? list.ToArray() : null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (stream != null && isCloseStream)
+                {
+                    stream.Close();
+                    stream.Dispose();
+                    stream = null;
+                }
+            }
+        }
+
+        /// <summary>
         /// 写入文件内容
         /// </summary>
         /// <param name="fileName">文件名</param>
@@ -431,7 +500,7 @@ namespace Hzdtf.Utility.Utils
 
             return formatter.Deserialize(stream);
         }
-        
+
         /// <summary>
         /// 将字符串以utf8写入到流中
         /// </summary>
