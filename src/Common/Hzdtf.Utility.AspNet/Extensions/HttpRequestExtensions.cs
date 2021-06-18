@@ -71,8 +71,16 @@ namespace Microsoft.AspNetCore.Http
         /// <returns>客户端请求IP</returns>
         public static string GetClientRequestIP(this HttpRequest request)
         {
-            var ip = request.Headers["X-Forwarded-For"].FirstOrDefault();
-            if (string.IsNullOrEmpty(ip))
+            string ip = null;
+            if (request.Headers.ContainsKey("X-Forwarded-For"))
+            {
+                ip = request.Headers["X-Forwarded-For"].FirstOrDefault();
+                if (string.IsNullOrEmpty(ip))
+                {
+                    ip = request.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+                }
+            }
+            else
             {
                 ip = request.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
             }

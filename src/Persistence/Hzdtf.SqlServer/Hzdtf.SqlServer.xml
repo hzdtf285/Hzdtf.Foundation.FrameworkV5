@@ -50,5 +50,19 @@
             <param name="ex">异常</param>
             <returns>异常是否主键重复</returns>
         </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.StrictnessIsExceptionPkRepeat(System.Exception)">
+            <summary>
+            严格判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsCommonExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
     </members>
 </doc>

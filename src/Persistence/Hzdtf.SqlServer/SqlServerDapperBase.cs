@@ -66,13 +66,49 @@ namespace Hzdtf.SqlServer
         /// <returns>异常是否主键重复</returns>
         protected override bool IsExceptionPkRepeat(Exception ex)
         {
+            return IsCommonExceptionPkRepeat(ex);
+        }
+
+        /// <summary>
+        /// 严格判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        public override bool StrictnessIsExceptionPkRepeat(Exception ex)
+        {
+            return IsCommonExceptionPkRepeat(ex);
+        }
+
+        #endregion
+
+        #region 私有方法
+
+        /// <summary>
+        /// 判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        protected bool IsCommonExceptionPkRepeat(Exception ex)
+        {
+            SqlException sqlEx = null;
             if (ex is SqlException)
             {
-                var sqlEx = ex as SqlException;
-                return sqlEx.Number == 2627;
+                sqlEx = ex as SqlException;
+            }
+            else
+            {
+                var innerEx = ex.GetLastInnerException();
+                if (innerEx is SqlException)
+                {
+                    sqlEx = innerEx as SqlException;
+                }
+            }
+            if (sqlEx == null)
+            {
+                return false;
             }
 
-            return false;
+            return sqlEx.Number == 2627;
         }
 
         #endregion

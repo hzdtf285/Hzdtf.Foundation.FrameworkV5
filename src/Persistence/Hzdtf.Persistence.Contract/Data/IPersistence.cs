@@ -207,5 +207,12 @@ namespace Hzdtf.Persistence.Contract.Data
         int Delete(CommonUseData comData = null, string connectionId = null);
 
         #endregion
+
+        /// <summary>
+        /// 严格判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        bool StrictnessIsExceptionPkRepeat(Exception ex);
     }
 }

@@ -70,6 +70,39 @@ namespace Hzdtf.MySql
         /// </summary>
         /// <returns>不匹配条件SQL</returns>
         protected override string NoEqualWhereSql() => " (false) ";
+        /// <summary>
+        /// 判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        protected override bool IsExceptionPkRepeat(Exception ex)
+        {
+            return IsCommonExceptionPkRepeat(ex);
+        }
+
+        /// <summary>
+        /// 严格判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        public override bool StrictnessIsExceptionPkRepeat(Exception ex)
+        {
+            return IsCommonExceptionPkRepeat(ex);
+        }
+
+        #endregion
+
+        #region 私有方法
+
+        /// <summary>
+        /// 判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        protected bool IsCommonExceptionPkRepeat(Exception ex)
+        {
+            return false;
+        }
 
         #endregion
     }

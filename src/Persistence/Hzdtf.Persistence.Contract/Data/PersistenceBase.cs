@@ -706,6 +706,13 @@ namespace Hzdtf.Persistence.Contract.Data
 
         #endregion
 
+        /// <summary>
+        /// 严格判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        public abstract bool StrictnessIsExceptionPkRepeat(Exception ex);
+
         #endregion
 
         #region 虚方法

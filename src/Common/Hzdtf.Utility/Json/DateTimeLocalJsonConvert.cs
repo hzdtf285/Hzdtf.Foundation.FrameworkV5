@@ -23,7 +23,13 @@ namespace Hzdtf.Utility.Json
         /// <returns>日期时间</returns>
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return DateTime.Parse(reader.GetString());
+            var str = reader.GetString();
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return DateTime.MinValue;
+            }
+
+            return DateTime.Parse(str);
         }
 
         /// <summary>

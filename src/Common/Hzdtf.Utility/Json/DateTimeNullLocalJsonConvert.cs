@@ -29,7 +29,7 @@ namespace Hzdtf.Utility.Json
                 return null;
             }
 
-            return DateTime.Parse(reader.GetString());
+            return DateTime.Parse(str);
         }
 
         /// <summary>
