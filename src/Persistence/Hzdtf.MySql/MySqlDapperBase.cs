@@ -70,6 +70,7 @@ namespace Hzdtf.MySql
         /// </summary>
         /// <returns>不匹配条件SQL</returns>
         protected override string NoEqualWhereSql() => " (false) ";
+
         /// <summary>
         /// 判断异常是否主键重复
         /// </summary>
@@ -101,7 +102,25 @@ namespace Hzdtf.MySql
         /// <returns>异常是否主键重复</returns>
         protected bool IsCommonExceptionPkRepeat(Exception ex)
         {
-            return false;
+            MySqlException sqlEx = null;
+            if (ex is MySqlException)
+            {
+                sqlEx = ex as MySqlException;
+            }
+            else
+            {
+                var innerEx = ex.GetLastInnerException();
+                if (innerEx is MySqlException)
+                {
+                    sqlEx = innerEx as MySqlException;
+                }
+            }
+            if (sqlEx == null)
+            {
+                return false;
+            }
+
+            return sqlEx.Number == 1062;
         }
 
         #endregion
