@@ -16,6 +16,24 @@ namespace Hzdtf.Utility.Data
     public class MessagePackBytesSerialization : IBytesSerialization
     {
         /// <summary>
+        /// 是否设置日期时间为本地时间，默认为否
+        /// </summary>
+        public bool IsSetDateTimeToLocalTime
+        {
+            get;
+            set;
+        } = false;
+
+        /// <summary>
+        /// 转换为本地时间深度，默认为3
+        /// </summary>
+        public byte ToLocalTimeDepth
+        {
+            get;
+            set;
+        } = 3;
+
+        /// <summary>
         /// 序列化
         /// </summary>
         /// <param name="obj">对象</param>
@@ -28,7 +46,7 @@ namespace Hzdtf.Utility.Data
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="data">数据</param>
         /// <returns>对象</returns>
-        public T Deserialize<T>(byte[] data) => MessagePackExtensions.MessagePackDeserialize<T>(data);
+        public T Deserialize<T>(byte[] data) => MessagePackExtensions.MessagePackDeserialize<T>(data, IsSetDateTimeToLocalTime, ToLocalTimeDepth);
 
         /// <summary>
         /// 反序列化为对象
@@ -36,6 +54,6 @@ namespace Hzdtf.Utility.Data
         /// <param name="data">数据</param>
         /// <param name="type">类型</param>
         /// <returns>对象</returns>
-        public object Deserialize(byte[] data, Type type) => MessagePackExtensions.MessagePackDeserialize(data, type);
+        public object Deserialize(byte[] data, Type type) => MessagePackExtensions.MessagePackDeserialize(data, type, IsSetDateTimeToLocalTime, ToLocalTimeDepth);
     }
 }

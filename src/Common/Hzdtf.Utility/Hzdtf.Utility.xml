@@ -2419,6 +2419,16 @@
             @ 黄振东
             </summary>
         </member>
+        <member name="P:Hzdtf.Utility.Data.MessagePackBytesSerialization.IsSetDateTimeToLocalTime">
+            <summary>
+            是否设置日期时间为本地时间，默认为否
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Data.MessagePackBytesSerialization.ToLocalTimeDepth">
+            <summary>
+            转换为本地时间深度，默认为3
+            </summary>
+        </member>
         <member name="M:Hzdtf.Utility.Data.MessagePackBytesSerialization.Serialize(System.Object)">
             <summary>
             序列化
@@ -8767,6 +8777,21 @@
             <param name="dateTime">日期时间</param>  
             <returns>时间戳</returns>  
         </member>
+        <member name="M:System.DateTimeExtensions.SetDateTimeToLocalTime(System.Object,System.Byte)">
+            <summary>
+            设置对象所有日期时间属性为本地时间
+            </summary>
+            <param name="obj">对象</param>
+            <param name="depth">深度</param>
+        </member>
+        <member name="M:System.DateTimeExtensions.SetDateTimeToLocalTimeFrorCurrDepth(System.Object,System.Byte,System.Byte)">
+            <summary>
+            设置对象所有日期时间属性为本地时间
+            </summary>
+            <param name="currDepth">当前深度</param>
+            <param name="depth">深度</param>
+            <param name="obj">对象</param>
+        </member>
         <member name="T:System.ExceptionExtensions">
             <summary>
             异常扩展类
@@ -9078,13 +9103,32 @@
             <param name="data">数据</param>
             <returns>对象</returns>
         </member>
-        <member name="M:System.MessagePackExtensions.MessagePackDeserialize(System.Byte[],System.Type)">
+        <member name="M:System.MessagePackExtensions.MessagePackDeserialize``1(System.Byte[],System.Boolean,System.Byte)">
+            <summary>
+            消息包反序列化为对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="data">数据</param>
+            <param name="isSetDateTimeToLocalTime">是否设置日期时间为本地时间，默认为否</param>
+            <param name="toLocalTimeDepth">转换为本地时间深度</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:System.MessagePackExtensions.MessagePackDeserialize(System.Byte[],System.Type,System.Boolean,System.Byte)">
             <summary>
             反序列化为对象
             </summary>
             <param name="data">数据</param>
             <param name="type">类型</param>
+            <param name="isSetDateTimeToLocalTime">是否设置日期时间为本地时间，默认为否</param>
+            <param name="toLocalTimeDepth">转换为本地时间深度</param>
             <returns>对象</returns>
+        </member>
+        <member name="M:System.MessagePackExtensions.IsMessagePackSerializationException(System.Exception)">
+            <summary>
+            判断是否消息包序列化异常
+            </summary>
+            <param name="ex">异常</param>
+            <returns>是否消息包序列化异常</returns>
         </member>
         <member name="T:System.ObjectOrderbyConnExtension">
             <summary>

@@ -503,5 +503,158 @@ namespace System
 
             return t;
         }
+
+        /// <summary>
+        /// 设置对象所有日期时间属性为本地时间
+        /// </summary>
+        /// <param name="obj">对象</param>
+        /// <param name="depth">深度</param>
+        public static void SetDateTimeToLocalTime(this object obj, byte depth = 3)
+        {
+            SetDateTimeToLocalTimeFrorCurrDepth(obj, 1, depth);
+        }
+
+        /// <summary>
+        /// 设置对象所有日期时间属性为本地时间
+        /// </summary>
+        /// <param name="currDepth">当前深度</param>
+        /// <param name="depth">深度</param>
+        /// <param name="obj">对象</param>
+        private static void SetDateTimeToLocalTimeFrorCurrDepth(object obj, byte currDepth, byte depth)
+        {
+            if (obj == null || currDepth > depth)
+            {
+                return;
+            }
+            var type = obj.GetType();
+            if (type.IsArray)
+            {
+                var array = obj as object[];
+                if (array == null)
+                {
+                    return;
+                }
+                foreach (var a in array)
+                {
+                    if (a == null)
+                    {
+                        continue;
+                    }
+
+                    SetDateTimeToLocalTimeFrorCurrDepth(a, currDepth, depth);
+                }
+                return;
+            }
+            var thisFullName = type.FullName;
+            var nextDepth = Convert.ToByte(currDepth + 1);
+            if (thisFullName.Contains("System.Collections.Generic.IList") || thisFullName.Contains("System.Collections.Generic.List")
+                || thisFullName.Contains("System.Collections.Generic.ICollection"))
+            {
+                var list = obj as IEnumerable<object>;
+                if (list == null)
+                {
+                    return;
+                }
+                foreach (var a in list)
+                {
+                    if (a == null)
+                    {
+                        continue;
+                    }
+
+                    SetDateTimeToLocalTimeFrorCurrDepth(a, nextDepth, depth);
+                }
+
+                return;
+            }
+
+            var propertys = obj.GetType().GetProperties();
+            foreach (var item in propertys)
+            {
+                if (item.CanRead)
+                {
+                    if (item.PropertyType.IsEnum || item.PropertyType == typeof(string))
+                    {
+                        continue;
+                    }
+
+                    if (item.PropertyType == typeof(DateTime) || item.PropertyType == typeof(DateTime?))
+                    {
+                        if (item.CanWrite)
+                        {
+                            var value = item.GetValue(obj);
+                            if (value == null)
+                            {
+                                continue;
+                            }
+                            var dateTime = ((DateTime)value).ToLocalTime();
+                            item.SetValue(obj, dateTime);
+                        }
+
+                        continue;
+                    }
+                    if (item.PropertyType.IsValueType)
+                    {
+                        continue;
+                    }
+
+                    var fullName = item.PropertyType.FullName;
+                    if (fullName.Contains("System.Collections.Generic.IList") || fullName.Contains("System.Collections.Generic.List")
+                        || fullName.Contains("System.Collections.Generic.ICollection"))
+                    {
+                        var objValue = item.GetValue(obj);
+                        if (objValue == null)
+                        {
+                            continue;
+                        }
+
+                        var list = objValue as IEnumerable<object>;
+                        if (list == null)
+                        {
+                            continue;
+                        }
+                        foreach (var a in list)
+                        {
+                            if (a == null)
+                            {
+                                continue;
+                            }
+
+                            SetDateTimeToLocalTimeFrorCurrDepth(a, nextDepth, depth);
+                        }
+                    }
+
+                    if (item.PropertyType.IsClass)
+                    {
+                        var objValue = item.GetValue(obj);
+                        if (objValue == null)
+                        {
+                            continue;
+                        }
+                        if (item.PropertyType.IsArray)
+                        {
+                            var array = objValue as object[];
+                            if (array == null)
+                            {
+                                continue;
+                            }
+                            foreach (var a in array)
+                            {
+                                if (a == null)
+                                {
+                                    continue;
+                                }
+
+                                SetDateTimeToLocalTimeFrorCurrDepth(a, nextDepth, depth);
+                            }
+                        }
+                        else
+                        {
+                            SetDateTimeToLocalTimeFrorCurrDepth(objValue, nextDepth, depth);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
