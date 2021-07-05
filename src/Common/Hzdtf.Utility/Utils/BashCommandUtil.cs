@@ -93,5 +93,49 @@ namespace Hzdtf.Utility.Utils
 
             return output;
         }
+
+        /// <summary>
+        /// 执行dotnet命令
+        /// </summary>
+        /// <param name="command">命令</param>
+        /// <param name="err">错误</param>
+        /// <returns>输出返回值</returns>
+        public static string ExecDotnetCommand(string command, out string err)
+        {
+            return ExecCommand("dotnet", command, out err);
+        }
+
+        /// <summary>
+        /// 执行文件命令
+        /// </summary>
+        /// <param name="fileName">文件</param>
+        /// <param name="command">命令</param>
+        /// <param name="err">错误</param>
+        /// <returns>输出返回值</returns>
+        public static string ExecCommand(this string fileName, string command, out string err)
+        {
+            err = null;
+            if (string.IsNullOrWhiteSpace(command))
+            {
+                return null;
+            }
+            string output = null;
+            using (var proc = new Process())
+            {
+                proc.StartInfo.FileName = fileName;
+                proc.StartInfo.Arguments = $" {command}\"";
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
+                proc.Start();
+
+                output = proc.StandardOutput.ReadToEnd();
+                err = proc.StandardError.ReadToEnd();
+
+                proc.WaitForExit();
+            }
+
+            return output;
+        }
     }
 }

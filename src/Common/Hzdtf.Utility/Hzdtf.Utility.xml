@@ -6561,6 +6561,28 @@
             <param name="text">文本</param>
             <returns>字节数组</returns>
         </member>
+        <member name="M:Hzdtf.Utility.Safety.MD5Util.GetBytesMD5(System.Byte[])">
+            <summary>
+            获取字节的MD5值
+            </summary>
+            <param name="bytes">字节流</param>
+            <returns>字节的MD5值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Safety.MD5Util.GetFileMD5(System.String)">
+            <summary>
+            获取文件的MD5值
+            </summary>
+            <param name="fileName">文件名</param>
+            <returns>文件的MD5值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Safety.MD5Util.GetStreamMD5(System.IO.Stream,System.Boolean)">
+            <summary>
+            获取流的MD5值
+            </summary>
+            <param name="stream">流</param>
+            <param name="isCloseStream">是否关闭流</param>
+            <returns>流的MD5值</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Safety.SignUtil">
             <summary>
             签名辅助类
@@ -6684,6 +6706,23 @@
             <summary>
             执行Bash命令
             </summary>
+            <param name="command">命令</param>
+            <param name="err">错误</param>
+            <returns>输出返回值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.BashCommandUtil.ExecDotnetCommand(System.String,System.String@)">
+            <summary>
+            执行dotnet命令
+            </summary>
+            <param name="command">命令</param>
+            <param name="err">错误</param>
+            <returns>输出返回值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.BashCommandUtil.ExecCommand(System.String,System.String,System.String@)">
+            <summary>
+            执行文件命令
+            </summary>
+            <param name="fileName">文件</param>
             <param name="command">命令</param>
             <param name="err">错误</param>
             <returns>输出返回值</returns>

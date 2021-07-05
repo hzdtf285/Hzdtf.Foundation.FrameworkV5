@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Hzdtf.Utility.Utils;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -67,6 +69,81 @@ namespace Hzdtf.Utility.Safety
                 byte[] buffer = Encoding.Default.GetBytes(text);
                 //开始加密
                 return mi.ComputeHash(buffer);
+            }
+        }
+
+        /// <summary>
+        /// 获取字节的MD5值
+        /// </summary>
+        /// <param name="bytes">字节流</param>
+        /// <returns>字节的MD5值</returns>
+        public static string GetBytesMD5(this byte[] bytes)
+        {
+            if (bytes.IsNullOrLength0())
+            {
+                return null;
+            }
+
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] retVal = md5.ComputeHash(bytes);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < retVal.Length; i++)
+            {
+                sb.Append(retVal[i].ToString("x2"));
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 获取文件的MD5值
+        /// </summary>
+        /// <param name="fileName">文件名</param>
+        /// <returns>文件的MD5值</returns>
+        public static string GetFileMD5(this string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                return null;
+            }
+
+            return GetStreamMD5(new FileStream(fileName, FileMode.Open));
+        }
+
+        /// <summary>
+        /// 获取流的MD5值
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <param name="isCloseStream">是否关闭流</param>
+        /// <returns>流的MD5值</returns>
+        public static string GetStreamMD5(this Stream stream, bool isCloseStream = true)
+        {
+            if (stream == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                MD5 md5 = new MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(stream);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                {
+                    sb.Append(retVal[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                if (isCloseStream)
+                {
+                    stream.Close();
+                    stream.Dispose();
+                }
             }
         }
     }
