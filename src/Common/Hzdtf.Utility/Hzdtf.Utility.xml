@@ -258,6 +258,11 @@
             信息事件
             </summary>
         </member>
+        <member name="F:Hzdtf.Utility.App.GetGRpcClientFactory">
+            <summary>
+            获取GRpc客户端工厂
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Attr.AuthAttribute">
             <summary>
             授权特性
@@ -2946,6 +2951,19 @@
             </summary>
             <param name="cusOptions">渠道自定义选项</param>
             <returns>事件ID</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.Extensions.IGetGRpcClientFactory">
+            <summary>
+            获取GRpc客户端工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Extensions.IGetGRpcClientFactory.GetRpcClient``1">
+            <summary>
+            获取GRpc客户端
+            </summary>
+            <typeparam name="GRpcClientT">GRpc客户端类型</typeparam>
+            <returns>GRpc客户端</returns>
         </member>
         <member name="T:Hzdtf.Utility.Factory.IGeneralFactory`1">
             <summary>
@@ -9612,6 +9630,17 @@
             如果返回值是错误则抛出RPC异常
             </summary>
             <param name="basicReturn">基本返回</param>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.GetGRpcClient``1(System.Action{``0,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException},System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+            <summary>
+            获取GRpc客户端
+            需要在App.GetGRpcClient里设置获取GRpc客户端工厂的实现
+            </summary>
+            <typeparam name="GRpcClientT">GRpc客户端类型</typeparam>
+            <param name="action">回调业务处理方法</param>
+            <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
+            <param name="customerOptions">自定义选项配置</param>
+            <returns>GRpc客户端</returns>
         </member>
     </members>
 </doc>

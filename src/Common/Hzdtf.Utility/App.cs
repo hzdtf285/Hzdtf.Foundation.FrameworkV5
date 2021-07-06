@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Event;
+using Hzdtf.Utility.Extensions;
 using Hzdtf.Utility.Safety;
 using Hzdtf.Utility.TheOperation;
 using Microsoft.Extensions.Configuration;
@@ -266,5 +267,10 @@ namespace Hzdtf.Utility
         /// 信息事件
         /// </summary>
         public static IInfoEvent InfoEvent;
+
+        /// <summary>
+        /// 获取GRpc客户端工厂
+        /// </summary>
+        public static IGetGRpcClientFactory GetGRpcClientFactory;
     }
 }

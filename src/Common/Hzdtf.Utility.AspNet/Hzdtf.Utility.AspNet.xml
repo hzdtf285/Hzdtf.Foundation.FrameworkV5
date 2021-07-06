@@ -176,6 +176,19 @@
             Http状态码，默认返回200
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.AspNet.Extensions.GRpc.GetGRpcClientFactory">
+            <summary>
+            获取GRpc客户端工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.GRpc.GetGRpcClientFactory.GetRpcClient``1">
+            <summary>
+            获取GRpc客户端
+            </summary>
+            <typeparam name="GRpcClientT">GRpc客户端类型</typeparam>
+            <returns>GRpc客户端</returns>
+        </member>
         <member name="T:Hzdtf.Utility.AspNet.Extensions.IHttpContextAuthToken">
             <summary>
             Http上下文授权票据接口

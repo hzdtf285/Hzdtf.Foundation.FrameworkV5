@@ -27,6 +27,7 @@ namespace Grpc.Net.Client
         /// <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
         /// <param name="customerOptions">自定义选项配置</param>
         /// <param name="options">选项配置</param>
+        [Obsolete("此方法因不能复用GRpc通道，性能差，故弃用。请使用GetGRpcClient")]
         public static void CreateChannel(string address, Action<GrpcChannel, Metadata> action, Action<RpcException> exAction = null, Action<ChannelCustomerOptions> customerOptions = null, GrpcChannelOptions options = null)
         {
             var headers = new Metadata();
@@ -137,6 +138,77 @@ namespace Grpc.Net.Client
             }
 
             new BusinessException(basicReturn.Code, basicReturn.Msg, basicReturn.Desc).ThrowRpcException(basicReturn.Msg);
+        }
+
+        /// <summary>
+        /// 获取GRpc客户端
+        /// 需要在App.GetGRpcClient里设置获取GRpc客户端工厂的实现
+        /// </summary>
+        /// <typeparam name="GRpcClientT">GRpc客户端类型</typeparam>
+        /// <param name="action">回调业务处理方法</param>
+        /// <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
+        /// <param name="customerOptions">自定义选项配置</param>
+        /// <returns>GRpc客户端</returns>
+        public static GRpcClientT GetGRpcClient<GRpcClientT>(Action<GRpcClientT, Metadata> action, Action<RpcException> exAction = null, Action<ChannelCustomerOptions> customerOptions = null)
+            where GRpcClientT : ClientBase<GRpcClientT>
+        {
+            if (App.GetGRpcClientFactory == null)
+            {
+                throw new ArgumentNullException("App.GetGRpcClientFactory未定义");
+            }
+            var client = App.GetGRpcClientFactory.GetRpcClient<GRpcClientT>();
+            if (action != null)
+            {
+                var headers = new Metadata();
+                var cusOptions = new ChannelCustomerOptions();
+                if (customerOptions != null)
+                {
+                    customerOptions(cusOptions);
+                }
+
+                var token = cusOptions.GetToken();
+                if (!string.IsNullOrWhiteSpace(token))
+                {
+                    headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
+                }
+                var eventId = cusOptions.GetEventId();
+                if (!string.IsNullOrWhiteSpace(eventId))
+                {
+                    headers.Add(App.EVENT_ID_KEY, eventId);
+                }
+
+                RpcException rpcEx = null;
+                Exception exce = null;
+                Stopwatch watch = new Stopwatch();
+                try
+                {
+                    watch.Start();
+                    action(client, headers);
+                    watch.Stop();
+                }
+                catch (RpcException ex)
+                {
+                    watch.Stop();
+                    exce = rpcEx = ex;
+                }
+                catch (Exception ex)
+                {
+                    watch.Stop();
+                    exce = ex;
+                }
+
+                if (App.InfoEvent != null)
+                {
+                    App.InfoEvent.RecordAsync($"grpc发起请求.接口:{cusOptions.Api}.耗时:{watch.ElapsedMilliseconds}ms",
+                        exce, "GetGRpcClient", eventId, cusOptions.Api);
+                }
+                if (rpcEx != null && exAction != null)
+                {
+                    exAction(rpcEx);
+                }
+            }
+
+            return client;
         }
     }    
 }
