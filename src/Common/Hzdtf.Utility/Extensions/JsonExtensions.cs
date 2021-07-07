@@ -19,8 +19,9 @@ namespace System
         /// <param name="obj">对象</param>
         /// <param name="isIgnoreNull">是否忽略null值，默认为是</param>
         /// <param name="isUseCamel">是否使用驼蜂风格（即首字母小写），默认为是</param>
+        /// <param name="format">格式化，默认为无</param>
         /// <returns>JSON字符串</returns>
-        public static string ToJsonString(this object obj, bool isIgnoreNull = true, bool isUseCamel = true)
+        public static string ToJsonString(this object obj, bool isIgnoreNull = true, bool isUseCamel = true, Formatting format = Formatting.None)
         {
             if (obj == null)
             {
@@ -36,7 +37,7 @@ namespace System
                 jSetting.ContractResolver = new CamelCasePropertyNamesContractResolver();
             }
 
-            return JsonConvert.SerializeObject(obj, Formatting.Indented, jSetting);
+            return JsonConvert.SerializeObject(obj, format, jSetting);
         }
 
         /// <summary>

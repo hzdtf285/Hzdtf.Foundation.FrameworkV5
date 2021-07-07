@@ -9089,13 +9089,14 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:System.JsonExtensions.ToJsonString(System.Object,System.Boolean,System.Boolean)">
+        <member name="M:System.JsonExtensions.ToJsonString(System.Object,System.Boolean,System.Boolean,Newtonsoft.Json.Formatting)">
             <summary>
             将对象转换为JSON字符串
             </summary>
             <param name="obj">对象</param>
             <param name="isIgnoreNull">是否忽略null值，默认为是</param>
             <param name="isUseCamel">是否使用驼蜂风格（即首字母小写），默认为是</param>
+            <param name="format">格式化，默认为无</param>
             <returns>JSON字符串</returns>
         </member>
         <member name="M:System.JsonExtensions.ToJsonObject``1(System.String)">
