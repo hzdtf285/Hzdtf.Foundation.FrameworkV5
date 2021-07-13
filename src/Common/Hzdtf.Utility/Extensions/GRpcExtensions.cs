@@ -98,6 +98,10 @@ namespace Grpc.Net.Client
             {
                 exAction(rpcEx);
             }
+            else if (exce != null)
+            {
+                throw new Exception(exce.Message, exce);
+            }
         }
 
         /// <summary>
@@ -205,6 +209,10 @@ namespace Grpc.Net.Client
                 if (rpcEx != null && exAction != null)
                 {
                     exAction(rpcEx);
+                }
+                else if (exce != null)
+                {
+                    throw new Exception(exce.Message, exce);
                 }
             }
 
