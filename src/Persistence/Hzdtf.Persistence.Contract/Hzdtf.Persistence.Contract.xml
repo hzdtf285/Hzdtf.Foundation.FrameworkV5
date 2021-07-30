@@ -412,11 +412,31 @@
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
         </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Insert(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Insert(System.Collections.Generic.IList{`1},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             插入模型列表
             </summary>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.IPersistence`2.Insert(System.Collections.Generic.IList{`1},System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
@@ -662,7 +682,7 @@
         <member name="T:Hzdtf.Persistence.Contract.Data.PersistenceBase`2">
             <summary>
             持久化基类
-            如果可实例化的子类包含有TenantId属性（字段），则默认代表中存在租户ID，本类对外提供所有的增/删/改/查操作都自动加上租户ID约束，同时取租户ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
+            如果可实例化的子类包含有TenantId属性（字段），则默认代表中存在租戶ID，本类对外提供所有的增/删/改/查操作都自动加上租戶ID约束，同时取租戶ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
             @ 黄振东
             </summary>
             <typeparam name="IdT">ID类型</typeparam>
@@ -827,11 +847,31 @@
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
         </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(System.Collections.Generic.IList{`1},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             插入模型列表
             </summary>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(System.Collections.Generic.IList{`1},System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
@@ -880,6 +920,13 @@
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.StrictnessIsExceptionPkRepeat(System.Exception)">
+            <summary>
+            严格判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Select(`0,System.Data.IDbConnection,System.Data.IDbTransaction,System.String[],Hzdtf.Utility.Model.CommonUseData)">
             <summary>
@@ -971,22 +1018,24 @@
             </summary>
             <returns>所有字段映射集合</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(`1,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(`1,System.Data.IDbConnection,System.String[],System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             插入模型
             </summary>
             <param name="model">模型</param>
             <param name="dbConnection">数据库连接</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="dbTransaction">数据库事务</param>
             <param name="comData">通用数据</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(System.Collections.Generic.IList{`1},System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.Insert(System.Collections.Generic.IList{`1},System.Data.IDbConnection,System.String[],System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             插入模型列表
             </summary>
             <param name="models">模型列表</param>
             <param name="dbConnection">数据库连接</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="dbTransaction">数据库事务</param>
             <param name="comData">通用数据</param>
             <returns>影响行数</returns>
@@ -1031,13 +1080,6 @@
             <param name="comData">通用数据</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.StrictnessIsExceptionPkRepeat(System.Exception)">
-            <summary>
-            严格判断异常是否主键重复
-            </summary>
-            <param name="ex">异常</param>
-            <returns>异常是否主键重复</returns>
-        </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SlaveTables">
             <summary>
             从表集合
@@ -1081,46 +1123,46 @@
             <param name="id">ID</param>
             <returns>主键是否自增</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsMerchantId(Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsTenantId(Hzdtf.Utility.Model.CommonUseData)">
             <summary>
-            是否存在租赁ID
+            是否存在租戶ID
             </summary>
             <param name="comData">通用数据</param>
-            <returns>查询时是否需要追加租赁ID为过滤条件</returns>
+            <returns>查询时是否需要追加租戶ID为过滤条件</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsMerchantId(`0@,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.IsExistsTenantId(`0@,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
-            是否存在租赁ID
+            是否存在租戶ID
             </summary>
-            <param name="currUserMerchantId">当前用户租户ID</param>
+            <param name="currUserTenantId">当前用户租戶ID</param>
             <param name="comData">通用数据</param>
-            <returns>是否存在租赁ID</returns>
+            <returns>是否存在租戶ID</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelContainerMerchantId">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelContainerTenantId">
             <summary>
-            模型是否包含租户ID
+            模型是否包含租戶ID
             </summary>
-            <returns>模型是否包含租户ID</returns>
+            <returns>模型是否包含租戶ID</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelIsSetMerchantId(`1)">
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ModelIsSetTenantId(`1)">
             <summary>
-            模型是否已设置租户ID
-            </summary>
-            <param name="model">模型</param>
-            <returns>模型是否已设置租户ID</returns>
-        </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectIsAppendMerchantId">
-            <summary>
-            查询是否追加租户ID，默认为是
-            </summary>
-            <returns>查询是否不追加租户ID</returns>
-        </member>
-        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SetMerchantId(`1,`0)">
-            <summary>
-            设置模型的租赁ID
+            模型是否已设置租戶ID
             </summary>
             <param name="model">模型</param>
-            <param name="tenantId">租赁ID</param>
+            <returns>模型是否已设置租戶ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SelectIsAppendTenantId">
+            <summary>
+            查询是否追加租戶ID，默认为是
+            </summary>
+            <returns>查询是否不追加租戶ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.SetTenantId(`1,`0)">
+            <summary>
+            设置模型的租戶ID
+            </summary>
+            <param name="model">模型</param>
+            <param name="TenantId">租戶ID</param>
         </member>
         <member name="M:Hzdtf.Persistence.Contract.Data.PersistenceBase`2.ExecTransaction(System.Action{System.String},Hzdtf.Utility.Enums.AccessMode,Hzdtf.Utility.Attr.TransactionAttribute,System.String)">
             <summary>

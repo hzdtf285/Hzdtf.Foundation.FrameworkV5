@@ -91,6 +91,16 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Find(`0,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            根据ID查找模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyName">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Findsing">
             <summary>
             根据ID查找模型列表前事件
@@ -124,6 +134,16 @@
             根据ID查找模型列表
             </summary>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Find(`0[],System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            根据ID查找模型列表
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="propertyName">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
@@ -233,6 +253,15 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Query(System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.QueryPaging">
             <summary>
             查询模型列表并分页前事件
@@ -276,6 +305,18 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryPage(System.Int32,System.Int32,System.String[],Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            执行查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Adding">
             <summary>
             添加模型前事件
@@ -313,6 +354,16 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Add(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            添加模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.Addsing">
             <summary>
             添加模型列表前事件
@@ -346,6 +397,16 @@
             添加模型列表
             </summary>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Add(System.Collections.Generic.IList{`1},System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            添加模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
@@ -388,6 +449,17 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.Set(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            设置模型
+            如果ID存在则修改，否则添加
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
         <member name="E:Hzdtf.Service.Impl.ServiceBase`3.ModifyByIding">
             <summary>
             根据ID修改模型前事件
@@ -421,6 +493,16 @@
             根据ID修改模型
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ModifyById(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            根据ID修改模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>返回信息</returns>
@@ -866,11 +948,31 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息任务</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            异步根据ID查找模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyName">属性名称集合</param>
+            <param name="connectionId">连接ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息任务</returns>
+        </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0[],Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID集合查找模型列表
             </summary>
             <param name="ids">ID集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.FindAsync(`0[],System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            异步根据ID查找模型列表
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="propertyName">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>返回信息任务</returns>
@@ -900,12 +1002,33 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息任务</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryAsync(System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息任务</returns>
+        </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryPageAsync(System.Int32,System.Int32,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步执行查询模型列表并分页
             </summary>
             <param name="pageIndex">页码</param>
             <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.QueryPageAsync(System.Int32,System.Int32,System.String[],Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            异步执行查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="filter">筛选</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
@@ -920,11 +1043,31 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息任务</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AddAsync(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            异步添加模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息任务</returns>
+        </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AddAsync(System.Collections.Generic.IList{`1},Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步添加模型列表
             </summary>
             <param name="models">模型列表</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.AddAsync(System.Collections.Generic.IList{`1},System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            异步添加模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>返回信息任务</returns>
@@ -939,11 +1082,32 @@
             <param name="connectionId">连接ID</param>
             <returns>返回信息任务</returns>
         </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.SetAsync(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            异步设置模型
+            如果ID存在则修改，否则添加
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息任务</returns>
+        </member>
         <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ModifyByIdAsync(`1,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             异步根据ID修改模型
             </summary>
             <param name="model">模型</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Impl.ServiceBase`3.ModifyByIdAsync(`1,System.String[],Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            异步根据ID修改模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
             <param name="comData">通用数据</param>
             <param name="connectionId">连接ID</param>
             <returns>返回信息任务</returns>

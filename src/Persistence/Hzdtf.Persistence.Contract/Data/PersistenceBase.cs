@@ -19,7 +19,7 @@ namespace Hzdtf.Persistence.Contract.Data
 {
     /// <summary>
     /// 持久化基类
-    /// 如果可实例化的子类包含有TenantId属性（字段），则默认代表中存在租户ID，本类对外提供所有的增/删/改/查操作都自动加上租户ID约束，同时取租户ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
+    /// 如果可实例化的子类包含有TenantId属性（字段），则默认代表中存在租戶ID，本类对外提供所有的增/删/改/查操作都自动加上租戶ID约束，同时取租戶ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
     /// @ 黄振东
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
@@ -142,6 +142,24 @@ namespace Hzdtf.Persistence.Contract.Data
 
             return result;
         }
+
+        /// <summary>
+        /// 根据SQL属性查询模型
+        /// </summary>
+        /// <param name="sqlProp">SQL属性</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>模型</returns>
+        //public virtual ModelT SelectFristBy(SqlPropInfo sqlProp, CommonUseData comData = null, string connectionId = null)
+        //{
+        //    ModelT result = null;
+        //    DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
+        //    {
+        //        result = Select(id, dbConn, GetDbTransaction(connId, AccessMode.SLAVE), propertyNames, comData: comData);
+        //    }, AccessMode.SLAVE);
+
+        //    return result;
+        //}
 
         /// <summary>
         /// 根据ID集合查询模型列表
@@ -344,17 +362,30 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <returns>影响行数</returns>
         public virtual int Insert(ModelT model, CommonUseData comData = null, string connectionId = null)
         {
+            return Insert(model, null, comData, connectionId);
+        }
+
+        /// <summary>
+        /// 插入模型
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>影响行数</returns>
+        public virtual int Insert(ModelT model, string[] propertyNames, CommonUseData comData = null, string connectionId = null)
+        {
             int result = 0;
 
-            IdT tenantId;
-            if (!ModelIsSetMerchantId(model) && IsExistsMerchantId(out tenantId, comData))
+            IdT TenantId;
+            if (!ModelIsSetTenantId(model) && IsExistsTenantId(out TenantId, comData))
             {
-                SetMerchantId(model, tenantId);
+                SetTenantId(model, TenantId);
             }
 
             DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
             {
-                result = Insert(model, dbConn, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
+                result = Insert(model, dbConn, propertyNames, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
             }, AccessMode.MASTER);
 
             return result;
@@ -369,26 +400,38 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <returns>影响行数</returns>
         public virtual int Insert(IList<ModelT> models, CommonUseData comData = null, string connectionId = null)
         {
+            return Insert(models, null, comData, connectionId);
+        }
+
+        /// <summary>
+        /// 插入模型列表
+        /// </summary>
+        /// <param name="models">模型列表</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>影响行数</returns>
+        public virtual int Insert(IList<ModelT> models, string[] propertyNames = null, CommonUseData comData = null, string connectionId = null)
+        {
             int result = 0;
 
-            IdT tenantId = default(IdT);
+            IdT TenantId = default(IdT);
             foreach (var m in models)
             {
-                if (ModelIsSetMerchantId(m))
+                if (ModelIsSetTenantId(m))
                 {
                     continue;
                 }
 
-                if (!Identity.IsEmpty(tenantId) && IsExistsMerchantId(out tenantId, comData))
+                if (!Identity.IsEmpty(TenantId) && IsExistsTenantId(out TenantId, comData))
                 {
-                    SetMerchantId(m, tenantId);
+                    SetTenantId(m, TenantId);
                 }
             }
 
-
             DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
             {
-                result = Insert(models, dbConn, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
+                result = Insert(models, dbConn, propertyNames, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
             }, AccessMode.MASTER);
 
             return result;
@@ -495,11 +538,12 @@ namespace Hzdtf.Persistence.Contract.Data
             {
                 DbConnectionManager.BrainpowerExecute(cId, this, (connId, dbConn) =>
                 {
-                    result = DeleteByIds(ids, dbConn, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
+                    var trans = GetDbTransaction(connId, AccessMode.MASTER);
+                    result = DeleteByIds(ids, dbConn, trans, comData: comData);
 
                     foreach (KeyValuePair<string, string> slTable in slaveTables)
                     {
-                        DeleteSlaveTableByForeignKeys(slTable.Key, slTable.Value, ids, dbConn, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
+                        DeleteSlaveTableByForeignKeys(slTable.Key, slTable.Value, ids, dbConn, trans, comData: comData);
                     }
                 }, AccessMode.MASTER);
             }, AccessMode.MASTER, connectionId: connectionId);
@@ -532,11 +576,12 @@ namespace Hzdtf.Persistence.Contract.Data
             {
                 DbConnectionManager.BrainpowerExecute(cId, this, (connId, dbConn) =>
                 {
-                    result = Delete(dbConn, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
+                    var trans = GetDbTransaction(connId, AccessMode.MASTER);
+                    result = Delete(dbConn, trans, comData: comData);
 
                     foreach (KeyValuePair<string, string> slTable in slaveTables)
                     {
-                        DeleteSlaveTable(slTable.Key, dbConn, GetDbTransaction(connId, AccessMode.MASTER), comData: comData);
+                        DeleteSlaveTable(slTable.Key, dbConn, trans, comData: comData);
                     }
                 }, AccessMode.MASTER);
             }, AccessMode.MASTER, connectionId: connectionId);
@@ -545,6 +590,13 @@ namespace Hzdtf.Persistence.Contract.Data
         }
 
         #endregion
+
+        /// <summary>
+        /// 严格判断异常是否主键重复
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>异常是否主键重复</returns>
+        public abstract bool StrictnessIsExceptionPkRepeat(Exception ex);
 
         #region 需要子类重写的方法
 
@@ -560,6 +612,16 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <param name="comData">通用数据</param>
         /// <returns>模型</returns>
         protected abstract ModelT Select(IdT id, IDbConnection dbConnection, IDbTransaction dbTransaction = null, string[] propertyNames = null, CommonUseData comData = null);
+
+        /// <summary>
+        /// 根据ID查询模型
+        /// </summary>
+        /// <param name="sqlProp">SQL属性</param>
+        /// <param name="dbConnection">数据库连接</param>
+        /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
+        /// <returns>模型</returns>
+        //protected abstract ModelT SelectFristBy(SqlPropInfo sqlProp, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID集合查询模型列表
@@ -649,20 +711,22 @@ namespace Hzdtf.Persistence.Contract.Data
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="dbConnection">数据库连接</param>
+        /// <param name="propertyNames">属性名称集合</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected abstract int Insert(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null);
+        protected abstract int Insert(ModelT model, IDbConnection dbConnection, string[] propertyNames = null, IDbTransaction dbTransaction = null, CommonUseData comData = null);
 
         /// <summary>
         /// 插入模型列表
         /// </summary>
         /// <param name="models">模型列表</param>
         /// <param name="dbConnection">数据库连接</param>
+        /// <param name="propertyNames">属性名称集合</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected abstract int Insert(IList<ModelT> models, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null);
+        protected abstract int Insert(IList<ModelT> models, IDbConnection dbConnection, string[] propertyNames = null, IDbTransaction dbTransaction = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID更新模型
@@ -705,13 +769,6 @@ namespace Hzdtf.Persistence.Contract.Data
         protected abstract int Delete(IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null);
 
         #endregion
-
-        /// <summary>
-        /// 严格判断异常是否主键重复
-        /// </summary>
-        /// <param name="ex">异常</param>
-        /// <returns>异常是否主键重复</returns>
-        public abstract bool StrictnessIsExceptionPkRepeat(Exception ex);
 
         #endregion
 
@@ -761,27 +818,27 @@ namespace Hzdtf.Persistence.Contract.Data
         protected virtual bool PrimaryKeyIncr(IdT id) => Identity.IsEmpty(id);
 
         /// <summary>
-        /// 是否存在租赁ID
+        /// 是否存在租戶ID
         /// </summary>
         /// <param name="comData">通用数据</param>
-        /// <returns>查询时是否需要追加租赁ID为过滤条件</returns>
-        protected virtual bool IsExistsMerchantId(CommonUseData comData = null)
+        /// <returns>查询时是否需要追加租戶ID为过滤条件</returns>
+        protected virtual bool IsExistsTenantId(CommonUseData comData = null)
         {
-            IdT currUserMerchantId;
-            return IsExistsMerchantId(out currUserMerchantId, comData);
+            IdT currUserTenantId;
+            return IsExistsTenantId(out currUserTenantId, comData);
         }
 
         /// <summary>
-        /// 是否存在租赁ID
+        /// 是否存在租戶ID
         /// </summary>
-        /// <param name="currUserMerchantId">当前用户租户ID</param>
+        /// <param name="currUserTenantId">当前用户租戶ID</param>
         /// <param name="comData">通用数据</param>
-        /// <returns>是否存在租赁ID</returns>
-        protected virtual bool IsExistsMerchantId(out IdT currUserMerchantId, CommonUseData comData = null)
+        /// <returns>是否存在租戶ID</returns>
+        protected virtual bool IsExistsTenantId(out IdT currUserTenantId, CommonUseData comData = null)
         {
-            currUserMerchantId = default(IdT);
+            currUserTenantId = default(IdT);
 
-            if (ModelContainerMerchantId())
+            if (ModelContainerTenantId())
             {
                 var currUser = UserTool<IdT>.GetCurrUser(comData);
                 if (currUser == null)
@@ -790,9 +847,9 @@ namespace Hzdtf.Persistence.Contract.Data
                 }
                 if (Identity.IsEmpty(currUser.TenantId))
                 {
-                    throw new ArgumentException("当前用户的租户ID为空");
+                    throw new ArgumentException("当前用户的租戶ID为空");
                 }
-                currUserMerchantId = currUser.TenantId;
+                currUserTenantId = currUser.TenantId;
 
                 return true;
             }
@@ -801,30 +858,30 @@ namespace Hzdtf.Persistence.Contract.Data
         }
 
         /// <summary>
-        /// 模型是否包含租户ID
+        /// 模型是否包含租戶ID
         /// </summary>
-        /// <returns>模型是否包含租户ID</returns>
-        protected virtual bool ModelContainerMerchantId() => false;
+        /// <returns>模型是否包含租戶ID</returns>
+        protected virtual bool ModelContainerTenantId() => false;
 
         /// <summary>
-        /// 模型是否已设置租户ID
+        /// 模型是否已设置租戶ID
         /// </summary>
         /// <param name="model">模型</param>
-        /// <returns>模型是否已设置租户ID</returns>
-        protected virtual bool ModelIsSetMerchantId(ModelT model) => false;
+        /// <returns>模型是否已设置租戶ID</returns>
+        protected virtual bool ModelIsSetTenantId(ModelT model) => false;
 
         /// <summary>
-        /// 查询是否追加租户ID，默认为是
+        /// 查询是否追加租戶ID，默认为是
         /// </summary>
-        /// <returns>查询是否不追加租户ID</returns>
-        protected virtual bool SelectIsAppendMerchantId() => true;
+        /// <returns>查询是否不追加租戶ID</returns>
+        protected virtual bool SelectIsAppendTenantId() => true;
 
         /// <summary>
-        /// 设置模型的租赁ID
+        /// 设置模型的租戶ID
         /// </summary>
         /// <param name="model">模型</param>
-        /// <param name="tenantId">租赁ID</param>
-        protected virtual void SetMerchantId(ModelT model, IdT tenantId)
+        /// <param name="TenantId">租戶ID</param>
+        protected virtual void SetTenantId(ModelT model, IdT TenantId)
         {
             if (model == null)
             {
@@ -834,17 +891,17 @@ namespace Hzdtf.Persistence.Contract.Data
             if (model is PersonTimeTenantInfo<ModelT>)
             {
                 var temp = model as PersonTimeTenantInfo<IdT>;
-                temp.TenantId = tenantId;
+                temp.TenantId = TenantId;
             }
             if (model is PersonTimeTenantInfo<IdT>)
             {
                 var temp = model as PersonTimeTenantInfo<IdT>;
-                temp.TenantId = tenantId;
+                temp.TenantId = TenantId;
             }
             else if (model is BasicUserInfo<IdT>)
             {
                 var temp = model as BasicUserInfo<IdT>;
-                temp.TenantId = tenantId;
+                temp.TenantId = TenantId;
             }
         }
 

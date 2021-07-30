@@ -73,48 +73,44 @@ namespace Hzdtf.CodeGenerator
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 49);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(18, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 24);
+            this.label1.Size = new System.Drawing.Size(44, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "类型：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 49);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Location = new System.Drawing.Point(220, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 24);
+            this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "主机：";
             // 
             // cbxDataSourceType
             // 
+            this.cbxDataSourceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxDataSourceType.FormattingEnabled = true;
-            this.cbxDataSourceType.Location = new System.Drawing.Point(107, 45);
-            this.cbxDataSourceType.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxDataSourceType.Location = new System.Drawing.Point(68, 32);
             this.cbxDataSourceType.Name = "cbxDataSourceType";
-            this.cbxDataSourceType.Size = new System.Drawing.Size(188, 32);
+            this.cbxDataSourceType.Size = new System.Drawing.Size(121, 25);
             this.cbxDataSourceType.TabIndex = 0;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(721, 49);
-            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Location = new System.Drawing.Point(459, 35);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 24);
+            this.label6.Size = new System.Drawing.Size(44, 17);
             this.label6.TabIndex = 0;
             this.label6.Text = "端口：";
             // 
             // txtHost
             // 
-            this.txtHost.Location = new System.Drawing.Point(424, 45);
-            this.txtHost.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtHost.Location = new System.Drawing.Point(270, 32);
             this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(257, 30);
+            this.txtHost.Size = new System.Drawing.Size(165, 23);
             this.txtHost.TabIndex = 1;
             // 
             // groupBox1
@@ -133,21 +129,18 @@ namespace Hzdtf.CodeGenerator
             this.groupBox1.Controls.Add(this.cbxDataSourceType);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(19, 17);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1381, 171);
+            this.groupBox1.Size = new System.Drawing.Size(879, 121);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据源";
             // 
             // btnTestConn
             // 
-            this.btnTestConn.Location = new System.Drawing.Point(1177, 99);
-            this.btnTestConn.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnTestConn.Location = new System.Drawing.Point(749, 70);
             this.btnTestConn.Name = "btnTestConn";
-            this.btnTestConn.Size = new System.Drawing.Size(143, 37);
+            this.btnTestConn.Size = new System.Drawing.Size(91, 26);
             this.btnTestConn.TabIndex = 6;
             this.btnTestConn.Text = "测试连接";
             this.btnTestConn.UseVisualStyleBackColor = true;
@@ -155,74 +148,66 @@ namespace Hzdtf.CodeGenerator
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(800, 102);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtPassword.Location = new System.Drawing.Point(509, 72);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(249, 30);
+            this.txtPassword.Size = new System.Drawing.Size(160, 23);
             this.txtPassword.TabIndex = 5;
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(800, 45);
-            this.txtPort.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtPort.Location = new System.Drawing.Point(509, 32);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(134, 30);
+            this.txtPort.Size = new System.Drawing.Size(87, 23);
             this.txtPort.TabIndex = 2;
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(424, 102);
-            this.txtUser.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtUser.Location = new System.Drawing.Point(270, 72);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(257, 30);
+            this.txtUser.Size = new System.Drawing.Size(165, 23);
             this.txtUser.TabIndex = 4;
             // 
             // txtDb
             // 
-            this.txtDb.Location = new System.Drawing.Point(1061, 45);
-            this.txtDb.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtDb.Location = new System.Drawing.Point(675, 32);
             this.txtDb.Name = "txtDb";
-            this.txtDb.Size = new System.Drawing.Size(257, 30);
+            this.txtDb.Size = new System.Drawing.Size(165, 23);
             this.txtDb.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(721, 106);
-            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label7.Location = new System.Drawing.Point(459, 75);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 24);
+            this.label7.Size = new System.Drawing.Size(44, 17);
             this.label7.TabIndex = 0;
             this.label7.Text = "密码：";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(346, 106);
-            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label5.Location = new System.Drawing.Point(220, 75);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 24);
+            this.label5.Size = new System.Drawing.Size(44, 17);
             this.label5.TabIndex = 0;
             this.label5.Text = "用户：";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(963, 49);
-            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label4.Location = new System.Drawing.Point(613, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 24);
+            this.label4.Size = new System.Drawing.Size(56, 17);
             this.label4.TabIndex = 0;
             this.label4.Text = "数据库：";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(346, 49);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label3.Location = new System.Drawing.Point(220, 35);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 24);
+            this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "主机：";
             // 
@@ -231,11 +216,9 @@ namespace Hzdtf.CodeGenerator
             this.groupBox2.Controls.Add(this.cbxSelectAll);
             this.groupBox2.Controls.Add(this.btnLoad);
             this.groupBox2.Controls.Add(this.dgvTable);
-            this.groupBox2.Location = new System.Drawing.Point(19, 210);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBox2.Location = new System.Drawing.Point(12, 149);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1381, 665);
+            this.groupBox2.Size = new System.Drawing.Size(879, 471);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "表";
@@ -243,10 +226,9 @@ namespace Hzdtf.CodeGenerator
             // cbxSelectAll
             // 
             this.cbxSelectAll.AutoSize = true;
-            this.cbxSelectAll.Location = new System.Drawing.Point(1262, 106);
-            this.cbxSelectAll.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxSelectAll.Location = new System.Drawing.Point(803, 75);
             this.cbxSelectAll.Name = "cbxSelectAll";
-            this.cbxSelectAll.Size = new System.Drawing.Size(72, 28);
+            this.cbxSelectAll.Size = new System.Drawing.Size(51, 21);
             this.cbxSelectAll.TabIndex = 2;
             this.cbxSelectAll.Text = "全选";
             this.cbxSelectAll.UseVisualStyleBackColor = true;
@@ -254,10 +236,9 @@ namespace Hzdtf.CodeGenerator
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(1238, 44);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnLoad.Location = new System.Drawing.Point(788, 31);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(118, 32);
+            this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 1;
             this.btnLoad.Text = "加载";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -271,12 +252,11 @@ namespace Hzdtf.CodeGenerator
             this.Desc,
             this.Paging,
             this.Selcct});
-            this.dgvTable.Location = new System.Drawing.Point(28, 44);
-            this.dgvTable.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.dgvTable.Location = new System.Drawing.Point(18, 31);
             this.dgvTable.Name = "dgvTable";
             this.dgvTable.RowHeadersWidth = 62;
             this.dgvTable.RowTemplate.Height = 25;
-            this.dgvTable.Size = new System.Drawing.Size(1172, 589);
+            this.dgvTable.Size = new System.Drawing.Size(746, 417);
             this.dgvTable.TabIndex = 0;
             // 
             // Column
@@ -324,21 +304,18 @@ namespace Hzdtf.CodeGenerator
             this.groupBox3.Controls.Add(this.txtNameSpacePfx);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Location = new System.Drawing.Point(19, 898);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupBox3.Location = new System.Drawing.Point(12, 636);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.groupBox3.Size = new System.Drawing.Size(1381, 206);
+            this.groupBox3.Size = new System.Drawing.Size(879, 146);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "生成项";
             // 
             // btnBuilder
             // 
-            this.btnBuilder.Location = new System.Drawing.Point(666, 93);
-            this.btnBuilder.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnBuilder.Location = new System.Drawing.Point(424, 66);
             this.btnBuilder.Name = "btnBuilder";
-            this.btnBuilder.Size = new System.Drawing.Size(170, 54);
+            this.btnBuilder.Size = new System.Drawing.Size(108, 38);
             this.btnBuilder.TabIndex = 5;
             this.btnBuilder.Text = "生成";
             this.btnBuilder.UseVisualStyleBackColor = true;
@@ -349,10 +326,9 @@ namespace Hzdtf.CodeGenerator
             this.cbxRoutePermissionConfig.AutoSize = true;
             this.cbxRoutePermissionConfig.Checked = true;
             this.cbxRoutePermissionConfig.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxRoutePermissionConfig.Location = new System.Drawing.Point(453, 107);
-            this.cbxRoutePermissionConfig.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxRoutePermissionConfig.Location = new System.Drawing.Point(288, 76);
             this.cbxRoutePermissionConfig.Name = "cbxRoutePermissionConfig";
-            this.cbxRoutePermissionConfig.Size = new System.Drawing.Size(144, 28);
+            this.cbxRoutePermissionConfig.Size = new System.Drawing.Size(99, 21);
             this.cbxRoutePermissionConfig.TabIndex = 4;
             this.cbxRoutePermissionConfig.Text = "路由权限配置";
             this.cbxRoutePermissionConfig.UseVisualStyleBackColor = true;
@@ -362,10 +338,9 @@ namespace Hzdtf.CodeGenerator
             this.cbxController.AutoSize = true;
             this.cbxController.Checked = true;
             this.cbxController.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxController.Location = new System.Drawing.Point(338, 107);
-            this.cbxController.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxController.Location = new System.Drawing.Point(215, 76);
             this.cbxController.Name = "cbxController";
-            this.cbxController.Size = new System.Drawing.Size(90, 28);
+            this.cbxController.Size = new System.Drawing.Size(63, 21);
             this.cbxController.TabIndex = 4;
             this.cbxController.Text = "控制器";
             this.cbxController.UseVisualStyleBackColor = true;
@@ -375,10 +350,9 @@ namespace Hzdtf.CodeGenerator
             this.cbxService.AutoSize = true;
             this.cbxService.Checked = true;
             this.cbxService.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxService.Location = new System.Drawing.Point(239, 107);
-            this.cbxService.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxService.Location = new System.Drawing.Point(152, 76);
             this.cbxService.Name = "cbxService";
-            this.cbxService.Size = new System.Drawing.Size(72, 28);
+            this.cbxService.Size = new System.Drawing.Size(51, 21);
             this.cbxService.TabIndex = 4;
             this.cbxService.Text = "服务";
             this.cbxService.UseVisualStyleBackColor = true;
@@ -388,10 +362,9 @@ namespace Hzdtf.CodeGenerator
             this.cbxPersistence.AutoSize = true;
             this.cbxPersistence.Checked = true;
             this.cbxPersistence.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxPersistence.Location = new System.Drawing.Point(123, 107);
-            this.cbxPersistence.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxPersistence.Location = new System.Drawing.Point(78, 76);
             this.cbxPersistence.Name = "cbxPersistence";
-            this.cbxPersistence.Size = new System.Drawing.Size(90, 28);
+            this.cbxPersistence.Size = new System.Drawing.Size(63, 21);
             this.cbxPersistence.TabIndex = 4;
             this.cbxPersistence.Text = "持久化";
             this.cbxPersistence.UseVisualStyleBackColor = true;
@@ -401,10 +374,9 @@ namespace Hzdtf.CodeGenerator
             this.cbxModel.AutoSize = true;
             this.cbxModel.Checked = true;
             this.cbxModel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxModel.Location = new System.Drawing.Point(33, 107);
-            this.cbxModel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxModel.Location = new System.Drawing.Point(21, 76);
             this.cbxModel.Name = "cbxModel";
-            this.cbxModel.Size = new System.Drawing.Size(72, 28);
+            this.cbxModel.Size = new System.Drawing.Size(51, 21);
             this.cbxModel.TabIndex = 4;
             this.cbxModel.Text = "模型";
             this.cbxModel.UseVisualStyleBackColor = true;
@@ -412,10 +384,9 @@ namespace Hzdtf.CodeGenerator
             // cbxTenant
             // 
             this.cbxTenant.AutoSize = true;
-            this.cbxTenant.Location = new System.Drawing.Point(1208, 48);
-            this.cbxTenant.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxTenant.Location = new System.Drawing.Point(769, 34);
             this.cbxTenant.Name = "cbxTenant";
-            this.cbxTenant.Size = new System.Drawing.Size(108, 28);
+            this.cbxTenant.Size = new System.Drawing.Size(75, 21);
             this.cbxTenant.TabIndex = 23;
             this.cbxTenant.Text = "是否租户";
             this.cbxTenant.UseVisualStyleBackColor = true;
@@ -428,49 +399,44 @@ namespace Hzdtf.CodeGenerator
             "Guid",
             "字符串",
             "雪花算法"});
-            this.cbxPkType.Location = new System.Drawing.Point(946, 42);
-            this.cbxPkType.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.cbxPkType.Location = new System.Drawing.Point(602, 30);
             this.cbxPkType.Name = "cbxPkType";
-            this.cbxPkType.Size = new System.Drawing.Size(188, 32);
+            this.cbxPkType.Size = new System.Drawing.Size(121, 25);
             this.cbxPkType.TabIndex = 21;
             // 
             // txtNameSpacePfx
             // 
-            this.txtNameSpacePfx.Location = new System.Drawing.Point(182, 45);
-            this.txtNameSpacePfx.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtNameSpacePfx.Location = new System.Drawing.Point(116, 32);
             this.txtNameSpacePfx.Name = "txtNameSpacePfx";
-            this.txtNameSpacePfx.Size = new System.Drawing.Size(579, 30);
+            this.txtNameSpacePfx.Size = new System.Drawing.Size(370, 23);
             this.txtNameSpacePfx.TabIndex = 20;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(830, 54);
-            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label9.Location = new System.Drawing.Point(528, 38);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 24);
+            this.label9.Size = new System.Drawing.Size(68, 17);
             this.label9.TabIndex = 0;
             this.label9.Text = "主键类型：";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 54);
-            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Location = new System.Drawing.Point(18, 38);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(136, 24);
+            this.label8.Size = new System.Drawing.Size(92, 17);
             this.label8.TabIndex = 0;
             this.label8.Text = "命名空间前辍：";
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1419, 1139);
+            this.ClientSize = new System.Drawing.Size(903, 791);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "Main";
             this.Text = "代码生成器(.Net)";
             this.groupBox1.ResumeLayout(false);

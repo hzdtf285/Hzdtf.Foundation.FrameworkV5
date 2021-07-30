@@ -17,7 +17,7 @@ namespace Hzdtf.Persistence.Dapper
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT>
+    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT> 
         where ModelT : SimpleInfo<IdT>
     {
         #region 属性与字段
@@ -64,6 +64,19 @@ namespace Hzdtf.Persistence.Dapper
                 return dbConnection.QueryFirstOrDefault<ModelT>(sql, dataParameter, dbTransaction);
             }, comData: comData, "Select");
         }
+
+        /// <summary>
+        /// 根据ID查询模型
+        /// </summary>
+        /// <param name="sqlProp">SQL属性</param>
+        /// <param name="dbConnection">数据库连接</param>
+        /// <param name="dbTransaction">数据库事务</param>
+        /// <param name="comData">通用数据</param>
+        /// <returns>模型</returns>
+        //protected override ModelT SelectFristBy(SqlPropInfo sqlProp, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
+        //{
+
+        //}
 
         /// <summary>
         /// 根据ID集合查询模型
@@ -260,13 +273,14 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <param name="model">模型</param>
         /// <param name="dbConnection">数据库连接</param>
+        /// <param name="propertyNames">属性名称集合</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int Insert(ModelT model, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
+        protected override int Insert(ModelT model, IDbConnection dbConnection, string[] propertyNames = null, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             var isAuto = PrimaryKeyIncr(model.Id);
-            var sql = InsertSql(model, isAuto, comData: comData);
+            var sql = InsertSql(model, propertyNames, isAuto, comData: comData);
             if (IsSupportIdempotent)
             {
                 if (isAuto)
@@ -319,13 +333,14 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <param name="models">模型列表</param>
         /// <param name="dbConnection">数据库连接</param>
+        /// <param name="propertyNames">属性名称集合</param>
         /// <param name="dbTransaction">数据库事务</param>
         /// <param name="comData">通用数据</param>
         /// <returns>影响行数</returns>
-        protected override int Insert(IList<ModelT> models, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
+        protected override int Insert(IList<ModelT> models, IDbConnection dbConnection, string[] propertyNames = null, IDbTransaction dbTransaction = null, CommonUseData comData = null)
         {
             DynamicParameters parameters;
-            var sql = InsertSql(models, out parameters, comData: comData);
+            var sql = InsertSql(models, out parameters, propertyNames, comData: comData);
 
             return ExecRecordSqlLog<int>(sql, () =>
             {
@@ -585,19 +600,21 @@ namespace Hzdtf.Persistence.Dapper
         /// 插入模型SQL语句
         /// </summary>
         /// <param name="model">模型</param>
+        /// <param name="propertyNames">属性名称集合</param>
         /// <param name="isGetInsertId">是否获取自增ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string InsertSql(ModelT model, bool isGetInsertId = false, CommonUseData comData = null);
+        protected abstract string InsertSql(ModelT model, string[] propertyNames = null, bool isGetInsertId = false, CommonUseData comData = null);
 
         /// <summary>
         /// 插入模型列表SQL语句
         /// </summary>
         /// <param name="models">模型列表</param>
         /// <param name="parameters">动态参数</param>
+        /// <param name="propertyNames">属性名称集合</param>
         /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected abstract string InsertSql(IList<ModelT> models, out DynamicParameters parameters, CommonUseData comData = null);
+        protected abstract string InsertSql(IList<ModelT> models, out DynamicParameters parameters, string[] propertyNames = null, CommonUseData comData = null);
 
         /// <summary>
         /// 根据ID更新模型SQL语句

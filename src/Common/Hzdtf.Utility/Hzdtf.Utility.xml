@@ -2540,6 +2540,27 @@
             从
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.Enums.BooleanType">
+            <summary>
+            布尔类型
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Enums.BooleanType.FALSE">
+            <summary>
+            否
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Enums.BooleanType.TRUE">
+            <summary>
+            是
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.Enums.BooleanType.DEFAULT">
+            <summary>
+            默认
+            </summary>
+        </member>
         <member name="T:Hzdtf.Utility.Enums.CommunicationMode">
             <summary>
             通讯方式
@@ -3661,7 +3682,7 @@
             退出登录时间
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.MerchantId_Name">
+        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantId_Name">
             <summary>
             租户ID_名称
             一般情况没有，特殊情况下有用，如SAAS中的租户
@@ -3673,12 +3694,12 @@
             一般情况没有，特殊情况下有用，如SAAS中的租户
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.MerchantIdString_Name">
+        <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantIdString_Name">
             <summary>
             租户ID字符串_名称
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.MerchantIdString">
+        <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.TenantIdString">
             <summary>
             租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
             </summary>
@@ -4549,7 +4570,7 @@
             </summary>
             <typeparam name="IdT">ID类型</typeparam>
         </member>
-        <member name="F:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.MerchantId_Name">
+        <member name="F:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantId_Name">
             <summary>
             租户ID_名称
             </summary>
@@ -4559,12 +4580,12 @@
             租户ID
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.MerchantIdString_Name">
+        <member name="F:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantIdString_Name">
             <summary>
             租户ID字符串_名称
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.MerchantIdString">
+        <member name="P:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantIdString">
             <summary>
             租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
             </summary>
@@ -4993,7 +5014,7 @@
             </summary>
             <typeparam name="IdT">ID类型</typeparam>
         </member>
-        <member name="F:Hzdtf.Utility.Model.SimpleTenanInfo`1.MerchantId_Name">
+        <member name="F:Hzdtf.Utility.Model.SimpleTenanInfo`1.TenantId_Name">
             <summary>
             租户ID_名称
             </summary>
@@ -5002,6 +5023,40 @@
             <summary>
             租户ID
             </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.Model.SqlPropInfo">
+            <summary>
+            SQL属性信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.SqlPropInfo.Top">
+            <summary>
+            前面几条，如果为0，则不加此条件
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.SqlPropInfo.AppendTenantId">
+            <summary>
+            追加租戶ID，默认值为“默认”
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.SqlPropInfo.PropertyNames">
+            <summary>
+            属性名称集合，如果为空则获取全部
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.Model.SqlPropInfo.WhereSql">
+            <summary>
+            条件SQL，不包含where
+            如果有包含属性，则用格式（区分大小写）：|/属性名/|
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.SqlPropInfo.PackPropName(System.String)">
+            <summary>
+            封装属性名
+            </summary>
+            <param name="propName">属性名</param>
+            <returns>封装后的属性名</returns>
         </member>
         <member name="T:Hzdtf.Utility.Model.TimeInfo`1">
             <summary>

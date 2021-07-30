@@ -108,8 +108,6 @@ namespace Hzdtf.Example.WebApp
 
             app.UseApiExceptionHandle();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

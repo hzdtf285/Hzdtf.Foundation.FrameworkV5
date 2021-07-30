@@ -84,7 +84,7 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 租户ID_名称
         /// </summary>
-        public const string MerchantId_Name = "TenantId";
+        public const string TenantId_Name = "TenantId";
 
         /// <summary>
         /// 租户ID

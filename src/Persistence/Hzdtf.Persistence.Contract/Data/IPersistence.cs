@@ -38,6 +38,15 @@ namespace Hzdtf.Persistence.Contract.Data
         ModelT Select(IdT id, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
+        /// 根据SQL属性查询模型
+        /// </summary>
+        /// <param name="sqlProp">SQL属性</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>模型</returns>
+        //ModelT SelectFristBy(SqlPropInfo sqlProp, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
         /// 根据ID集合查询模型
         /// </summary>
         /// <param name="ids">ID集合</param>
@@ -153,6 +162,16 @@ namespace Hzdtf.Persistence.Contract.Data
         int Insert(ModelT model, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
+        /// 插入模型
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>影响行数</returns>
+        int Insert(ModelT model, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
         /// 插入模型列表
         /// </summary>
         /// <param name="models">模型列表</param>
@@ -160,6 +179,16 @@ namespace Hzdtf.Persistence.Contract.Data
         /// <param name="connectionId">连接ID</param>
         /// <returns>影响行数</returns>
         int Insert(IList<ModelT> models, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
+        /// 插入模型列表
+        /// </summary>
+        /// <param name="models">模型列表</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>影响行数</returns>
+        int Insert(IList<ModelT> models, string[] propertyNames = null, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID更新模型

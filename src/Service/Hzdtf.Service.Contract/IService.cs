@@ -32,6 +32,16 @@ namespace Hzdtf.Service.Contract
         ReturnInfo<ModelT> Find(IdT id, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
+        /// 根据ID查找模型
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="propertyName">属性名称集合</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <param name="comData">通用数据</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<ModelT> Find(IdT id, string[] propertyName = null, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
         /// 根据ID查找模型后事件
         /// </summary>
         event Action<ReturnInfo<ModelT>, IdT, CommonUseData, string> Finded;
@@ -49,6 +59,16 @@ namespace Hzdtf.Service.Contract
         /// <param name="connectionId">连接ID</param>
         /// <returns>返回信息</returns>
         ReturnInfo<IList<ModelT>> Find(IdT[] ids, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
+        /// 根据ID查找模型列表
+        /// </summary>
+        /// <param name="ids">ID集合</param>
+        /// <param name="propertyName">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<IList<ModelT>> Find(IdT[] ids, string[] propertyName = null, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID查找模型列表后事件
@@ -106,6 +126,15 @@ namespace Hzdtf.Service.Contract
         ReturnInfo<IList<ModelT>> Query(CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
+        /// 查询模型列表
+        /// </summary>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<IList<ModelT>> Query(string[] propertyNames, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
         /// 查询模型列表后事件
         /// </summary>
         event Action<ReturnInfo<IList<ModelT>>, CommonUseData, string> Queryed;
@@ -125,7 +154,19 @@ namespace Hzdtf.Service.Contract
         /// <param name="connectionId">连接ID</param>
         /// <returns>返回信息</returns>
         ReturnInfo<PagingInfo<ModelT>> QueryPage(int pageIndex, int pageSize, FilterInfo filter = null, CommonUseData comData = null, string connectionId = null);
-        
+
+        /// <summary>
+        /// 执行查询模型列表并分页
+        /// </summary>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="filter">筛选</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<PagingInfo<ModelT>> QueryPage(int pageIndex, int pageSize, string[] propertyNames, FilterInfo filter = null, CommonUseData comData = null, string connectionId = null);
+
         /// <summary>
         /// 执行查询模型列表并分页后事件
         /// </summary>
@@ -150,6 +191,16 @@ namespace Hzdtf.Service.Contract
         ReturnInfo<bool> Add(ModelT model, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
+        /// 添加模型
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<bool> Add(ModelT model, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
         /// 添加模型后事件
         /// </summary>
         event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> Added;
@@ -167,6 +218,16 @@ namespace Hzdtf.Service.Contract
         /// <param name="connectionId">连接ID</param>
         /// <returns>返回信息</returns>
         ReturnInfo<bool> Add(IList<ModelT> models, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
+        /// 添加模型列表
+        /// </summary>
+        /// <param name="models">模型列表</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<bool> Add(IList<ModelT> models, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 添加模型列表后事件
@@ -189,6 +250,17 @@ namespace Hzdtf.Service.Contract
         ReturnInfo<bool> Set(ModelT model, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
+        /// 设置模型
+        /// 如果ID存在则修改，否则添加
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<bool> Set(ModelT model, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
         /// 设置模型后事件
         /// </summary>
         event Action<ReturnInfo<bool>, ModelT, CommonUseData, string> Seted;
@@ -206,6 +278,16 @@ namespace Hzdtf.Service.Contract
         /// <param name="connectionId">连接ID</param>
         /// <returns>返回信息</returns>
         ReturnInfo<bool> ModifyById(ModelT model, CommonUseData comData = null, string connectionId = null);
+
+        /// <summary>
+        /// 根据ID修改模型
+        /// </summary>
+        /// <param name="model">模型</param>
+        /// <param name="propertyNames">属性名称集合</param>
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>返回信息</returns>
+        ReturnInfo<bool> ModifyById(ModelT model, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
         /// 根据ID修改模型后事件
