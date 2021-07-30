@@ -170,23 +170,23 @@
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetTenantIdFilterSql(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
-            获取租戶ID筛选SQL
+            获取租户ID筛选SQL
             </summary>
             <param name="isBeforeAppWhere">是否前面追加WHERE</param>
             <param name="isBeforeAppAnd">是否前面追加AND</param>
             <param name="pfx">前辍</param>
             <param name="comData">通用数据</param>
-            <returns>租戶ID筛选SQL</returns>
+            <returns>租户ID筛选SQL</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetTenantIdFilterSql2(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
-            获取租戶ID筛选SQL2
+            获取租户ID筛选SQL2
             </summary>
             <param name="isBeforeAppWhere">是否前面追加WHERE</param>
             <param name="isAfterAppAnd">是否后面追加AND</param>
             <param name="pfx">前辍</param>
             <param name="comData">通用数据</param>
-            <returns>租戶ID筛选SQL</returns>
+            <returns>租户ID筛选SQL</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DefaultPageSortSql(System.String)">
             <summary>
@@ -274,16 +274,16 @@
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelContainerTenantId">
             <summary>
-            模型是否包含租戶ID
+            模型是否包含租户ID
             </summary>
-            <returns>模型是否包含租戶ID</returns>
+            <returns>模型是否包含租户ID</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelIsSetTenantId(`1)">
             <summary>
-            模型是否已设置租戶ID
+            模型是否已设置租户ID
             </summary>
             <param name="model">模型</param>
-            <returns>模型是否已设置租戶ID</returns>
+            <returns>模型是否已设置租户ID</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DeleteByTableSql(System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
