@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Quartz.AspNet.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig">
+            <summary>
+            时钟配置
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig.JobHandleException">
+            <summary>
+            工作处理异常
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig.JobHandleExceptionAssembly">
+            <summary>
+            工作处理异常程序集
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.QuartzExtensions">
+            <summary>
+            时钟扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.QuartzExtensions.AddQuartz(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Hzdtf.Quartz.AspNet.Extensions.QuartzConfig})">
+            <summary>
+            添加时钟
+            </summary>
+            <param name="services">服务收藏</param>
+            <param name="options">配置回调</param>
+            <returns>服务收藏</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.QuartzExtensions.UseQuartz(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.IServiceProvider)">
+            <summary>
+            使用时钟
+            </summary>
+            <param name="builder">应用生成</param>
+            <param name="service">服务提供者</param>
+            <returns>应用生成</returns>
+        </member>
+    </members>
+</doc>

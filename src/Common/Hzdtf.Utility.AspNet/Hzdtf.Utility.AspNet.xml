@@ -671,6 +671,20 @@
             </summary>
             <param name="response">http响应</param>
         </member>
+        <member name="T:Microsoft.AspNetCore.Http.QueryCollectionExtensions">
+            <summary>
+            查询收藏扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Http.QueryCollectionExtensions.ToDictionary(Microsoft.AspNetCore.Http.IQueryCollection,System.String[])">
+            <summary>
+            转换为字典
+            </summary>
+            <param name="query">查询收藏</param>
+            <param name="ignoreKeys">忽略键数组</param>
+            <returns>字典</returns>
+        </member>
         <member name="T:Microsoft.AspNetCore.Routing.RouteValueDictionaryExtensions">
             <summary>
             路由值字典扩展类

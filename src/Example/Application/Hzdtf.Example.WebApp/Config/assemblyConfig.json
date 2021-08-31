@@ -23,7 +23,8 @@
         "Hzdtf.Workflow.Persistence.Contract",
         "Hzdtf.Workflow.MySql",
         "Hzdtf.Example.Persistence.Contract",
-        "Hzdtf.Example.MySql"
+        "Hzdtf.Example.MySql",
+        "Hzdtf.Quartz.Extensions"
       ], 
       "Lifecycle": "SIGNLETON"
     },

@@ -227,6 +227,19 @@ namespace System
             return new DateTime(dateTime.Year, dateTime.Month, dateTime.PlaceMonthOfDay(), 23, 59, 59, 999);
         }
 
+        /// <summary>
+        /// 获取给定日期距离1900-01-01的天数
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <returns>日期距离1900-01-01的天数</returns>
+        public static int GetDis1900Day(this DateTime dateTime)
+        {
+            TimeSpan ts1 = new TimeSpan(dateTime.Ticks);
+            TimeSpan ts2 = new TimeSpan(Convert.ToDateTime("1900-01-01").Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            return ts.Days;
+        }
+
         #region 普通闰年
 
         /// <summary>
@@ -489,6 +502,16 @@ namespace System
             DateTime targetDt = dtStart.Add(toNow);
 
             return dtStart.Add(toNow);
+        }
+
+        /// <summary>
+        /// 将时间戳转换成日期时间
+        /// </summary>
+        /// <param name="timeStamp">时间戳</param>
+        /// <returns>日期时间</returns>
+        public static DateTime ToDateTimeFromTimeStamp(this int timeStamp)
+        {
+            return DATE_1970.AddSeconds(timeStamp).ToLocalTime();
         }
 
         /// <summary>  

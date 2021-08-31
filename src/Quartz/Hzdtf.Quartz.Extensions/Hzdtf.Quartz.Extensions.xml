@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Quartz.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Quartz.Extensions.Data.IQuartzDataFactory">
+            <summary>
+            时钟数据工厂接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Data.JobDetailDataJson">
+            <summary>
+            作业明细数据Json
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Extensions.Data.JobDetailDataJson.list">
+            <summary>
+            列表
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Data.JobDetailDataJson.#ctor(System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="jsonFile">JSON文件</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Data.JobDetailDataJson.ReaderAll">
+            <summary>
+            读取
+            </summary>
+            <returns>数据</returns>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Data.JobTaskDataJson">
+            <summary>
+            作业任务数据Json
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Extensions.Data.JobTaskDataJson.list">
+            <summary>
+            列表
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Data.JobTaskDataJson.#ctor(System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="jsonFile">JSON文件</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Data.JobTaskDataJson.ReaderAll">
+            <summary>
+            读取
+            </summary>
+            <returns>数据</returns>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Data.QuartzDataFactory">
+            <summary>
+            时钟数据工厂
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Data.QuartzDataFactory.JobDetailReader">
+            <summary>
+            作业明细读取
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Data.QuartzDataFactory.TriggerReader">
+            <summary>
+            触发器读取
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Data.QuartzDataFactory.JobTaskReader">
+            <summary>
+            作业任务读取
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Data.QuartzDataFactory.Create">
+            <summary>
+            创建
+            </summary>
+            <returns>产品</returns>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Data.TriggerDataJson">
+            <summary>
+            触发器数据Json
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Extensions.Data.TriggerDataJson.list">
+            <summary>
+            列表
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Data.TriggerDataJson.#ctor(System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="jsonFile">JSON文件</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Data.TriggerDataJson.ReaderAll">
+            <summary>
+            读取
+            </summary>
+            <returns>数据</returns>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Model.JobDetailInfo">
+            <summary>
+            作业明细信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobDetailInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobDetailInfo.Group">
+            <summary>
+            分组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobDetailInfo.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobDetailInfo.JobFullClass">
+            <summary>
+            作业全路径类
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobDetailInfo.Params">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Model.JobTaskInfo">
+            <summary>
+            作业任务信息
+            由作业明细和触发器组成
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobTaskInfo.JobDetailId">
+            <summary>
+            作业明细ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobTaskInfo.TriggerId">
+            <summary>
+            触发器ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobTaskInfo.JobDetail">
+            <summary>
+            作业明细
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.JobTaskInfo.Trigger">
+            <summary>
+            触发器
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Model.JobTaskInfo.FillJobDetailAndTrigger(System.Collections.Generic.IList{Hzdtf.Quartz.Extensions.Model.JobDetailInfo},System.Collections.Generic.IList{Hzdtf.Quartz.Extensions.Model.TriggerInfo})">
+            <summary>
+            填充作业明细和触发器
+            </summary>
+            <param name="jobDetails">作业明细列表</param>
+            <param name="triggers">触发器列表</param>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Model.TriggerInfo">
+            <summary>
+            触发器信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.TriggerInfo.CronSchedule">
+            <summary>
+            Cron表达式
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Model.TriggerInfo.Params">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.QuartzStaticConfig">
+            <summary>
+            时钟静态配置
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.QuartzStaticConfig.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.QuartzStaticConfig.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.QuartzStaticConfig.IsTraceLog">
+            <summary>
+            是否跟踪日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.QuartzStaticConfig.JobHandleException">
+            <summary>
+            工作处理异常
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.IJobHandleException">
+            <summary>
+            作业处理异常接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.IJobHandleException.Notify(Quartz.IJobExecutionContext,Quartz.IJob,System.Int64,System.Exception,System.String)">
+            <summary>
+            通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="transId">事务ID</param>
+            <param name="ex">异常</param>
+            <param name="idMsg">ID消息</param>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.ISchedulerWrap">
+            <summary>
+            调度器包装接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.ISchedulerWrap.StartAsync">
+            <summary>
+            异步启动
+            </summary>
+            <returns>任务</returns>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.JobBase">
+            <summary>
+            作业基类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobBase.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobBase.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Extensions.Scheduler.JobBase.identity">
+            <summary>
+            ID标识
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobBase.Execute(Quartz.IJobExecutionContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <returns>任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobBase.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase">
+            <summary>
+            作业处理异常
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.Notify(Quartz.IJobExecutionContext,Quartz.IJob,System.Int64,System.Exception,System.String)">
+            <summary>
+            通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="transId">事务ID</param>
+            <param name="ex">异常</param>
+            <param name="idMsg">ID消息</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.ExecNotify(Quartz.IJobExecutionContext,Quartz.IJob,System.Int64,System.Exception,System.String)">
+            <summary>
+            执行通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="transId">事务ID</param>
+            <param name="ex">异常</param>
+            <param name="idMsg">ID消息</param>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap">
+            <summary>
+            调度器包装
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.schedulerFactory">
+            <summary>
+            调度器工厂
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.QuartzDataFactory">
+            <summary>
+            时钟数据工厂
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.scheduler">
+            <summary>
+            调度器
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.Scheduler">
+            <summary>
+            调度器
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.#ctor(Quartz.ISchedulerFactory)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="schedulerFactory">调度器工厂，如果为null，则使用标准工厂(StdSchedulerFactory)</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.StartAsync">
+            <summary>
+            异步启动
+            </summary>
+            <returns>任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.BeforeJobTaskToSchedule(Hzdtf.Quartz.Extensions.Model.JobTaskInfo,Quartz.IJobDetail,Quartz.ITrigger)">
+            <summary>
+            作业任务添加到调试之前
+            </summary>
+            <param name="jobTask">作业任务</param>
+            <param name="jobDetail">作业明细</param>
+            <param name="trigger">触发器</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.BeforeScheduleStart(Quartz.IScheduler)">
+            <summary>
+            调度器启动之前
+            </summary>
+            <param name="scheduler">调度器</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+    </members>
+</doc>

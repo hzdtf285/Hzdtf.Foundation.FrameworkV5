@@ -6,6 +6,7 @@ using Hzdtf.BasicFunction.Service.Impl;
 using Hzdtf.BasicFunction.Service.Impl.Expand.Attachment;
 using Hzdtf.Logger.Contract;
 using Hzdtf.Logger.Integration.ENLog;
+using Hzdtf.Quartz.Extensions.Scheduler;
 using Hzdtf.Utility;
 using Hzdtf.Utility.ApiPermission;
 using Hzdtf.Utility.Config.AssemblyConfig;
@@ -58,6 +59,9 @@ namespace Hzdtf.Example.WebApp.AppStart
                     var theOper = container.Resolve<ITheOperation>();
                     return theOper != null ? theOper.EventId : null;
                 };
+
+                var sch = container.Resolve<ISchedulerWrap>();
+                sch.StartAsync();
             });
         }
     }

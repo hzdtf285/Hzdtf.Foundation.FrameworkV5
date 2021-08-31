@@ -50,6 +50,48 @@
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobHandleException">
+            <summary>
+            作业处理异常
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobHandleException.Notify(Quartz.IJobExecutionContext,Quartz.IJob,System.Int64,System.Exception,System.String)">
+            <summary>
+            通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="transId">事务ID</param>
+            <param name="ex">异常</param>
+            <param name="idMsg">ID消息</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService1">
+            <summary>
+            作业服务1
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService1.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService2">
+            <summary>
+            作业服务2
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService2.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
         <member name="T:Hzdtf.Example.Service.Impl.Workflow.FormDataReaderFactory">
             <summary>
             表单数据读取工厂

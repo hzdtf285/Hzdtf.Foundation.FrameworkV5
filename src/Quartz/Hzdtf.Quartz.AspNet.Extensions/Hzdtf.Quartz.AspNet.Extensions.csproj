@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>时钟扩展AspNet类库</Product>
+    <Description>时钟扩展AspNet类库，对Quartz进行扩展。运行在.net5以上</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Quartz.AspNet.Extensions.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Quartz.AspNet.Extensions.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Hzdtf.Utility.AspNet\Hzdtf.Utility.AspNet.csproj" />
+    <ProjectReference Include="..\Hzdtf.Quartz.Extensions\Hzdtf.Quartz.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

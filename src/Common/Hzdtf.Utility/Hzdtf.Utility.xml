@@ -8716,6 +8716,13 @@
             <param name="dateTime">日期时间</param>
             <returns>月份最后1天日期</returns>
         </member>
+        <member name="M:System.DateTimeExtensions.GetDis1900Day(System.DateTime)">
+            <summary>
+            获取给定日期距离1900-01-01的天数
+            </summary>
+            <param name="dateTime">日期时间</param>
+            <returns>日期距离1900-01-01的天数</returns>
+        </member>
         <member name="M:System.DateTimeExtensions.IsOrdinaryLeapYear">
             <summary>
             判断当前日期是否为普通闰年
@@ -8876,6 +8883,13 @@
             <returns>日期</returns>
         </member>
         <member name="M:System.DateTimeExtensions.ToDateTimeFromTimeStamp(System.String)">
+            <summary>
+            将时间戳转换成日期时间
+            </summary>
+            <param name="timeStamp">时间戳</param>
+            <returns>日期时间</returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.ToDateTimeFromTimeStamp(System.Int32)">
             <summary>
             将时间戳转换成日期时间
             </summary>
