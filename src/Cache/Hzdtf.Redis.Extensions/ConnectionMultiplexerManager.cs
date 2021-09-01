@@ -79,10 +79,11 @@ namespace StackExchange.Redis
             {
                 return;
             }
-            
+
             if (dicConnMultis.ContainsKey(options.Key))
             {
-                dicConnMultis[connKey].CloseAsync();
+                dicConnMultis[options.Key].Close();
+                dicConnMultis.Remove(options.Key);
             }
         }
 
@@ -98,8 +99,10 @@ namespace StackExchange.Redis
 
             foreach (KeyValuePair<string, IConnectionMultiplexer> item in dicConnMultis)
             {
-                item.Value.CloseAsync();
+                item.Value.Close();
             }
+
+            dicConnMultis.Clear();
         }
 
         #endregion
