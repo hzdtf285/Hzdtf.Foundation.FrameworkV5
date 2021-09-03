@@ -1497,9 +1497,7 @@ namespace Hzdtf.Service.Impl
 
         #endregion
 
-        #endregion
-
-        #region 受保护的方法
+        #region 执行
 
         /// <summary>
         /// 执行返回函数且带有连接ID
@@ -1510,7 +1508,7 @@ namespace Hzdtf.Service.Impl
         /// <param name="connectionId">连接ID</param>
         /// <param name="accessMode">访问模式</param>
         /// <returns>返回信息</returns>
-        protected ReturnInfo<OutT> ExecReturnFuncAndConnectionId<OutT>(Func<ReturnInfo<OutT>, string, OutT> func, ReturnInfo<OutT> returnInfo = null, string connectionId = null, AccessMode accessMode = AccessMode.MASTER)
+        public ReturnInfo<OutT> ExecReturnFuncAndConnectionId<OutT>(Func<ReturnInfo<OutT>, string, OutT> func, ReturnInfo<OutT> returnInfo = null, string connectionId = null, AccessMode accessMode = AccessMode.MASTER)
         {
             return ExecReturnFunc<OutT>((reInfo) =>
             {
@@ -1531,7 +1529,7 @@ namespace Hzdtf.Service.Impl
         /// <param name="func">函数</param>
         /// <param name="returnInfo">返回信息</param>
         /// <returns>返回信息</returns>
-        protected ReturnInfo<OutT> ExecReturnFunc<OutT>(Func<ReturnInfo<OutT>, OutT> func, ReturnInfo<OutT> returnInfo = null)
+        public ReturnInfo<OutT> ExecReturnFunc<OutT>(Func<ReturnInfo<OutT>, OutT> func, ReturnInfo<OutT> returnInfo = null)
         {
             if (returnInfo == null)
             {
@@ -1550,7 +1548,7 @@ namespace Hzdtf.Service.Impl
         /// <param name="action">动作</param>
         /// <param name="connectionId">连接ID</param>
         /// <param name="accessMode">访问模式</param>
-        protected void ExecProcConnectionId(Action<string> action, string connectionId = null, AccessMode accessMode = AccessMode.MASTER)
+        public void ExecProcConnectionId(Action<string> action, string connectionId = null, AccessMode accessMode = AccessMode.MASTER)
         {
             if (string.IsNullOrWhiteSpace(connectionId))
             {
@@ -1574,6 +1572,12 @@ namespace Hzdtf.Service.Impl
                 action(connectionId);
             }
         }
+
+        #endregion
+
+        #endregion
+
+        #region 受保护的方法
 
         /// <summary>
         /// 设置创建信息

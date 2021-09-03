@@ -341,6 +341,35 @@
             清空所有模型后事件
             </summary>
         </member>
+        <member name="M:Hzdtf.Service.Contract.IService`2.ExecReturnFuncAndConnectionId``1(System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,``0},Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            执行返回函数且带有连接ID
+            </summary>
+            <typeparam name="OutT">输出类型</typeparam>
+            <param name="func">函数</param>
+            <param name="returnInfo">返回信息</param>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Contract.IService`2.ExecReturnFunc``1(System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{``0},``0},Hzdtf.Utility.Model.Return.ReturnInfo{``0})">
+            <summary>
+            执行返回函数
+            </summary>
+            <typeparam name="OutT">输出类型</typeparam>
+            <param name="func">函数</param>
+            <param name="returnInfo">返回信息</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Service.Contract.IService`2.ExecProcConnectionId(System.Action{System.String},System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            执行连接ID过程
+            如果传过来的连接ID为空，则会创建新的连接ID，结束后会自动注释连接ID，否则不会
+            </summary>
+            <param name="action">动作</param>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+        </member>
         <member name="T:Hzdtf.Service.Contract.IServiceAsync`2">
             <summary>
             异步服务接口
