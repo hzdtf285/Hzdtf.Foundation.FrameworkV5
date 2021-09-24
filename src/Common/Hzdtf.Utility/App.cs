@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hzdtf.Utility
 {
@@ -272,5 +273,26 @@ namespace Hzdtf.Utility
         /// 获取GRpc客户端工厂
         /// </summary>
         public static IGetGRpcClientFactory GetGRpcClientFactory;
+
+        /// <summary>
+        /// 事件总线
+        /// </summary>
+        public readonly static IEventBus EventBus = AppEventBus.Instance;
+
+        /// <summary>
+        /// 当前服务提供者实例
+        /// </summary>
+        public static IServiceProvider Instance
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 从当前服务提供者实例获取服务
+        /// </summary>
+        /// <typeparam name="T">服务类型</typeparam>
+        /// <returns>服务</returns>
+        public static T GetServiceFromInstance<T>() => Instance != null ? Instance.GetService<T>() : default(T);
     }
 }

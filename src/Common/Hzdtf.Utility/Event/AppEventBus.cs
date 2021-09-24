@@ -44,16 +44,24 @@ namespace Hzdtf.Utility.Event
             /// <param name="handler">处理</param>
             public HandlerData(Type handler)
             {
-                this.handler = handler;
-                object instance = handler.Assembly.CreateInstance(handler.FullName);
-                if (instance is IEventHandler)
-                {
-                    handlerObj = handler.Assembly.CreateInstance(handler.FullName) as IEventHandler;
-                }
-                else
+                if (handler.GetInterface(typeof(IEventHandler).Name) == null)
                 {
                     throw new NotImplementedException("类型[" + handler.FullName + "]未实现IEventHandler接口");
                 }
+
+                this.handler = handler;
+                object instance = null;
+                // 优先从容器里获取
+                if (App.Instance != null)
+                {
+                    instance = App.Instance.GetService(handler);
+                }
+                if (instance == null)
+                {
+                    instance = handler.Assembly.CreateInstance(handler.FullName);
+                }
+
+                handlerObj = instance as IEventHandler;
             }
         }
 

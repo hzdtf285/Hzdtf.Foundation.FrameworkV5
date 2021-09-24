@@ -23,7 +23,7 @@ namespace Hzdtf.Utility.AspNet.Extensions.GRpc
         /// <returns>GRpc客户端</returns>
         public GRpcClientT GetRpcClient<GRpcClientT>() where GRpcClientT : ClientBase<GRpcClientT>
         {
-            return WebApp.Instance.GetService<GRpcClientT>();
+            return App.Instance.GetService<GRpcClientT>();
         }
     }
 }

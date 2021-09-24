@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hzdtf.Utility.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +15,8 @@ namespace Hzdtf.Utility.Event
         /// 执行
         /// </summary>
         /// <param name="eventData">事件数据</param>
-        void Execute(EventData eventData);
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        void Execute(EventData eventData, CommonUseData comData = null, string connectionId = null);
     }
 }

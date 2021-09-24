@@ -466,24 +466,6 @@
             <param name="prefix">前辍</param>
             <param name="model">模型</param>
         </member>
-        <member name="T:Hzdtf.Utility.AspNet.WebApp">
-            <summary>
-            Web应用类
-            @ 黄振东
-            </summary>
-        </member>
-        <member name="P:Hzdtf.Utility.AspNet.WebApp.Instance">
-            <summary>
-            当前服务提供者实例
-            </summary>
-        </member>
-        <member name="M:Hzdtf.Utility.AspNet.WebApp.GetServiceFromInstance``1">
-            <summary>
-            从当前服务提供者实例获取服务
-            </summary>
-            <typeparam name="T">服务类型</typeparam>
-            <returns>服务</returns>
-        </member>
         <member name="T:Microsoft.AspNetCore.Builder.CultureMiddlewareExtensions">
             <summary>
             文化中间件扩展类
