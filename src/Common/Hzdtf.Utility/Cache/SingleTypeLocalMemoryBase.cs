@@ -166,9 +166,15 @@ namespace Hzdtf.Utility.Cache
         /// <returns>是否移除成功</returns>
         public virtual bool Remove(KeyT[] keys)
         {
-            foreach (KeyT key in keys)
+            lock (GetSyncCache())
             {
-                Remove(key);
+                foreach (KeyT key in keys)
+                {
+                    if (Exists(key))
+                    {
+                        GetCache().Remove(key);
+                    }
+                }
             }
 
             return true;

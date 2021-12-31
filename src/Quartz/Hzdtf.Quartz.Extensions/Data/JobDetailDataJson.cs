@@ -1,5 +1,4 @@
 ﻿using Hzdtf.Quartz.Extensions.Model;
-using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.Data;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,6 @@ namespace Hzdtf.Quartz.Extensions.Data
     /// 作业明细数据Json
     /// @ 黄振东
     /// </summary>
-    [Inject]
     public class JobDetailDataJson : IReaderAll<JobDetailInfo>
     {
         /// <summary>

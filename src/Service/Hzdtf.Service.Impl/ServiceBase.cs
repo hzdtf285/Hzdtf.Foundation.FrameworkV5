@@ -11,7 +11,6 @@ using Hzdtf.Utility.Enums;
 using Hzdtf.Utility.Utils;
 using Hzdtf.Utility.Attr.ParamAttr;
 using System.ComponentModel.DataAnnotations;
-using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.Model.Identitys;
 using Hzdtf.Utility.Localization;
 using System.Text;

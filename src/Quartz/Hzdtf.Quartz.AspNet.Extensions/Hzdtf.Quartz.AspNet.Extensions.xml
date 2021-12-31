@@ -20,6 +20,31 @@
             工作处理异常程序集
             </summary>
         </member>
+        <member name="P:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig.JobDetailReader">
+            <summary>
+            作业明细读取
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig.JobTaskReader">
+            <summary>
+            作业任务读取
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig.TriggerReader">
+            <summary>
+            触发器读取
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig.QuartzDataFactory">
+            <summary>
+            时钟数据工厂
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.AspNet.Extensions.QuartzConfig.SchedulerWrap">
+            <summary>
+            调试器包装
+            </summary>
+        </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.QuartzExtensions">
             <summary>
             时钟扩展类

@@ -1,7 +1,10 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Quartz.AspNet.Extensions;
 using Hzdtf.Quartz.Extensions;
+using Hzdtf.Quartz.Extensions.Data;
+using Hzdtf.Quartz.Extensions.Model;
 using Hzdtf.Quartz.Extensions.Scheduler;
+using Hzdtf.Utility.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Quartz;
@@ -34,6 +37,47 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+            if (op.JobDetailReader == null)
+            {
+                services.AddSingleton<IReaderAll<JobDetailInfo>, JobDetailDataJson>();
+            }
+            else
+            {
+                services.AddSingleton<IReaderAll<JobDetailInfo>>(op.JobDetailReader);
+            }
+            if (op.JobTaskReader == null)
+            {
+                services.AddSingleton<IReaderAll<JobTaskInfo>, JobTaskDataJson>();
+            }
+            else
+            {
+                services.AddSingleton<IReaderAll<JobTaskInfo>>(op.JobTaskReader);
+            }
+            if (op.TriggerReader == null)
+            {
+                services.AddSingleton<IReaderAll<TriggerInfo>, TriggerDataJson>();
+            }
+            else
+            {
+                services.AddSingleton<IReaderAll<TriggerInfo>>(op.TriggerReader);
+            }
+            if (op.QuartzDataFactory == null)
+            {
+                services.AddSingleton<IQuartzDataFactory, QuartzDataFactory>();
+            }
+            else
+            {
+                services.AddSingleton<IQuartzDataFactory>(op.QuartzDataFactory);
+            }
+            if (op.SchedulerWrap == null)
+            {
+                services.AddSingleton<ISchedulerWrap, SchedulerWrap>();
+            }
+            else
+            {
+                services.AddSingleton<ISchedulerWrap>(op.SchedulerWrap);
+            }
+
             if (op.JobHandleException != null)
             {
                 QuartzStaticConfig.JobHandleException = op.JobHandleException;

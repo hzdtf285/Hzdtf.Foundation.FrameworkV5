@@ -20,7 +20,7 @@ namespace System
         /// <param name="enable">是否启动</param>
         public static void SetHttp2UnencryptedSupport(bool enable = true)
         {
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", enable);
         }
     }
 }

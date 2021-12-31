@@ -3,7 +3,7 @@
     "Id": 1,
     "Name": "job1",
     "Group": "group1",
-    "JobFullClass": "Hzdtf.Example.Service.Impl,FoxUC.Example.Service.Impl.Quartz.JobService1",
+    "JobFullClass": "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService1",
     "Params": {
       "K1": "V1",
       "K2": "V2"
@@ -13,6 +13,6 @@
     "Id": 2,
     "Name": "job2",
     "Group": "group1",
-    "JobFullClass": "Hzdtf.Example.Service.Impl,FoxUC.Example.Service.Impl.Quartz.JobService2"
+    "JobFullClass": "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService2"
   }
 ]

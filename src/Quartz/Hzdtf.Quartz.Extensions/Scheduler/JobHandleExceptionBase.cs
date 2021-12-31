@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Logger.Contract;
+using Hzdtf.Quartz.Extensions.Model;
 using Microsoft.Extensions.Configuration;
 using Quartz;
 using System;
@@ -36,18 +37,16 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// </summary>
         /// <param name="context">作业执行上下文</param>
         /// <param name="jobInstance">作业实例</param>
-        /// <param name="transId">事务ID</param>
-        /// <param name="ex">异常</param>
-        /// <param name="idMsg">ID消息</param>
-        public void Notify(IJobExecutionContext context, IJob jobInstance, long transId, Exception ex, string idMsg)
+        /// <param name="jobEx">作业异常</param>
+        public void Notify(IJobExecutionContext context, IJob jobInstance, JobExceptionInfo jobEx)
         {
             try
             {
-                ExecNotify(context, jobInstance, transId, ex, idMsg);
+                ExecNotify(context, jobInstance, jobEx);
             }
             catch (Exception outEx)
             {
-                Log.ErrorAsync($"执行作业处理异常程序时又发生异常", outEx, this.GetType().Name, null, transId.ToString(), "Notify");
+                Log.ErrorAsync($"执行作业处理异常程序时又发生异常", outEx, this.GetType().Name, null, jobEx.TransId.ToString(), "Notify");
             }
         }
 
@@ -56,9 +55,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// </summary>
         /// <param name="context">作业执行上下文</param>
         /// <param name="jobInstance">作业实例</param>
-        /// <param name="transId">事务ID</param>
-        /// <param name="ex">异常</param>
-        /// <param name="idMsg">ID消息</param>
-        protected abstract void ExecNotify(IJobExecutionContext context, IJob jobInstance, long transId, Exception ex, string idMsg);
+        /// <param name="jobEx">作业异常</param>
+        protected abstract void ExecNotify(IJobExecutionContext context, IJob jobInstance, JobExceptionInfo jobEx);
     }
 }

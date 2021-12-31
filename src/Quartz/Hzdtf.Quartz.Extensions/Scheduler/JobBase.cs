@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Logger.Contract;
+using Hzdtf.Utility;
 using Hzdtf.Utility.Model.Identitys;
 using Microsoft.Extensions.Configuration;
 using Quartz;
@@ -65,10 +66,22 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
                 catch (Exception ex)
                 {
                     Log.ErrorAsync($"执行作业发生异常.{idMsg}", ex, thisClass, null, transIdStr, name, group, "Execute");
-                    if (QuartzStaticConfig.JobHandleException != null)
+                    if (QuartzStaticConfig.JobHandleException == null)
                     {
-                        QuartzStaticConfig.JobHandleException.Notify(context, this, transId, ex, idMsg);
+                        return;
                     }
+
+                    QuartzStaticConfig.JobHandleException.Notify(context, this, new Model.JobExceptionInfo()
+                    {
+                        Ex = ex,
+                        ExMsg = ex.Message,
+                        ExStackTrace = ex.StackTrace,
+                        TransId = transId,
+                        JobName = name,
+                        JobGroup = group,
+                        JobFullClass = this.GetType().FullName,
+                        ServiceName = App.AppServiceName
+                    });
                 }
             });
         }

@@ -1,3 +1,4 @@
+﻿using Hzdtf.Quartz.Extensions.Model;
 ﻿using Quartz;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// </summary>
         /// <param name="context">作业执行上下文</param>
         /// <param name="jobInstance">作业实例</param>
-        /// <param name="transId">事务ID</param>
-        /// <param name="ex">异常</param>
-        /// <param name="idMsg">ID消息</param>
-        void Notify(IJobExecutionContext context, IJob jobInstance, long transId, Exception ex, string idMsg);
+        /// <param name="jobEx">作业异常</param>
+        void Notify(IJobExecutionContext context, IJob jobInstance, JobExceptionInfo jobEx);
     }
 }

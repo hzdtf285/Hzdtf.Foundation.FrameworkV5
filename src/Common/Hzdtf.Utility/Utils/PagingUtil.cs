@@ -74,5 +74,27 @@ namespace Hzdtf.Utility.Utils
 
             return pagingInfo;
         }
+
+        /// <summary>
+        /// 循环分页
+        /// </summary>
+        /// <param name="callback">回调。0：页码，1：每页记录数，2：返回总页数</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="maxForCount">最大循环次数</param>
+        public static void ForPage(Func<int, int, int> callback, int pageIndex = 0, int pageSize = 500, int maxForCount = 10000)
+        {
+            for (; pageIndex < maxForCount; pageIndex++)
+            {
+                var pageCount = callback(pageIndex, pageSize);
+                if (pageIndex < pageCount - 1)
+                {
+                    pageIndex++;
+                    continue;
+                }
+
+                return;
+            }
+        }
     }
 }

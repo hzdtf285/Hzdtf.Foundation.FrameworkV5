@@ -1137,7 +1137,7 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <param name="propertyNames">属性名称</param>
         /// <returns>更新字段SQL</returns>
-        private string GetUpdateFieldsSql(string[] propertyNames = null)
+        protected string GetUpdateFieldsSql(string[] propertyNames = null)
         {
             string[] fields = null;
             if (propertyNames == null)
@@ -1150,6 +1150,10 @@ namespace Hzdtf.Persistence.Dapper
                 for (var i = 0; i < propertyNames.Length; i++)
                 {
                     fields[i] = GetFieldByProp(propertyNames[i]);
+                    if (string.IsNullOrWhiteSpace(fields[i]))
+                    {
+                        throw new KeyNotFoundException($"找不到属性名[{propertyNames[i]}]映射的列");
+                    }
                 }
             }
 

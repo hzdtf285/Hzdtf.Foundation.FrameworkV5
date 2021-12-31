@@ -6729,6 +6729,397 @@
             事件ID
             </summary>
         </member>
+        <member name="T:Hzdtf.Utility.UserPermission.IUserMenuPermission`1">
+            <summary>
+            用户菜单权限接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuPermission`1.UserHavePermission(`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            用户是否拥有权限
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="funCode">功能编码</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.IUserMenuPermissionCache`1">
+            <summary>
+            用户菜单权限缓存接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">用户类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuPermissionCache`1.InitCache(`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            初始化缓存
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuPermissionCache`1.GetWithTSNotAccessKeys(System.TimeSpan)">
+            <summary>
+            获取时间范围内没有访问的用户ID数组
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>时间范围内没有访问的用户ID数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuPermissionCache`1.RemoveWithTSNotAccess(System.TimeSpan)">
+            <summary>
+            移除时间范围内没有访问的用户
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.IUserMenuReader`1">
+            <summary>
+            用户菜单读取接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuReader`1.GetHavePermissionMenuFunCodes(`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据用户ID获取拥有权限的菜单功能编码字典
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermission`1">
+            <summary>
+            租户用户菜单权限接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermission`1.UserHavePermission(`0,`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            用户是否拥有权限
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="funCode">功能编码</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1">
+            <summary>
+            租户用户菜单权限缓存接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">用户类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1.InitCache(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            初始化缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1.GetWithTSNotAccessKeys(System.TimeSpan)">
+            <summary>
+            获取时间范围内没有访问的键数组
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>时间范围内没有访问的键数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1.RemoveWithTSNotAccess(System.TimeSpan)">
+            <summary>
+            移除时间范围内没有访问的用户
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1.RemoveCache(`0,`0)">
+            <summary>
+            根据商户ID和用户ID移除缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1.RemoveCache(`0,`0[])">
+            <summary>
+            根据商户ID和用户ID移除缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userIds">用户ID数组</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1.RemoveCache(Hzdtf.Utility.Model.KeyValueInfo{`0,`0}[])">
+            <summary>
+            根据商户ID和用户ID移除缓存
+            </summary>
+            <param name="merchantIdMapUserIds">商户ID映射用户ID，key：商户ID，value：用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuPermissionCache`1.ClearCache(`0)">
+            <summary>
+            根据商户ID清空缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <returns>是否清空成功</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuReader`1">
+            <summary>
+            租户用户菜单读取接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.ITenantUserMenuReader`1.GetHavePermissionMenuFunCodes(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据用户ID获取拥有权限的菜单功能编码字典
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1">
+            <summary>
+            租户用户菜单本地缓存
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.dicCache">
+            <summary>
+            字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.dicLastAccessTime">
+            <summary>
+            最后一次访问时间字典
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.syncDicCache">
+            <summary>
+            同步字典缓存
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.MerchantIdUserMenuReader">
+            <summary>
+            商户用户菜单读取
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.UserHavePermission(`0,`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            用户是否拥有权限
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="funCode">功能编码</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.GetWithTSNotAccessKeys(System.TimeSpan)">
+            <summary>
+            获取时间范围内没有访问的键数组
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>时间范围内没有访问的键数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.RemoveWithTSNotAccess(System.TimeSpan)">
+            <summary>
+            移除时间范围内没有访问的用户
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.Add(System.String,System.Collections.Generic.IDictionary{System.String,System.String[]})">
+            <summary>
+            添加
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns>是否添加成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.InitCache(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            初始化缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.RemoveCache(`0,`0)">
+            <summary>
+            根据商户ID和用户ID移除缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.RemoveCache(`0,`0[])">
+            <summary>
+            根据商户ID和用户ID移除缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userIds">用户ID数组</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.RemoveCache(Hzdtf.Utility.Model.KeyValueInfo{`0,`0}[])">
+            <summary>
+            根据商户ID和用户ID移除缓存
+            </summary>
+            <param name="merchantIdMapUserIds">商户ID映射用户ID，key：商户ID，value：用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.ClearCache(`0)">
+            <summary>
+            根据商户ID清空缓存
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <returns>是否清空成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.Remove(System.String)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key">键</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.Remove(System.String[])">
+            <summary>
+            移除键数组
+            </summary>
+            <param name="keys">键数组</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.Clear">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.GetCache">
+            <summary>
+            获取缓存
+            </summary>
+            <returns>缓存</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.GetSyncCache">
+            <summary>
+            获取同步的缓存对象，是为了线程安全
+            </summary>
+            <returns>同步的缓存对象</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.TenantUserMenuLocalCache`1.GetKey(`0,`0)">
+            <summary>
+            获取键
+            </summary>
+            <param name="merchantId">商户ID</param>
+            <param name="userId">用户ID</param>
+            <returns>键</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1">
+            <summary>
+            用户菜单本地缓存
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.dicCache">
+            <summary>
+            字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.dicLastAccessTime">
+            <summary>
+            最后一次访问时间字典
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.syncDicCache">
+            <summary>
+            同步字典缓存
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.UserMenuReader">
+            <summary>
+            用户菜单读取
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.UserHavePermission(`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            用户是否拥有权限
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="funCode">功能编码</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.GetWithTSNotAccessKeys(System.TimeSpan)">
+            <summary>
+            获取时间范围内没有访问的用户ID数组
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>时间范围内没有访问的用户ID数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.RemoveWithTSNotAccess(System.TimeSpan)">
+            <summary>
+            移除时间范围内没有访问的用户
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.Add(`0,System.Collections.Generic.IDictionary{System.String,System.String[]})">
+            <summary>
+            添加
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns>是否添加成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.InitCache(`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            初始化缓存
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.Remove(`0)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key">键</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.Remove(`0[])">
+            <summary>
+            移除键数组
+            </summary>
+            <param name="keys">键数组</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.Clear">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.GetCache">
+            <summary>
+            获取缓存
+            </summary>
+            <returns>缓存</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.GetSyncCache">
+            <summary>
+            获取同步的缓存对象，是为了线程安全
+            </summary>
+            <returns>同步的缓存对象</returns>
+        </member>
         <member name="T:Hzdtf.Utility.Utils.AuthUtil">
             <summary>
             身份认证辅助类
@@ -7459,6 +7850,15 @@
             <param name="countFunc">统计数函数</param>
             <param name="selectPageFunc">查询分页函数</param>
             <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.PagingUtil.ForPage(System.Func{System.Int32,System.Int32,System.Int32},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            循环分页
+            </summary>
+            <param name="callback">回调。0：页码，1：每页记录数，2：返回总页数</param>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="maxForCount">最大循环次数</param>
         </member>
         <member name="T:Hzdtf.Utility.Utils.RuntimeUtil">
             <summary>
@@ -8741,6 +9141,45 @@
             </summary>
             <param name="dateTime">日期时间</param>
             <returns>日期距离1900-01-01的天数</returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.CurrQuarterLastDay">
+            <summary>
+            获取指定日期的当前季度最后1天日期
+            </summary>
+            <returns>当前日期的季度最后1天日期</returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.QuarterLastDay(System.DateTime)">
+            <summary>
+            获取指定日期的季度最后1天日期
+            </summary>
+            <param name="dateTime">日期时间</param>
+            <returns>日期的季度最后1天日期</returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.QuarterFirstDay">
+            <summary>
+            获取当前日期的季度第1天日期
+            </summary>
+            <returns>当前日期的季度第1天日期</returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.QuarterFirstDay(System.DateTime)">
+            <summary>
+            获取指定日期的季度第1天日期
+            </summary>
+            <param name="dateTime">日期时间</param>
+            <returns>日期的季度第1天日期</returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.GetCurrQuarter">
+            <summary>
+            获取当前季度，从0开始
+            </summary>
+            <returns>当前季度</returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.GetQuarter(System.DateTime)">
+            <summary>
+            获取季度，从0开始
+            </summary>
+            <param name="dateTime">日期时间</param>
+            <returns>季度</returns>
         </member>
         <member name="M:System.DateTimeExtensions.IsOrdinaryLeapYear">
             <summary>

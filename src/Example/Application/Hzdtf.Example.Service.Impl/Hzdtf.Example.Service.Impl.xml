@@ -56,6 +56,25 @@
             @ 黄振东
             </summary>
         </member>
+        <member name="F:Hzdtf.Example.Service.Impl.Quartz.JobHandleException.service">
+            <summary>
+            测试表单服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobHandleException.#ctor(Hzdtf.Example.Service.Contract.ITestFormService)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="service">测试表单服务</param>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobHandleException.ExecNotify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Extensions.Model.JobExceptionInfo)">
+            <summary>
+            执行通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="jobEx">作业异常</param>
+        </member>
         <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobHandleException.Notify(Quartz.IJobExecutionContext,Quartz.IJob,System.Int64,System.Exception,System.String)">
             <summary>
             通知

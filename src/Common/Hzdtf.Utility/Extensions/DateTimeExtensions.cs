@@ -240,6 +240,93 @@ namespace System
             return ts.Days;
         }
 
+        /// <summary>
+        /// 获取指定日期的当前季度最后1天日期
+        /// </summary>
+        /// <returns>当前日期的季度最后1天日期</returns>
+        public static DateTime CurrQuarterLastDay() => DateTime.Now.QuarterLastDay();
+
+        /// <summary>
+        /// 获取指定日期的季度最后1天日期
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <returns>日期的季度最后1天日期</returns>
+        public static DateTime QuarterLastDay(this DateTime dateTime)
+        {
+            switch (dateTime.GetQuarter())
+            {
+                case 0:
+                    return new DateTime(dateTime.Year, 3, 31, 23, 59, 59, 999);
+
+                case 1:
+                    return new DateTime(dateTime.Year, 6, 30, 23, 59, 59, 999);
+
+                case 2:
+                    return new DateTime(dateTime.Year, 9, 30, 23, 59, 59, 999);
+
+                default:
+                    return new DateTime(dateTime.Year, 12, 31, 23, 59, 59, 999);
+            }
+        }
+
+        /// <summary>
+        /// 获取当前日期的季度第1天日期
+        /// </summary>
+        /// <returns>当前日期的季度第1天日期</returns>
+        public static DateTime QuarterFirstDay() => DateTime.Now.QuarterFirstDay();
+
+        /// <summary>
+        /// 获取指定日期的季度第1天日期
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <returns>日期的季度第1天日期</returns>
+        public static DateTime QuarterFirstDay(this DateTime dateTime)
+        {
+            switch (dateTime.GetQuarter())
+            {
+                case 0:
+                    return new DateTime(dateTime.Year, 1, 1);
+
+                case 1:
+                    return new DateTime(dateTime.Year, 4, 1);
+
+                case 2:
+                    return new DateTime(dateTime.Year, 7, 1);
+
+                default:
+                    return new DateTime(dateTime.Year, 10, 1);
+            }
+        }
+
+        /// <summary>
+        /// 获取当前季度，从0开始
+        /// </summary>
+        /// <returns>当前季度</returns>
+        public static byte GetCurrQuarter() => DateTime.Now.GetQuarter();
+
+        /// <summary>
+        /// 获取季度，从0开始
+        /// </summary>
+        /// <param name="dateTime">日期时间</param>
+        /// <returns>季度</returns>
+        public static byte GetQuarter(this DateTime dateTime)
+        {
+            if (dateTime.Month < 4)
+            {
+                return 0;
+            }
+            if (dateTime.Month > 3 && dateTime.Month < 7)
+            {
+                return 1;
+            }
+            if (dateTime.Month > 6 && dateTime.Month < 10)
+            {
+                return 2;
+            }
+
+            return 3;
+        }
+        
         #region 普通闰年
 
         /// <summary>

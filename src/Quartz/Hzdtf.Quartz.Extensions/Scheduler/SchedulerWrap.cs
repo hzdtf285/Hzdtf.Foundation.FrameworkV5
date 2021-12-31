@@ -1,5 +1,4 @@
 ﻿using Hzdtf.Quartz.Extensions.Data;
-using Hzdtf.Utility.Attr;
 using Quartz;
 using Quartz.Impl;
 using System;
@@ -16,7 +15,6 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
     /// 调度器包装
     /// @ 黄振东
     /// </summary>
-    [Inject]
     public class SchedulerWrap : ISchedulerWrap, IDisposable
     {
         /// <summary>
@@ -27,11 +25,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// <summary>
         /// 时钟数据工厂
         /// </summary>
-        public IQuartzDataFactory QuartzDataFactory
-        {
-            get;
-            set;
-        }
+        private readonly IQuartzDataFactory quartzDataFactory;
 
         /// <summary>
         /// 调度器
@@ -49,9 +43,11 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// <summary>
         /// 构造方法
         /// </summary>
+        /// <param name="quartzDataFactory">时钟数据工厂</param>
         /// <param name="schedulerFactory">调度器工厂，如果为null，则使用标准工厂(StdSchedulerFactory)</param>
-        public SchedulerWrap(ISchedulerFactory schedulerFactory = null)
+        public SchedulerWrap(IQuartzDataFactory quartzDataFactory, ISchedulerFactory schedulerFactory = null)
         {
+            this.quartzDataFactory = quartzDataFactory;
             if (schedulerFactory == null)
             {
                 schedulerFactory = new StdSchedulerFactory();
@@ -69,7 +65,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
             {
                 return;
             }
-            var jobTasks = QuartzDataFactory.Create();
+            var jobTasks = quartzDataFactory.Create();
             if (jobTasks.IsNullOrCount0())
             {
                 return;

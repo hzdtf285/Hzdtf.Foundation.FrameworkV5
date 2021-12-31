@@ -59,9 +59,6 @@ namespace Hzdtf.Example.WebApp.AppStart
                     var theOper = container.Resolve<ITheOperation>();
                     return theOper != null ? theOper.EventId : null;
                 };
-
-                var sch = container.Resolve<ISchedulerWrap>();
-                sch.StartAsync();
             });
         }
     }
