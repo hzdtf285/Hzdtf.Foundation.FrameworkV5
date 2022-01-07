@@ -54,8 +54,38 @@ namespace Hzdtf.Utility.UserPermission
         public ReturnInfo<bool> UserHavePermission(IdT userId, string menuCode, string funCode, CommonUseData comData = null)
         {
             var re = new ReturnInfo<bool>();
-            var userMenuFunCodes = Get(userId);
-            if (userMenuFunCodes == null)
+            var reUserMenuFunCodes = GetHavePermissionMenuFunCodes(userId, comData);
+            if (reUserMenuFunCodes.Failure() || reUserMenuFunCodes.Data.IsNullOrCount0())
+            {
+                re.FromBasic(reUserMenuFunCodes);
+                return re;
+            }
+
+            if (reUserMenuFunCodes.Data.ContainsKey(menuCode))
+            {
+                var funCodes = reUserMenuFunCodes.Data[menuCode];
+                if (funCodes.IsNullOrLength0())
+                {
+                    return re;
+                }
+
+                re.Data = funCodes.Where(p => p == funCode).Any();
+            }
+
+            return re;
+        }
+
+        /// <summary>
+        /// 根据用户ID获取拥有权限的菜单功能编码字典
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="comData">通用数据</param>
+        /// <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
+        public ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT userId, CommonUseData comData = null)
+        {
+            var re = new ReturnInfo<IDictionary<string, string[]>>();
+            re.Data = Get(userId);
+            if (re.Data == null)
             {
                 var reMenuFunCodes = UserMenuReader.GetHavePermissionMenuFunCodes(userId, comData);
                 if (reMenuFunCodes.Failure())
@@ -72,23 +102,12 @@ namespace Hzdtf.Utility.UserPermission
                 else
                 {
                     Add(userId, reMenuFunCodes.Data);
-                    userMenuFunCodes = reMenuFunCodes.Data;
+                    re.Data = reMenuFunCodes.Data;
                 }
             }
             else
             {
                 dicLastAccessTime[userId] = DateTime.Now;
-            }
-
-            if (userMenuFunCodes.ContainsKey(menuCode))
-            {
-                var funCodes = userMenuFunCodes[menuCode];
-                if (funCodes.IsNullOrLength0())
-                {
-                    return re;
-                }
-
-                re.Data = funCodes.Where(p => p == funCode).Any();
             }
 
             return re;

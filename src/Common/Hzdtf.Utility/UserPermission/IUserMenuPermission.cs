@@ -24,5 +24,13 @@ namespace Hzdtf.Utility.UserPermission
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
         ReturnInfo<bool> UserHavePermission(IdT userId, string menuCode, string funCode, CommonUseData comData = null);
+
+        /// <summary>
+        /// 根据用户ID获取拥有权限的菜单功能编码字典
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="comData">通用数据</param>
+        /// <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
+        ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT userId, CommonUseData comData = null);
     }
 }

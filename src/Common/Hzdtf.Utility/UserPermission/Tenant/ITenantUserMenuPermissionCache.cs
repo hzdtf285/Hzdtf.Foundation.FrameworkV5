@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hzdtf.Utility.UserPermission.Merchant
+namespace Hzdtf.Utility.UserPermission.Tenant
 {
     /// <summary>
     /// 租户用户菜单权限缓存接口
