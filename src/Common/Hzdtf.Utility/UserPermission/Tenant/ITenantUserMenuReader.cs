@@ -18,10 +18,10 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 根据用户ID获取拥有权限的菜单功能编码字典
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
-        ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT merchantId, IdT userId, CommonUseData comData = null);
+        ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT tenantId, IdT userId, CommonUseData comData = null);
     }
 }

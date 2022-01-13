@@ -585,7 +585,7 @@
             <param name="context">上下文</param>
             <returns>上下文键</returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateCommonUseData(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData},System.String,System.String,System.String)">
+        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateCommonUseData(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData},System.String,System.String,System.String[])">
             <summary>
             创建通用数据
             </summary>
@@ -593,18 +593,18 @@
             <param name="factory">通用数据工厂</param>
             <param name="key">键</param>
             <param name="menuCode">菜单编码</param>
-            <param name="functionCode">功能编码</param>
+            <param name="functionCodes">功能编码数组</param>
             <returns>通用数据</returns>
         </member>
-        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateBasicCommonUseData(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.String,Hzdtf.Utility.Model.IAuthToken)">
+        <member name="M:Microsoft.AspNetCore.Http.HttpContextExtensions.CreateBasicCommonUseData(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,Hzdtf.Utility.Model.IAuthToken,System.String[])">
             <summary>
             创建基本的通用数据
             </summary>
             <param name="context">上下文</param>
             <param name="key">键</param>
             <param name="menuCode">菜单编码</param>
-            <param name="functionCode">功能编码</param>
             <param name="authToken">授权票据</param>
+            <param name="functionCodes">功能编码数组</param>
             <returns>基本的通用数据</returns>
         </member>
         <member name="T:Microsoft.AspNetCore.Http.HttpRequestExtensions">

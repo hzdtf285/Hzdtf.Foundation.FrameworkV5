@@ -61,7 +61,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="workflowId">工作流ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("GetFlowDetail/{workflowId}")]
-        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId) => Service.FindCurrUserApplyDetail(workflowId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE));
+        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId) => Service.FindCurrUserApplyDetail(workflowId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE));
 
         /// <summary>
         /// 填充页面数据，包含当前用户所拥有的权限功能列表

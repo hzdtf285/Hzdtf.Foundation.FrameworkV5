@@ -19,11 +19,11 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 初始化缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        BasicReturnInfo InitCache(IdT merchantId, IdT userId, CommonUseData comData = null);
+        BasicReturnInfo InitCache(IdT tenantId, IdT userId, CommonUseData comData = null);
 
         /// <summary>
         /// 获取时间范围内没有访问的键数组
@@ -40,33 +40,33 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         bool RemoveWithTSNotAccess(TimeSpan timeSpan);
 
         /// <summary>
-        /// 根据商户ID和用户ID移除缓存
+        /// 根据租户ID和用户ID移除缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <returns>是否移除成功</returns>
-        bool RemoveCache(IdT merchantId, IdT userId);
+        bool RemoveCache(IdT tenantId, IdT userId);
 
         /// <summary>
-        /// 根据商户ID和用户ID移除缓存
+        /// 根据租户ID和用户ID移除缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userIds">用户ID数组</param>
         /// <returns>是否移除成功</returns>
-        bool RemoveCache(IdT merchantId, IdT[] userIds);
+        bool RemoveCache(IdT tenantId, IdT[] userIds);
 
         /// <summary>
-        /// 根据商户ID和用户ID移除缓存
+        /// 根据租户ID和用户ID移除缓存
         /// </summary>
-        /// <param name="merchantIdMapUserIds">商户ID映射用户ID，key：商户ID，value：用户ID</param>
+        /// <param name="tenantIdMapUserIds">租户ID映射用户ID，key：租户ID，value：用户ID</param>
         /// <returns>是否移除成功</returns>
-        bool RemoveCache(params KeyValueInfo<IdT, IdT>[] merchantIdMapUserIds);
+        bool RemoveCache(params KeyValueInfo<IdT, IdT>[] tenantIdMapUserIds);
 
         /// <summary>
-        /// 根据商户ID清空缓存
+        /// 根据租户ID清空缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <returns>是否清空成功</returns>
-        bool ClearCache(IdT merchantId);
+        bool ClearCache(IdT tenantId);
     }
 }

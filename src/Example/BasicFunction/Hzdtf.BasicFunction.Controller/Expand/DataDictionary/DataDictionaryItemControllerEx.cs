@@ -53,7 +53,7 @@ namespace Hzdtf.BasicFunction.Controller
         /// <returns>数据字典列表</returns>
         [HttpGet("DataDictionarys")]
         [Function(FunCodeDefine.QUERY_CODE)]
-        public virtual IList<DataDictionaryInfo> DataDictionarys() => DataDictionaryService.Query(HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE)).Data;
+        public virtual IList<DataDictionaryInfo> DataDictionarys() => DataDictionaryService.Query(HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE)).Data;
 
         /// <summary>
         /// 执行分页获取数据
@@ -65,7 +65,7 @@ namespace Hzdtf.BasicFunction.Controller
         [Function(FunCodeDefine.QUERY_CODE)]
         public virtual Page1ReturnInfo<DataDictionaryItemExpandInfo> PageExpandList(int page, int rows)
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE);
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
             dicParams.RemoveKey("page");
             dicParams.RemoveKey("rows");

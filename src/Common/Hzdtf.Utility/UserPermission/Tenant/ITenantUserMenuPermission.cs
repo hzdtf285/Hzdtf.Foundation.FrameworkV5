@@ -18,13 +18,13 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 用户是否拥有权限
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="menuCode">菜单编码</param>
-        /// <param name="funCode">功能编码</param>
+        /// <param name="funCodes">功能编码数组</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        ReturnInfo<bool> UserHavePermission(IdT merchantId, IdT userId, string menuCode, string funCode, CommonUseData comData = null);
+        ReturnInfo<bool> UserHavePermission(IdT tenantId, IdT userId, string menuCode, string[] funCodes, CommonUseData comData = null);
 
         /// <summary>
         /// 根据用户ID获取拥有权限的菜单功能编码字典

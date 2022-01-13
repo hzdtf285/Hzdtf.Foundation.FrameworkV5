@@ -40,9 +40,9 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="factory">通用数据工厂</param>
         /// <param name="key">键</param>
         /// <param name="menuCode">菜单编码</param>
-        /// <param name="functionCode">功能编码</param>
+        /// <param name="functionCodes">功能编码数组</param>
         /// <returns>通用数据</returns>
-        public static CommonUseData CreateCommonUseData(this HttpContext context, ISimpleFactory<HttpContext, CommonUseData> factory, string key = null, string menuCode = null, string functionCode = null)
+        public static CommonUseData CreateCommonUseData(this HttpContext context, ISimpleFactory<HttpContext, CommonUseData> factory, string key = null, string menuCode = null, params string[] functionCodes)
         {
             if (factory != null)
             {
@@ -51,7 +51,7 @@ namespace Microsoft.AspNetCore.Http
                 {
                     result.Key = key;
                     result.MenuCode = menuCode;
-                    result.FunctionCode = functionCode;
+                    result.FunctionCodes = functionCodes;
 
                     return result;
                 }
@@ -72,16 +72,16 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="context">上下文</param>
         /// <param name="key">键</param>
         /// <param name="menuCode">菜单编码</param>
-        /// <param name="functionCode">功能编码</param>
         /// <param name="authToken">授权票据</param>
+        /// <param name="functionCodes">功能编码数组</param>
         /// <returns>基本的通用数据</returns>
-        public static CommonUseData CreateBasicCommonUseData(this HttpContext context, string key = null, string menuCode = null, string functionCode = null, IAuthToken authToken = null)
+        public static CommonUseData CreateBasicCommonUseData(this HttpContext context, string key = null, string menuCode = null, IAuthToken authToken = null, params string[] functionCodes)
         {
             var result = new CommonUseData()
             {
                 Key = key,
                 MenuCode = menuCode,
-                FunctionCode = functionCode
+                FunctionCodes = functionCodes
             };
             if (context != null && context.Request != null)
             {

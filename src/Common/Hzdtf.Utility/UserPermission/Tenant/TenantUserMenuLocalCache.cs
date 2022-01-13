@@ -46,16 +46,16 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 用户是否拥有权限
         /// </summary>
-        /// <param name="tenant">租户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="menuCode">菜单编码</param>
-        /// <param name="funCode">功能编码</param>
+        /// <param name="funCodes">功能编码数组</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public ReturnInfo<bool> UserHavePermission(IdT tenant, IdT userId, string menuCode, string funCode, CommonUseData comData = null)
+        public ReturnInfo<bool> UserHavePermission(IdT tenantId, IdT userId, string menuCode, string[] funCodes, CommonUseData comData = null)
         {
             var re = new ReturnInfo<bool>();
-            var reUserMenuFunCodes = GetHavePermissionMenuFunCodes(tenant, userId, comData);
+            var reUserMenuFunCodes = GetHavePermissionMenuFunCodes(tenantId, userId, comData);
             if (reUserMenuFunCodes.Failure() || reUserMenuFunCodes.Data.IsNullOrCount0())
             {
                 re.FromBasic(reUserMenuFunCodes);
@@ -64,13 +64,20 @@ namespace Hzdtf.Utility.UserPermission.Tenant
 
             if (reUserMenuFunCodes.Data.ContainsKey(menuCode))
             {
-                var funCodes = reUserMenuFunCodes.Data[menuCode];
-                if (funCodes.IsNullOrLength0())
+                var exitsFunCodes = reUserMenuFunCodes.Data[menuCode];
+                if (exitsFunCodes.IsNullOrLength0())
                 {
                     return re;
                 }
-
-                re.Data = funCodes.Where(p => p == funCode).Any();
+                // 循环需要的功能编码，只要有一个存在，则有权限直接返回
+                foreach (var funCode in funCodes)
+                {
+                    re.Data = exitsFunCodes.Contains(funCode);
+                    if (re.Data)
+                    {
+                        return re;
+                    }
+                }
             }
 
             return re;
@@ -79,18 +86,18 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 根据用户ID获取拥有权限的菜单功能编码字典
         /// </summary>
-        /// <param name="tenant">租户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
-        public ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT tenant, IdT userId, CommonUseData comData = null)
+        public ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT tenantId, IdT userId, CommonUseData comData = null)
         {
             var re = new ReturnInfo<IDictionary<string, string[]>>();
-            var key = GetKey(tenant, userId);
+            var key = GetKey(tenantId, userId);
             re.Data = Get(key);
             if (re.Data == null)
             {
-                var reMenuFunCodes = TenantIdUserMenuReader.GetHavePermissionMenuFunCodes(tenant, userId, comData);
+                var reMenuFunCodes = TenantIdUserMenuReader.GetHavePermissionMenuFunCodes(tenantId, userId, comData);
                 if (reMenuFunCodes.Failure())
                 {
                     re.FromBasic(reMenuFunCodes);
@@ -173,17 +180,17 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 初始化缓存
         /// </summary>
-        /// <param name="tenant">租户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public BasicReturnInfo InitCache(IdT tenant, IdT userId, CommonUseData comData = null)
+        public BasicReturnInfo InitCache(IdT tenantId, IdT userId, CommonUseData comData = null)
         {
-            var key = GetKey(tenant, userId);
+            var key = GetKey(tenantId, userId);
             var result = Get(key);
             if (result == null)
             {
-                var reMenuFunCodes = TenantIdUserMenuReader.GetHavePermissionMenuFunCodes(tenant, userId, comData);
+                var reMenuFunCodes = TenantIdUserMenuReader.GetHavePermissionMenuFunCodes(tenantId, userId, comData);
                 if (reMenuFunCodes.Failure())
                 {
                     return reMenuFunCodes;
@@ -206,21 +213,21 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 根据租户ID和用户ID移除缓存
         /// </summary>
-        /// <param name="tenant">租户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <returns>是否移除成功</returns>
-        public bool RemoveCache(IdT tenant, IdT userId)
+        public bool RemoveCache(IdT tenantId, IdT userId)
         {
-            return Remove(GetKey(tenant, userId));
+            return Remove(GetKey(tenantId, userId));
         }
 
         /// <summary>
         /// 根据租户ID和用户ID移除缓存
         /// </summary>
-        /// <param name="tenant">租户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userIds">用户ID数组</param>
         /// <returns>是否移除成功</returns>
-        public bool RemoveCache(IdT tenant, IdT[] userIds)
+        public bool RemoveCache(IdT tenantId, IdT[] userIds)
         {
             if (userIds.IsNullOrLength0())
             {
@@ -230,7 +237,7 @@ namespace Hzdtf.Utility.UserPermission.Tenant
             var keys = new string[userIds.Length];
             for (var i = 0; i < keys.Length; i++)
             {
-                keys[i] = GetKey(tenant, userIds[i]);
+                keys[i] = GetKey(tenantId, userIds[i]);
             }
 
             return Remove(keys);
@@ -260,11 +267,11 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 根据租户ID清空缓存
         /// </summary>
-        /// <param name="tenant">租户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <returns>是否清空成功</returns>
-        public bool ClearCache(IdT tenant)
+        public bool ClearCache(IdT tenantId)
         {
-            var keys = dicCache.Where(p => p.Key.StartsWith($"{tenant}.")).Select(p => p.Key).ToArray();
+            var keys = dicCache.Where(p => p.Key.StartsWith($"{tenantId}.")).Select(p => p.Key).ToArray();
             return Remove(keys);
         }
 
@@ -333,9 +340,9 @@ namespace Hzdtf.Utility.UserPermission.Tenant
         /// <summary>
         /// 获取键
         /// </summary>
-        /// <param name="tenant">租户ID</param>
+        /// <param name="tenantId">租户ID</param>
         /// <param name="userId">用户ID</param>
         /// <returns>键</returns>
-        private string GetKey(IdT tenant, IdT userId) => $"{tenant}.{userId}";
+        private string GetKey(IdT tenantId, IdT userId) => $"{tenantId}.{userId}";
     }
 }

@@ -85,11 +85,11 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
-        /// 功能编码
+        /// 功能编码数组
         /// </summary>
-        [JsonProperty("functionCode")]
-        [Key("functionCode")]
-        public string FunctionCode
+        [JsonProperty("functionCodes")]
+        [Key("functionCodes")]
+        public string[] FunctionCodes
         {
             get;
             set;

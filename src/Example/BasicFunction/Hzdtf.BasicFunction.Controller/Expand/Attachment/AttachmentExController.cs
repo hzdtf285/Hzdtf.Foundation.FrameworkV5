@@ -59,7 +59,7 @@ namespace Hzdtf.BasicFunction.Controller.Expand.Attachment
                 return returnInfo;
             }
 
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: "Attachment", functionCode: FunCodeDefine.UPLOAD_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: "Attachment", functionCodes: FunCodeDefine.UPLOAD_CODE);
             var attachment = AutoMapperUtil.Mapper.Map<SimpleAttachmentInfo, AttachmentInfo>(simpleAttachment);
             BeforeUpload(returnInfo, attachment, comData);
             if (returnInfo.Failure())

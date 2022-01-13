@@ -81,7 +81,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="handleId">处理ID</param>
         /// <returns>返回信息</returns>
         [HttpPut("ModifyReadedByHandleId/{handleId}")]
-        public virtual ReturnInfo<bool> ModifyReadedByHandleId(int handleId) => WorkflowHandleService.ModifyToReadedById(handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.EDIT_CODE));
+        public virtual ReturnInfo<bool> ModifyReadedByHandleId(int handleId) => WorkflowHandleService.ModifyToReadedById(handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.EDIT_CODE));
 
         /// <summary>
         /// 获取审核明细信息
@@ -90,7 +90,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="handleId">处理ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("GetAuditDetail/{workflowId}/{handleId}")]
-        public virtual ReturnInfo<WorkflowInfo> GetAuditDetail(int workflowId, int handleId) => Service.FindAuditDetail(workflowId, handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE));
+        public virtual ReturnInfo<WorkflowInfo> GetAuditDetail(int workflowId, int handleId) => Service.FindAuditDetail(workflowId, handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE));
 
         /// <summary>
         /// 执行审核
@@ -98,7 +98,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="flowAudit">流程审核信息</param>
         /// <returns>返回信息</returns>
         [HttpPost("ExecAudit")]
-        public virtual ReturnInfo<bool> ExecAudit(FlowAuditInfo flowAudit) => WorkFlowAudit.Execute(flowAudit.ToFlowIn(), HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.AUDIT));
+        public virtual ReturnInfo<bool> ExecAudit(FlowAuditInfo flowAudit) => WorkFlowAudit.Execute(flowAudit.ToFlowIn(), HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.AUDIT));
 
         /// <summary>
         /// 获取流程明细信息
@@ -107,7 +107,7 @@ namespace Hzdtf.Workflow.Controller
         /// <param name="handleId">处理ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("GetFlowDetail/{workflowId}/{handleId}")]
-        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId, int handleId) => Service.FindWaitDetail(workflowId, handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE));
+        public virtual ReturnInfo<WorkflowInfo> GetFlowDetail(int workflowId, int handleId) => Service.FindWaitDetail(workflowId, handleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE));
 
         /// <summary>
         /// 填充页面数据，包含当前用户所拥有的权限功能列表

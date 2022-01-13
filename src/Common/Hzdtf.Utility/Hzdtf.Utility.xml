@@ -3860,9 +3860,9 @@
             菜单编码
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.Model.CommonUseData.FunctionCode">
+        <member name="P:Hzdtf.Utility.Model.CommonUseData.FunctionCodes">
             <summary>
-            功能编码
+            功能编码数组
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.CommonUseData.CurrUser">
@@ -6420,9 +6420,9 @@
             动作
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Code">
+        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Codes">
             <summary>
-            编码
+            编码数组
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Disabled">
@@ -6736,23 +6736,15 @@
             </summary>
             <typeparam name="IdT">ID类型</typeparam>
         </member>
-        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuPermission`1.UserHavePermission(`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuPermission`1.UserHavePermission(`0,System.String,System.String[],Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             用户是否拥有权限
             </summary>
             <param name="userId">用户ID</param>
             <param name="menuCode">菜单编码</param>
-            <param name="funCode">功能编码</param>
+            <param name="funCodes">功能编码数组</param>
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
-        </member>
-        <member name="M:Hzdtf.Utility.UserPermission.IUserMenuPermission`1.GetHavePermissionMenuFunCodes(`0,Hzdtf.Utility.Model.CommonUseData)">
-            <summary>
-            根据用户ID获取拥有权限的菜单功能编码字典
-            </summary>
-            <param name="userId">用户ID</param>
-            <param name="comData">通用数据</param>
-            <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
         </member>
         <member name="T:Hzdtf.Utility.UserPermission.IUserMenuPermissionCache`1">
             <summary>
@@ -6805,14 +6797,14 @@
             </summary>
             <typeparam name="IdT">ID类型</typeparam>
         </member>
-        <member name="M:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuPermission`1.UserHavePermission(`0,`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuPermission`1.UserHavePermission(`0,`0,System.String,System.String[],Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             用户是否拥有权限
             </summary>
-            <param name="merchantId">商户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <param name="menuCode">菜单编码</param>
-            <param name="funCode">功能编码</param>
+            <param name="funCodes">功能编码数组</param>
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
@@ -6836,7 +6828,7 @@
             <summary>
             初始化缓存
             </summary>
-            <param name="merchantId">商户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
@@ -6857,32 +6849,32 @@
         </member>
         <member name="M:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuPermissionCache`1.RemoveCache(`0,`0)">
             <summary>
-            根据商户ID和用户ID移除缓存
+            根据租户ID和用户ID移除缓存
             </summary>
-            <param name="merchantId">商户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <returns>是否移除成功</returns>
         </member>
         <member name="M:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuPermissionCache`1.RemoveCache(`0,`0[])">
             <summary>
-            根据商户ID和用户ID移除缓存
+            根据租户ID和用户ID移除缓存
             </summary>
-            <param name="merchantId">商户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userIds">用户ID数组</param>
             <returns>是否移除成功</returns>
         </member>
         <member name="M:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuPermissionCache`1.RemoveCache(Hzdtf.Utility.Model.KeyValueInfo{`0,`0}[])">
             <summary>
-            根据商户ID和用户ID移除缓存
+            根据租户ID和用户ID移除缓存
             </summary>
-            <param name="merchantIdMapUserIds">商户ID映射用户ID，key：商户ID，value：用户ID</param>
+            <param name="tenantIdMapUserIds">租户ID映射用户ID，key：租户ID，value：用户ID</param>
             <returns>是否移除成功</returns>
         </member>
         <member name="M:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuPermissionCache`1.ClearCache(`0)">
             <summary>
-            根据商户ID清空缓存
+            根据租户ID清空缓存
             </summary>
-            <param name="merchantId">商户ID</param>
+            <param name="tenantId">租户ID</param>
             <returns>是否清空成功</returns>
         </member>
         <member name="T:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuReader`1">
@@ -6896,7 +6888,7 @@
             <summary>
             根据用户ID获取拥有权限的菜单功能编码字典
             </summary>
-            <param name="merchantId">商户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <param name="comData">通用数据</param>
             <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
@@ -6928,14 +6920,14 @@
             租户用户菜单读取
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.UserPermission.Tenant.TenantUserMenuLocalCache`1.UserHavePermission(`0,`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Utility.UserPermission.Tenant.TenantUserMenuLocalCache`1.UserHavePermission(`0,`0,System.String,System.String[],Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             用户是否拥有权限
             </summary>
-            <param name="tenant">租户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <param name="menuCode">菜单编码</param>
-            <param name="funCode">功能编码</param>
+            <param name="funCodes">功能编码数组</param>
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
@@ -6943,7 +6935,7 @@
             <summary>
             根据用户ID获取拥有权限的菜单功能编码字典
             </summary>
-            <param name="tenant">租户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <param name="comData">通用数据</param>
             <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
@@ -6974,7 +6966,7 @@
             <summary>
             初始化缓存
             </summary>
-            <param name="tenant">租户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
@@ -6983,7 +6975,7 @@
             <summary>
             根据租户ID和用户ID移除缓存
             </summary>
-            <param name="tenant">租户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <returns>是否移除成功</returns>
         </member>
@@ -6991,7 +6983,7 @@
             <summary>
             根据租户ID和用户ID移除缓存
             </summary>
-            <param name="tenant">租户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userIds">用户ID数组</param>
             <returns>是否移除成功</returns>
         </member>
@@ -7006,7 +6998,7 @@
             <summary>
             根据租户ID清空缓存
             </summary>
-            <param name="tenant">租户ID</param>
+            <param name="tenantId">租户ID</param>
             <returns>是否清空成功</returns>
         </member>
         <member name="M:Hzdtf.Utility.UserPermission.Tenant.TenantUserMenuLocalCache`1.Remove(System.String)">
@@ -7044,7 +7036,7 @@
             <summary>
             获取键
             </summary>
-            <param name="tenant">租户ID</param>
+            <param name="tenantId">租户ID</param>
             <param name="userId">用户ID</param>
             <returns>键</returns>
         </member>
@@ -7075,23 +7067,15 @@
             用户菜单读取
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.UserHavePermission(`0,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.UserHavePermission(`0,System.String,System.String[],Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             用户是否拥有权限
             </summary>
             <param name="userId">用户ID</param>
             <param name="menuCode">菜单编码</param>
-            <param name="funCode">功能编码</param>
+            <param name="funCodes">功能编码数组</param>
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
-        </member>
-        <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.GetHavePermissionMenuFunCodes(`0,Hzdtf.Utility.Model.CommonUseData)">
-            <summary>
-            根据用户ID获取拥有权限的菜单功能编码字典
-            </summary>
-            <param name="userId">用户ID</param>
-            <param name="comData">通用数据</param>
-            <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
         </member>
         <member name="M:Hzdtf.Utility.UserPermission.UserMenuLocalCache`1.GetWithTSNotAccessKeys(System.TimeSpan)">
             <summary>

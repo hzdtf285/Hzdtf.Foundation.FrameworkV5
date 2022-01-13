@@ -6,7 +6,7 @@ using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
-using Hzdtf.Utility.RequestResource;
+using Hzdtf.Utility.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
@@ -61,11 +61,11 @@ namespace Hzdtf.BasicFunction.Controller.Extensions.RoutePermission
         /// <returns>获取是否拥有权限</returns>
         protected override bool IsHavePermission(HttpContext context, RoutePermissionInfo controller, ActionInfo action, BasicReturnInfo basicReturn)
         {
-            if (string.IsNullOrWhiteSpace(controller.Code) || string.IsNullOrWhiteSpace(action.Code))
+            if (string.IsNullOrWhiteSpace(controller.Code) || action.Codes.IsNullOrLength0())
             {
                 return true;
             }
-            ReturnInfo<bool> perReInfo = userService.IsCurrUserPermission(controller.Code, action.Code, comData: context.CreateCommonUseData(comDataFactory, key: action.ResourceKey, menuCode: controller.Code, functionCode: action.Code));
+            ReturnInfo<bool> perReInfo = userService.IsCurrUserPermission(controller.Code, action.Codes, comData: context.CreateCommonUseData(comDataFactory, key: action.ResourceKey, menuCode: controller.Code, functionCodes: action.Codes));
             if (perReInfo.Failure())
             {
                 basicReturn.FromBasic(perReInfo);

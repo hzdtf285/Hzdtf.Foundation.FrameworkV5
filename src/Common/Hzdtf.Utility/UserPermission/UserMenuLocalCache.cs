@@ -48,44 +48,14 @@ namespace Hzdtf.Utility.UserPermission
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="menuCode">菜单编码</param>
-        /// <param name="funCode">功能编码</param>
+        /// <param name="funCodes">功能编码数组</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public ReturnInfo<bool> UserHavePermission(IdT userId, string menuCode, string funCode, CommonUseData comData = null)
+        public ReturnInfo<bool> UserHavePermission(IdT userId, string menuCode, string[] funCodes, CommonUseData comData = null)
         {
             var re = new ReturnInfo<bool>();
-            var reUserMenuFunCodes = GetHavePermissionMenuFunCodes(userId, comData);
-            if (reUserMenuFunCodes.Failure() || reUserMenuFunCodes.Data.IsNullOrCount0())
-            {
-                re.FromBasic(reUserMenuFunCodes);
-                return re;
-            }
-
-            if (reUserMenuFunCodes.Data.ContainsKey(menuCode))
-            {
-                var funCodes = reUserMenuFunCodes.Data[menuCode];
-                if (funCodes.IsNullOrLength0())
-                {
-                    return re;
-                }
-
-                re.Data = funCodes.Where(p => p == funCode).Any();
-            }
-
-            return re;
-        }
-
-        /// <summary>
-        /// 根据用户ID获取拥有权限的菜单功能编码字典
-        /// </summary>
-        /// <param name="userId">用户ID</param>
-        /// <param name="comData">通用数据</param>
-        /// <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
-        public ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT userId, CommonUseData comData = null)
-        {
-            var re = new ReturnInfo<IDictionary<string, string[]>>();
-            re.Data = Get(userId);
-            if (re.Data == null)
+            var userMenuFunCodes = Get(userId);
+            if (userMenuFunCodes == null)
             {
                 var reMenuFunCodes = UserMenuReader.GetHavePermissionMenuFunCodes(userId, comData);
                 if (reMenuFunCodes.Failure())
@@ -102,12 +72,30 @@ namespace Hzdtf.Utility.UserPermission
                 else
                 {
                     Add(userId, reMenuFunCodes.Data);
-                    re.Data = reMenuFunCodes.Data;
+                    userMenuFunCodes = reMenuFunCodes.Data;
                 }
             }
             else
             {
                 dicLastAccessTime[userId] = DateTime.Now;
+            }
+
+            if (userMenuFunCodes.ContainsKey(menuCode))
+            {
+                var exitsFunCodes = userMenuFunCodes[menuCode];
+                if (exitsFunCodes.IsNullOrLength0())
+                {
+                    return re;
+                }
+                // 循环需要的功能编码，只要有一个存在，则有权限直接返回
+                foreach (var funCode in funCodes)
+                {
+                    re.Data = exitsFunCodes.Contains(funCode);
+                    if (re.Data)
+                    {
+                        return re;
+                    }
+                }
             }
 
             return re;

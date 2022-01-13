@@ -7,52 +7,52 @@
       "Actions": [
         {
           "Action": "Get",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Count",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Exists",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Post",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "BatchAdd",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "Put",
-          "Code": "Edit",
+          "Codes": [ "Edit" ],
           "Disabled": false
         },
         {
           "Action": "Delete",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "BatchRemove",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         }
 
@@ -65,52 +65,52 @@
       "Actions": [
         {
           "Action": "Get",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Count",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Exists",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Post",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "BatchAdd",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "Put",
-          "Code": "Edit",
+          "Codes": [ "Edit" ],
           "Disabled": false
         },
         {
           "Action": "Delete",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "BatchRemove",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         }
 
@@ -123,32 +123,32 @@
       "Actions": [
         {
           "Action": "Get",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Count",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Exists",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Post",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
@@ -158,17 +158,17 @@
         },
         {
           "Action": "Put",
-          "Code": "Edit",
+          "Codes": [ "Edit" ],
           "Disabled": false
         },
         {
           "Action": "Delete",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "BatchRemove",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         }
 
@@ -181,52 +181,52 @@
       "Actions": [
         {
           "Action": "Get",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Count",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Exists",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Post",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "BatchAdd",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "Put",
-          "Code": "Edit",
+          "Codes": [ "Edit" ],
           "Disabled": false
         },
         {
           "Action": "Delete",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "BatchRemove",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         }
 
@@ -239,67 +239,67 @@
       "Actions": [
         {
           "Action": "Get",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Count",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Exists",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Post",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "BatchAdd",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "Put",
-          "Code": "Edit",
+          "Codes": [ "Edit" ],
           "Disabled": false
         },
         {
           "Action": "Delete",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "BatchRemove",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "MenuTrees",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "HaveMenuFunctions",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "SavePermission",
-          "Code": "Save",
+          "Codes": [ "Save" ],
           "Disabled": false
         }
 
@@ -312,17 +312,17 @@
       "Actions": [
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "GetFlowDetail",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         }
       ]
@@ -334,27 +334,27 @@
       "Actions": [
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "GetFlowDetail",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "ModifyReadedByHandleId",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "GetAuditDetail",
-          "Code": "Audit",
+          "Codes": [ "Audit" ],
           "Disabled": false
         }
       ]
@@ -366,17 +366,17 @@
       "Actions": [
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "GetFlowDetail",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         }
       ]
@@ -388,57 +388,57 @@
       "Actions": [
         {
           "Action": "Get",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Count",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Exists",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "PageData",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Page",
-          "Code": "Query",
+          "Codes": [ "Query" ],
           "Disabled": false
         },
         {
           "Action": "Post",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "BatchAdd",
-          "Code": "Add",
+          "Codes": [ "Add" ],
           "Disabled": false
         },
         {
           "Action": "Put",
-          "Code": "Edit",
+          "Codes": [ "Edit" ],
           "Disabled": false
         },
         {
           "Action": "Delete",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "BatchRemove",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         },
         {
           "Action": "BatchRemove",
-          "Code": "Remove",
+          "Codes": [ "Remove" ],
           "Disabled": false
         }
 

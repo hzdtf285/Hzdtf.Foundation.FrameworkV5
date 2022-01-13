@@ -38,7 +38,7 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet("{id}")]
         public override ReturnInfo<AttachmentInfo> Get(int id)
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE);
             ReturnInfo<AttachmentInfo> returnInfo = Service.Find(id, comData);
             if (returnInfo.Failure())
             {
@@ -60,7 +60,7 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet]
         public override object Page()
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE);
             ReturnInfo<PagingInfo<AttachmentInfo>> returnInfo = DoPage(comData);
             ReturnInfo<bool> reInfo = FilterDownLoadPermissionFileAddress(returnInfo.Data.Rows, comData);
             if (reInfo.Failure())
@@ -78,7 +78,7 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpGet("List")]
         public virtual ReturnInfo<IList<AttachmentInfo>> List()
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE);
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
             ReturnInfo<IList<AttachmentInfo>> returnInfo = Service.QueryByOwner(Convert.ToInt16(dicParams.GetValue("ownerType")), Convert.ToInt32(dicParams.GetValue("ownerId")), dicParams.GetValue("blurTitle"), comData);
             if (returnInfo.Success())
@@ -101,7 +101,7 @@ namespace Hzdtf.BasicFunction.Controller
         /// <returns>返回信息</returns>
         [HttpDelete("DeleteByOwner/{ownerType}/{ownerId}")]
         [Function(FunCodeDefine.REMOVE_CODE)]
-        public virtual ReturnInfo<bool> DeleteByOwner(short ownerType, int ownerId) => Service.RemoveByOwner(ownerType, ownerId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.REMOVE_CODE));
+        public virtual ReturnInfo<bool> DeleteByOwner(short ownerType, int ownerId) => Service.RemoveByOwner(ownerType, ownerId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.REMOVE_CODE));
 
         /// <summary>
         /// 过滤下载权限的文件地址

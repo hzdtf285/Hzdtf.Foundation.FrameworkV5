@@ -30,7 +30,7 @@ namespace Hzdtf.BasicController
         [HttpGet("PageData")]
         public virtual ReturnInfo<PageInfoT> PageData()
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE);
             var pageData = CreatePageData(comData);
             if (pageData == null)
             {

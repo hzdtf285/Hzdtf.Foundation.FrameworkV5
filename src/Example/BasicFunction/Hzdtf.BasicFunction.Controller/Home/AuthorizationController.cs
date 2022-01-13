@@ -112,7 +112,7 @@ namespace Hzdtf.BasicFunction.Controller.Home
             }
 
 
-            var comData = HttpContext.CreateCommonUseData(ComDataFactory, menuCode: "Authorization", functionCode: "Login");
+            var comData = HttpContext.CreateCommonUseData(ComDataFactory, menuCode: "Authorization", functionCodes: "Login");
             return ExecLogin(loginInfo, (user, pwd, reInfo) =>
             {
                 if (IdentityAuth != null)
@@ -146,7 +146,7 @@ namespace Hzdtf.BasicFunction.Controller.Home
 
                 return re;
             }
-            var comData = HttpContext.CreateCommonUseData(ComDataFactory, menuCode: "Authorization", functionCode: "LoginToToken");
+            var comData = HttpContext.CreateCommonUseData(ComDataFactory, menuCode: "Authorization", functionCodes: "LoginToToken");
             return ExecLogin(loginInfo, (user, pwd, reInfo) =>
             {
                 var busRe = IdentityTokenAuth.AccreditToToken(loginInfo.LoginId, loginInfo.Password, comData);

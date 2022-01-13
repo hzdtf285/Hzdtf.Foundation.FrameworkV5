@@ -52,7 +52,7 @@ namespace Hzdtf.BasicController
         [Function(FunCodeDefine.QUERY_CODE)]
         public virtual object Page()
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE);
             ReturnInfo<PagingInfo<ModelT>> returnInfo = DoPage(comData);
             return PagingReturnConvert.Convert<ModelT>(returnInfo);
         }

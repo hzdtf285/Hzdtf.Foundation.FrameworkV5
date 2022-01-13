@@ -43,7 +43,7 @@ namespace Hzdtf.BasicFunction.Controller.Home
         /// <returns>动作结果</returns>
         public ActionResult Index()
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: "Home", functionCode: "Query");
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: "Home", functionCodes: "Query");
             var user = UserTool<int>.GetCurrUser(comData);
             return View(UserMenuService.CanAccessMenus(user.Id, comData));
         }

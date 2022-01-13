@@ -69,9 +69,9 @@ namespace Hzdtf.Utility.ApiPermission
             public string Action { get; set; }
 
             /// <summary>
-            /// 编码
+            /// 编码数组
             /// </summary>
-            public string Code { get; set; }
+            public string[] Codes { get; set; }
 
             /// <summary>
             /// 是否禁用

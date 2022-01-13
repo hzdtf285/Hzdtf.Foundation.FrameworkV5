@@ -37,7 +37,7 @@ namespace Hzdtf.BasicFunction.Controller
         [HttpPut("ModifyCurrUserPassword")]
         public virtual ReturnInfo<bool> ModifyCurrUserPassword(CurrUserModifyPasswordInfo currUserModifyPassword)
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.RESET_PASSWORD_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.RESET_PASSWORD_CODE);
             var user = UserTool<int>.GetCurrUser(comData);
             currUserModifyPassword.LoginId = user.LoginId;
             return Service.ModifyPasswordByLoginId(currUserModifyPassword, comData);
@@ -51,7 +51,7 @@ namespace Hzdtf.BasicFunction.Controller
         /// <returns>返回信息</returns>
         [HttpPut("ResetUserPassword")]
         [Function(FunCodeDefine.RESET_PASSWORD_CODE)]
-        public virtual ReturnInfo<bool> ResetUserPassword(ModifyPasswordInfo modifyPassword, string connectionId = null) => Service.ResetUserPassword(modifyPassword, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.RESET_PASSWORD_CODE));
+        public virtual ReturnInfo<bool> ResetUserPassword(ModifyPasswordInfo modifyPassword, string connectionId = null) => Service.ResetUserPassword(modifyPassword, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.RESET_PASSWORD_CODE));
 
         /// <summary>
         /// 导出
@@ -61,7 +61,7 @@ namespace Hzdtf.BasicFunction.Controller
         [Function(FunCodeDefine.EXPORT_EXCEL_CODE)]
         public virtual FileContentResult Export()
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.EXPORT_EXCEL_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.EXPORT_EXCEL_CODE);
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
             UserFilterInfo filter = dicParams.ToObject<UserFilterInfo, string>();
             ReturnInfo<IList<UserInfo>> returnInfo = Service.QueryByFilter(filter, comData);
@@ -89,7 +89,7 @@ namespace Hzdtf.BasicFunction.Controller
         /// <param name="returnInfo">返回信息</param>
         protected void AppendPageData(ReturnInfo<UserPageInfo> returnInfo)
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE);
             ReturnInfo<IList<RoleInfo>> roleReturnInfo = RoleService.QueryAndNotSystemHide(comData);
             if (roleReturnInfo.Success())
             {

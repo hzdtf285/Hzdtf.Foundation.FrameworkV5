@@ -56,7 +56,7 @@ namespace Hzdtf.BasicFunction.Controller.PermissionSet
         /// </summary>
         /// <returns>返回信息</returns>
         [HttpGet("MenuTrees")]
-        public virtual IList<MenuTreeInfo> MenuTrees() => MenuService.QueryMenuTrees(HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE)).Data;
+        public virtual IList<MenuTreeInfo> MenuTrees() => MenuService.QueryMenuTrees(HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE)).Data;
 
         /// <summary>
         /// 获取角色拥有的功能菜单信息列表
@@ -64,7 +64,7 @@ namespace Hzdtf.BasicFunction.Controller.PermissionSet
         /// <param name="roleId">角色ID</param>
         /// <returns>返回信息</returns>
         [HttpGet("HaveMenuFunctions")]
-        public virtual ReturnInfo<IList<MenuFunctionInfo>> HaveMenuFunctions(int roleId) => RoleMenuFunctionService.QueryMenuFunctionsByRoleId(roleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.QUERY_CODE));
+        public virtual ReturnInfo<IList<MenuFunctionInfo>> HaveMenuFunctions(int roleId) => RoleMenuFunctionService.QueryMenuFunctionsByRoleId(roleId, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.QUERY_CODE));
 
         /// <summary>
         /// 保存权限
@@ -73,7 +73,7 @@ namespace Hzdtf.BasicFunction.Controller.PermissionSet
         /// <param name="menuFunctionIds">菜单功能ID列表</param>
         /// <returns>返回信息</returns>
         [HttpPut("SavePermission")]
-        public virtual ReturnInfo<bool> SavePermission(int roleId, IList<int> menuFunctionIds) => RoleMenuFunctionService.SaveRoleMenuFunctions(roleId, menuFunctionIds, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.SAVE_CODE));
+        public virtual ReturnInfo<bool> SavePermission(int roleId, IList<int> menuFunctionIds) => RoleMenuFunctionService.SaveRoleMenuFunctions(roleId, menuFunctionIds, HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.SAVE_CODE));
         
         /// <summary>
         /// 菜单编码

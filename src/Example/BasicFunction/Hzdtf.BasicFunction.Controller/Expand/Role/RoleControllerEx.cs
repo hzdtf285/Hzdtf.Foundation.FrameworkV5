@@ -36,7 +36,7 @@ namespace Hzdtf.BasicFunction.Controller
         [Function(FunCodeDefine.EXPORT_EXCEL_CODE)]
         public virtual FileContentResult Export()
         {
-            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCode: FunCodeDefine.EXPORT_EXCEL_CODE);
+            var comData = HttpContext.CreateCommonUseData(ComUseDataFactory, menuCode: MenuCode(), functionCodes: FunCodeDefine.EXPORT_EXCEL_CODE);
             IDictionary<string, string> dicParams = Request.QueryString.Value.ToDictionaryFromUrlParams();
             KeywordFilterInfo filter = dicParams.ToObject<KeywordFilterInfo, string>();
             ReturnInfo<IList<RoleInfo>> returnInfo = Service.QueryByFilter(filter, comData);
