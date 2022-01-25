@@ -75,7 +75,7 @@ namespace Hzdtf.Example.WebApp
                     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Hzdtf.Example.Controller.xml"));
                 });
             }
-            services.AddSingleton<IJobTaskPersistence, JobTaskJsonFile>();
+            //services.AddSingleton<IJobTaskBasicPersistence, JobTaskJsonFile>();
             services.AddQuartz(op =>
             {
                 op.JobHandleExceptionAssembly = "Hzdtf.Example.Service.Impl";

@@ -10,14 +10,54 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskPersistence.Query(System.String)">
+        <member name="T:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence">
+            <summary>
+            作业任务基本持久化接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Query(System.String)">
             <summary>
             查询所有
             </summary>
             <param name="connectionId">连接ID</param>
             <returns>作业任务信息列表</returns>
         </member>
-        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskPersistence.Set(Hzdtf.Quartz.Model.JobTaskInfo,System.String)">
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Find(System.String,System.String,System.String)">
+            <summary>
+            查找
+            </summary>
+            <param name="name">名称</param>
+            <param name="group">分组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Find(System.Int32,System.String)">
+            <summary>
+            查找
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Exists(System.String,System.String,System.String)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="name">名称</param>
+            <param name="group">分组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Exists(System.Int32,System.String)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Set(Hzdtf.Quartz.Model.JobTaskInfo,System.String)">
             <summary>
             设置，如果存在则更新，否则插入
             </summary>
@@ -25,7 +65,7 @@
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskPersistence.UpdateCron(System.String,System.String,System.String,System.String)">
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.UpdateCron(System.String,System.String,System.String,System.String)">
             <summary>
             更新Cron表达式
             </summary>
@@ -35,7 +75,7 @@
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskPersistence.Delete(System.Int32,System.String)">
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Delete(System.Int32,System.String)">
             <summary>
             删除
             </summary>
@@ -43,7 +83,7 @@
             <param name="connectionId">连接ID</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskPersistence.Delete(System.String,System.String,System.String)">
+        <member name="M:Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence.Delete(System.String,System.String,System.String)">
             <summary>
             删除
             </summary>

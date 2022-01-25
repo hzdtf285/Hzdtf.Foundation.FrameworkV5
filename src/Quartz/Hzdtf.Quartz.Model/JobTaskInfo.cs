@@ -20,9 +20,9 @@ namespace Hzdtf.Quartz.Model
         /// <summary>
         /// 名称
         /// </summary>
-        [Key("name")]
-        [JsonProperty("name")]
-        public string Name
+        [Key("jtName")]
+        [JsonProperty("jtName")]
+        public string JtName
         {
             get;
             set;
@@ -31,9 +31,9 @@ namespace Hzdtf.Quartz.Model
         /// <summary>
         /// 分组
         /// </summary>
-        [Key("name")]
-        [JsonProperty("group")]
-        public string Group
+        [Key("jtGroup")]
+        [JsonProperty("jtGroup")]
+        public string JtGroup
         {
             get;
             set;
@@ -42,9 +42,9 @@ namespace Hzdtf.Quartz.Model
         /// <summary>
         /// 描述
         /// </summary>
-        [Key("description")]
-        [JsonProperty("description")]
-        public string Description
+        [Key("jtDesc")]
+        [JsonProperty("jtDesc")]
+        public string JtDesc
         {
             get;
             set;

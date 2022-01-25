@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Persistence\Hzdtf.Persistence.Contract\Hzdtf.Persistence.Contract.csproj" />
     <ProjectReference Include="..\Hzdtf.Quartz.Model\Hzdtf.Quartz.Model.csproj" />
   </ItemGroup>
 

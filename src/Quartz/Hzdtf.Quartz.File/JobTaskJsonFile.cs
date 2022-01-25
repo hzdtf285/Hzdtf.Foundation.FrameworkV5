@@ -13,7 +13,7 @@ namespace Hzdtf.Quartz.File
     /// @ 黄振东
     /// </summary>
     [Inject]
-    public class JobTaskJsonFile : IJobTaskPersistence
+    public partial class JobTaskJsonFile : IJobTaskBasicPersistence
     {
         /// <summary>
         /// 列表
@@ -51,6 +51,52 @@ namespace Hzdtf.Quartz.File
         }
 
         /// <summary>
+        /// 查找
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <param name="group">分组</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        public JobTaskInfo Find(string name, string group = null, string connectionId = null)
+        {
+            return list.Where(p => p.JtName == name && p.JtGroup == group).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查找
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        public JobTaskInfo Find(int id, string connectionId = null)
+        {
+            return list.Where(p => p.Id == id).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 是否存在
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <param name="group">分组</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        public bool Exists(string name, string group = null, string connectionId = null)
+        {
+            return Find(name, group, connectionId) != null;
+        }
+
+        /// <summary>
+        /// 是否存在
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        public bool Exists(int id, string connectionId = null)
+        {
+            return Find(id, connectionId) != null;
+        }
+
+        /// <summary>
         /// 设置，如果存在则更新，否则插入
         /// </summary>
         /// <param name="jobTask">作业任务</param>
@@ -65,7 +111,7 @@ namespace Hzdtf.Quartz.File
                 jsonFile.WriteJsonFile(list);
                 return 1;
             }
-            var exists = list.Where(p => p.Name == jobTask.Name && p.Group == jobTask.Group).FirstOrDefault();
+            var exists = list.Where(p => p.JtName == jobTask.JtName && p.JtGroup == jobTask.JtGroup).FirstOrDefault();
             if (exists == null)
             {
                 list.Add(jobTask);
@@ -93,7 +139,7 @@ namespace Hzdtf.Quartz.File
             {
                 return 0;
             }
-            var exists = list.Where(p => p.Name == name && p.Group == group).FirstOrDefault();
+            var exists = list.Where(p => p.JtName == name && p.JtGroup == group).FirstOrDefault();
             if (exists == null)
             {
                 return 0;
@@ -144,7 +190,7 @@ namespace Hzdtf.Quartz.File
                 return 0;
             }
 
-            var exists = list.Where(p => p.Name == name && p.Group == group).FirstOrDefault();
+            var exists = list.Where(p => p.JtName == name && p.JtGroup == group).FirstOrDefault();
             if (exists == null)
             {
                 return 0;

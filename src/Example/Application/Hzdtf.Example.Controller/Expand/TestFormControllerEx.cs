@@ -59,7 +59,7 @@ namespace Hzdtf.Example.Controller
         [HttpGet("remove")]
         public void remove()
         {
-            Scheduler.CompletelyRemoveJobTaskAsync("作业1", "分组1").Wait();
+            Scheduler.CompletelyRemoveJobTaskAsync("作业3", "分组3").Wait();
         }
 
         [AllowAnonymous]
@@ -69,9 +69,9 @@ namespace Hzdtf.Example.Controller
             Scheduler.RescheduleJobTaskAsync(new Quartz.Model.JobTaskInfo()
             {
                 Id = 3,
-                Name = "作业3",
-                Group = "分组3",
-                TriggerCron = "0/1 * * * * ?",
+                JtName = "作业3",
+                JtGroup = "分组3",
+                TriggerCron = "0/10 * * * * ?",
                 JobFullClass = "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService3",
                 JobParams = new Dictionary<string, string>()
                 {
@@ -83,6 +83,7 @@ namespace Hzdtf.Example.Controller
                     { "t1", "t11" },
                     { "t2", "t12" },
                 },
+                SuccessedRemove= true,
             }).Wait();
         }
 

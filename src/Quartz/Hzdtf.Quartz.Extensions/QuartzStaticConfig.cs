@@ -64,7 +64,7 @@ namespace Hzdtf.Quartz.Extensions
         /// <summary>
         /// 作业任务持久化
         /// </summary>
-        public static IJobTaskPersistence JobTaskPersistence
+        public static IJobTaskBasicPersistence JobTaskPersistence
         {
             get;
             set;

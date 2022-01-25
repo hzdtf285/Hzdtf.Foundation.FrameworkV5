@@ -5,10 +5,10 @@ using System.Collections.Generic;
 namespace Hzdtf.Quartz.Persistence.Contract
 {
     /// <summary>
-    /// 作业任务持久化接口
+    /// 作业任务基本持久化接口
     /// @ 黄振东
     /// </summary>
-    public interface IJobTaskPersistence
+    public partial interface IJobTaskBasicPersistence
     {
         /// <summary>
         /// 查询所有
@@ -16,6 +16,40 @@ namespace Hzdtf.Quartz.Persistence.Contract
         /// <param name="connectionId">连接ID</param>
         /// <returns>作业任务信息列表</returns>
         IList<JobTaskInfo> Query(string connectionId = null);
+
+        /// <summary>
+        /// 查找
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <param name="group">分组</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        JobTaskInfo Find(string name, string group = null, string connectionId = null);
+
+        /// <summary>
+        /// 查找
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        JobTaskInfo Find(int id, string connectionId = null);
+
+        /// <summary>
+        /// 是否存在
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <param name="group">分组</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        bool Exists(string name, string group = null, string connectionId = null);
+
+        /// <summary>
+        /// 是否存在
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>作业任务</returns>
+        bool Exists(int id, string connectionId = null);
 
         /// <summary>
         /// 设置，如果存在则更新，否则插入

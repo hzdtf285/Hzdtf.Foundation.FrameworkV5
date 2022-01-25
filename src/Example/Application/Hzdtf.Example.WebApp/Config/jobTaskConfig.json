@@ -1,17 +1,17 @@
 ﻿[
   {
     "Id": 1,
-    "Name": "作业1",
-    "Group": "分组1",
-    "Description": "这是作业1的描述",
+    "JtName": "作业1",
+    "JtGroup": "分组1",
+    "JtDesc": "这是作业1的描述",
     "JobFullClass": "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService1",
     "TriggerCron": "0/5 * * * * ?"
   },
   {
     "Id": 2,
-    "Name": "作业2",
-    "Group": "分组2",
-    "Description": "这是作业2的描述",
+    "JtName": "作业2",
+    "JtGroup": "分组2",
+    "JtDesc": "这是作业2的描述",
     "JobFullClass": "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService2",
     "TriggerCron": "0/5 * * * * ?"
   }

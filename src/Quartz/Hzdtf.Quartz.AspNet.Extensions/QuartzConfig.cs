@@ -34,7 +34,7 @@ namespace Hzdtf.Quartz.AspNet.Extensions
         /// <summary>
         /// 作业任务持久化
         /// </summary>
-        public IJobTaskPersistence JobTaskPersistence
+        public IJobTaskBasicPersistence JobTaskPersistence
         {
             get;
             set;

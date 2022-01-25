@@ -251,7 +251,7 @@
             日志
             </summary>
         </member>
-        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.#ctor(Hzdtf.Quartz.Persistence.Contract.IJobTaskPersistence,Hzdtf.Logger.Contract.ILogable,Quartz.ISchedulerFactory)">
+        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap.#ctor(Hzdtf.Quartz.Persistence.Contract.IJobTaskBasicPersistence,Hzdtf.Logger.Contract.ILogable,Quartz.ISchedulerFactory)">
             <summary>
             构造方法
             </summary>

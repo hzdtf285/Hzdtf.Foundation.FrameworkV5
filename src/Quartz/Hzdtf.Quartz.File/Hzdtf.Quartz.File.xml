@@ -33,6 +33,40 @@
             <param name="connectionId">连接ID</param>
             <returns>作业任务信息列表</returns>
         </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Find(System.String,System.String,System.String)">
+            <summary>
+            查找
+            </summary>
+            <param name="name">名称</param>
+            <param name="group">分组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Find(System.Int32,System.String)">
+            <summary>
+            查找
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Exists(System.String,System.String,System.String)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="name">名称</param>
+            <param name="group">分组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Exists(System.Int32,System.String)">
+            <summary>
+            是否存在
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务</returns>
+        </member>
         <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Set(Hzdtf.Quartz.Model.JobTaskInfo,System.String)">
             <summary>
             设置，如果存在则更新，否则插入

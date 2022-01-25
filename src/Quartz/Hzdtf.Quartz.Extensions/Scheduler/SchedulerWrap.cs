@@ -41,7 +41,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// <summary>
         /// 作业任务持久化
         /// </summary>
-        private readonly IJobTaskPersistence persistence;
+        private readonly IJobTaskBasicPersistence persistence;
 
         /// <summary>
         /// 日志
@@ -54,7 +54,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// <param name="persistence">作业任务持久化</param>
         /// <param name="log">日志</param>
         /// <param name="schedulerFactory">调度器工厂，如果为null，则使用标准工厂(StdSchedulerFactory)</param>
-        public SchedulerWrap(IJobTaskPersistence persistence = null, ILogable log = null, ISchedulerFactory schedulerFactory = null)
+        public SchedulerWrap(IJobTaskBasicPersistence persistence = null, ILogable log = null, ISchedulerFactory schedulerFactory = null)
         {
             if (QuartzStaticConfig.JobTaskPersistence != null)
             {
@@ -87,13 +87,14 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
             {
                 return;
             }
+            scheduler = await schedulerFactory.GetScheduler();
+
             var jobTasks = persistence.Query();
             if (jobTasks.IsNullOrCount0())
             {
                 return;
             }
 
-            scheduler = await schedulerFactory.GetScheduler();
             foreach (var jobTask in jobTasks)
             {
                 await AddScheduleAsync(jobTask);
@@ -314,12 +315,12 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
             {
                 return;
             }
-            var tk = new TriggerKey(jobTask.Name, jobTask.Group);
+            var tk = new TriggerKey(jobTask.JtName, jobTask.JtGroup);
             var trigger = await scheduler.GetTrigger(tk) as CronTriggerImpl;
             // 如果不存在，则新创建调度
             if (trigger == null)
             {
-                var jk = new JobKey(jobTask.Name, jobTask.Group);
+                var jk = new JobKey(jobTask.JtName, jobTask.JtGroup);
                 await scheduler.DeleteJob(jk);
                 await AddScheduleAsync(jobTask);
 
@@ -339,9 +340,9 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         {
             var type = ReflectExtensions.LoadType(jobTask.JobFullClass);
             var jobBuilder = JobBuilder.Create(type)
-                .WithIdentity(jobTask.Name, jobTask.Group)
+                .WithIdentity(jobTask.JtName, jobTask.JtGroup)
                 .RequestRecovery()
-                .WithDescription(jobTask.Description);
+                .WithDescription(jobTask.JtDesc);
             jobBuilder.UsingJobData(QuartzCodeDefine.JobTaskIdKey, jobTask.Id);
             jobBuilder.UsingJobData(QuartzCodeDefine.JobTaskSuccessedRemoveKey, jobTask.SuccessedRemove);
             if (!jobTask.JobParams.IsNullOrCount0())
@@ -353,9 +354,9 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
             }
 
             var triggerBuilder = TriggerBuilder.Create()
-                .WithIdentity(jobTask.Name, jobTask.Group)
+                .WithIdentity(jobTask.JtName, jobTask.JtGroup)
                 .WithCronSchedule(jobTask.TriggerCron)
-                .WithDescription(jobTask.Description);
+                .WithDescription(jobTask.JtDesc);
             if (!jobTask.TriggerParams.IsNullOrCount0())
             {
                 foreach (var item in jobTask.TriggerParams)

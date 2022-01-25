@@ -67,17 +67,17 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.Name">
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JtName">
             <summary>
             名称
             </summary>
         </member>
-        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.Group">
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JtGroup">
             <summary>
             分组
             </summary>
         </member>
-        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.Description">
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JtDesc">
             <summary>
             描述
             </summary>
