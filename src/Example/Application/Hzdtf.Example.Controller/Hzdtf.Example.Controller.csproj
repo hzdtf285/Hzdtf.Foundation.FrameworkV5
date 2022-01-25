@@ -18,6 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Quartz\Hzdtf.Quartz.Extensions\Hzdtf.Quartz.Extensions.csproj" />
     <ProjectReference Include="..\..\Workflow\Hzdtf.Workflow.Controller\Hzdtf.Workflow.Controller.csproj" />
     <ProjectReference Include="..\Hzdtf.Example.Service.Contract\Hzdtf.Example.Service.Contract.csproj" />
   </ItemGroup>

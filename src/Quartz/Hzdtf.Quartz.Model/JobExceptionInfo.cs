@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hzdtf.Quartz.Extensions.Model
+namespace Hzdtf.Quartz.Model
 {
     /// <summary>
     /// 作业异常信息

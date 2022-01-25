@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Hzdtf.Utility.Utils;
 
 namespace System
 {
@@ -87,6 +88,13 @@ namespace System
         /// <param name="type">类型</param>
         /// <returns>JSON对象</returns>
         public static object ToJsonObjectFromFile(this string fileName, Type type) => ReaderFileContent(fileName, str => ToJsonObject(str, type));
+
+        /// <summary>
+        /// 写入JSON文件
+        /// </summary>
+        /// <param name="fileName">文件名</param>
+        /// <param name="obj">对象</param>
+        public static void WriteJsonFile(this string fileName, object obj) => fileName.WriteFileContent(obj.ToJsonString());
 
         /// <summary>
         /// 读取文件内容

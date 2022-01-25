@@ -1,12 +1,10 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Quartz.AspNet.Extensions;
 using Hzdtf.Quartz.Extensions;
-using Hzdtf.Quartz.Extensions.Data;
-using Hzdtf.Quartz.Extensions.Model;
 using Hzdtf.Quartz.Extensions.Scheduler;
-using Hzdtf.Utility.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Quartz;
 using Quartz.Impl;
 using System;
@@ -37,38 +35,6 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
-            if (op.JobDetailReader == null)
-            {
-                services.AddSingleton<IReaderAll<JobDetailInfo>, JobDetailDataJson>();
-            }
-            else
-            {
-                services.AddSingleton<IReaderAll<JobDetailInfo>>(op.JobDetailReader);
-            }
-            if (op.JobTaskReader == null)
-            {
-                services.AddSingleton<IReaderAll<JobTaskInfo>, JobTaskDataJson>();
-            }
-            else
-            {
-                services.AddSingleton<IReaderAll<JobTaskInfo>>(op.JobTaskReader);
-            }
-            if (op.TriggerReader == null)
-            {
-                services.AddSingleton<IReaderAll<TriggerInfo>, TriggerDataJson>();
-            }
-            else
-            {
-                services.AddSingleton<IReaderAll<TriggerInfo>>(op.TriggerReader);
-            }
-            if (op.QuartzDataFactory == null)
-            {
-                services.AddSingleton<IQuartzDataFactory, QuartzDataFactory>();
-            }
-            else
-            {
-                services.AddSingleton<IQuartzDataFactory>(op.QuartzDataFactory);
-            }
             if (op.SchedulerWrap == null)
             {
                 services.AddSingleton<ISchedulerWrap, SchedulerWrap>();
@@ -76,7 +42,10 @@ namespace Microsoft.Extensions.DependencyInjection
             else
             {
                 services.AddSingleton<ISchedulerWrap>(op.SchedulerWrap);
+                QuartzStaticConfig.SchedulerWrap = op.SchedulerWrap;
             }
+
+            QuartzStaticConfig.JobTaskPersistence = op.JobTaskPersistence;
 
             if (op.JobHandleException != null)
             {
@@ -95,8 +64,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="builder">应用生成</param>
         /// <param name="service">服务提供者</param>
+        /// <param name="lifetime">生命周期</param>
         /// <returns>应用生成</returns>
-        public static IApplicationBuilder UseQuartz(this IApplicationBuilder builder, IServiceProvider service)
+        public static IApplicationBuilder UseQuartz(this IApplicationBuilder builder, IServiceProvider service, IHostApplicationLifetime lifetime)
         {
             if (QuartzStaticConfig.JobHandleException == null)
             {
@@ -112,6 +82,18 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 QuartzStaticConfig.Log = log;
             }
+
+            ISchedulerWrap scheduler = null;
+            lifetime.ApplicationStarted.Register(() =>
+            {
+                scheduler = service.GetService<ISchedulerWrap>();
+                scheduler.StartAsync().Wait();
+            });
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                scheduler.StopAsync().Wait();
+            });
+
 
             return builder;
         }

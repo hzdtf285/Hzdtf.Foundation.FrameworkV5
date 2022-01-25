@@ -1,6 +1,9 @@
 ﻿using Hzdtf.BasicFunction.Service.Contract;
+using Hzdtf.Quartz.Extensions.Scheduler;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +24,66 @@ namespace Hzdtf.Example.Controller
         {
             get;
             set;
+        }
+
+        public ISchedulerWrap Scheduler
+        {
+            get;
+            set;
+        }
+
+        [AllowAnonymous]
+        [HttpGet("test")]
+        public async Task Test()
+        {
+            await Scheduler.RescheduleJobTaskAsync("0/10 * * * * ?", "作业1", "分组1");
+            //Scheduler.StopJobTaskAsync("作业1", "分组1").Wait();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("pause")]
+        public void pause()
+        {
+            Scheduler.PauseJobTaskAsync("作业1").Wait();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("resume")]
+        public void resume()
+        {
+            Scheduler.ResumeJobTaskAsync("作业1").Wait();
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("remove")]
+        public void remove()
+        {
+            Scheduler.CompletelyRemoveJobTaskAsync("作业1", "分组1").Wait();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("re")]
+        public void re()
+        {
+            Scheduler.RescheduleJobTaskAsync(new Quartz.Model.JobTaskInfo()
+            {
+                Id = 3,
+                Name = "作业3",
+                Group = "分组3",
+                TriggerCron = "0/1 * * * * ?",
+                JobFullClass = "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService3",
+                JobParams = new Dictionary<string, string>()
+                {
+                    { "j1", "j11" },
+                    { "j2", "j12" },
+                },
+                TriggerParams = new Dictionary<string, string>()
+                {
+                    { "t1", "t11" },
+                    { "t2", "t12" },
+                },
+            }).Wait();
         }
 
         /// <summary>

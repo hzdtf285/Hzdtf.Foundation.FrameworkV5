@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Quartz.File</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Quartz.File.JobTaskJsonFile">
+            <summary>
+            作业任务JSON文件
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.File.JobTaskJsonFile.list">
+            <summary>
+            列表
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.File.JobTaskJsonFile.jsonFile">
+            <summary>
+            JSON文件
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.#ctor(System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="jsonFile">JSON文件</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Query(System.String)">
+            <summary>
+            查询所有
+            </summary>
+            <param name="connectionId">连接ID</param>
+            <returns>作业任务信息列表</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Set(Hzdtf.Quartz.Model.JobTaskInfo,System.String)">
+            <summary>
+            设置，如果存在则更新，否则插入
+            </summary>
+            <param name="jobTask">作业任务</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.UpdateCron(System.String,System.String,System.String,System.String)">
+            <summary>
+            更新Cron表达式
+            </summary>
+            <param name="cron">cron表达式</param>
+            <param name="name">名称</param>
+            <param name="group">分组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Delete(System.Int32,System.String)">
+            <summary>
+            删除
+            </summary>
+            <param name="id">ID</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.File.JobTaskJsonFile.Delete(System.String,System.String,System.String)">
+            <summary>
+            删除
+            </summary>
+            <param name="name">名称</param>
+            <param name="group">分组</param>
+            <param name="connectionId">连接ID</param>
+            <returns>影响行数</returns>
+        </member>
+    </members>
+</doc>

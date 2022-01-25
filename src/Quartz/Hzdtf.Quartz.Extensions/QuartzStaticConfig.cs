@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Quartz.Extensions.Scheduler;
+using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -55,6 +56,24 @@ namespace Hzdtf.Quartz.Extensions
         /// 工作处理异常
         /// </summary>
         public static IJobHandleException JobHandleException
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 作业任务持久化
+        /// </summary>
+        public static IJobTaskPersistence JobTaskPersistence
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 调度器包装
+        /// </summary>
+        public static ISchedulerWrap SchedulerWrap
         {
             get;
             set;

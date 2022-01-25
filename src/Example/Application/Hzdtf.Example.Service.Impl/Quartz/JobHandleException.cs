@@ -1,6 +1,6 @@
 ﻿using Hzdtf.Example.Service.Contract;
-using Hzdtf.Quartz.Extensions.Model;
 using Hzdtf.Quartz.Extensions.Scheduler;
+using Hzdtf.Quartz.Model;
 using Quartz;
 using System;
 using System.Collections.Generic;

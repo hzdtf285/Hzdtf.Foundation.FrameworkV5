@@ -9676,6 +9676,13 @@
             <param name="type">类型</param>
             <returns>JSON对象</returns>
         </member>
+        <member name="M:System.JsonExtensions.WriteJsonFile(System.String,System.Object)">
+            <summary>
+            写入JSON文件
+            </summary>
+            <param name="fileName">文件名</param>
+            <param name="obj">对象</param>
+        </member>
         <member name="M:System.JsonExtensions.ReaderFileContent``1(System.String,System.Func{System.String,``0})">
             <summary>
             读取文件内容

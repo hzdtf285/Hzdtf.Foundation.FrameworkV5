@@ -67,7 +67,7 @@
             </summary>
             <param name="service">测试表单服务</param>
         </member>
-        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobHandleException.ExecNotify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Extensions.Model.JobExceptionInfo)">
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobHandleException.ExecNotify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Model.JobExceptionInfo)">
             <summary>
             执行通知
             </summary>
@@ -105,6 +105,19 @@
             </summary>
         </member>
         <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService2.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService3">
+            <summary>
+            作业服务3
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService3.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
             <summary>
             执行业务处理
             </summary>

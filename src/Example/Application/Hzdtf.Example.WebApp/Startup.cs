@@ -2,7 +2,8 @@ using Autofac;
 using Hzdtf.BasicFunction.Controller.Extensions.RoutePermission;
 using Hzdtf.Example.WebApp.AppStart;
 using Hzdtf.Logger.Integration.ENLog;
-using Hzdtf.Quartz.Extensions.Scheduler;
+using Hzdtf.Quartz.File;
+using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,6 +75,7 @@ namespace Hzdtf.Example.WebApp
                     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Hzdtf.Example.Controller.xml"));
                 });
             }
+            services.AddSingleton<IJobTaskPersistence, JobTaskJsonFile>();
             services.AddQuartz(op =>
             {
                 op.JobHandleExceptionAssembly = "Hzdtf.Example.Service.Impl";
@@ -81,7 +83,7 @@ namespace Hzdtf.Example.WebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.AspNetCore.Hosting.IApplicationLifetime lifetime)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             App.Instance = app.ApplicationServices;
             if (env.IsDevelopment())
@@ -104,7 +106,7 @@ namespace Hzdtf.Example.WebApp
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseQuartz(app.ApplicationServices);
+            app.UseQuartz(app.ApplicationServices, lifetime);
 
             app.UseTheReuestOperation();
             app.UseCulture();
@@ -123,12 +125,6 @@ namespace Hzdtf.Example.WebApp
             });
 
             OtherConfig.Init();
-
-            lifetime.ApplicationStarted.Register(() =>
-            {
-                var scheduler = app.ApplicationServices.GetService<ISchedulerWrap>();
-                scheduler.StartAsync().Wait();
-            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

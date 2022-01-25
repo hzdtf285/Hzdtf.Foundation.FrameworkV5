@@ -1,5 +1,5 @@
-﻿using Hzdtf.Quartz.Extensions.Model;
-﻿using Quartz;
+﻿using Hzdtf.Quartz.Model;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;

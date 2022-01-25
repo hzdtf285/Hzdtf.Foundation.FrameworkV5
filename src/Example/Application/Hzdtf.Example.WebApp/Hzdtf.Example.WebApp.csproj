@@ -31,6 +31,7 @@
     <ProjectReference Include="..\..\..\Logger\Hzdtf.Logger.Integration.ENLog\Hzdtf.Logger.Integration.ENLog.csproj" />
     <ProjectReference Include="..\..\..\Logger\Hzdtf.Logger.Integration.MicrosoftLog\Hzdtf.Logger.Integration.MicrosoftLog.csproj" />
     <ProjectReference Include="..\..\..\Quartz\Hzdtf.Quartz.AspNet.Extensions\Hzdtf.Quartz.AspNet.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\Quartz\Hzdtf.Quartz.File\Hzdtf.Quartz.File.csproj" />
     <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.Controller\Hzdtf.BasicFunction.Controller.csproj" />
     <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.MySql\Hzdtf.BasicFunction.MySql.csproj" />
     <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.Service.Impl\Hzdtf.BasicFunction.Service.Impl.csproj" />

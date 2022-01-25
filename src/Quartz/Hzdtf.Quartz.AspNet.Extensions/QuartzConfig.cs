@@ -1,7 +1,5 @@
-﻿using Hzdtf.Quartz.Extensions.Data;
-using Hzdtf.Quartz.Extensions.Model;
-using Hzdtf.Quartz.Extensions.Scheduler;
-using Hzdtf.Utility.Data;
+﻿using Hzdtf.Quartz.Extensions.Scheduler;
+using Hzdtf.Quartz.Persistence.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,36 +32,9 @@ namespace Hzdtf.Quartz.AspNet.Extensions
         }
 
         /// <summary>
-        /// 作业明细读取
+        /// 作业任务持久化
         /// </summary>
-        public IReaderAll<JobDetailInfo> JobDetailReader
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 作业任务读取
-        /// </summary>
-        public IReaderAll<JobTaskInfo> JobTaskReader
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 触发器读取
-        /// </summary>
-        public IReaderAll<TriggerInfo> TriggerReader
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 时钟数据工厂
-        /// </summary>
-        public IQuartzDataFactory QuartzDataFactory
+        public IJobTaskPersistence JobTaskPersistence
         {
             get;
             set;

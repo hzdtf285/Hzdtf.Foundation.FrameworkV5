@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Logger.Contract;
+using Hzdtf.Quartz.Model;
 using Hzdtf.Utility;
 using Hzdtf.Utility.Model.Identitys;
 using Microsoft.Extensions.Configuration;
@@ -53,7 +54,6 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
                 var name = context.JobDetail.Key.Name;
                 var group = context.JobDetail.Key.Group;
                 var idMsg = $"事务Id[{transId}],类名[{thisClass}],作业组[{group}],作业名[{name}]";
-
                 try
                 {
                     if (QuartzStaticConfig.IsTraceLog)
@@ -62,6 +62,27 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
                     }
 
                     ExecBusinessHandle(context, transId);
+
+                    // 如果设置了执行成功后移除任务
+                    var successRemove = context.JobDetail.JobDataMap.GetBoolean(QuartzCodeDefine.JobTaskSuccessedRemoveKey);
+                    if (successRemove)
+                    {
+                        ISchedulerWrap wrap = null;
+                        if (QuartzStaticConfig.SchedulerWrap == null)
+                        {
+                            if (App.Instance == null)
+                            {
+                                throw new ArgumentNullException("请设置App.Instance");
+                            }
+                            wrap = App.GetServiceFromInstance<ISchedulerWrap>();
+                        }
+                        else
+                        {
+                            wrap = QuartzStaticConfig.SchedulerWrap;
+                        }
+
+                        wrap.CompletelyRemoveJobTaskAsync(name, group);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -71,7 +92,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
                         return;
                     }
 
-                    QuartzStaticConfig.JobHandleException.Notify(context, this, new Model.JobExceptionInfo()
+                    QuartzStaticConfig.JobHandleException.Notify(context, this, new JobExceptionInfo()
                     {
                         Ex = ex,
                         ExMsg = ex.Message,

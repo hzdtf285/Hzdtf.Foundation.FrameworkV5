@@ -23,6 +23,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Logger\Hzdtf.Logger.Contract\Hzdtf.Logger.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Quartz.Model\Hzdtf.Quartz.Model.csproj" />
+    <ProjectReference Include="..\Hzdtf.Quartz.Persistence.Contract\Hzdtf.Quartz.Persistence.Contract.csproj" />
   </ItemGroup>
 
 </Project>

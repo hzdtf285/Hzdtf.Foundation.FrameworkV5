@@ -1,5 +1,5 @@
 ﻿using Hzdtf.Logger.Contract;
-using Hzdtf.Quartz.Extensions.Model;
+using Hzdtf.Quartz.Model;
 using Microsoft.Extensions.Configuration;
 using Quartz;
 using System;

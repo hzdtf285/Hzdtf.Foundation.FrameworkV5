@@ -21,8 +21,8 @@ namespace Hzdtf.Example.Service.Impl.Quartz
         /// <param name="transId">事务ID</param>
         public override void ExecBusinessHandle(IJobExecutionContext context, long transId)
         {
-            throw new Exception("测试异常");
-            Console.WriteLine($"{DateTime.Now.ToLongTimeString()}.JobService1");
+            //throw new Exception("测试异常");
+            Console.WriteLine($"{DateTime.Now.ToFullFixedDateTime()}.JobService1");
         }
     }
 }
