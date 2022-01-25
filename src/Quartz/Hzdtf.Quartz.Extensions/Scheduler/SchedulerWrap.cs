@@ -10,9 +10,7 @@ using System.Reflection;
 using Quartz.Impl.Triggers;
 using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Quartz.Model;
-using Microsoft.Extensions.Logging;
 using Hzdtf.Logger.Contract;
-using Hzdtf.Utility;
 
 namespace Hzdtf.Quartz.Extensions.Scheduler
 {

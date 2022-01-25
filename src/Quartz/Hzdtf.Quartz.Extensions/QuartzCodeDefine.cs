@@ -10,7 +10,7 @@ namespace Hzdtf.Quartz.Extensions
     /// 时钟编码定义
     /// @ 黄振东
     /// </summary>
-    static class QuartzCodeDefine
+    public static class QuartzCodeDefine
     {
         /// <summary>
         /// 作业任务ID键

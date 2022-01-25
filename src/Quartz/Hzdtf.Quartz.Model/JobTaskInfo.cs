@@ -120,6 +120,8 @@ namespace Hzdtf.Quartz.Model
         /// 执行成功后移除任务
         /// 默认为否
         /// </summary>
+        [Key("successedRemove")]
+        [JsonProperty("successedRemove")]
         public bool SuccessedRemove
         {
             get;
