@@ -50,7 +50,7 @@ namespace Hzdtf.MySql
         protected override string GetPartPageSql(int pageIndex, int pageSize)
         {
             int[] page = PagingUtil.PageStartEnd(pageIndex, pageSize);
-            return $"LIMIT {page[0]},{page[1]}";
+            return $"LIMIT {page[0]},{pageSize}";
         }
 
         /// <summary>

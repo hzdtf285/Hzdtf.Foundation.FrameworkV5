@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace Hzdtf.Example.Service.Impl.Quartz
 {
     /// <summary>
-    /// 作业服务3
+    /// 作业服务9
     /// @ 黄振东
     /// </summary>
-    public class JobService3 : JobBase
+    public class JobService9 : JobBase
     {
         /// <summary>
         /// 执行业务处理
@@ -21,7 +21,7 @@ namespace Hzdtf.Example.Service.Impl.Quartz
         /// <param name="transId">事务ID</param>
         public override void ExecBusinessHandle(IJobExecutionContext context, long transId)
         {
-            Console.WriteLine($"{DateTime.Now.ToFullFixedDateTime()}.JobService3");
+            Console.WriteLine($"{DateTime.Now.ToFullFixedDateTime()}.JobService9");
         }
     }
 }

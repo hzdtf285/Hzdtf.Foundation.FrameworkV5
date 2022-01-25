@@ -1,6 +1,7 @@
 ﻿using Hzdtf.Logger.Contract;
 using Hzdtf.Quartz.AspNet.Extensions;
 using Hzdtf.Quartz.Extensions;
+using Hzdtf.Quartz.Extensions.Job;
 using Hzdtf.Quartz.Extensions.Scheduler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;

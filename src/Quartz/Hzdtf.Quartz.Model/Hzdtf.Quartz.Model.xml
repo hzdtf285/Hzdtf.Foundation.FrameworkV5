@@ -60,6 +60,12 @@
             异常
             </summary>
         </member>
+        <member name="T:Hzdtf.Quartz.Model.JobTaskFilterInfo">
+            <summary>
+            作业任务过滤信息
+            @ 黄振东
+            </summary>
+        </member>
         <member name="T:Hzdtf.Quartz.Model.JobTaskInfo">
             <summary>
             作业任务信息

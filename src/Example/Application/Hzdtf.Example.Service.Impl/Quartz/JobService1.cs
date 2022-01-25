@@ -1,4 +1,4 @@
-﻿using Hzdtf.Quartz.Extensions.Scheduler;
+﻿using Hzdtf.Quartz.Extensions.Job;
 using Quartz;
 using System;
 using System.Collections.Generic;

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hzdtf.Quartz.Extensions.Scheduler
+namespace Hzdtf.Quartz.Extensions.Job
 {
     /// <summary>
     /// 作业处理异常

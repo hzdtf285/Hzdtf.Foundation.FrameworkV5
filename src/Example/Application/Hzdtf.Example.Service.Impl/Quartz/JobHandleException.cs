@@ -1,5 +1,5 @@
 ﻿using Hzdtf.Example.Service.Contract;
-using Hzdtf.Quartz.Extensions.Scheduler;
+using Hzdtf.Quartz.Extensions.Job;
 using Hzdtf.Quartz.Model;
 using Quartz;
 using System;

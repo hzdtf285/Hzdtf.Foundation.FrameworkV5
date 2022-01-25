@@ -66,25 +66,27 @@ namespace Hzdtf.Example.Controller
         [HttpGet("re")]
         public void re()
         {
-            Scheduler.RescheduleJobTaskAsync(new Quartz.Model.JobTaskInfo()
+            for (var i = 1; i <= 10; i++)
             {
-                Id = 3,
-                JtName = "作业3",
-                JtGroup = "分组3",
-                TriggerCron = "0/10 * * * * ?",
-                JobFullClass = "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService3",
-                JobParams = new Dictionary<string, string>()
+                Scheduler.RescheduleJobTaskAsync(new Quartz.Model.JobTaskInfo()
+                {
+                    Id = i,
+                    JtName = "作业" + i,
+                    JtGroup = "分组" + i,
+                    TriggerCron = "0/10 * * * * ?",
+                    JobFullClass = "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService" + i,
+                    JobParams = new Dictionary<string, string>()
                 {
                     { "j1", "j11" },
                     { "j2", "j12" },
                 },
-                TriggerParams = new Dictionary<string, string>()
+                    TriggerParams = new Dictionary<string, string>()
                 {
                     { "t1", "t11" },
                     { "t2", "t12" },
                 },
-                SuccessedRemove= true,
-            }).Wait();
+                }).Wait();
+            }
         }
 
         /// <summary>

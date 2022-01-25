@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Logger.Contract;
+using Hzdtf.Quartz.Extensions.Job;
 using Hzdtf.Quartz.Extensions.Scheduler;
 using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility;

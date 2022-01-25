@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Logger.Contract;
+using Hzdtf.Quartz.Extensions.Scheduler;
 using Hzdtf.Quartz.Model;
 using Hzdtf.Utility;
 using Hzdtf.Utility.Model.Identitys;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hzdtf.Quartz.Extensions.Scheduler
+namespace Hzdtf.Quartz.Extensions.Job
 {
     /// <summary>
     /// 作业基类

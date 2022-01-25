@@ -14,5 +14,21 @@
     "JtDesc": "这是作业2的描述",
     "JobFullClass": "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService2",
     "TriggerCron": "0/5 * * * * ?"
+  },
+  {
+    "Id": 3,
+    "JtName": "作业3",
+    "JtGroup": "分组3",
+    "JtDesc": "这是作业3的描述",
+    "JobFullClass": "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService2",
+    "TriggerCron": "0/5 * * * * ?"
+  },
+  {
+    "Id": 4,
+    "JtName": "作业4",
+    "JtGroup": "分组4",
+    "JtDesc": "这是作业4的描述",
+    "JobFullClass": "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService2",
+    "TriggerCron": "0/5 * * * * ?"
   }
 ]

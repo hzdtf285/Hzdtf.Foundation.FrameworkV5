@@ -4,6 +4,87 @@
         <name>Hzdtf.Quartz.Extensions</name>
     </assembly>
     <members>
+        <member name="T:Hzdtf.Quartz.Extensions.Job.IJobHandleException">
+            <summary>
+            作业处理异常接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Job.IJobHandleException.Notify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Model.JobExceptionInfo)">
+            <summary>
+            通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="jobEx">作业异常</param>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Job.JobBase">
+            <summary>
+            作业基类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Job.JobBase.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Job.JobBase.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Extensions.Job.JobBase.identity">
+            <summary>
+            ID标识
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Job.JobBase.Execute(Quartz.IJobExecutionContext)">
+            <summary>
+            执行
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <returns>任务</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Job.JobBase.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Quartz.Extensions.Job.JobHandleExceptionBase">
+            <summary>
+            作业处理异常
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Job.JobHandleExceptionBase.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.Job.JobHandleExceptionBase.Config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Job.JobHandleExceptionBase.Notify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Model.JobExceptionInfo)">
+            <summary>
+            通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="jobEx">作业异常</param>
+        </member>
+        <member name="M:Hzdtf.Quartz.Extensions.Job.JobHandleExceptionBase.ExecNotify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Model.JobExceptionInfo)">
+            <summary>
+            执行通知
+            </summary>
+            <param name="context">作业执行上下文</param>
+            <param name="jobInstance">作业实例</param>
+            <param name="jobEx">作业异常</param>
+        </member>
         <member name="T:Hzdtf.Quartz.Extensions.QuartzCodeDefine">
             <summary>
             时钟编码定义
@@ -55,20 +136,6 @@
             <summary>
             调度器包装
             </summary>
-        </member>
-        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.IJobHandleException">
-            <summary>
-            作业处理异常接口
-            @ 黄振东
-            </summary>
-        </member>
-        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.IJobHandleException.Notify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Model.JobExceptionInfo)">
-            <summary>
-            通知
-            </summary>
-            <param name="context">作业执行上下文</param>
-            <param name="jobInstance">作业实例</param>
-            <param name="jobEx">作业异常</param>
         </member>
         <member name="T:Hzdtf.Quartz.Extensions.Scheduler.ISchedulerWrap">
             <summary>
@@ -152,73 +219,6 @@
             <param name="name">名称</param>
             <param name="group">分组</param>
             <returns>任务</returns>
-        </member>
-        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.JobBase">
-            <summary>
-            作业基类
-            @ 黄振东
-            </summary>
-        </member>
-        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobBase.Log">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobBase.Config">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="F:Hzdtf.Quartz.Extensions.Scheduler.JobBase.identity">
-            <summary>
-            ID标识
-            </summary>
-        </member>
-        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobBase.Execute(Quartz.IJobExecutionContext)">
-            <summary>
-            执行
-            </summary>
-            <param name="context">作业执行上下文</param>
-            <returns>任务</returns>
-        </member>
-        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobBase.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
-            <summary>
-            执行业务处理
-            </summary>
-            <param name="context">作业执行上下文</param>
-            <param name="transId">事务ID</param>
-        </member>
-        <member name="T:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase">
-            <summary>
-            作业处理异常
-            @ 黄振东
-            </summary>
-        </member>
-        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.Log">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="P:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.Config">
-            <summary>
-            配置
-            </summary>
-        </member>
-        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.Notify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Model.JobExceptionInfo)">
-            <summary>
-            通知
-            </summary>
-            <param name="context">作业执行上下文</param>
-            <param name="jobInstance">作业实例</param>
-            <param name="jobEx">作业异常</param>
-        </member>
-        <member name="M:Hzdtf.Quartz.Extensions.Scheduler.JobHandleExceptionBase.ExecNotify(Quartz.IJobExecutionContext,Quartz.IJob,Hzdtf.Quartz.Model.JobExceptionInfo)">
-            <summary>
-            执行通知
-            </summary>
-            <param name="context">作业执行上下文</param>
-            <param name="jobInstance">作业实例</param>
-            <param name="jobEx">作业异常</param>
         </member>
         <member name="T:Hzdtf.Quartz.Extensions.Scheduler.SchedulerWrap">
             <summary>

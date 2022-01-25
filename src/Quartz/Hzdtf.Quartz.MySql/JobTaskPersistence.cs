@@ -6,8 +6,9 @@ using Hzdtf.Utility.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Hzdtf.Utility.Utils;
+using Hzdtf.Utility.Model.Page;
+using System.Text;
 
 namespace Hzdtf.Quartz.MySql
 {
@@ -18,16 +19,111 @@ namespace Hzdtf.Quartz.MySql
     public partial class JobTaskPersistence : IJobTaskBasicPersistence
     {
         /// <summary>
-        /// 查询所有
+        /// 查询
         /// </summary>
+        /// <param name="filter">过滤器</param>
         /// <param name="connectionId">连接ID</param>
         /// <returns>作业任务信息列表</returns>
-        public IList<JobTaskInfo> Query(string connectionId = null)
+        public IList<JobTaskInfo> Query(JobTaskFilterInfo filter = null, string connectionId = null)
         {
-            var list = this.Select(connectionId: connectionId);
-            DbToModelFullOtherProps(list);
+            var sql = $"{BasicSelectSql()} {GetWhereSql(ref filter)}";
+            if (!string.IsNullOrWhiteSpace(filter.SortName))
+            {
+                sql += $" ORDER BY {PfxEscapeChar}{filter.SortName}{SufxEscapeChar} {filter.Sort.ToString()}";
+            }
 
-            return list;
+            IList<JobTaskInfo> result = null;
+            DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
+            {
+                result = ExecRecordSqlLog<IList<JobTaskInfo>>(sql, () =>
+                {
+                    return dbConn.Query<JobTaskInfo>(sql, filter, GetDbTransaction(connId, AccessMode.SLAVE)).ToList();
+                }, tag: "Query");
+            }, AccessMode.SLAVE);
+            DbToModelFullOtherProps(result);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 查询分页
+        /// </summary>
+        /// <param name="pageIndex">页码，从0开始</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>分页信息</returns>
+        public PagingInfo<JobTaskInfo> QueryPage(int pageIndex, int pageSize, JobTaskFilterInfo filter = null, string connectionId = null)
+        {
+            var whereSql = GetWhereSql(ref filter);
+            if (string.IsNullOrWhiteSpace(filter.SortName))
+            {
+                filter.SortName = "CreateTime";
+                filter.Sort = SortType.ASC;
+            }
+
+            var orderSql = new StringBuilder($"ORDER BY {PfxEscapeChar}{filter.SortName}{SufxEscapeChar} {filter.Sort.ToString()}");
+            if (!"Id".Equals(filter.SortName))
+            {
+                orderSql.AppendFormat(",{0}", GetFieldByProp("Id"));
+            }
+
+            var whereSqlStr = whereSql.ToString();
+            var countSql = $"{BasicCountSql()} {whereSqlStr}";
+            var selectSql = $"{BasicSelectSql()} {whereSqlStr} {orderSql.ToString()} {GetPartPageSql(pageIndex, pageSize)}";
+
+            PagingInfo<JobTaskInfo> result = null;
+            DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
+            {
+                var trans = GetDbTransaction(connId, AccessMode.SLAVE);
+                result = PagingUtil.ExecPage<JobTaskInfo>(pageIndex, pageSize, () =>
+                {
+                    return ExecRecordSqlLog<int>(countSql, () =>
+                    {
+                        return dbConn.ExecuteScalar<int>(countSql, filter, transaction: trans);
+                    }, tag: "QueryPage");
+                }, () =>
+                {
+                    return ExecRecordSqlLog<IList<JobTaskInfo>>(selectSql, () =>
+                    {
+                        return dbConn.Query<JobTaskInfo>(selectSql, filter, transaction: trans).AsList();
+                    }, tag: "QueryPage");
+                });
+            }, AccessMode.SLAVE);
+            DbToModelFullOtherProps(result.Rows);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 获取条件SQL
+        /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <returns>条件SQL</returns>
+        private string GetWhereSql(ref JobTaskFilterInfo filter)
+        {
+            var sql = CreateWhereSql();
+            if (filter == null)
+            {
+                filter = new JobTaskFilterInfo();
+                return sql.ToString();
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Keyword))
+            {
+                sql.AppendFormat(" AND ({0}{1}{2} LIKE '%{3}%' OR {0}{4}{2} LIKE '%{3}%')", 
+                    PfxEscapeChar, GetFieldByProp("JtName"), SufxEscapeChar, filter.Keyword.FillSqlValue(), GetFieldByProp("JtGroup"));
+            }
+            if (filter.StartCreateTime != null)
+            {
+                sql.AppendFormat(" AND {0}{1}{2}>=@StartCreateTime", PfxEscapeChar, GetFieldByProp("CreateTime"), SufxEscapeChar);
+            }
+            if (filter.EndCreateTime != null)
+            {
+                sql.AppendFormat(" AND {0}{1}{2}>=@EndCreateTime", PfxEscapeChar, GetFieldByProp("CreateTime"), SufxEscapeChar);
+            }
+
+            return sql.ToString();
         }
 
         /// <summary>

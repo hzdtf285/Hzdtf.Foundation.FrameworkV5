@@ -1,10 +1,14 @@
 ﻿using Hzdtf.Quartz.Model;
 using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility.Attr;
+using Hzdtf.Utility.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Hzdtf.Utility.Utils;
+using Hzdtf.Utility.Model;
+using Hzdtf.Utility.Model.Page;
 
 namespace Hzdtf.Quartz.File
 {
@@ -41,13 +45,109 @@ namespace Hzdtf.Quartz.File
         }
 
         /// <summary>
-        /// 查询所有
+        /// 新建一个连接ID
+        /// </summary>
+        /// <param name="accessMode">访问模式</param>
+        /// <returns>连接ID</returns>
+        public string NewConnectionId(AccessMode accessMode = AccessMode.MASTER)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 释放连接ID
         /// </summary>
         /// <param name="connectionId">连接ID</param>
+        public void Release(string connectionId)
+        { 
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <param name="connectionId">连接ID</param>
         /// <returns>作业任务信息列表</returns>
-        public IList<JobTaskInfo> Query(string connectionId = null)
+        public IList<JobTaskInfo> Query(JobTaskFilterInfo filter = null, string connectionId = null)
         {
-            return list;
+            var q = QueryForFilter(filter);
+            if (q == null)
+            {
+                return null;
+            }
+
+            return q.ToList();
+        }
+
+        /// <summary>
+        /// 查询分页
+        /// </summary>
+        /// <param name="pageIndex">页码，从0开始</param>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="connectionId">连接ID</param>
+        /// <returns>分页信息</returns>
+        public PagingInfo<JobTaskInfo> QueryPage(int pageIndex, int pageSize, JobTaskFilterInfo filter = null, string connectionId = null)
+        {
+            var q = QueryForFilter(filter);
+            if (q == null)
+            {
+                return null;
+            }
+
+            var page = new PagingInfo<JobTaskInfo>()
+            {
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                Records = q.Count()
+            };
+            if (page.Records == 0)
+            {
+                return page;
+            }
+
+            page.Rows = q.Skip(pageIndex.GetSkipRecordIndex(pageSize)).Take(pageSize).ToList();
+
+            return page;
+        }
+
+        /// <summary>
+        /// 为过滤器获取查询表达式
+        /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <returns>查询表达式</returns>
+        private IQueryable<JobTaskInfo> QueryForFilter(JobTaskFilterInfo filter = null)
+        {
+            if (list.IsNullOrCount0())
+            {
+                return null;
+            }
+            var query = list.AsQueryable();
+            if (filter == null)
+            {
+                return query;
+            }
+            if (!string.IsNullOrWhiteSpace(filter.Keyword))
+            {
+                query = query.Where(p => p.JtName.Contains(filter.Keyword) || p.JtGroup.Contains(filter.Keyword));
+            }
+            if (filter.StartCreateTime != null)
+            {
+                query = query.Where(p => p.CreateTime >= filter.StartCreateTime);
+            }
+            if (filter.EndCreateTime != null)
+            {
+                query = query.Where(p => p.CreateTime <= filter.EndCreateTime);
+            }
+            if (!string.IsNullOrWhiteSpace(filter.SortName))
+            {
+                query = query.OrderBy(new Dictionary<string, SortType>(1)
+                {
+                    { filter.SortName, filter.Sort }
+                });
+            }
+
+            return query;
         }
 
         /// <summary>

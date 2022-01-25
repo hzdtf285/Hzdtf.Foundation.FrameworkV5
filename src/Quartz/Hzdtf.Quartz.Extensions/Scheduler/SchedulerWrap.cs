@@ -11,6 +11,7 @@ using Quartz.Impl.Triggers;
 using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Quartz.Model;
 using Hzdtf.Logger.Contract;
+using Hzdtf.Utility.Enums;
 
 namespace Hzdtf.Quartz.Extensions.Scheduler
 {
@@ -83,21 +84,39 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
         /// <returns>任务</returns>
         public async Task StartAsync()
         {
-            if (scheduler != null)
+            if (scheduler != null && scheduler.IsStarted)
             {
                 return;
             }
             scheduler = await schedulerFactory.GetScheduler();
 
-            var jobTasks = persistence.Query();
-            if (jobTasks.IsNullOrCount0())
+            // 避免出现一次性查询大量数据，使用分页查询
+            var connId = persistence.NewConnectionId(AccessMode.SLAVE);
+            try
             {
-                return;
-            }
+                PagingUtil.ForPage((pageIndex, pageSize) =>
+                {
+                    var page = persistence.QueryPage(pageIndex, pageSize, connectionId: connId);
+                    if (page.Rows.IsNullOrCount0())
+                    {
+                        return page.PageCount;
+                    }
 
-            foreach (var jobTask in jobTasks)
+                    foreach (var jobTask in page.Rows)
+                    {
+                        AddScheduleAsync(jobTask).Wait();
+                    }
+
+                    return page.PageCount;
+                }, maxForCount: 1000000);
+            }
+            catch (Exception ex)
             {
-                await AddScheduleAsync(jobTask);
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                persistence.Release(connId);
             }
 
             BeforeScheduleStart(scheduler);

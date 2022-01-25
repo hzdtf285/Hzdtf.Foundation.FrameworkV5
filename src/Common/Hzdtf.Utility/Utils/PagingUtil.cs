@@ -89,7 +89,6 @@ namespace Hzdtf.Utility.Utils
                 var pageCount = callback(pageIndex, pageSize);
                 if (pageIndex < pageCount - 1)
                 {
-                    pageIndex++;
                     continue;
                 }
 

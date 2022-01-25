@@ -98,6 +98,19 @@
             <param name="context">工作执行上下文</param>
             <param name="transId">事务ID</param>
         </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService10">
+            <summary>
+            作业服务10
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService10.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
         <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService2">
             <summary>
             作业服务2
@@ -118,6 +131,84 @@
             </summary>
         </member>
         <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService3.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService4">
+            <summary>
+            作业服务4
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService4.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService5">
+            <summary>
+            作业服务5
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService5.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService6">
+            <summary>
+            作业服务6
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService6.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService7">
+            <summary>
+            作业服务7
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService7.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService8">
+            <summary>
+            作业服务8
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService8.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
+            <summary>
+            执行业务处理
+            </summary>
+            <param name="context">工作执行上下文</param>
+            <param name="transId">事务ID</param>
+        </member>
+        <member name="T:Hzdtf.Example.Service.Impl.Quartz.JobService9">
+            <summary>
+            作业服务9
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Service.Impl.Quartz.JobService9.ExecBusinessHandle(Quartz.IJobExecutionContext,System.Int64)">
             <summary>
             执行业务处理
             </summary>
