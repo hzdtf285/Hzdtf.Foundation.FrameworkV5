@@ -43,8 +43,8 @@ namespace Hzdtf.Utility.Utils
         {
             int[] result = new int[2];
             result[0] = pageIndex > 0 ? pageIndex * pageSize : pageIndex;
-            result[1] = result[0] + pageSize;
             result[0] += baseStartNum;
+            result[1] = result[0] + pageSize;
 
             return result;
         }
