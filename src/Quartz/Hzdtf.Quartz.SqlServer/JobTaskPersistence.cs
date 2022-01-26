@@ -29,7 +29,7 @@ namespace Hzdtf.Quartz.SqlServer
             var sql = $"{BasicSelectSql()} {GetWhereSql(ref filter)}";
             if (!string.IsNullOrWhiteSpace(filter.SortName))
             {
-                sql += $" ORDER BY {PfxEscapeChar}{filter.SortName}{SufxEscapeChar} {filter.Sort.ToString()}";
+                sql += $" ORDER BY {PfxEscapeChar}{GetFieldByProp(filter.SortName)}{SufxEscapeChar} {filter.Sort.ToString()}";
             }
 
             IList<JobTaskInfo> result = null;
@@ -62,7 +62,7 @@ namespace Hzdtf.Quartz.SqlServer
                 filter.Sort = SortType.ASC;
             }
 
-            var orderSql = new StringBuilder($"ORDER BY {PfxEscapeChar}{filter.SortName}{SufxEscapeChar} {filter.Sort.ToString()}");
+            var orderSql = new StringBuilder($"ORDER BY {PfxEscapeChar}{GetFieldByProp(filter.SortName)}{SufxEscapeChar} {filter.Sort.ToString()}");
             if (!"Id".Equals(filter.SortName))
             {
                 orderSql.AppendFormat(",{0}", GetFieldByProp("Id"));
