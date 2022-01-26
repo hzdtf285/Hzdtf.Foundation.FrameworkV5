@@ -85,22 +85,6 @@
             <param name="jobInstance">作业实例</param>
             <param name="jobEx">作业异常</param>
         </member>
-        <member name="T:Hzdtf.Quartz.Extensions.QuartzCodeDefine">
-            <summary>
-            时钟编码定义
-            @ 黄振东
-            </summary>
-        </member>
-        <member name="F:Hzdtf.Quartz.Extensions.QuartzCodeDefine.JobTaskIdKey">
-            <summary>
-            作业任务ID键
-            </summary>
-        </member>
-        <member name="F:Hzdtf.Quartz.Extensions.QuartzCodeDefine.JobTaskSuccessedRemoveKey">
-            <summary>
-            作业任务执行成功后移除键
-            </summary>
-        </member>
         <member name="T:Hzdtf.Quartz.Extensions.QuartzStaticConfig">
             <summary>
             时钟静态配置

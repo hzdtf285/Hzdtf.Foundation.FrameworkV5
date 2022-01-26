@@ -124,5 +124,21 @@
             默认为否
             </summary>
         </member>
+        <member name="T:Hzdtf.Quartz.Model.QuartzCodeDefine">
+            <summary>
+            时钟编码定义
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Model.QuartzCodeDefine.JobTaskIdKey">
+            <summary>
+            作业任务ID键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Model.QuartzCodeDefine.JobTaskSuccessedRemoveKey">
+            <summary>
+            作业任务执行成功后移除键
+            </summary>
+        </member>
     </members>
 </doc>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hzdtf.Quartz.Extensions
+namespace Hzdtf.Quartz.Model
 {
     /// <summary>
     /// 时钟编码定义

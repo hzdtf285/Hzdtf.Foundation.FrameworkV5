@@ -22,7 +22,8 @@ namespace Hzdtf.Example.Service.Impl.Quartz
         public override void ExecBusinessHandle(IJobExecutionContext context, long transId)
         {
             //throw new Exception("测试异常");
-            Console.WriteLine($"{DateTime.Now.ToFullFixedDateTime()}.JobService1");
+            //return;
+            //Console.WriteLine($"{DateTime.Now.ToFullFixedDateTime()}.JobService1. jobid:" + context.JobDetail.JobDataMap.Get(Hzdtf.Quartz.Extensions.QuartzCodeDefine.JobTaskIdKey));
         }
     }
 }

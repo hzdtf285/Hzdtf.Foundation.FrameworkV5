@@ -1,5 +1,6 @@
 ﻿using Hzdtf.BasicFunction.Service.Contract;
 using Hzdtf.Quartz.Extensions.Scheduler;
+using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,12 @@ namespace Hzdtf.Example.Controller
         }
 
         public ISchedulerWrap Scheduler
+        {
+            get;
+            set;
+        }
+
+        public IJobTaskPersistence TaskPersistence
         {
             get;
             set;
@@ -63,29 +70,42 @@ namespace Hzdtf.Example.Controller
         }
 
         [AllowAnonymous]
-        [HttpGet("re")]
-        public void re()
+        [HttpGet("removeall")]
+        public void removeall()
         {
-            for (var i = 1; i <= 10; i++)
+            Scheduler.StopAsync().Wait();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("re/{num}")]
+        public void re(int num)
+        {
+            var conn = TaskPersistence.NewConnectionId();
+            for (var i = 1 + 17897; i <= num; i++)
             {
-                Scheduler.RescheduleJobTaskAsync(new Quartz.Model.JobTaskInfo()
+                var model = new Quartz.Model.JobTaskInfo()
                 {
                     Id = i,
                     JtName = "作业" + i,
                     JtGroup = "分组" + i,
-                    TriggerCron = "0/10 * * * * ?",
-                    JobFullClass = "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService" + i,
+                    TriggerCron = "0/30 * * * * ?",
+                    JobFullClass = "Hzdtf.Example.Service.Impl,Hzdtf.Example.Service.Impl.Quartz.JobService1",
                     JobParams = new Dictionary<string, string>()
-                {
-                    { "j1", "j11" },
-                    { "j2", "j12" },
-                },
-                    TriggerParams = new Dictionary<string, string>()
-                {
-                    { "t1", "t11" },
-                    { "t2", "t12" },
-                },
-                }).Wait();
+                    {
+                        { "j1", "j11" },
+                        { "j2", "j12" },
+                    },
+                        TriggerParams = new Dictionary<string, string>()
+                    {
+                        { "t1", "t11" },
+                        { "t2", "t12" },
+                    }
+                };
+
+                TaskPersistence.Insert(model, connectionId: conn);
+                continue;
+
+                Scheduler.RescheduleJobTaskAsync(model).Wait();
             }
         }
 
