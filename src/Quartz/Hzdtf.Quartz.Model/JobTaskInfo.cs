@@ -188,7 +188,7 @@ namespace Hzdtf.Quartz.Model
             {
                 return false;
             }
-            if (filter.EndCreateTime != null && IsNeedFilter(ignoreFilterPropNames, "EndCreateTime") && CreateTime > filter.StartCreateTime)
+            if (filter.EndCreateTime != null && IsNeedFilter(ignoreFilterPropNames, "EndCreateTime") && CreateTime > filter.EndCreateTime)
             {
                 return false;
             }
