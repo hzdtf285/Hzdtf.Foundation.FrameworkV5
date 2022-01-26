@@ -7346,13 +7346,14 @@
             <param name="dic">字典</param>
             <returns>对象</returns>
         </member>
-        <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ToMergeString``1(``0[],System.String)">
+        <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ToMergeString``1(``0[],System.String,System.String)">
             <summary>
             将数组按分隔符组合字符串
             </summary>
             <typeparam name="T">类型</typeparam>
             <param name="array">数组</param>
             <param name="split">分隔符</param>
+            <param name="bothSides">两边符号</param>
             <returns>组合后的字符串</returns>
         </member>
         <member name="M:Hzdtf.Utility.Utils.CollectionUtil.RemoveKey``2(System.Collections.Generic.IDictionary{``0,``1},``0)">

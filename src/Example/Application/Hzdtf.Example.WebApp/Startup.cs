@@ -2,6 +2,7 @@ using Autofac;
 using Hzdtf.BasicFunction.Controller.Extensions.RoutePermission;
 using Hzdtf.Example.WebApp.AppStart;
 using Hzdtf.Logger.Integration.ENLog;
+using Hzdtf.Quartz.Extensions;
 using Hzdtf.Quartz.File;
 using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility;
@@ -75,10 +76,10 @@ namespace Hzdtf.Example.WebApp
                     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Hzdtf.Example.Controller.xml"));
                 });
             }
-            //services.AddSingleton<IJobTaskBasicPersistence, JobTaskJsonFile>();
-            services.AddQuartz(op =>
+
+            services.AddQuartz(() =>
             {
-                op.JobHandleExceptionAssembly = "Hzdtf.Example.Service.Impl";
+                QuartzStaticConfig.JobHandleExceptionAssembly = "Hzdtf.Example.Service.Impl";
             });
         }
 

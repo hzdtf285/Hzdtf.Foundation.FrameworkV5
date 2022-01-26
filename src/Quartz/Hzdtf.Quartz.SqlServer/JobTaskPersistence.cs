@@ -109,10 +109,37 @@ namespace Hzdtf.Quartz.SqlServer
                 return sql.ToString();
             }
 
+            var nameField = GetFieldByProp("JtName");
+            var groupField = GetFieldByProp("JtGroup");
+            if (!filter.Ids.IsNullOrLength0())
+            {
+                sql.AppendFormat(" AND {0}{1}{2} IN({3})", PfxEscapeChar, GetFieldByProp("Id"), SufxEscapeChar, filter.Ids.ToMergeString(","));
+            }
+            if (!filter.JtNames.IsNullOrLength0())
+            {
+                sql.AppendFormat(" AND {0}{1}{2} IN({3})", PfxEscapeChar, nameField, SufxEscapeChar, filter.JtNames.ToMergeString(",", "'"));
+            }
+            if (!filter.JtGroups.IsNullOrLength0())
+            {
+                sql.AppendFormat(" AND {0}{1}{2} IN({3})", PfxEscapeChar, groupField, SufxEscapeChar, filter.JtGroups.ToMergeString(",", "'"));
+            }
+            if (!filter.JobFullClasses.IsNullOrLength0())
+            {
+                sql.AppendFormat(" AND {0}{1}{2} IN({3})", PfxEscapeChar, GetFieldByProp("JobFullClasse"), SufxEscapeChar, filter.JobFullClasses.ToMergeString(",", "'"));
+            }
+            if (!filter.TriggerCrons.IsNullOrLength0())
+            {
+                sql.AppendFormat(" AND {0}{1}{2} IN({3})", PfxEscapeChar, GetFieldByProp("TriggerCron"), SufxEscapeChar, filter.TriggerCrons.ToMergeString(",", "'"));
+            }
+            if (filter.SuccessedRemove != null)
+            {
+                sql.AppendFormat(" AND {0}{1}{2}=@SuccessedRemove", PfxEscapeChar, GetFieldByProp("SuccessedRemove"), SufxEscapeChar);
+            }
+
             if (!string.IsNullOrWhiteSpace(filter.Keyword))
             {
                 sql.AppendFormat(" AND ({0}{1}{2} LIKE '%{3}%' OR {0}{4}{2} LIKE '%{3}%')", 
-                    PfxEscapeChar, GetFieldByProp("JtName"), SufxEscapeChar, filter.Keyword.FillSqlValue(), GetFieldByProp("JtGroup"));
+                    PfxEscapeChar, nameField, SufxEscapeChar, filter.Keyword.FillSqlValue(), groupField);
             }
             if (filter.StartCreateTime != null)
             {

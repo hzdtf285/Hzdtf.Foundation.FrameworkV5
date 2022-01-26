@@ -1,5 +1,4 @@
 ﻿using Hzdtf.Logger.Contract;
-using Hzdtf.Quartz.AspNet.Extensions;
 using Hzdtf.Quartz.Extensions;
 using Hzdtf.Quartz.Extensions.Job;
 using Hzdtf.Quartz.Extensions.Scheduler;
@@ -25,36 +24,28 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 添加时钟
         /// </summary>
         /// <param name="services">服务收藏</param>
-        /// <param name="options">配置回调</param>
+        /// <param name="options">配置回调，如果有自定义设置，请设置Hzdtf.Quartz.Extensions.QuartzStaticConfig</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection AddQuartz(this IServiceCollection services, Action<QuartzConfig> options = null)
+        public static IServiceCollection AddQuartz(this IServiceCollection services, Action options = null)
         {
-            var op = new QuartzConfig();
             if (options != null)
             {
-                options(op);
+                options();
             }
 
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
-            if (op.SchedulerWrap == null)
+            if (QuartzStaticConfig.SchedulerWrap == null)
             {
                 services.AddSingleton<ISchedulerWrap, SchedulerWrap>();
             }
             else
             {
-                services.AddSingleton<ISchedulerWrap>(op.SchedulerWrap);
-                QuartzStaticConfig.SchedulerWrap = op.SchedulerWrap;
+                services.AddSingleton<ISchedulerWrap>(QuartzStaticConfig.SchedulerWrap);
             }
 
-            QuartzStaticConfig.JobTaskPersistence = op.JobTaskPersistence;
-
-            if (op.JobHandleException != null)
+            if (QuartzStaticConfig.JobHandleException == null && !string.IsNullOrWhiteSpace(QuartzStaticConfig.JobHandleExceptionAssembly))
             {
-                QuartzStaticConfig.JobHandleException = op.JobHandleException;
-            }
-            else if (!string.IsNullOrWhiteSpace(op.JobHandleExceptionAssembly))
-            {
-                services.RegisterAssemblyWithInterfaceMapImpls(typeof(IJobHandleException), ServiceLifetime.Singleton, op.JobHandleExceptionAssembly);
+                services.RegisterAssemblyWithInterfaceMapImpls(typeof(IJobHandleException), ServiceLifetime.Singleton, QuartzStaticConfig.JobHandleExceptionAssembly);
             }
 
             return services;

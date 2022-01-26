@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Hzdtf.Utility.Utils;
-using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Page;
 
 namespace Hzdtf.Quartz.File
@@ -127,6 +126,31 @@ namespace Hzdtf.Quartz.File
             {
                 return query;
             }
+            if (!filter.Ids.IsNullOrLength0())
+            {
+                query = query.Where(p => filter.Ids.Contains(p.Id));
+            }
+            if (!filter.JtNames.IsNullOrLength0())
+            {
+                query = query.Where(p => filter.JtNames.Contains(p.JtName, true));
+            }
+            if (!filter.JtGroups.IsNullOrLength0())
+            {
+                query = query.Where(p => filter.JtGroups.Contains(p.JtGroup, true));
+            }
+            if (!filter.JobFullClasses.IsNullOrLength0())
+            {
+                query = query.Where(p => filter.JobFullClasses.Contains(p.JobFullClass, true));
+            }
+            if (!filter.TriggerCrons.IsNullOrLength0())
+            {
+                query = query.Where(p => filter.TriggerCrons.Contains(p.TriggerCron, true));
+            }
+            if (filter.SuccessedRemove != null)
+            {
+                query = query.Where(p => p.SuccessedRemove == filter.SuccessedRemove.Value);
+            }
+
             if (!string.IsNullOrWhiteSpace(filter.Keyword))
             {
                 query = query.Where(p => p.JtName.Contains(filter.Keyword) || p.JtGroup.Contains(filter.Keyword));
@@ -207,6 +231,8 @@ namespace Hzdtf.Quartz.File
             if (list == null)
             {
                 list = new List<JobTaskInfo>();
+                jobTask.InitCreateTime();
+                jobTask.InitModifyTime();
                 list.Add(jobTask);
                 jsonFile.WriteJsonFile(list);
                 return 1;
@@ -247,6 +273,7 @@ namespace Hzdtf.Quartz.File
             else
             {
                 exists.TriggerCron = cron;
+                exists.InitModifyTime();
                 jsonFile.WriteJsonFile(list);
                 return 1;
             }

@@ -66,6 +66,36 @@
             @ 黄振东
             </summary>
         </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.Ids">
+            <summary>
+            ID数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.JtNames">
+            <summary>
+            名称数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.JtGroups">
+            <summary>
+            分组数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.JobFullClasses">
+            <summary>
+            作业全路径数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.TriggerCrons">
+            <summary>
+            触发器表达式数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.SuccessedRemove">
+            <summary>
+            成功后移除
+            </summary>
+        </member>
         <member name="T:Hzdtf.Quartz.Model.JobTaskInfo">
             <summary>
             作业任务信息
@@ -122,6 +152,32 @@
             <summary>
             执行成功后移除任务
             默认为否
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.EqualFilter(Hzdtf.Quartz.Model.JobTaskFilterInfo,System.String[])">
+            <summary>
+            是否匹配过滤器
+            </summary>
+            <param name="filter">过滤器，如果为null，则返回true</param>
+            <param name="ignoreFilterPropNames">忽略过滤器的属性</param>
+            <returns>是否匹配过滤器</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.IsNeedFilter(System.String[],System.String)">
+            <summary>
+            是否需要过滤
+            </summary>
+            <param name="ignoreFilterPropNames">忽略过滤器的属性</param>
+            <param name="prop">属性名</param>
+            <returns>是否需要过滤</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.InitCreateTime">
+            <summary>
+            初始化创建时间，如果创建时间不是最小时间，则忽略
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.InitModifyTime">
+            <summary>
+            初始化修改时间，如果修改时间不是最小时间，则忽略
             </summary>
         </member>
         <member name="T:Hzdtf.Quartz.Model.QuartzCodeDefine">

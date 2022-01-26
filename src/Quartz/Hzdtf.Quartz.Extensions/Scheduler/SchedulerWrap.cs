@@ -96,7 +96,7 @@ namespace Hzdtf.Quartz.Extensions.Scheduler
             {
                 PagingUtil.ForPage((pageIndex, pageSize) =>
                 {
-                    var page = persistence.QueryPage(pageIndex, pageSize, connectionId: connId);
+                    var page = persistence.QueryPage(pageIndex, pageSize, QuartzStaticConfig.JobTaskFilter, connectionId: connId);
                     if (page.Rows.IsNullOrCount0())
                     {
                         return page.PageCount;

@@ -121,6 +121,16 @@
             调度器包装
             </summary>
         </member>
+        <member name="P:Hzdtf.Quartz.Extensions.QuartzStaticConfig.JobTaskFilter">
+            <summary>
+            作业任务过滤器
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Extensions.QuartzStaticConfig.JobHandleExceptionAssembly">
+            <summary>
+            工作处理异常程序集
+            </summary>
+        </member>
         <member name="T:Hzdtf.Quartz.Extensions.Scheduler.ISchedulerWrap">
             <summary>
             调度器包装接口
