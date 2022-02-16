@@ -9,6 +9,17 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.19.3" />
+    <PackageReference Include="Grpc.Tools" Version="2.43.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
+	</ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>Hzdtf.Example.Controller.xml</DocumentationFile>
   </PropertyGroup>

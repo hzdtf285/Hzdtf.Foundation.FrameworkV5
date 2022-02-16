@@ -94,7 +94,7 @@ namespace Microsoft.AspNetCore.Http
                     result.Action = routes[1];
                 }
 
-                result.Token = authToken == null? context.Request.GetBearerOriginTokenFromHeader() : authToken.GetToken();
+                result.Token = authToken == null ? context.Request.GetBearerOriginTokenFromHeader() : authToken.GetToken();
 
                 if (context.Request.Headers != null && context.Request.Headers.ContainsKey(App.EVENT_ID_KEY))
                 {

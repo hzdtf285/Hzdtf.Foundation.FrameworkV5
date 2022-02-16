@@ -169,17 +169,17 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
-        /// 租户ID_名称
-        /// 一般情况没有，特殊情况下有用，如SAAS中的租户
+        /// 租戶ID_名称
+        /// 一般情况没有，特殊情况下有用，如SAAS中的租戶
         /// </summary>
         public const string TenantId_Name = "TenantId";
 
         /// <summary>
-        /// 租户ID
-        /// 一般情况没有，特殊情况下有用，如SAAS中的租户
+        /// 租戶ID
+        /// 一般情况没有，特殊情况下有用，如SAAS中的租戶
         /// </summary>
         [JsonProperty("tenantId")]
-        [Display(Name = "租户ID", Order = 999, AutoGenerateField = false)]
+        [Display(Name = "租戶ID", Order = 999, AutoGenerateField = false)]
         [MessagePack.Key("tenantId")]
         public IdT TenantId
         {
@@ -188,16 +188,16 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
-        /// 租户ID字符串_名称
+        /// 租戶ID字符串_名称
         /// </summary>
         public const string TenantIdString_Name = "TenantIdString";
 
         /// <summary>
-        /// 租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// 租戶ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("TenantIdString")]
+        [JsonProperty("tenantIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("TenantIdString")]
+        [MessagePack.Key("tenantIdString")]
         public string TenantIdString
         {
             get => TenantId.ToString();

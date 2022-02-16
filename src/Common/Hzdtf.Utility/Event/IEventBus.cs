@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hzdtf.Utility.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -29,6 +30,8 @@ namespace Hzdtf.Utility.Event
         /// </summary>
         /// <param name="eventSourceType">事件源类型</param>
         /// <param name="eventData">事件数据</param>
-        void Publish(Type eventSourceType, EventData eventData);
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        void Publish(Type eventSourceType, EventData eventData, CommonUseData comData = null, string connectionId = null);
     }
 }

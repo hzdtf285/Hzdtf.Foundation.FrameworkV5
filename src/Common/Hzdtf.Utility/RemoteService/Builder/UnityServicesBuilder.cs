@@ -46,17 +46,41 @@ namespace Hzdtf.Utility.RemoteService.Builder
         /// <returns>生成地址任务</returns>
         public async Task<string> BuilderAsync(string serviceName, string path = null, string tag = null)
         {
+            var ser = BuilderServiceOptions(serviceName, tag);
+            return await ser.ServicesBuilder.BuilderAsync(path);
+        }
+
+        /// <summary>
+        /// 根据基地址生成地址
+        /// </summary>
+        /// <param name="serviceName">服务名</param>
+        /// <param name="baseAddress">基地址</param>
+        /// <param name="tag">标签</param>
+        /// <param name="path">路径</param>
+        /// <returns>生成地址</returns>
+        public string BuilderByBaseAddress(string serviceName, string baseAddress, string tag = null, string path = null)
+        {
+            var ser = BuilderServiceOptions(serviceName, tag);
+            return ser.ServicesBuilder.BuilderByBaseAddress(baseAddress, path);
+        }
+
+        /// <summary>
+        /// 生成服务配置
+        /// </summary>
+        /// <param name="serviceName">服务名称</param>
+        /// <param name="tag">标签</param>
+        /// <returns>服务配置</returns>
+        private ServicesOptions BuilderServiceOptions(string serviceName, string tag = null)
+        {
             if (string.IsNullOrWhiteSpace(serviceName))
             {
                 throw new ArgumentNullException("服务名不能为空");
             }
-
             var options = unityServicesOptions.Reader();
             if (options == null)
             {
                 throw new ArgumentNullException("统一服务选项配置为null");
             }
-
             var ser = GetServicesOptions(options, serviceName, tag);
             if (ser == null)
             {
@@ -76,7 +100,7 @@ namespace Hzdtf.Utility.RemoteService.Builder
                 ser.ServicesBuilder = serviceBuilder;
             }
 
-            return await ser.ServicesBuilder.BuilderAsync(path);
+            return ser;
         }
 
         /// <summary>

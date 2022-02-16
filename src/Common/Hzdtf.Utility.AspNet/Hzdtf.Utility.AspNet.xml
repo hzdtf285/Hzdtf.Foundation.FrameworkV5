@@ -217,6 +217,12 @@
             同步服务配置列表
             </summary>
         </member>
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RemoteService.UnityServicesOptionsConfiguration.#ctor(System.Action{Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String,System.Object})">
+            <summary>
+            构造方法
+            </summary>
+            <param name="beforeConfigurationBuilder">配置生成前回调</param>
+        </member>
         <member name="M:Hzdtf.Utility.AspNet.Extensions.RemoteService.UnityServicesOptionsConfiguration.#ctor(System.String,System.Action{Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String,System.Object})">
             <summary>
             构造方法

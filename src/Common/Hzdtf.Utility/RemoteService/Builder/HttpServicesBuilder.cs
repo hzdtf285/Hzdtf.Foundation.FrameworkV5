@@ -1,5 +1,4 @@
-﻿using Hzdtf.Utility.Attr;
-using Hzdtf.Utility.LoadBalance;
+﻿using Hzdtf.Utility.LoadBalance;
 using Hzdtf.Utility.RemoteService.Provider;
 using Hzdtf.Utility.Utils;
 using System;
@@ -74,7 +73,18 @@ namespace Hzdtf.Utility.RemoteService.Builder
             }
 
             var address = LoadBalance.Resolve(addresses);
-            var baseUri = new Uri($"{Sheme}://{address}");
+            return BuilderByBaseAddress(address, path);
+        }
+
+        /// <summary>
+        /// 根据基地址生成地址
+        /// </summary>
+        /// <param name="baseAddress">基地址</param>
+        /// <param name="path">路径</param>
+        /// <returns>生成地址</returns>
+        public string BuilderByBaseAddress(string baseAddress, string path = null)
+        {
+            var baseUri = new Uri($"{Sheme}://{baseAddress}");
             if (string.IsNullOrWhiteSpace(path))
             {
                 return baseUri.AbsoluteUri;

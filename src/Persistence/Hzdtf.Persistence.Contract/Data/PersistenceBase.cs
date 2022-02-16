@@ -144,24 +144,6 @@ namespace Hzdtf.Persistence.Contract.Data
         }
 
         /// <summary>
-        /// 根据SQL属性查询模型
-        /// </summary>
-        /// <param name="sqlProp">SQL属性</param>
-        /// <param name="comData">通用数据</param>
-        /// <param name="connectionId">连接ID</param>
-        /// <returns>模型</returns>
-        //public virtual ModelT SelectFristBy(SqlPropInfo sqlProp, CommonUseData comData = null, string connectionId = null)
-        //{
-        //    ModelT result = null;
-        //    DbConnectionManager.BrainpowerExecute(connectionId, this, (connId, dbConn) =>
-        //    {
-        //        result = Select(id, dbConn, GetDbTransaction(connId, AccessMode.SLAVE), propertyNames, comData: comData);
-        //    }, AccessMode.SLAVE);
-
-        //    return result;
-        //}
-
-        /// <summary>
         /// 根据ID集合查询模型列表
         /// </summary>
         /// <param name="ids">ID集合</param>

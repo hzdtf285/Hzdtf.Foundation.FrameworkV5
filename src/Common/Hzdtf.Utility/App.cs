@@ -3,6 +3,7 @@ using Hzdtf.Utility.Event;
 using Hzdtf.Utility.Extensions;
 using Hzdtf.Utility.Safety;
 using Hzdtf.Utility.TheOperation;
+using Grpc.Core;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;

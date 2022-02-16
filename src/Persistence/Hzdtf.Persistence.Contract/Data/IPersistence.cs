@@ -38,15 +38,6 @@ namespace Hzdtf.Persistence.Contract.Data
         ModelT Select(IdT id, string[] propertyNames, CommonUseData comData = null, string connectionId = null);
 
         /// <summary>
-        /// 根据SQL属性查询模型
-        /// </summary>
-        /// <param name="sqlProp">SQL属性</param>
-        /// <param name="comData">通用数据</param>
-        /// <param name="connectionId">连接ID</param>
-        /// <returns>模型</returns>
-        //ModelT SelectFristBy(SqlPropInfo sqlProp, CommonUseData comData = null, string connectionId = null);
-
-        /// <summary>
         /// 根据ID集合查询模型
         /// </summary>
         /// <param name="ids">ID集合</param>

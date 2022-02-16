@@ -1,6 +1,4 @@
-﻿using Hzdtf.Utility.Attr;
-using Hzdtf.Utility.Data.Config;
-using Hzdtf.Utility.RemoteService.Options;
+﻿using Hzdtf.Utility.Data.Config;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,8 +24,16 @@ namespace Hzdtf.Utility.RemoteService.Options
         /// <summary>
         /// 构造方法
         /// </summary>
+        public UnityServicesOptionsCache()
+            : base(AppContext.BaseDirectory + "/Config/serviceBuilderConfig.json")
+        {
+        }
+
+        /// <summary>
+        /// 构造方法
+        /// </summary>
         /// <param name="jsonFile">json文件</param>
-        public UnityServicesOptionsCache(string jsonFile = "Config/serviceBuilderConfig.json") : base(jsonFile) { }
+        public UnityServicesOptionsCache(string jsonFile) : base(jsonFile) { }
 
         /// <summary>
         /// 构造方法

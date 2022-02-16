@@ -126,21 +126,21 @@ namespace Hzdtf.Utility.Model
     }
 
     /// <summary>
-    /// 带有人时间租户信息
+    /// 带有人时间租戶信息
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     public class PersonTimeTenantInfo<IdT> : PersonTimeInfo<IdT>
     {
         /// <summary>
-        /// 租户ID_名称
+        /// 租戶ID_名称
         /// </summary>
         public const string TenantId_Name = "TenantId";
 
         /// <summary>
-        /// 租户ID
+        /// 租戶ID
         /// </summary>
         [JsonProperty("tenantId")]
-        [Display(Name = "租户ID", Order = 10, AutoGenerateField = false)]
+        [Display(Name = "租戶ID", Order = 10, AutoGenerateField = false)]
         [MessagePack.Key("tenantId")]
         public IdT TenantId
         {
@@ -149,16 +149,16 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
-        /// 租户ID字符串_名称
+        /// 租戶ID字符串_名称
         /// </summary>
         public const string TenantIdString_Name = "TenantIdString";
 
         /// <summary>
-        /// 租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// 租戶ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("TenantIdString")]
+        [JsonProperty("tenantIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("TenantIdString")]
+        [MessagePack.Key("tenantIdString")]
         public string TenantIdString
         {
             get => TenantId.ToString();

@@ -83,21 +83,40 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             services.AddSingleton<IUnityServicesOptions>(builderOptions.UnityServicesOptions);
-            if (builderOptions.UnityServicesBuilder == null)
-            {
-                services.AddSingleton<IUnityServicesBuilder, UnityServicesBuilder>();
-            }
-            else
+
+            if (builderOptions.UnityServicesBuilder != null)
             {
                 services.AddSingleton<IUnityServicesBuilder>(builderOptions.UnityServicesBuilder);
             }
-            if (builderOptions.ServiceProvider == null)
+            else if (builderOptions.UnityServicesBuilderType != null)
             {
-                services.AddSingleton<IServicesProvider, ServicesProviderMemory>();
+                services.AddSingleton(typeof(IUnityServicesBuilder), builderOptions.UnityServicesBuilderType);
             }
             else
             {
-                services.AddSingleton<IServicesProvider>(builderOptions.ServiceProvider);
+                services.AddSingleton<IUnityServicesBuilder, UnityServicesBuilder>();
+            }
+
+            if (builderOptions.NativeServicesProvider != null)
+            {
+                services.AddSingleton<INativeServicesProvider>(builderOptions.NativeServicesProvider);
+            }
+            else if (builderOptions.NativeServicesProviderType != null)
+            {
+                services.AddSingleton(typeof(INativeServicesProvider), builderOptions.NativeServicesProviderType);
+            }
+
+            if (builderOptions.ServicesProvider != null)
+            {
+                services.AddSingleton<IServicesProvider>(builderOptions.ServicesProvider);
+            }
+            else if (builderOptions.ServicesProviderType != null)
+            {
+                services.AddSingleton(typeof(IServicesProvider), builderOptions.ServicesProviderType);
+            }
+            else
+            {
+                services.AddSingleton<IServicesProvider, ServicesProviderMemory>();
             }
             
             return services;

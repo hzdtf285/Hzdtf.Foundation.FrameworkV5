@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Hzdtf.Utility.Utils;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Hzdtf.Utility.Utils;
 
 namespace System
 {

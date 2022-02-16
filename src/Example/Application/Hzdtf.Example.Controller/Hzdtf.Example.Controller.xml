@@ -51,5 +51,106 @@
             </summary>
             <returns>工作流编码</returns>
         </member>
+        <member name="T:Hzdtf.Example.Controller.TestServiceProvider">
+            <summary>
+            测试服务提供者
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Example.Controller.TestServiceProvider.ExecGetAddresses(System.String,System.String)">
+            <summary>
+            异步根据服务名获取地址数组
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="tag">标签</param>
+            <returns>地址数组任务</returns>
+        </member>
+        <member name="T:GrpcService2.GreetReflection">
+            <summary>Holder for reflection information generated from Protos/greet.proto</summary>
+        </member>
+        <member name="P:GrpcService2.GreetReflection.Descriptor">
+            <summary>File descriptor for Protos/greet.proto</summary>
+        </member>
+        <member name="T:GrpcService2.HelloRequest">
+            <summary>
+            The request message containing the user's name.
+            </summary>
+        </member>
+        <member name="F:GrpcService2.HelloRequest.NameFieldNumber">
+            <summary>Field number for the "name" field.</summary>
+        </member>
+        <member name="T:GrpcService2.HelloReply">
+            <summary>
+            The response message containing the greetings.
+            </summary>
+        </member>
+        <member name="F:GrpcService2.HelloReply.MessageFieldNumber">
+            <summary>Field number for the "message" field.</summary>
+        </member>
+        <member name="T:GrpcService2.Greeter">
+            <summary>
+            The greeting service definition.
+            </summary>
+        </member>
+        <member name="P:GrpcService2.Greeter.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:GrpcService2.Greeter.GreeterClient">
+            <summary>Client for Greeter</summary>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for Greeter</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for Greeter that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.SayHello(GrpcService2.HelloRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Sends a greeting
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.SayHello(GrpcService2.HelloRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Sends a greeting
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The response received from the server.</returns>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.SayHelloAsync(GrpcService2.HelloRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Sends a greeting
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+            <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+            <param name="cancellationToken">An optional token for canceling the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.SayHelloAsync(GrpcService2.HelloRequest,Grpc.Core.CallOptions)">
+            <summary>
+            Sends a greeting
+            </summary>
+            <param name="request">The request to send to the server.</param>
+            <param name="options">The options for the call.</param>
+            <returns>The call object.</returns>
+        </member>
+        <member name="M:GrpcService2.Greeter.GreeterClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
     </members>
 </doc>

@@ -311,7 +311,7 @@ namespace Hzdtf.Utility.Utils
                 lock (syncDicObject)
                 {
                     try
-                    {
+                    {// 
                         syncDicFileName.Remove(fileName);
                     }
                     catch (ArgumentException)
@@ -500,7 +500,7 @@ namespace Hzdtf.Utility.Utils
 
             return formatter.Deserialize(stream);
         }
-
+        
         /// <summary>
         /// 将字符串以utf8写入到流中
         /// </summary>

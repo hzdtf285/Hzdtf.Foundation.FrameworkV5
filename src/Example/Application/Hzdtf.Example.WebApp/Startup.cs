@@ -1,11 +1,13 @@
 using Autofac;
 using Hzdtf.BasicFunction.Controller.Extensions.RoutePermission;
+using Hzdtf.Example.Controller;
 using Hzdtf.Example.WebApp.AppStart;
 using Hzdtf.Logger.Integration.ENLog;
 using Hzdtf.Quartz.Extensions;
 using Hzdtf.Quartz.File;
 using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility;
+using Hzdtf.Utility.RemoteService.Provider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -80,6 +82,28 @@ namespace Hzdtf.Example.WebApp
             services.AddQuartz(() =>
             {
                 QuartzStaticConfig.JobHandleExceptionAssembly = "Hzdtf.Example.Service.Impl";
+            });
+
+            //services.AddSingleton<IServicesProvider, TestServiceProvider>();
+            services.AddUnityServicesBuilderConfigure(options =>
+            {
+                options.NativeServicesProviderType = typeof(TestServiceProvider);
+                options.ServicesProviderType = typeof(TestServiceProvider);
+                options.ServicesOptions = new Utility.RemoteService.Options.UnityServicesOptions()
+                {
+                    GlobalConfiguration = new Utility.RemoteService.Options.GlobalServicesOptions()
+                    {
+                        Sheme = "http",
+                        LoadBalanceMode = Utility.LoadBalance.LoadBalanceMode.ROUND_ROBIN,
+                    },
+                    Services = new Utility.RemoteService.Options.ServicesOptions[]
+                    {
+                        new Utility.RemoteService.Options.ServicesOptions()
+                        {
+                            ServiceName = "service1",
+                        }
+                    }
+                };
             });
         }
 

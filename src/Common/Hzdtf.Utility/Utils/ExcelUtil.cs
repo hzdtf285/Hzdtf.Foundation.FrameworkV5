@@ -348,8 +348,30 @@ namespace Hzdtf.Utility.Utils
                         DataRow dataRow = data.NewRow();
                         for (int j = row.FirstCellNum; j < cellCount; ++j)
                         {
-                            if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
-                                dataRow[j] = row.GetCell(j).ToString();
+                            var cell = row.GetCell(j);
+                            if (cell == null)
+                            {
+                                continue;
+                            }
+
+                            switch (cell.CellType)
+                            {
+                                case CellType.Formula:
+                                    dataRow[j] = row.GetCell(j).NumericCellValue;
+
+                                    break;
+
+                                default:
+                                    var value = row.GetCell(j);
+                                    if (value == null)
+                                    {
+                                        continue;
+                                    }
+
+                                    dataRow[j] = value.ToString();
+
+                                    break;
+                            }
                         }
                         data.Rows.Add(dataRow);
                     }

@@ -1,9 +1,9 @@
-﻿using Hzdtf.Utility.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using Hzdtf.Utility.Utils;
 
 namespace Hzdtf.Utility.Safety
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Utils;
 
 namespace Hzdtf.Utility.Event
@@ -167,7 +168,9 @@ namespace Hzdtf.Utility.Event
         /// </summary>
         /// <param name="eventSourceType">事件源类型</param>
         /// <param name="eventData">事件数据</param>
-        public void Publish(Type eventSourceType, EventData eventData)
+        /// <param name="comData">通用数据</param>
+        /// <param name="connectionId">连接ID</param>
+        public void Publish(Type eventSourceType, EventData eventData, CommonUseData comData = null, string connectionId = null)
         {
             if (!dicSourceMapHandler.ContainsKey(eventSourceType) || dicSourceMapHandler[eventSourceType].IsNullOrCount0())
             {
@@ -177,7 +180,7 @@ namespace Hzdtf.Utility.Event
             IList<HandlerData> handlerDatas = dicSourceMapHandler[eventSourceType];
             foreach (HandlerData handlerData in handlerDatas)
             {
-                handlerData.HanlerObj.Execute(eventData);
+                handlerData.HanlerObj.Execute(eventData, comData, connectionId);
             }
         }
 

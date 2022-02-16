@@ -66,19 +66,6 @@ namespace Hzdtf.Persistence.Dapper
         }
 
         /// <summary>
-        /// 根据ID查询模型
-        /// </summary>
-        /// <param name="sqlProp">SQL属性</param>
-        /// <param name="dbConnection">数据库连接</param>
-        /// <param name="dbTransaction">数据库事务</param>
-        /// <param name="comData">通用数据</param>
-        /// <returns>模型</returns>
-        //protected override ModelT SelectFristBy(SqlPropInfo sqlProp, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
-        //{
-
-        //}
-
-        /// <summary>
         /// 根据ID集合查询模型
         /// </summary>
         /// <param name="ids">ID集合</param>

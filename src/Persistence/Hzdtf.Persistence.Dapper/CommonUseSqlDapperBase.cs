@@ -78,8 +78,8 @@ namespace Hzdtf.Persistence.Dapper
                 basicSelectSql = BasicSelectSql(propertyNames: propertyNames, comData: comData);
             }
 
-            var merchantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
-            return $"{basicSelectSql} WHERE {merchantIdFilterSql} {ID_EQUAL_PARAM_SQL} {dataPermissionSql} ";
+            var tenantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
+            return $"{basicSelectSql} WHERE {tenantIdFilterSql} {ID_EQUAL_PARAM_SQL} {dataPermissionSql} ";
         }
 
         /// <summary>
@@ -109,8 +109,8 @@ namespace Hzdtf.Persistence.Dapper
                 basicSelectSql = BasicSelectSql(propertyNames: propertyNames, comData: comData);
             }
 
-            var merchantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
-            return $"{basicSelectSql} WHERE {merchantIdFilterSql} {GetWhereIdsSql(ids, out parameters, comData: comData)} {dataPermissionSql}";
+            var tenantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
+            return $"{basicSelectSql} WHERE {tenantIdFilterSql} {GetWhereIdsSql(ids, out parameters, comData: comData)} {dataPermissionSql}";
         }
 
         /// <summary>
@@ -127,8 +127,8 @@ namespace Hzdtf.Persistence.Dapper
                 dataPermissionSql = $" AND ({dataPermissionSql})";
             }
 
-            var merchantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
-            return $"{BasicCountSql(comData: comData)} WHERE {merchantIdFilterSql} {ID_EQUAL_PARAM_SQL} {dataPermissionSql}";
+            var tenantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
+            return $"{BasicCountSql(comData: comData)} WHERE {tenantIdFilterSql} {ID_EQUAL_PARAM_SQL} {dataPermissionSql}";
         }
 
         /// <summary>
@@ -144,10 +144,10 @@ namespace Hzdtf.Persistence.Dapper
             string tbAlias = string.IsNullOrWhiteSpace(pfx) ? null : pfx.Replace(".", null);
             if (SelectIsAppendTenantId())
             {
-                var merchantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, pfx: tbAlias, comData: comData);
-                if (!string.IsNullOrWhiteSpace(merchantIdSql))
+                var tenantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, pfx: tbAlias, comData: comData);
+                if (!string.IsNullOrWhiteSpace(tenantIdSql))
                 {
-                    whereSql.Append(" AND " + merchantIdSql);
+                    whereSql.Append(" AND " + tenantIdSql);
                 }
             }
 
@@ -197,10 +197,10 @@ namespace Hzdtf.Persistence.Dapper
             var whereSql = CreateWhereSql();
             if (SelectIsAppendTenantId())
             {
-                var merchantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, pfx: tbAlias, comData: comData);
-                if (!string.IsNullOrWhiteSpace(merchantIdSql))
+                var tenantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, pfx: tbAlias, comData: comData);
+                if (!string.IsNullOrWhiteSpace(tenantIdSql))
                 {
-                    whereSql.Append(" AND " + merchantIdSql);
+                    whereSql.Append(" AND " + tenantIdSql);
                 }
             }
             if (!string.IsNullOrWhiteSpace(dataPermissionSql))
@@ -260,10 +260,10 @@ namespace Hzdtf.Persistence.Dapper
             StringBuilder whereSql = CreateWhereSql();
             if (SelectIsAppendTenantId())
             {
-                var merchantIdFilterSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
-                if (!string.IsNullOrWhiteSpace(merchantIdFilterSql))
+                var tenantIdFilterSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
+                if (!string.IsNullOrWhiteSpace(tenantIdFilterSql))
                 {
-                    whereSql.Append(" AND " + merchantIdFilterSql);
+                    whereSql.Append(" AND " + tenantIdFilterSql);
                 }
             }
             MergeWhereSql(whereSql, filter, out parameters, comData: comData);
@@ -401,10 +401,10 @@ namespace Hzdtf.Persistence.Dapper
             StringBuilder whereSql = CreateWhereSql();
             if (SelectIsAppendTenantId())
             {
-                var merchantIdFilterSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
-                if (!string.IsNullOrWhiteSpace(merchantIdFilterSql))
+                var tenantIdFilterSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
+                if (!string.IsNullOrWhiteSpace(tenantIdFilterSql))
                 {
-                    whereSql.Append(" AND " + merchantIdFilterSql);
+                    whereSql.Append(" AND " + tenantIdFilterSql);
                 }
             }
             MergeWhereSql(whereSql, filter, out parameters, comData: comData);
@@ -426,12 +426,12 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>租户ID筛选SQL</returns>
         protected virtual string GetTenantIdFilterSql(bool isBeforeAppWhere = false, bool isBeforeAppAnd = false, string pfx = null, CommonUseData comData = null)
         {
-            IdT merchantId;
-            if (IsExistsTenantId(out merchantId, comData))
+            IdT tenantId;
+            if (IsExistsTenantId(out tenantId, comData))
             {
-                var merchantIdField = GetFieldByProp("TenantId");
+                var tenantIdField = GetFieldByProp("TenantId");
                 pfx = string.IsNullOrWhiteSpace(pfx) ? null : pfx + ".";
-                var sql = $"({pfx}{PfxEscapeChar}{merchantIdField}{SufxEscapeChar}={Identity.GetValueSql(merchantId)})";
+                var sql = $"({pfx}{PfxEscapeChar}{tenantIdField}{SufxEscapeChar}={Identity.GetValueSql(tenantId)})";
                 if (isBeforeAppWhere)
                 {
                     return $" WHERE ({sql})";
@@ -457,12 +457,12 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>租户ID筛选SQL</returns>
         protected virtual string GetTenantIdFilterSql2(bool isBeforeAppWhere = false, bool isAfterAppAnd = false, string pfx = null, CommonUseData comData = null)
         {
-            IdT merchantId;
-            if (IsExistsTenantId(out merchantId, comData))
+            IdT tenantId;
+            if (IsExistsTenantId(out tenantId, comData))
             {
-                var merchantIdField = GetFieldByProp("TenantId");
+                var tenantIdField = GetFieldByProp("TenantId");
                 pfx = string.IsNullOrWhiteSpace(pfx) ? null : pfx + ".";
-                var sql = $"({pfx}{PfxEscapeChar}{merchantIdField}{SufxEscapeChar}={Identity.GetValueSql(merchantId)})";
+                var sql = $"({pfx}{PfxEscapeChar}{tenantIdField}{SufxEscapeChar}={Identity.GetValueSql(tenantId)})";
                 if (isBeforeAppWhere)
                 {
                     return $" WHERE ({sql})";
@@ -505,12 +505,12 @@ namespace Hzdtf.Persistence.Dapper
         /// <returns>只有修改信息的SQL语句</returns>
         protected override string SelectModifyInfoByIdAndGeModifyTimeSql(ModelT model, CommonUseData comData = null)
         {
-            var merchantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
+            var tenantIdFilterSql = SelectIsAppendTenantId() ? GetTenantIdFilterSql2(isAfterAppAnd: true, comData: comData) : null;
 
             var modifyTimeField = $"{PfxEscapeChar}{ GetFieldByProp("ModifyTime") }{SufxEscapeChar}";
             var idField = $"{PfxEscapeChar}{ GetFieldByProp("Id")}{SufxEscapeChar}";
             return $"SELECT {idField} Id,{PfxEscapeChar}{GetFieldByProp("ModifierId")}{SufxEscapeChar} ModifierId,{PfxEscapeChar}{GetFieldByProp("Modifier")}{SufxEscapeChar} Modifier,{modifyTimeField} ModifyTime"
-                + $" FROM {PfxEscapeChar}{Table}{SufxEscapeChar} WHERE  {merchantIdFilterSql} {idField}=@Id AND {modifyTimeField}>@ModifyTime";
+                + $" FROM {PfxEscapeChar}{Table}{SufxEscapeChar} WHERE  {tenantIdFilterSql} {idField}=@Id AND {modifyTimeField}>@ModifyTime";
         }
 
         /// <summary>
@@ -529,10 +529,10 @@ namespace Hzdtf.Persistence.Dapper
             var whereSql = CreateWhereSql(true);
             if (SelectIsAppendTenantId())
             {
-                var merchantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
-                if (!string.IsNullOrWhiteSpace(merchantIdSql))
+                var tenantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
+                if (!string.IsNullOrWhiteSpace(tenantIdSql))
                 {
-                    whereSql.Append(" AND " + merchantIdSql);
+                    whereSql.Append(" AND " + tenantIdSql);
                 }
             }
             whereSql.Append("(");
@@ -684,10 +684,10 @@ namespace Hzdtf.Persistence.Dapper
             StringBuilder whereSql = CreateWhereSql(true);
             if (SelectIsAppendTenantId())
             {
-                var merchantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
-                if (!string.IsNullOrWhiteSpace(merchantIdSql))
+                var tenantIdSql = GetTenantIdFilterSql2(isAfterAppAnd: false, comData: comData);
+                if (!string.IsNullOrWhiteSpace(tenantIdSql))
                 {
-                    whereSql.Append(" AND " + merchantIdSql);
+                    whereSql.Append(" AND " + tenantIdSql);
                 }
             }
             whereSql.Append($"{PfxEscapeChar}{foreignKeyName}{SufxEscapeChar} IN(");

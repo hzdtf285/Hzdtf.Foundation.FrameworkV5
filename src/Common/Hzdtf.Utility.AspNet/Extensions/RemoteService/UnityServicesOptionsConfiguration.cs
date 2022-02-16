@@ -28,9 +28,18 @@ namespace Hzdtf.Utility.AspNet.Extensions.RemoteService
         /// <summary>
         /// 构造方法
         /// </summary>
+        /// <param name="beforeConfigurationBuilder">配置生成前回调</param>
+        public UnityServicesOptionsConfiguration(Action<IConfigurationBuilder, string, object> beforeConfigurationBuilder = null)
+            : base(AppContext.BaseDirectory + "/Config/serviceBuilderConfig.json", beforeConfigurationBuilder)
+        {
+        }
+
+        /// <summary>
+        /// 构造方法
+        /// </summary>
         /// <param name="jsonFile">json文件</param>
         /// <param name="beforeConfigurationBuilder">配置生成前回调</param>
-        public UnityServicesOptionsConfiguration(string jsonFile = "Config/serviceBuilderConfig.json", Action<IConfigurationBuilder, string, object> beforeConfigurationBuilder = null) 
+        public UnityServicesOptionsConfiguration(string jsonFile, Action<IConfigurationBuilder, string, object> beforeConfigurationBuilder = null) 
             : base(jsonFile, beforeConfigurationBuilder)
         {
         }

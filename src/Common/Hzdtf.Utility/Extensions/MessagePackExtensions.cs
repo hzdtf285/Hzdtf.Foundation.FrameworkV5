@@ -25,14 +25,6 @@ namespace System
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="data">数据</param>
-        /// <returns>对象</returns>
-        public static T MessagePackDeserialize<T>(this byte[] data) => data.IsNullOrLength0() ? default(T) : MessagePackSerializer.Deserialize<T>(data);
-
-        /// <summary>
-        /// 消息包反序列化为对象
-        /// </summary>
-        /// <typeparam name="T">对象类型</typeparam>
-        /// <param name="data">数据</param>
         /// <param name="isSetDateTimeToLocalTime">是否设置日期时间为本地时间，默认为否</param>
         /// <param name="toLocalTimeDepth">转换为本地时间深度</param>
         /// <returns>对象</returns>
@@ -68,16 +60,6 @@ namespace System
             }
 
             return obj;
-        }
-
-        /// <summary>
-        /// 判断是否消息包序列化异常
-        /// </summary>
-        /// <param name="ex">异常</param>
-        /// <returns>是否消息包序列化异常</returns>
-        public static bool IsMessagePackSerializationException(this Exception ex)
-        {
-            return ex is MessagePackSerializationException;
         }
     }
 }

@@ -76,21 +76,21 @@ namespace Hzdtf.Utility.Model
     }
 
     /// <summary>
-    /// 简单租户信息
+    /// 简单租戶信息
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     public class SimpleTenanInfo<IdT> : SimpleInfo<IdT>
     {
         /// <summary>
-        /// 租户ID_名称
+        /// 租戶ID_名称
         /// </summary>
         public const string TenantId_Name = "TenantId";
 
         /// <summary>
-        /// 租户ID
+        /// 租戶ID
         /// </summary>
         [JsonProperty("tenantId")]
-        [Display(Name = "租户ID", Order = 10, AutoGenerateField = false)]
+        [Display(Name = "租戶ID", Order = 10, AutoGenerateField = false)]
         [MessagePack.Key("tenantId")]
         public IdT TenantId
         {

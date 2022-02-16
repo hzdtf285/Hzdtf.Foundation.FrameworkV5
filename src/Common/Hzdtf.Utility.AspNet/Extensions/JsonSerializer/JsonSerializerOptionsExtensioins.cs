@@ -38,14 +38,13 @@ namespace Microsoft.Extensions.DependencyInjection
                     options.JsonSerializerOptions.Converters.Add(new DateTimeLocalJsonConvert());
                     options.JsonSerializerOptions.Converters.Add(new DateTimeNullLocalJsonConvert());
                 }
-
                 if (jsonOptions == null)
                 {
-                    return;
+                     return;
                 }
 
                 jsonOptions(options);
-            });
+             });
 
             return builder;
         }

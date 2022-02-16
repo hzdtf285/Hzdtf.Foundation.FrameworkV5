@@ -2836,12 +2836,14 @@
             <param name="eventSourceType">事件源类型</param>
             <param name="eventHandlerType">事件处理类型</param>
         </member>
-        <member name="M:Hzdtf.Utility.Event.AppEventBus.Publish(System.Type,Hzdtf.Utility.Event.EventData)">
+        <member name="M:Hzdtf.Utility.Event.AppEventBus.Publish(System.Type,Hzdtf.Utility.Event.EventData,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             发布事件
             </summary>
             <param name="eventSourceType">事件源类型</param>
             <param name="eventData">事件数据</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
         </member>
         <member name="M:Hzdtf.Utility.Event.AppEventBus.IsExistsHandlerData(System.Collections.Generic.IList{Hzdtf.Utility.Event.AppEventBus.HandlerData},System.Type)">
             <summary>
@@ -2901,12 +2903,14 @@
             <param name="eventSourceType">事件源类型</param>
             <param name="eventHandlerType">事件处理类型</param>
         </member>
-        <member name="M:Hzdtf.Utility.Event.IEventBus.Publish(System.Type,Hzdtf.Utility.Event.EventData)">
+        <member name="M:Hzdtf.Utility.Event.IEventBus.Publish(System.Type,Hzdtf.Utility.Event.EventData,Hzdtf.Utility.Model.CommonUseData,System.String)">
             <summary>
             发布事件
             </summary>
             <param name="eventSourceType">事件源类型</param>
             <param name="eventData">事件数据</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
         </member>
         <member name="T:Hzdtf.Utility.Event.IEventHandler">
             <summary>
@@ -3032,6 +3036,89 @@
             </summary>
             <param name="type">类型</param>
             <returns>产品</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache">
+            <summary>
+            GRpc渠道策略缓存
+            key：服务名
+            value：地址映射渠道字典（key：地址，value：渠道）
+            缓存是以静态变量存储
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.dicCache">
+            <summary>
+            字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.syncDicCache">
+            <summary>
+            同步字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.servicesBuilder">
+            <summary>
+            服务生成器
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.nativeServiceProvider">
+            <summary>
+            原生服务提供者
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.#ctor(Hzdtf.Utility.RemoteService.Builder.IUnityServicesBuilder,Hzdtf.Utility.RemoteService.Provider.INativeServicesProvider)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="servicesBuilder">服务生成器</param>
+            <param name="nativeServiceProvider">原生服务提供者</param>
+        </member>
+        <member name="M:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.BuilderAsync(System.String,Grpc.Net.Client.GrpcChannelOptions)">
+            <summary>
+            异步生成渠道
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="options">grpc渠道配置</param>
+            <returns>生成地址任务</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.GetCache">
+            <summary>
+            获取缓存
+            </summary>
+            <returns>缓存</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.GetSyncCache">
+            <summary>
+            获取同步的缓存对象，是为了线程安全
+            </summary>
+            <returns>同步的缓存对象</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.UpdateExistsesAddress(System.String,System.String[])">
+            <summary>
+            更新存在的地址，如果缓存里的地址在新的地址不存在，则移除
+            </summary>
+            <param name="serviceName">服务名称</param>
+            <param name="newAddresses">新的地址数组</param>
+        </member>
+        <member name="M:Hzdtf.Utility.GRpcStrategy.GRpcChannelStrategyCache.DisposeAsync">
+            <summary>
+            异步释放资源
+            </summary>
+            <returns>任务</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.GRpcStrategy.IGRpcChannel">
+            <summary>
+            GRpc渠道接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.GRpcStrategy.IGRpcChannel.BuilderAsync(System.String,Grpc.Net.Client.GrpcChannelOptions)">
+            <summary>
+            异步生成渠道
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="options">grpc渠道配置</param>
+            <returns>生成地址任务</returns>
         </member>
         <member name="T:Hzdtf.Utility.InterfaceImpl.IInterfaceMapImpl">
             <summary>
@@ -3703,24 +3790,24 @@
         </member>
         <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantId_Name">
             <summary>
-            租户ID_名称
-            一般情况没有，特殊情况下有用，如SAAS中的租户
+            租戶ID_名称
+            一般情况没有，特殊情况下有用，如SAAS中的租戶
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.TenantId">
             <summary>
-            租户ID
-            一般情况没有，特殊情况下有用，如SAAS中的租户
+            租戶ID
+            一般情况没有，特殊情况下有用，如SAAS中的租戶
             </summary>
         </member>
         <member name="F:Hzdtf.Utility.Model.BasicUserInfo`1.TenantIdString_Name">
             <summary>
-            租户ID字符串_名称
+            租戶ID字符串_名称
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.BasicUserInfo`1.TenantIdString">
             <summary>
-            租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+            租戶ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.Model.BasicUserInfo">
@@ -3774,6 +3861,12 @@
             <param name="code">编码</param>
             <param name="msg">消息</param>
             <param name="desc">描述</param>
+        </member>
+        <member name="M:Hzdtf.Utility.Model.BusinessException.ToString">
+            <summary>
+            转换为字符串
+            </summary>
+            <returns>字符串</returns>
         </member>
         <member name="T:Hzdtf.Utility.Model.CodeNameFilterInfo">
             <summary>
@@ -4585,28 +4678,28 @@
         </member>
         <member name="T:Hzdtf.Utility.Model.PersonTimeTenantInfo`1">
             <summary>
-            带有人时间租户信息
+            带有人时间租戶信息
             </summary>
             <typeparam name="IdT">ID类型</typeparam>
         </member>
         <member name="F:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantId_Name">
             <summary>
-            租户ID_名称
+            租戶ID_名称
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantId">
             <summary>
-            租户ID
+            租戶ID
             </summary>
         </member>
         <member name="F:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantIdString_Name">
             <summary>
-            租户ID字符串_名称
+            租戶ID字符串_名称
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.PersonTimeTenantInfo`1.TenantIdString">
             <summary>
-            租户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+            租戶ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.Model.SimpleInfoExtensions">
@@ -5029,18 +5122,18 @@
         </member>
         <member name="T:Hzdtf.Utility.Model.SimpleTenanInfo`1">
             <summary>
-            简单租户信息
+            简单租戶信息
             </summary>
             <typeparam name="IdT">ID类型</typeparam>
         </member>
         <member name="F:Hzdtf.Utility.Model.SimpleTenanInfo`1.TenantId_Name">
             <summary>
-            租户ID_名称
+            租戶ID_名称
             </summary>
         </member>
         <member name="P:Hzdtf.Utility.Model.SimpleTenanInfo`1.TenantId">
             <summary>
-            租户ID
+            租戶ID
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.Model.SqlPropInfo">
@@ -5619,6 +5712,14 @@
             <param name="path">路径</param>
             <returns>生成地址任务</returns>
         </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Builder.HttpServicesBuilder.BuilderByBaseAddress(System.String,System.String)">
+            <summary>
+            根据基地址生成地址
+            </summary>
+            <param name="baseAddress">基地址</param>
+            <param name="path">路径</param>
+            <returns>生成地址</returns>
+        </member>
         <member name="T:Hzdtf.Utility.RemoteService.Builder.IServicesBuilder">
             <summary>
             服务生成器接口
@@ -5657,6 +5758,14 @@
             <param name="path">路径</param>
             <returns>生成地址任务</returns>
         </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Builder.IServicesBuilder.BuilderByBaseAddress(System.String,System.String)">
+            <summary>
+            根据基地址生成地址
+            </summary>
+            <param name="baseAddress">基地址</param>
+            <param name="path">路径</param>
+            <returns>生成地址</returns>
+        </member>
         <member name="T:Hzdtf.Utility.RemoteService.Builder.IUnityServicesBuilder">
             <summary>
             统一服务生成器接口
@@ -5671,6 +5780,16 @@
             <param name="path">路径</param>
             <param name="tag">标签</param>
             <returns>生成地址任务</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Builder.IUnityServicesBuilder.BuilderByBaseAddress(System.String,System.String,System.String,System.String)">
+            <summary>
+            根据基地址生成地址
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="baseAddress">基地址</param>
+            <param name="tag">标签</param>
+            <param name="path">路径</param>
+            <returns>生成地址</returns>
         </member>
         <member name="T:Hzdtf.Utility.RemoteService.Builder.UnityServicesBuilder">
             <summary>
@@ -5703,6 +5822,24 @@
             <param name="path">路径</param>
             <param name="tag">标签</param>
             <returns>生成地址任务</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Builder.UnityServicesBuilder.BuilderByBaseAddress(System.String,System.String,System.String,System.String)">
+            <summary>
+            根据基地址生成地址
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="baseAddress">基地址</param>
+            <param name="tag">标签</param>
+            <param name="path">路径</param>
+            <returns>生成地址</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Builder.UnityServicesBuilder.BuilderServiceOptions(System.String,System.String)">
+            <summary>
+            生成服务配置
+            </summary>
+            <param name="serviceName">服务名称</param>
+            <param name="tag">标签</param>
+            <returns>服务配置</returns>
         </member>
         <member name="M:Hzdtf.Utility.RemoteService.Builder.UnityServicesBuilder.GetServicesOptions(Hzdtf.Utility.RemoteService.Options.UnityServicesOptions,System.String,System.String)">
             <summary>
@@ -5848,6 +5985,11 @@
             统一服务选项配置
             </summary>
         </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Options.UnityServicesOptionsCache.#ctor">
+            <summary>
+            构造方法
+            </summary>
+        </member>
         <member name="M:Hzdtf.Utility.RemoteService.Options.UnityServicesOptionsCache.#ctor(System.String)">
             <summary>
             构造方法
@@ -5871,6 +6013,19 @@
             写入到存储里
             </summary>
             <param name="data">数据</param>
+        </member>
+        <member name="T:Hzdtf.Utility.RemoteService.Provider.INativeServicesProvider">
+            <summary>
+            原生服务提供者接口，代表着最原始的服务提供，比如直通第三方服务发现
+            缓存不适合本接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Provider.INativeServicesProvider.GetTheAddressesRegister(System.Action{System.String,System.String,System.String[]})">
+            <summary>
+            注册获取到地址数组后
+            </summary>
+            <param name="callback">回调,0：服务名，1：标签，2：地址数组</param>
         </member>
         <member name="T:Hzdtf.Utility.RemoteService.Provider.IServicesProvider">
             <summary>
@@ -5922,6 +6077,44 @@
             <returns>读取</returns>
         </member>
         <member name="M:Hzdtf.Utility.RemoteService.Provider.ServiceProviderAggReaderBase.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.RemoteService.Provider.ServiceProviderBase">
+            <summary>
+            服务提供者基类，提供原生服务有更新触发
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RemoteService.Provider.ServiceProviderBase.actions">
+            <summary>
+            更新触发回调列表
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Provider.ServiceProviderBase.GetAddresses(System.String,System.String)">
+            <summary>
+            异步根据服务名获取地址数组
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="tag">标签</param>
+            <returns>地址数组任务</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Provider.ServiceProviderBase.ExecGetAddresses(System.String,System.String)">
+            <summary>
+            执行异步根据服务名获取地址数组
+            </summary>
+            <param name="serviceName">服务名</param>
+            <param name="tag">标签</param>
+            <returns>地址数组任务</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Provider.ServiceProviderBase.GetTheAddressesRegister(System.Action{System.String,System.String,System.String[]})">
+            <summary>
+            注册获取到地址数组后
+            </summary>
+            <param name="callback">回调,0：服务名，1：标签，2：地址数组</param>
+        </member>
+        <member name="M:Hzdtf.Utility.RemoteService.Provider.ServiceProviderBase.Dispose">
             <summary>
             释放资源
             </summary>
@@ -6058,9 +6251,29 @@
             统一服务生成器
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.RemoteService.UnitServiceBuilderOptions.ServiceProvider">
+        <member name="P:Hzdtf.Utility.RemoteService.UnitServiceBuilderOptions.UnityServicesBuilderType">
+            <summary>
+            统一服务生成器类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RemoteService.UnitServiceBuilderOptions.NativeServicesProvider">
+            <summary>
+            原生服务提供者
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RemoteService.UnitServiceBuilderOptions.NativeServicesProviderType">
+            <summary>
+            原生服务提供者类型
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RemoteService.UnitServiceBuilderOptions.ServicesProvider">
             <summary>
             服务提供者
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RemoteService.UnitServiceBuilderOptions.ServicesProviderType">
+            <summary>
+            服务提供者类型
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.RequestResource.IRequestResource">
@@ -6790,6 +7003,256 @@
             <param name="comData">通用数据</param>
             <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
         </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermission`1">
+            <summary>
+            租戶用户菜单权限接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermission`1.UserHavePermission(`0,`0,System.String,System.String[],Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            用户是否拥有权限
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="funCodes">功能编码数组</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermission`1.GetHavePermissionMenuFunCodes(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据用户ID获取拥有权限的菜单功能编码字典
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1">
+            <summary>
+            租戶用户菜单权限缓存接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">用户类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1.InitCache(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            初始化缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1.GetWithTSNotAccessKeys(System.TimeSpan)">
+            <summary>
+            获取时间范围内没有访问的键数组
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>时间范围内没有访问的键数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1.RemoveWithTSNotAccess(System.TimeSpan)">
+            <summary>
+            移除时间范围内没有访问的用户
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1.RemoveCache(`0,`0)">
+            <summary>
+            根据租戶ID和用户ID移除缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1.RemoveCache(`0,`0[])">
+            <summary>
+            根据租戶ID和用户ID移除缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userIds">用户ID数组</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1.RemoveCache(Hzdtf.Utility.Model.KeyValueInfo{`0,`0}[])">
+            <summary>
+            根据租戶ID和用户ID移除缓存
+            </summary>
+            <param name="tenantIdMapUserIds">租戶ID映射用户ID，key：租戶ID，value：用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuPermissionCache`1.ClearCache(`0)">
+            <summary>
+            根据租戶ID清空缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <returns>是否清空成功</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuReader`1">
+            <summary>
+            租戶用户菜单读取接口
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.IMerchantUserMenuReader`1.GetHavePermissionMenuFunCodes(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据用户ID获取拥有权限的菜单功能编码字典
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1">
+            <summary>
+            租戶用户菜单本地缓存
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.dicCache">
+            <summary>
+            字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.dicLastAccessTime">
+            <summary>
+            最后一次访问时间字典
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.syncDicCache">
+            <summary>
+            同步字典缓存
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.TenantIdUserMenuReader">
+            <summary>
+            租戶用户菜单读取
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.UserHavePermission(`0,`0,System.String,System.String[],Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            用户是否拥有权限
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <param name="menuCode">菜单编码</param>
+            <param name="funCodes">功能编码数组</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.GetHavePermissionMenuFunCodes(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据用户ID获取拥有权限的菜单功能编码字典
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.GetWithTSNotAccessKeys(System.TimeSpan)">
+            <summary>
+            获取时间范围内没有访问的键数组
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>时间范围内没有访问的键数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.RemoveWithTSNotAccess(System.TimeSpan)">
+            <summary>
+            移除时间范围内没有访问的用户
+            </summary>
+            <param name="timeSpan">时间范围</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.Add(System.String,System.Collections.Generic.IDictionary{System.String,System.String[]})">
+            <summary>
+            添加
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns>是否添加成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.InitCache(`0,`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            初始化缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.RemoveCache(`0,`0)">
+            <summary>
+            根据租戶ID和用户ID移除缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.RemoveCache(`0,`0[])">
+            <summary>
+            根据租戶ID和用户ID移除缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userIds">用户ID数组</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.RemoveCache(Hzdtf.Utility.Model.KeyValueInfo{`0,`0}[])">
+            <summary>
+            根据租戶ID和用户ID移除缓存
+            </summary>
+            <param name="tenantIdMapUserIds">租戶ID映射用户ID，key：租戶ID，value：用户ID</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.ClearCache(`0)">
+            <summary>
+            根据租戶ID清空缓存
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <returns>是否清空成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.Remove(System.String)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key">键</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.Remove(System.String[])">
+            <summary>
+            移除键数组
+            </summary>
+            <param name="keys">键数组</param>
+            <returns>是否移除成功</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.Clear">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.GetCache">
+            <summary>
+            获取缓存
+            </summary>
+            <returns>缓存</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.GetSyncCache">
+            <summary>
+            获取同步的缓存对象，是为了线程安全
+            </summary>
+            <returns>同步的缓存对象</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.UserPermission.Merchant.MerchantUserMenuLocalCache`1.GetKey(`0,`0)">
+            <summary>
+            获取键
+            </summary>
+            <param name="tenantId">租戶ID</param>
+            <param name="userId">用户ID</param>
+            <returns>键</returns>
+        </member>
         <member name="T:Hzdtf.Utility.UserPermission.Tenant.ITenantUserMenuPermission`1">
             <summary>
             租户用户菜单权限接口
@@ -7345,6 +7808,15 @@
             <typeparam name="ValueT">字典值类型</typeparam>
             <param name="dic">字典</param>
             <returns>对象</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ToMergeString``1(``0[],System.String)">
+            <summary>
+            将数组按分隔符组合字符串
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="array">数组</param>
+            <param name="split">分隔符</param>
+            <returns>组合后的字符串</returns>
         </member>
         <member name="M:Hzdtf.Utility.Utils.CollectionUtil.ToMergeString``1(``0[],System.String,System.String)">
             <summary>
@@ -9706,14 +10178,6 @@
             <param name="obj">对象</param>
             <returns>序列化后的数据</returns>
         </member>
-        <member name="M:System.MessagePackExtensions.MessagePackDeserialize``1(System.Byte[])">
-            <summary>
-            消息包反序列化为对象
-            </summary>
-            <typeparam name="T">对象类型</typeparam>
-            <param name="data">数据</param>
-            <returns>对象</returns>
-        </member>
         <member name="M:System.MessagePackExtensions.MessagePackDeserialize``1(System.Byte[],System.Boolean,System.Byte)">
             <summary>
             消息包反序列化为对象
@@ -9733,13 +10197,6 @@
             <param name="isSetDateTimeToLocalTime">是否设置日期时间为本地时间，默认为否</param>
             <param name="toLocalTimeDepth">转换为本地时间深度</param>
             <returns>对象</returns>
-        </member>
-        <member name="M:System.MessagePackExtensions.IsMessagePackSerializationException(System.Exception)">
-            <summary>
-            判断是否消息包序列化异常
-            </summary>
-            <param name="ex">异常</param>
-            <returns>是否消息包序列化异常</returns>
         </member>
         <member name="T:System.ObjectOrderbyConnExtension">
             <summary>
@@ -10142,6 +10599,10 @@
             GRpc渠道辅助类
             @ 黄振东
             </summary>
+            <summary>
+            GRpc渠道辅助类
+            @ 黄振东
+            </summary>
         </member>
         <member name="M:Grpc.Net.Client.GRpcChannelUtil.CreateChannel(System.String,System.Action{Grpc.Net.Client.GrpcChannel,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException},System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},Grpc.Net.Client.GrpcChannelOptions)">
             <summary>
@@ -10194,6 +10655,31 @@
             <param name="action">回调业务处理方法</param>
             <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
             <param name="customerOptions">自定义选项配置</param>
+            <returns>GRpc客户端</returns>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.ExecGRpcClient``1(``0,System.Action{``0,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException},System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+            <summary>
+            执行GRpc客户端
+            需要在App.GetGRpcClient里设置获取GRpc客户端工厂的实现
+            </summary>
+            <typeparam name="GRpcClientT">GRpc客户端类型</typeparam>
+            <param name="client">客户端</param>
+            <param name="action">回调业务处理方法</param>
+            <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
+            <param name="customerOptions">自定义选项配置</param>
+            <returns>GRpc客户端</returns>
+        </member>
+        <member name="M:Grpc.Net.Client.GRpcChannelUtil.GetGRpcClientFormStrategy``1(System.String,System.Func{Grpc.Net.Client.GrpcChannel,``0},System.Action{``0,Grpc.Core.Metadata},System.Action{Grpc.Core.RpcException},System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},Grpc.Net.Client.GrpcChannelOptions)">
+            <summary>
+            获取策略中的GRpc客户端
+            </summary>
+            <typeparam name="GRpcClientT">GRpc客户端类型</typeparam>
+            <param name="serviceName">服务名</param>
+            <param name="createGRpcClient">创建GRpc客户端</param>
+            <param name="action">回调业务处理方法</param>
+            <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
+            <param name="customerOptions">自定义选项配置</param>
+            <param name="options">grpc选项配置</param>
             <returns>GRpc客户端</returns>
         </member>
     </members>

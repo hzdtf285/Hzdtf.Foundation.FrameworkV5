@@ -235,6 +235,18 @@ namespace Hzdtf.Utility.Utils
         /// <typeparam name="T">类型</typeparam>
         /// <param name="array">数组</param>
         /// <param name="split">分隔符</param>
+        /// <returns>组合后的字符串</returns>
+        public static string ToMergeString<T>(this T[] array, string split = null)
+        {
+            return array.ToMergeString(split, null);
+        }
+
+        /// <summary>
+        /// 将数组按分隔符组合字符串
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="array">数组</param>
+        /// <param name="split">分隔符</param>
         /// <param name="bothSides">两边符号</param>
         /// <returns>组合后的字符串</returns>
         public static string ToMergeString<T>(this T[] array, string split = null, string bothSides = null)

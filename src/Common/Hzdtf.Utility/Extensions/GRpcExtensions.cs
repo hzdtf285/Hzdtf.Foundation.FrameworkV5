@@ -17,7 +17,7 @@ namespace Grpc.Net.Client
     /// GRpc渠道辅助类
     /// @ 黄振东
     /// </summary>
-    public static class GRpcChannelUtil
+    public static partial class GRpcChannelUtil
     {
         /// <summary>
         /// 创建一个渠道，执行完业务处理方法后，会自动关闭渠道连接
@@ -161,62 +161,80 @@ namespace Grpc.Net.Client
                 throw new ArgumentNullException("App.GetGRpcClientFactory未定义");
             }
             var client = App.GetGRpcClientFactory.GetRpcClient<GRpcClientT>();
-            if (action != null)
-            {
-                var headers = new Metadata();
-                var cusOptions = new ChannelCustomerOptions();
-                if (customerOptions != null)
-                {
-                    customerOptions(cusOptions);
-                }
-
-                var token = cusOptions.GetToken();
-                if (!string.IsNullOrWhiteSpace(token))
-                {
-                    headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
-                }
-                var eventId = cusOptions.GetEventId();
-                if (!string.IsNullOrWhiteSpace(eventId))
-                {
-                    headers.Add(App.EVENT_ID_KEY, eventId);
-                }
-
-                RpcException rpcEx = null;
-                Exception exce = null;
-                Stopwatch watch = new Stopwatch();
-                try
-                {
-                    watch.Start();
-                    action(client, headers);
-                    watch.Stop();
-                }
-                catch (RpcException ex)
-                {
-                    watch.Stop();
-                    exce = rpcEx = ex;
-                }
-                catch (Exception ex)
-                {
-                    watch.Stop();
-                    exce = ex;
-                }
-
-                if (App.InfoEvent != null)
-                {
-                    App.InfoEvent.RecordAsync($"grpc发起请求.接口:{cusOptions.Api}.耗时:{watch.ElapsedMilliseconds}ms",
-                        exce, "GetGRpcClient", eventId, cusOptions.Api);
-                }
-                if (rpcEx != null && exAction != null)
-                {
-                    exAction(rpcEx);
-                }
-                else if (exce != null)
-                {
-                    throw new Exception(exce.Message, exce);
-                }
-            }
+            ExecGRpcClient(client, action, exAction, customerOptions);
 
             return client;
+        }
+
+        /// <summary>
+        /// 执行GRpc客户端
+        /// 需要在App.GetGRpcClient里设置获取GRpc客户端工厂的实现
+        /// </summary>
+        /// <typeparam name="GRpcClientT">GRpc客户端类型</typeparam>
+        /// <param name="client">客户端</param>
+        /// <param name="action">回调业务处理方法</param>
+        /// <param name="exAction">发生异常回调，如果为null，则不会捕获异常</param>
+        /// <param name="customerOptions">自定义选项配置</param>
+        /// <returns>GRpc客户端</returns>
+        private static void ExecGRpcClient<GRpcClientT>(GRpcClientT client, Action<GRpcClientT, Metadata> action, Action<RpcException> exAction = null, Action<ChannelCustomerOptions> customerOptions = null)
+            where GRpcClientT : ClientBase<GRpcClientT>
+        {
+            if (action == null)
+            {
+                return;
+            }
+
+            var headers = new Metadata();
+            var cusOptions = new ChannelCustomerOptions();
+            if (customerOptions != null)
+            {
+                customerOptions(cusOptions);
+            }
+
+            var token = cusOptions.GetToken();
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
+            }
+            var eventId = cusOptions.GetEventId();
+            if (!string.IsNullOrWhiteSpace(eventId))
+            {
+                headers.Add(App.EVENT_ID_KEY, eventId);
+            }
+
+            RpcException rpcEx = null;
+            Exception exce = null;
+            Stopwatch watch = new Stopwatch();
+            try
+            {
+                watch.Start();
+                action(client, headers);
+                watch.Stop();
+            }
+            catch (RpcException ex)
+            {
+                watch.Stop();
+                exce = rpcEx = ex;
+            }
+            catch (Exception ex)
+            {
+                watch.Stop();
+                exce = ex;
+            }
+
+            if (App.InfoEvent != null)
+            {
+                App.InfoEvent.RecordAsync($"grpc发起请求.接口:{cusOptions.Api}.耗时:{watch.ElapsedMilliseconds}ms",
+                    exce, "GetGRpcClient", eventId, cusOptions.Api);
+            }
+            if (rpcEx != null && exAction != null)
+            {
+                exAction(rpcEx);
+            }
+            else if (exce != null)
+            {
+                throw new Exception(exce.Message, exce);
+            }
         }
     }    
 }

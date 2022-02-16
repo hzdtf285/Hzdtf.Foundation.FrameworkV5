@@ -50,9 +50,45 @@ namespace Hzdtf.Utility.RemoteService
         }
 
         /// <summary>
+        /// 统一服务生成器类型
+        /// </summary>
+        public Type UnityServicesBuilderType
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 原生服务提供者
+        /// </summary>
+        public INativeServicesProvider NativeServicesProvider
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 原生服务提供者类型
+        /// </summary>
+        public Type NativeServicesProviderType
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 服务提供者
         /// </summary>
-        public IServicesProvider ServiceProvider
+        public IServicesProvider ServicesProvider
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 服务提供者类型
+        /// </summary>
+        public Type ServicesProviderType
         {
             get;
             set;

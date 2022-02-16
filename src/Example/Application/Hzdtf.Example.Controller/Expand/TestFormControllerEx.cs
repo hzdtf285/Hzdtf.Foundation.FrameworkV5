@@ -1,8 +1,12 @@
-﻿using Hzdtf.BasicFunction.Service.Contract;
+﻿using Grpc.Net.Client;
+using GrpcService2;
+using Hzdtf.BasicFunction.Service.Contract;
 using Hzdtf.Quartz.Extensions.Scheduler;
 using Hzdtf.Quartz.Persistence.Contract;
+using Hzdtf.Utility;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
+using Hzdtf.Utility.RemoteService.Provider;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -41,17 +45,27 @@ namespace Hzdtf.Example.Controller
 
         [AllowAnonymous]
         [HttpGet("test")]
-        public async Task Test()
+        public void Test()
         {
-            await Scheduler.RescheduleJobTaskAsync("0/10 * * * * ?", "作业1", "分组1");
-            //Scheduler.StopJobTaskAsync("作业1", "分组1").Wait();
+            GRpcChannelUtil.GetGRpcClientFormStrategy<Greeter.GreeterClient>("service1", channel =>
+            {
+                return new Greeter.GreeterClient(channel);
+            }, (client, header) =>
+            {
+                var msg = client.SayHello(new HelloRequest()
+                {
+                    Name = "李"
+                });
+            });
         }
 
         [AllowAnonymous]
         [HttpGet("pause")]
         public void pause()
         {
-            Scheduler.PauseJobTaskAsync("作业1").Wait();
+            var s = App.GetServiceFromInstance<INativeServicesProvider>();
+            
+            //Scheduler.PauseJobTaskAsync("作业1").Wait();
         }
 
         [AllowAnonymous]
