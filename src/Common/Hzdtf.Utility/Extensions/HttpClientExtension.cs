@@ -400,7 +400,7 @@ namespace System.Net.Http
             var token = cusOptions.GetToken();
             if (!string.IsNullOrWhiteSpace(token))
             {
-                content.Headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
+                httpClient.DefaultRequestHeaders.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
             }
             var eventId = cusOptions.GetEventId();
             if (!string.IsNullOrWhiteSpace(eventId))
