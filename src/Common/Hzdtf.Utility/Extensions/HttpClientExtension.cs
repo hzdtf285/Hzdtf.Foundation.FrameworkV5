@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,12 +23,13 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string Get(string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string Get(string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.Get(url, customerOptions);
+                return httpClient.Get(url, customerOptions, timeout);
             }
         }
 
@@ -39,13 +39,14 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string Get(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string Get(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             return httpClient.RequestJson(url, "Get", httpContent =>
             {
                 return httpClient.GetAsync(url);
-            }, customerOptions);
+            }, customerOptions: customerOptions, timeout: timeout);
         }
 
         /// <summary>
@@ -53,10 +54,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> GetAsync(string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> GetAsync(string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => Get(url, customerOptions));
+            return Task<string>.Run(() => Get(url, customerOptions, timeout));
         }
 
         /// <summary>
@@ -65,10 +67,11 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> GetAsync(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> GetAsync(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => httpClient.Get(url, customerOptions));
+            return Task<string>.Run(() => httpClient.Get(url, customerOptions, timeout));
         }
 
         #endregion
@@ -81,12 +84,13 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string PostJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string PostJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.PostJson(url, data, customerOptions);
+                return httpClient.PostJson(url, data, customerOptions, timeout);
             }
         }
 
@@ -97,13 +101,14 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string PostJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string PostJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             return httpClient.RequestJson(url, "Post", httpContent =>
             {
                 return httpClient.PostAsync(url, httpContent);
-            }, data, customerOptions);
+            }, data, customerOptions, timeout);
         }
 
         /// <summary>
@@ -112,10 +117,11 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> PostJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> PostJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => PostJson(url, data, customerOptions));
+            return Task<string>.Run(() => PostJson(url, data, customerOptions, timeout));
         }
 
         /// <summary>
@@ -125,10 +131,11 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> PostJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> PostJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => httpClient.PostJson(url, data, customerOptions));
+            return Task<string>.Run(() => httpClient.PostJson(url, data, customerOptions, timeout));
         }
 
         #endregion
@@ -140,12 +147,13 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string Delete(string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string Delete(string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.Delete(url, customerOptions);
+                return httpClient.Delete(url, customerOptions, timeout);
             }
         }
 
@@ -155,13 +163,14 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string Delete(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string Delete(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             return httpClient.RequestJson(url, "Delete", httpContent =>
             {
                 return httpClient.DeleteAsync(url);
-            }, customerOptions);
+            }, customerOptions: customerOptions, timeout: timeout);
         }
 
         /// <summary>
@@ -169,10 +178,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> DeleteAsync(string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> DeleteAsync(string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => Delete(url, customerOptions));
+            return Task<string>.Run(() => Delete(url, customerOptions, timeout));
         }
 
         /// <summary>
@@ -181,10 +191,11 @@ namespace System.Net.Http
         /// <param name="httpClient">http客户端</param>
         /// <param name="url">URL</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> DeleteAsync(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> DeleteAsync(this HttpClient httpClient, string url, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => httpClient.Delete(url, customerOptions));
+            return Task<string>.Run(() => httpClient.Delete(url, customerOptions, timeout));
         }
 
         #endregion
@@ -197,12 +208,13 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string PutJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string PutJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.PutJson(url, data, customerOptions);
+                return httpClient.PutJson(url, data, customerOptions, timeout);
             }
         }
 
@@ -213,13 +225,14 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string PutJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string PutJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             return httpClient.RequestJson(url, "Put", httpContent =>
             {
                 return httpClient.PutAsync(url, httpContent);
-            }, data, customerOptions);
+            }, data, customerOptions, timeout);
         }
 
         /// <summary>
@@ -228,10 +241,11 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> PutJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> PutJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => PutJson(url, data, customerOptions));
+            return Task<string>.Run(() => PutJson(url, data, customerOptions, timeout));
         }
 
         /// <summary>
@@ -241,10 +255,11 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> PutJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> PutJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => httpClient.PutJson(url, data, customerOptions));
+            return Task<string>.Run(() => httpClient.PutJson(url, data, customerOptions, timeout));
         }
 
         #endregion
@@ -257,12 +272,13 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string PatchJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string PatchJson(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             using (var httpClient = CreateHttpClient())
             {
-                return httpClient.PatchJson(url, data, customerOptions);
+                return httpClient.PatchJson(url, data, customerOptions, timeout);
             }
         }
 
@@ -273,13 +289,14 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string PatchJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string PatchJson(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             return httpClient.RequestJson(url, "Patch", httpContent =>
             {
                 return httpClient.PatchAsync(url, httpContent);
-            }, data, customerOptions);
+            }, data, customerOptions, timeout);
         }
 
         /// <summary>
@@ -288,10 +305,11 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> PatchJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> PatchJsonAsync(string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => PatchJson(url, data, customerOptions));
+            return Task<string>.Run(() => PatchJson(url, data, customerOptions, timeout));
         }
 
         /// <summary>
@@ -301,10 +319,11 @@ namespace System.Net.Http
         /// <param name="url">URL</param>
         /// <param name="data">数据</param>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>任务</returns>
-        public static Task<string> PatchJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static Task<string> PatchJsonAsync(this HttpClient httpClient, string url, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
-            return Task<string>.Run(() => httpClient.PatchJson(url, data, customerOptions));
+            return Task<string>.Run(() => httpClient.PatchJson(url, data, customerOptions, timeout));
         }
 
         #endregion
@@ -333,8 +352,9 @@ namespace System.Net.Http
         /// 创建http客户端
         /// </summary>
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>http客户端</returns>
-        public static HttpClient CreateHttpClient(Action<ChannelCustomerOptions> customerOptions = null)
+        public static HttpClient CreateHttpClient(Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             var httpClient = new HttpClient();
             var cusOptions = new ChannelCustomerOptions();
@@ -353,6 +373,10 @@ namespace System.Net.Http
             {
                 httpClient.DefaultRequestHeaders.Add(App.EVENT_ID_KEY, eventId);
             }
+            if (timeout != null)
+            {
+                httpClient.Timeout = (TimeSpan)timeout;
+            }
 
             return httpClient;
         }
@@ -366,8 +390,9 @@ namespace System.Net.Http
         /// <param name="callbackRequest">回调请求</param>
         /// <param name="data">数据</param>        
         /// <param name="customerOptions">自定义选项配置</param>
+        /// <param name="timeout">超时</param>
         /// <returns>返回字符串</returns>
-        public static string RequestJson(this HttpClient httpClient, string url, string method, Func<HttpContent, Task<HttpResponseMessage>> callbackRequest, object data = null, Action<ChannelCustomerOptions> customerOptions = null)
+        public static string RequestJson(this HttpClient httpClient, string url, string method, Func<HttpContent, Task<HttpResponseMessage>> callbackRequest, object data = null, Action<ChannelCustomerOptions> customerOptions = null, TimeSpan? timeout = null)
         {
             HttpContent content = null;
             if (data != null)
@@ -400,12 +425,16 @@ namespace System.Net.Http
             var token = cusOptions.GetToken();
             if (!string.IsNullOrWhiteSpace(token))
             {
-                httpClient.DefaultRequestHeaders.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
+                httpClient.DefaultRequestHeaders.Add(AuthUtil.AUTH_KEY, token.AddBearerToken());
             }
             var eventId = cusOptions.GetEventId();
             if (!string.IsNullOrWhiteSpace(eventId))
             {
                 content.Headers.Add(App.EVENT_ID_KEY, eventId);
+            }
+            if (timeout != null)
+            {
+                httpClient.Timeout = (TimeSpan)timeout;
             }
 
             Exception exce = null;

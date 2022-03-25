@@ -280,6 +280,132 @@
             <typeparam name="T">服务类型</typeparam>
             <returns>服务</returns>
         </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseInt">
+            <summary>
+            异步释放整型
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseLong">
+            <summary>
+            异步释放长整型
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseString">
+            <summary>
+            异步释放字符串型
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1">
+            <summary>
+            异步释放包装
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+            <typeparam name="KeyT">键类型</typeparam>
+        </member>
+        <member name="F:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.dicCaches">
+            <summary>
+            缓存键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.syncDicCaches">
+            <summary>
+            同步缓存键
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.Wait(`0,System.Nullable{System.TimeSpan})">
+            <summary>
+            等待
+            </summary>
+            <param name="key">键</param>
+            <param name="timeout">超时，默认永不超时</param>
+            <returns>回调的返回值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.Release(`0,System.Object)">
+            <summary>
+            释放
+            </summary>
+            <param name="key">键</param>
+            <param name="callbackReturnValue">回调的返回值</param>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.GetCache">
+            <summary>
+            获取缓存对象
+            </summary>
+            <returns>缓存对象</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.GetSyncCache">
+            <summary>
+            获取同步缓存对象
+            </summary>
+            <returns>同步缓存对象</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.AutoResetReturnInfo">
+            <summary>
+            自动重置返回信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.AsyncCallbackWrap.AutoResetReturnInfo.AutoReset">
+            <summary>
+            自动重置事件
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.AsyncCallbackWrap.AutoResetReturnInfo.CallbackReturn">
+            <summary>
+            回调返回
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseInt">
+            <summary>
+            异步释放整型接口
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseLong">
+            <summary>
+            异步释放长整型接口
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseString">
+            <summary>
+            异步释放字符串接口
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseWrap`1">
+            <summary>
+            异步释放包装接口
+            提供对本地线程阻塞，在本进程内，另处进行线程继续执行(释放)
+            @ 黄振东
+            </summary>
+            <typeparam name="KeyT">键类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseWrap`1.Wait(`0,System.Nullable{System.TimeSpan})">
+            <summary>
+            等待
+            </summary>
+            <param name="key">键</param>
+            <param name="timeout">超时，默认永不超时</param>
+            <returns>回调的返回值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseWrap`1.Release(`0,System.Object)">
+            <summary>
+            释放
+            </summary>
+            <param name="key">键</param>
+            <param name="callbackReturnValue">回调的返回值</param>
+        </member>
         <member name="T:Hzdtf.Utility.Attr.AuthAttribute">
             <summary>
             授权特性
@@ -9430,6 +9556,13 @@
             @ 黄振东
             </summary>
         </member>
+        <member name="M:System.AppContextExtensions.SetHttp2Support(System.Boolean)">
+            <summary>
+            设置http2是否支持
+            执行此方法后，默认是启用
+            </summary>
+            <param name="enable">是否启动</param>
+        </member>
         <member name="M:System.AppContextExtensions.SetHttp2UnencryptedSupport(System.Boolean)">
             <summary>
             设置http2非加密是否支持
@@ -9886,50 +10019,55 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.Get(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.Get(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Get请求
             </summary>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.Get(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.Get(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Get请求JSON
             </summary>
             <param name="httpClient">http客户端</param>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.GetAsync(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.GetAsync(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Get请求
             </summary>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.GetAsync(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.GetAsync(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Get请求
             </summary>
             <param name="httpClient">http客户端</param>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PostJson(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PostJson(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Post请求JSON
             </summary>
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PostJson(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PostJson(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Post请求JSON
             </summary>
@@ -9937,18 +10075,20 @@
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PostJsonAsync(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PostJsonAsync(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Post请求JSON
             </summary>
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PostJsonAsync(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PostJsonAsync(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Post请求JSON
             </summary>
@@ -9956,71 +10096,58 @@
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.Delete(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.Delete(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Delete请求
             </summary>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.Delete(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.Delete(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Get请求JSON
             </summary>
             <param name="httpClient">http客户端</param>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.DeleteAsync(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.DeleteAsync(System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Delete请求
             </summary>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.DeleteAsync(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.DeleteAsync(System.Net.Http.HttpClient,System.String,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Delete请求
             </summary>
             <param name="httpClient">http客户端</param>
             <param name="url">URL</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PutJson(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PutJson(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Put请求JSON
             </summary>
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PutJson(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
-            <summary>
-            Put请求JSON
-            </summary>
-            <param name="httpClient">http客户端</param>
-            <param name="url">URL</param>
-            <param name="data">数据</param>
-            <param name="customerOptions">自定义选项配置</param>
-            <returns>返回字符串</returns>
-        </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PutJsonAsync(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
-            <summary>
-            Put请求JSON
-            </summary>
-            <param name="url">URL</param>
-            <param name="data">数据</param>
-            <param name="customerOptions">自定义选项配置</param>
-            <returns>任务</returns>
-        </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PutJsonAsync(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PutJson(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Put请求JSON
             </summary>
@@ -10028,18 +10155,41 @@
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
+            <returns>返回字符串</returns>
+        </member>
+        <member name="M:System.Net.Http.HttpClientExtension.PutJsonAsync(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
+            <summary>
+            Put请求JSON
+            </summary>
+            <param name="url">URL</param>
+            <param name="data">数据</param>
+            <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PatchJson(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PutJsonAsync(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
+            <summary>
+            Put请求JSON
+            </summary>
+            <param name="httpClient">http客户端</param>
+            <param name="url">URL</param>
+            <param name="data">数据</param>
+            <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
+            <returns>任务</returns>
+        </member>
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJson(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Patch请求JSON
             </summary>
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PatchJson(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJson(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Patch请求JSON
             </summary>
@@ -10047,18 +10197,20 @@
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PatchJsonAsync(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJsonAsync(System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Patch请求JSON
             </summary>
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.PatchJsonAsync(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.PatchJsonAsync(System.Net.Http.HttpClient,System.String,System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             Patch请求JSON
             </summary>
@@ -10066,6 +10218,7 @@
             <param name="url">URL</param>
             <param name="data">数据</param>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>任务</returns>
         </member>
         <member name="M:System.Net.Http.HttpClientExtension.AddBearerTokenToHeader(System.Net.Http.HttpClient,System.String)">
@@ -10082,14 +10235,15 @@
             <param name="httpClient">http客户端</param>
             <param name="containerBearerToken">包含了bearer token</param>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.CreateHttpClient(System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.CreateHttpClient(System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             创建http客户端
             </summary>
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>http客户端</returns>
         </member>
-        <member name="M:System.Net.Http.HttpClientExtension.RequestJson(System.Net.Http.HttpClient,System.String,System.String,System.Func{System.Net.Http.HttpContent,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}},System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions})">
+        <member name="M:System.Net.Http.HttpClientExtension.RequestJson(System.Net.Http.HttpClient,System.String,System.String,System.Func{System.Net.Http.HttpContent,System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage}},System.Object,System.Action{Hzdtf.Utility.Extensions.ChannelCustomerOptions},System.Nullable{System.TimeSpan})">
             <summary>
             请求请求JSON
             </summary>
@@ -10099,6 +10253,7 @@
             <param name="callbackRequest">回调请求</param>
             <param name="data">数据</param>        
             <param name="customerOptions">自定义选项配置</param>
+            <param name="timeout">超时</param>
             <returns>返回字符串</returns>
         </member>
         <member name="T:System.JsonExtensions">

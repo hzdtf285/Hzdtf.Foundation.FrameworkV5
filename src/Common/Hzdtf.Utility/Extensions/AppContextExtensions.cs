@@ -13,6 +13,16 @@ namespace System
     public static class AppContextExtensions
     {
         /// <summary>
+        /// 设置http2是否支持
+        /// 执行此方法后，默认是启用
+        /// </summary>
+        /// <param name="enable">是否启动</param>
+        public static void SetHttp2Support(bool enable = true)
+        {
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", enable);
+        }
+
+        /// <summary>
         /// 设置http2非加密是否支持
         /// 例如：GRpc如果要对http进行支持，则需要启用
         /// 执行此方法后，默认是启用

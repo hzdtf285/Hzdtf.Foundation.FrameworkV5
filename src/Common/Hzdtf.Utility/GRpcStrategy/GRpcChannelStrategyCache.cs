@@ -176,7 +176,7 @@ namespace Hzdtf.Utility.GRpcStrategy
                     }
                     catch { }
 
-                    dic.Remove(item);
+                    dic.RemoveKey(item.Key);
                 }
             }
         }
