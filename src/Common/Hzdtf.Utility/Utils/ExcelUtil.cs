@@ -279,14 +279,75 @@ namespace Hzdtf.Utility.Utils
         /// <returns>数据表</returns>
         public static DataTable ToDataTableFromExcelStream(this Stream stream, bool isGeV2007 = true, string sheetName = null, bool isFirstRowColumn = true)
         {
+            return ReaderExcelStream<DataTable>(stream, wb =>
+            {
+                ISheet sheet = null;
+                if (sheetName == null)
+                {
+                    sheet = wb.GetSheetAt(0);
+                }
+                else
+                {
+                    sheet = wb.GetSheet(sheetName);
+                    if (sheet == null) //如果没有找到指定的sheetName对应的sheet，则尝试获取第一个sheet
+                    {
+                        sheet = wb.GetSheetAt(0);
+                    }
+                }
+
+                return ReaderSheetToDataTable(sheet, isFirstRowColumn);
+            }, isGeV2007);
+        }
+
+        /// <summary>
+        /// 从Excel流读取并转换到数据表数组
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <param name="sheetNameMapFirstRowColumn">工作表名映射是否第1行列名字典</param>
+        /// <param name="isGeV2007">是否大于或等于2007版本</param>
+        /// <returns>数据表数组</returns>
+        public static DataTable[] ToDataTablesFromExcelStream(this Stream stream, IDictionary<string, bool> sheetNameMapFirstRowColumn, bool isGeV2007 = true)
+        {
+            if (sheetNameMapFirstRowColumn.IsNullOrCount0())
+            {
+                throw new ArgumentNullException("工作表名映射是否第1行列名字典不能为空");
+            }
+
+            return ReaderExcelStream<DataTable[]>(stream, wb =>
+            {
+                var sheets = new Dictionary<ISheet, bool>(sheetNameMapFirstRowColumn.Count);
+                foreach (var item in sheetNameMapFirstRowColumn)
+                {
+                    sheets.Add(wb.GetSheet(item.Key), item.Value);
+                }
+
+                var dts = new DataTable[sheets.Count];
+                var j = 0;
+                foreach (var item in sheets)
+                {
+                    dts[j] = ReaderSheetToDataTable(item.Key, item.Value);
+                    j++;
+                }
+
+                return dts;
+            }, isGeV2007);
+        }
+
+        /// <summary>
+        /// 读取Excel流
+        /// </summary>
+        /// <param name="stream">Excel流</param>
+        /// <param name="callback">读取到工作薄回调</param>
+        /// <param name="isGeV2007">是否大于或等于2007版本</param>
+        /// <returns>返回值</returns>
+        private static T ReaderExcelStream<T>(Stream stream, Func<IWorkbook, T> callback, bool isGeV2007 = true)
+            where T : class
+        {
             if (stream == null)
             {
                 return null;
             }
 
-            ISheet sheet = null;
-            DataTable data = new DataTable();
-            int startRow = 0;
             IWorkbook workbook = null;
             try
             {
@@ -298,86 +359,12 @@ namespace Hzdtf.Utility.Utils
                 {
                     workbook = new HSSFWorkbook(stream);
                 }
-
-                if (sheetName == null)
+                if (workbook.NumberOfSheets < 1)
                 {
-                    sheet = workbook.GetSheetAt(0);
-                }
-                else
-                {
-                    sheet = workbook.GetSheet(sheetName);
-                    if (sheet == null) //如果没有找到指定的sheetName对应的sheet，则尝试获取第一个sheet
-                    {
-                        sheet = workbook.GetSheetAt(0);
-                    }
-                }
-                if (sheet != null)
-                {
-                    IRow firstRow = sheet.GetRow(0);
-                    int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
-
-                    if (isFirstRowColumn)
-                    {
-                        for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
-                        {
-                            ICell cell = firstRow.GetCell(i);
-                            if (cell != null)
-                            {
-                                string cellValue = cell.StringCellValue;
-                                if (cellValue != null)
-                                {
-                                    DataColumn column = new DataColumn(cellValue);
-                                    data.Columns.Add(column);
-                                }
-                            }
-                        }
-                        startRow = sheet.FirstRowNum + 1;
-                    }
-                    else
-                    {
-                        startRow = sheet.FirstRowNum;
-                    }
-
-                    //最后一列的标号
-                    int rowCount = sheet.LastRowNum;
-                    for (int i = startRow; i <= rowCount; ++i)
-                    {
-                        IRow row = sheet.GetRow(i);
-                        if (row == null) continue; //没有数据的行默认是null　　　　　　　
-
-                        DataRow dataRow = data.NewRow();
-                        for (int j = row.FirstCellNum; j < cellCount; ++j)
-                        {
-                            var cell = row.GetCell(j);
-                            if (cell == null)
-                            {
-                                continue;
-                            }
-
-                            switch (cell.CellType)
-                            {
-                                case CellType.Formula:
-                                    dataRow[j] = row.GetCell(j).NumericCellValue;
-
-                                    break;
-
-                                default:
-                                    var value = row.GetCell(j);
-                                    if (value == null)
-                                    {
-                                        continue;
-                                    }
-
-                                    dataRow[j] = value.ToString();
-
-                                    break;
-                            }
-                        }
-                        data.Rows.Add(dataRow);
-                    }
+                    return null;
                 }
 
-                return data;
+                return callback(workbook);
             }
             catch (Exception ex)
             {
@@ -393,6 +380,87 @@ namespace Hzdtf.Utility.Utils
                 stream.Close();
                 stream.Dispose();
             }
+        }
+
+        /// <summary>
+        /// 读取工作表并转换为数据表
+        /// </summary>
+        /// <param name="sheet">工作表</param>
+        /// <param name="isFirstRowColumn">是否第1行列名</param>
+        /// <returns>数据表</returns>
+        private static DataTable ReaderSheetToDataTable(ISheet sheet, bool isFirstRowColumn)
+        {
+            if (sheet == null)
+            {
+                return null;
+            }
+
+            var data = new DataTable(string.IsNullOrWhiteSpace(sheet.SheetName) ? null : sheet.SheetName);
+            var startRow = 0;
+            IRow firstRow = sheet.GetRow(0);
+            int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
+
+            if (isFirstRowColumn)
+            {
+                for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
+                {
+                    ICell cell = firstRow.GetCell(i);
+                    if (cell != null)
+                    {
+                        string cellValue = cell.StringCellValue;
+                        if (cellValue != null)
+                        {
+                            DataColumn column = new DataColumn(cellValue);
+                            data.Columns.Add(column);
+                        }
+                    }
+                }
+                startRow = sheet.FirstRowNum + 1;
+            }
+            else
+            {
+                startRow = sheet.FirstRowNum;
+            }
+
+            //最后一列的标号
+            int rowCount = sheet.LastRowNum;
+            for (int i = startRow; i <= rowCount; ++i)
+            {
+                IRow row = sheet.GetRow(i);
+                if (row == null) continue; //没有数据的行默认是null　　　　　　　
+
+                DataRow dataRow = data.NewRow();
+                for (int j = row.FirstCellNum; j < cellCount; ++j)
+                {
+                    var cell = row.GetCell(j);
+                    if (cell == null)
+                    {
+                        continue;
+                    }
+
+                    switch (cell.CellType)
+                    {
+                        case CellType.Formula:
+                            dataRow[j] = row.GetCell(j).NumericCellValue;
+
+                            break;
+
+                        default:
+                            var value = row.GetCell(j);
+                            if (value == null)
+                            {
+                                continue;
+                            }
+
+                            dataRow[j] = value.ToString();
+
+                            break;
+                    }
+                }
+                data.Rows.Add(dataRow);
+            }
+
+            return data;
         }
     }
 

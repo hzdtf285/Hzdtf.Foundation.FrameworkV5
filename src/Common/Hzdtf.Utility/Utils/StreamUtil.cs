@@ -311,7 +311,7 @@ namespace Hzdtf.Utility.Utils
                 lock (syncDicObject)
                 {
                     try
-                    {// 
+                    {
                         syncDicFileName.Remove(fileName);
                     }
                     catch (ArgumentException)

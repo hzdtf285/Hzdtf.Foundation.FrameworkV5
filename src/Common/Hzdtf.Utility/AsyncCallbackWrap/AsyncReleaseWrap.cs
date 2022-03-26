@@ -33,33 +33,49 @@ namespace Hzdtf.Utility.AsyncCallbackWrap
         /// </summary>
         /// <param name="key">键</param>
         /// <param name="timeout">超时，默认永不超时</param>
-        /// <returns>回调的返回值</returns>
-        public object Wait(KeyT key, TimeSpan? timeout = null)
+        /// <returns>回调的返回值。例如：如果超时，则返回false</returns>
+        public bool Wait(KeyT key, TimeSpan? timeout = null)
+        {
+            return Wait(key: key, returnValue: out _, timeout: timeout);
+        }
+
+        /// <summary>
+        /// 等待
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="returnValue">返回值</param>
+        /// <param name="timeout">超时，默认永不超时</param>
+        /// <returns>是否接收到信号。例如：如果超时，则返回false</returns>
+        public bool Wait(KeyT key, out object returnValue, TimeSpan? timeout = null)
         {
             var autoReset = new AutoResetReturnInfo()
             {
                 AutoReset = new AutoResetEvent(false)
             };
+            var result = false;
             try
             {
                 Add(key, autoReset);
                 if (timeout == null)
                 {
-                    autoReset.AutoReset.WaitOne();
+                    result = autoReset.AutoReset.WaitOne();
                 }
                 else
                 {
-                    autoReset.AutoReset.WaitOne(timeout.Value);
+                    result = autoReset.AutoReset.WaitOne(timeout.Value);
                 }
 
-                return autoReset.CallbackReturn;
+                returnValue = autoReset.CallbackReturn;
+
+                return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }
             finally
             {
+                autoReset.AutoReset.Close();
                 Remove(key);
             }
         }
@@ -69,14 +85,16 @@ namespace Hzdtf.Utility.AsyncCallbackWrap
         /// </summary>
         /// <param name="key">键</param>
         /// <param name="callbackReturnValue">回调的返回值</param>
-        public void Release(KeyT key, object callbackReturnValue = null)
+        /// <returns>是否释放成功</returns>
+        public bool Release(KeyT key, object callbackReturnValue = null)
         {
             if (dicCaches.ContainsKey(key))
             {
                 var autoReset = dicCaches[key];
                 autoReset.CallbackReturn = callbackReturnValue;
-                autoReset.AutoReset.Set();
+                return autoReset.AutoReset.Set();
             }
+            return false;
         }
 
         /// <summary>

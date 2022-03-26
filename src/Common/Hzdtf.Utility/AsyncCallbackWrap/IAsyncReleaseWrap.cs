@@ -19,14 +19,24 @@ namespace Hzdtf.Utility.AsyncCallbackWrap
         /// </summary>
         /// <param name="key">键</param>
         /// <param name="timeout">超时，默认永不超时</param>
-        /// <returns>回调的返回值</returns>
-        object Wait(KeyT key, TimeSpan? timeout = null);
+        /// <returns>回调的返回值。例如：如果超时，则返回false</returns>
+        bool Wait(KeyT key, TimeSpan? timeout = null);
+
+        /// <summary>
+        /// 等待
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="returnValue">返回值</param>
+        /// <param name="timeout">超时，默认永不超时</param>
+        /// <returns>是否接收到信号。例如：如果超时，则返回false</returns>
+        bool Wait(KeyT key, out object returnValue, TimeSpan? timeout = null);
 
         /// <summary>
         /// 释放
         /// </summary>
         /// <param name="key">键</param>
         /// <param name="callbackReturnValue">回调的返回值</param>
-        void Release(KeyT key, object callbackReturnValue = null);
+        /// <returns>是否释放成功</returns>
+        bool Release(KeyT key, object callbackReturnValue = null);
     }
 }

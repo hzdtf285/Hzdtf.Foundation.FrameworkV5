@@ -325,7 +325,16 @@
             </summary>
             <param name="key">键</param>
             <param name="timeout">超时，默认永不超时</param>
-            <returns>回调的返回值</returns>
+            <returns>回调的返回值。例如：如果超时，则返回false</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.Wait(`0,System.Object@,System.Nullable{System.TimeSpan})">
+            <summary>
+            等待
+            </summary>
+            <param name="key">键</param>
+            <param name="returnValue">返回值</param>
+            <param name="timeout">超时，默认永不超时</param>
+            <returns>是否接收到信号。例如：如果超时，则返回false</returns>
         </member>
         <member name="M:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.Release(`0,System.Object)">
             <summary>
@@ -333,6 +342,7 @@
             </summary>
             <param name="key">键</param>
             <param name="callbackReturnValue">回调的返回值</param>
+            <returns>是否释放成功</returns>
         </member>
         <member name="M:Hzdtf.Utility.AsyncCallbackWrap.AsyncReleaseWrap`1.GetCache">
             <summary>
@@ -397,7 +407,16 @@
             </summary>
             <param name="key">键</param>
             <param name="timeout">超时，默认永不超时</param>
-            <returns>回调的返回值</returns>
+            <returns>回调的返回值。例如：如果超时，则返回false</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseWrap`1.Wait(`0,System.Object@,System.Nullable{System.TimeSpan})">
+            <summary>
+            等待
+            </summary>
+            <param name="key">键</param>
+            <param name="returnValue">返回值</param>
+            <param name="timeout">超时，默认永不超时</param>
+            <returns>是否接收到信号。例如：如果超时，则返回false</returns>
         </member>
         <member name="M:Hzdtf.Utility.AsyncCallbackWrap.IAsyncReleaseWrap`1.Release(`0,System.Object)">
             <summary>
@@ -405,6 +424,7 @@
             </summary>
             <param name="key">键</param>
             <param name="callbackReturnValue">回调的返回值</param>
+            <returns>是否释放成功</returns>
         </member>
         <member name="T:Hzdtf.Utility.Attr.AuthAttribute">
             <summary>
@@ -8207,6 +8227,32 @@
             <param name="stream">流</param>
             <param name="isGeV2007">是否大于或等于2007版本</param>
             <param name="sheetName">工作表名</param>
+            <param name="isFirstRowColumn">是否第1行列名</param>
+            <returns>数据表</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.ExcelUtil.ToDataTablesFromExcelStream(System.IO.Stream,System.Collections.Generic.IDictionary{System.String,System.Boolean},System.Boolean)">
+            <summary>
+            从Excel流读取并转换到数据表数组
+            </summary>
+            <param name="stream">流</param>
+            <param name="sheetNameMapFirstRowColumn">工作表名映射是否第1行列名字典</param>
+            <param name="isGeV2007">是否大于或等于2007版本</param>
+            <returns>数据表数组</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.ExcelUtil.ReaderExcelStream``1(System.IO.Stream,System.Func{NPOI.SS.UserModel.IWorkbook,``0},System.Boolean)">
+            <summary>
+            读取Excel流
+            </summary>
+            <param name="stream">Excel流</param>
+            <param name="callback">读取到工作薄回调</param>
+            <param name="isGeV2007">是否大于或等于2007版本</param>
+            <returns>返回值</returns>
+        </member>
+        <member name="M:Hzdtf.Utility.Utils.ExcelUtil.ReaderSheetToDataTable(NPOI.SS.UserModel.ISheet,System.Boolean)">
+            <summary>
+            读取工作表并转换为数据表
+            </summary>
+            <param name="sheet">工作表</param>
             <param name="isFirstRowColumn">是否第1行列名</param>
             <returns>数据表</returns>
         </member>
