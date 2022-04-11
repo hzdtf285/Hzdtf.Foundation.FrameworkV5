@@ -1,5 +1,5 @@
 ﻿using Hzdtf.BasicFunction.Service.Contract;
-using Hzdtf.Utility.ApiPermission;
+using Hzdtf.Utility.RoutePermission;
 using Hzdtf.Utility.AspNet.Extensions.RoutePermission;
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Factory;
@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static Hzdtf.Utility.ApiPermission.RoutePermissionInfo;
+using static Hzdtf.Utility.RoutePermission.RoutePermissionInfo;
 
 namespace Hzdtf.BasicFunction.Controller.Extensions.RoutePermission
 {

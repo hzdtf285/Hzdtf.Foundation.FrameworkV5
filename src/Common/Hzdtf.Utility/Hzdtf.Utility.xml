@@ -6694,141 +6694,282 @@
             <param name="action">处理业务回调</param>
             <param name="key">键</param>
         </member>
-        <member name="T:Hzdtf.Utility.ApiPermission.RoutePermissionCache">
+        <member name="T:Hzdtf.Utility.RoutePermission.ActionPermissionAttribute">
+            <summary>
+            动作权限属性
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RoutePermission.ActionPermissionAttribute.codes">
+            <summary>
+            编码数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RoutePermission.ActionPermissionAttribute.Codes">
+            <summary>
+            编码数组
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RoutePermission.ActionPermissionAttribute.resourceKey">
+            <summary>
+            资源键
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RoutePermission.ActionPermissionAttribute.ResourceKey">
+            <summary>
+            资源键
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.RoutePermission.ActionPermissionAttribute.#ctor(System.String[],System.Int32,System.Boolean,System.String,System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="codes">编码数组</param>
+            <param name="id">ID</param>
+            <param name="disabled">是否禁用</param>
+            <param name="extendJson">扩展属性JSON</param>
+            <param name="resourceKey">资源键</param>
+        </member>
+        <member name="T:Hzdtf.Utility.RoutePermission.IRoutePermissionConfigReader">
+            <summary>
+            路由权限配置读取接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.RoutePermission.IRoutePermissionReader">
+            <summary>
+            路由权限读取接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Utility.RoutePermission.PermissionAttributeBase">
+            <summary>
+            权限属性基类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RoutePermission.PermissionAttributeBase.id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RoutePermission.PermissionAttributeBase.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RoutePermission.PermissionAttributeBase.disabled">
+            <summary>
+            是否禁用
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RoutePermission.PermissionAttributeBase.Disabled">
+            <summary>
+            是否禁用
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RoutePermission.PermissionAttributeBase.extend">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RoutePermission.PermissionAttributeBase.Extend">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.RoutePermission.PermissionAttributeBase.#ctor(System.Int32,System.Boolean,System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="id">ID</param>
+            <param name="disabled">是否禁用</param>
+            <param name="extendJson">扩展属性JSON</param>
+        </member>
+        <member name="T:Hzdtf.Utility.RoutePermission.RoutePermissionAssembly">
+            <summary>
+            路由权限程序集
+            通过传入程序集数组，自动扫描带有RoutePermission和ActionPermission特性加入到路由权限控制数据里
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RoutePermission.RoutePermissionAssembly.routePermissions">
+            <summary>
+            路由权限信息数组
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.RoutePermission.RoutePermissionAssembly.#ctor(System.String[])">
+            <summary>
+            构造方法
+            </summary>
+            <param name="assembly">程序集</param>
+        </member>
+        <member name="M:Hzdtf.Utility.RoutePermission.RoutePermissionAssembly.Reader">
+            <summary>
+            读取
+            </summary>
+            <returns>数据</returns>
+        </member>
+        <member name="T:Hzdtf.Utility.RoutePermission.RoutePermissionAttribute">
+            <summary>
+            路由权限属性
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Utility.RoutePermission.RoutePermissionAttribute.code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionAttribute.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Utility.RoutePermission.RoutePermissionAttribute.#ctor(System.String,System.Int32,System.Boolean,System.String)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="code">编码</param>
+            <param name="id">ID</param>
+            <param name="disabled">是否禁用</param>
+            <param name="extendJson">扩展属性JSON</param>
+        </member>
+        <member name="T:Hzdtf.Utility.RoutePermission.RoutePermissionCache">
             <summary>
             路由权限缓存
             @ 黄振东
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.ApiPermission.RoutePermissionCache.protoReader">
+        <member name="F:Hzdtf.Utility.RoutePermission.RoutePermissionCache.confifgReader">
             <summary>
-            原生读取
+            配置读取
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.ApiPermission.RoutePermissionCache.cache">
+        <member name="F:Hzdtf.Utility.RoutePermission.RoutePermissionCache.cache">
             <summary>
             缓存
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.ApiPermission.RoutePermissionCache.syncCache">
+        <member name="F:Hzdtf.Utility.RoutePermission.RoutePermissionCache.syncCache">
             <summary>
             同步缓存
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.ApiPermission.RoutePermissionCache.Reader">
+        <member name="M:Hzdtf.Utility.RoutePermission.RoutePermissionCache.#ctor(Hzdtf.Utility.RoutePermission.IRoutePermissionConfigReader)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="confifgReader">配置读取</param>
+        </member>
+        <member name="M:Hzdtf.Utility.RoutePermission.RoutePermissionCache.Reader">
             <summary>
             读取
             </summary>
             <returns>数据</returns>
         </member>
-        <member name="M:Hzdtf.Utility.ApiPermission.RoutePermissionCache.Set(Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]})">
-            <summary>
-            设置对象
-            </summary>
-            <param name="obj">对象</param>
-        </member>
-        <member name="T:Hzdtf.Utility.ApiPermission.RoutePermissionInfo">
+        <member name="T:Hzdtf.Utility.RoutePermission.RoutePermissionInfo">
             <summary>
             路由权限信息
             @ 黄振东
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.Id">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.Id">
             <summary>
             ID
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.Controller">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.Controller">
             <summary>
             控制
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.Code">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.Code">
             <summary>
             编码
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.Disabled">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.Disabled">
             <summary>
             是否禁用
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.Actions">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.Actions">
             <summary>
             动作数组
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.Extend">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.Extend">
             <summary>
             扩展属性
             </summary>
         </member>
-        <member name="T:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo">
+        <member name="T:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo">
             <summary>
             动作信息
             @ 黄振东
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Id">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo.Id">
             <summary>
             ID
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Action">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo.Action">
             <summary>
             动作
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Codes">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo.Codes">
             <summary>
             编码数组
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Disabled">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo.Disabled">
             <summary>
             是否禁用
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.ResourceKey">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo.ResourceKey">
             <summary>
             资源键
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo.Extend">
+        <member name="P:Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo.Extend">
             <summary>
             扩展属性
             </summary>
         </member>
-        <member name="T:Hzdtf.Utility.ApiPermission.RoutePermissionJson">
+        <member name="T:Hzdtf.Utility.RoutePermission.RoutePermissionJson">
             <summary>
             路由权限Json
             @ 黄振东
             </summary>
         </member>
-        <member name="F:Hzdtf.Utility.ApiPermission.RoutePermissionJson.jsonFile">
+        <member name="F:Hzdtf.Utility.RoutePermission.RoutePermissionJson.jsonFile">
             <summary>
             Json文件
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.ApiPermission.RoutePermissionJson.#ctor(System.String)">
+        <member name="M:Hzdtf.Utility.RoutePermission.RoutePermissionJson.#ctor(System.String)">
             <summary>
             构造方法
             </summary>
             <param name="jsonFile">Json文件</param>
         </member>
-        <member name="M:Hzdtf.Utility.ApiPermission.RoutePermissionJson.Reader">
+        <member name="M:Hzdtf.Utility.RoutePermission.RoutePermissionJson.Reader">
             <summary>
             读取
             </summary>
             <returns>数据</returns>
         </member>
-        <member name="T:Hzdtf.Utility.ApiPermission.WrapRoutePermissionInfo">
+        <member name="T:Hzdtf.Utility.RoutePermission.WrapRoutePermissionInfo">
             <summary>
             包装路由权限信息
             @ 黄振东
             </summary>
         </member>
-        <member name="P:Hzdtf.Utility.ApiPermission.WrapRoutePermissionInfo.Config">
+        <member name="P:Hzdtf.Utility.RoutePermission.WrapRoutePermissionInfo.Config">
             <summary>
             配置
             </summary>

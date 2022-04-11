@@ -1,4 +1,5 @@
 ﻿using Hzdtf.Utility.AspNet.Extensions.RoutePermission;
+using Hzdtf.Utility.RoutePermission;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,6 +30,15 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 return Microsoft.Extensions.Options.Options.Create<RoutePermissionOptions>(routePermissionOptions);
             });
+            if (routePermissionOptions.ConfigReader == null)
+            {
+                services.AddSingleton<IRoutePermissionConfigReader, RoutePermissionJson>();
+            }
+            else
+            {
+                services.AddSingleton(typeof(IRoutePermissionConfigReader), routePermissionOptions.ConfigReader);
+            }
+            services.AddSingleton<IRoutePermissionReader, RoutePermissionCache>();
 
             return services;
         }

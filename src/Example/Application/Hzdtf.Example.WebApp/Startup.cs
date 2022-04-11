@@ -8,6 +8,7 @@ using Hzdtf.Quartz.File;
 using Hzdtf.Quartz.Persistence.Contract;
 using Hzdtf.Utility;
 using Hzdtf.Utility.RemoteService.Provider;
+using Hzdtf.Utility.RoutePermission;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

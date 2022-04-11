@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hzdtf.Utility.ApiPermission
+namespace Hzdtf.Utility.RoutePermission
 {
     /// <summary>
     /// 路由权限信息

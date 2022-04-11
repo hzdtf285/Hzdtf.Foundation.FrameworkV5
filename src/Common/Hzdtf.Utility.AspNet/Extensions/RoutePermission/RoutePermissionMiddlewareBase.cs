@@ -1,4 +1,4 @@
-﻿using Hzdtf.Utility.ApiPermission;
+﻿using Hzdtf.Utility.RoutePermission;
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hzdtf.Utility.Utils;
 using System.Linq;
-using static Hzdtf.Utility.ApiPermission.RoutePermissionInfo;
+using static Hzdtf.Utility.RoutePermission.RoutePermissionInfo;
 using Microsoft.AspNetCore.Routing;
 using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.RequestResource;
@@ -204,5 +204,16 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
             get;
             set;
         } = "/api/";
+
+        /// <summary>
+        /// 配置读取
+        /// 可以设置Hzdtf.Utility.RoutePermission.RoutePermissionJson、Hzdtf.Utility.RoutePermission.RoutePermissionAssembly
+        /// 默认为RoutePermissionJson
+        /// </summary>
+        public IRoutePermissionConfigReader ConfigReader
+        {
+            get;
+            set;
+        }
     }
 }

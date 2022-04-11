@@ -8,7 +8,7 @@ using Hzdtf.Logger.Contract;
 using Hzdtf.Logger.Integration.ENLog;
 using Hzdtf.Quartz.Extensions.Scheduler;
 using Hzdtf.Utility;
-using Hzdtf.Utility.ApiPermission;
+using Hzdtf.Utility.RoutePermission;
 using Hzdtf.Utility.Config.AssemblyConfig;
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Localization;
@@ -51,7 +51,7 @@ namespace Hzdtf.Example.WebApp.AppStart
                 var attachmentService = container.Resolve<AttachmentService>();
                 AttachmentOwnerLocalMember attachmentOwnerLocalMember = container.Resolve<AttachmentOwnerLocalMember>();
                 attachmentOwnerLocalMember.ProtoAttachmentOwnerReader = container.Resolve<AttachmentOwnerJson>();
-
+                
                 attachmentService.AttachmentOwnerReader = attachmentOwnerLocalMember;
 
                 App.GetEventIdFunc = () =>

@@ -1,23 +1,19 @@
-﻿using Hzdtf.Utility.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Hzdtf.Utility.Utils;
-using Hzdtf.Utility.Attr;
 
-namespace Hzdtf.Utility.ApiPermission
+namespace Hzdtf.Utility.RoutePermission
 {
     /// <summary>
     /// 路由权限缓存
     /// @ 黄振东
     /// </summary>
-    [Inject]
-    public class RoutePermissionCache : IReader<RoutePermissionInfo[]>, ISetObject<IReader<RoutePermissionInfo[]>>
+    public class RoutePermissionCache : IRoutePermissionReader
     {
         /// <summary>
-        /// 原生读取
+        /// 配置读取
         /// </summary>
-        private IReader<RoutePermissionInfo[]> protoReader = new RoutePermissionJson();
+        private readonly IRoutePermissionConfigReader confifgReader;
 
         /// <summary>
         /// 缓存
@@ -30,6 +26,19 @@ namespace Hzdtf.Utility.ApiPermission
         private static readonly object syncCache = new object();
 
         /// <summary>
+        /// 构造方法
+        /// </summary>
+        /// <param name="confifgReader">配置读取</param>
+        public RoutePermissionCache(IRoutePermissionConfigReader confifgReader)
+        {
+            if (confifgReader == null)
+            {
+                throw new ArgumentNullException("confifgReader配置读取不能为空");
+            }
+            this.confifgReader = confifgReader;
+        }
+
+        /// <summary>
         /// 读取
         /// </summary>
         /// <returns>数据</returns>
@@ -40,22 +49,13 @@ namespace Hzdtf.Utility.ApiPermission
                 return cache;
             }
 
-            var temp = protoReader.Reader();
+            var temp = confifgReader.Reader();
             lock (syncCache)
             {
                 cache = temp;
             }
 
             return cache;
-        }
-
-        /// <summary>
-        /// 设置对象
-        /// </summary>
-        /// <param name="obj">对象</param>
-        public void Set(IReader<RoutePermissionInfo[]> obj)
-        {
-            this.protoReader = obj;
         }
     }
 }

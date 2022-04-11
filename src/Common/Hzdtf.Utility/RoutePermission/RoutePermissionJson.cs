@@ -2,17 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Hzdtf.Utility.Attr;
-using Newtonsoft.Json;
 
-namespace Hzdtf.Utility.ApiPermission
+namespace Hzdtf.Utility.RoutePermission
 {
     /// <summary>
     /// 路由权限Json
     /// @ 黄振东
     /// </summary>
-    [Inject]
-    public class RoutePermissionJson : IReader<RoutePermissionInfo[]>
+    public class RoutePermissionJson : IRoutePermissionConfigReader
     {
         /// <summary>
         /// Json文件

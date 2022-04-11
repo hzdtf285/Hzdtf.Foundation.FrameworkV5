@@ -339,7 +339,7 @@
             本次操作
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.TheOperation.ITheOperation)">
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.RoutePermission.RoutePermissionInfo[]},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.TheOperation.ITheOperation)">
             <summary>
             构造方法
             </summary>
@@ -356,7 +356,7 @@
             <param name="context">http上下文</param>
             <returns>任务</returns>
         </member>
-        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.IsHavePermission(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.IsHavePermission(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.RoutePermission.RoutePermissionInfo,Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
             <summary>
             判断是否拥有权限
             </summary>
@@ -390,6 +390,13 @@
         <member name="P:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions.PfxApiPath">
             <summary>
             Api路径前辍，默认是/api/
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions.ConfigReader">
+            <summary>
+            配置读取
+            可以设置Hzdtf.Utility.RoutePermission.RoutePermissionJson、Hzdtf.Utility.RoutePermission.RoutePermissionAssembly
+            默认为RoutePermissionJson
             </summary>
         </member>
         <member name="T:Hzdtf.Utility.AspNet.Extensions.TheReuestOperation.TheReuestOperationMiddleware">

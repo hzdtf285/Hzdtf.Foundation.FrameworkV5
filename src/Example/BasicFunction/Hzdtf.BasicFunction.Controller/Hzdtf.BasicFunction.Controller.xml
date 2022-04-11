@@ -298,7 +298,7 @@
             通用数据工厂
             </summary>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.ApiPermission.RoutePermissionInfo[]},Hzdtf.BasicFunction.Service.Contract.IUserService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData})">
+        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.RoutePermission.RoutePermissionInfo[]},Hzdtf.BasicFunction.Service.Contract.IUserService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData})">
             <summary>
             构造方法
             </summary>
@@ -309,7 +309,7 @@
             <param name="localize">本地化</param>
             <param name="comDataFactory">通用数据工厂</param>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.IsHavePermission(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.ApiPermission.RoutePermissionInfo,Hzdtf.Utility.ApiPermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
+        <member name="M:Hzdtf.BasicFunction.Controller.Extensions.RoutePermission.RoutePermissionMiddleware.IsHavePermission(Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.RoutePermission.RoutePermissionInfo,Hzdtf.Utility.RoutePermission.RoutePermissionInfo.ActionInfo,Hzdtf.Utility.Model.Return.BasicReturnInfo)">
             <summary>
             判断是否拥有权限
             </summary>
