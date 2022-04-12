@@ -321,7 +321,7 @@
         </member>
         <member name="F:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.reader">
             <summary>
-            读取API权限配置
+            路由权限读取
             </summary>
         </member>
         <member name="F:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.options">
@@ -339,13 +339,13 @@
             本次操作
             </summary>
         </member>
-        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.Data.IReader{Hzdtf.Utility.RoutePermission.RoutePermissionInfo[]},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.TheOperation.ITheOperation)">
+        <member name="M:Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionMiddlewareBase.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{Hzdtf.Utility.AspNet.Extensions.RoutePermission.RoutePermissionOptions},Hzdtf.Utility.RoutePermission.IRoutePermissionReader,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.TheOperation.ITheOperation)">
             <summary>
             构造方法
             </summary>
             <param name="next">下一个中间件处理委托</param>
             <param name="options">路由权限选项配置</param>
-            <param name="reader">读取API权限配置</param>
+            <param name="reader">路由权限读取</param>
             <param name="localize">本地化</param>
             <param name="theOperation">本次操作</param>
         </member>

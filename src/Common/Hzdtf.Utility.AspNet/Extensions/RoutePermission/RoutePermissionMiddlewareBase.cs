@@ -1,5 +1,4 @@
 ﻿using Hzdtf.Utility.RoutePermission;
-using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -12,7 +11,6 @@ using System.Linq;
 using static Hzdtf.Utility.RoutePermission.RoutePermissionInfo;
 using Microsoft.AspNetCore.Routing;
 using Hzdtf.Utility.Localization;
-using Hzdtf.Utility.RequestResource;
 using Hzdtf.Utility.TheOperation;
 
 namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
@@ -29,9 +27,9 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
         private readonly RequestDelegate next;
 
         /// <summary>
-        /// 读取API权限配置
+        /// 路由权限读取
         /// </summary>
-        private readonly IReader<RoutePermissionInfo[]> reader;
+        private readonly IRoutePermissionReader reader;
 
         /// <summary>
         /// API权限选项配置
@@ -53,16 +51,16 @@ namespace Hzdtf.Utility.AspNet.Extensions.RoutePermission
         /// </summary>
         /// <param name="next">下一个中间件处理委托</param>
         /// <param name="options">路由权限选项配置</param>
-        /// <param name="reader">读取API权限配置</param>
+        /// <param name="reader">路由权限读取</param>
         /// <param name="localize">本地化</param>
         /// <param name="theOperation">本次操作</param>
         public RoutePermissionMiddlewareBase(RequestDelegate next, IOptions<RoutePermissionOptions> options,
-            IReader<RoutePermissionInfo[]> reader, ILocalization localize,
+            IRoutePermissionReader reader, ILocalization localize,
             ITheOperation theOperation = null)
-        {
+        {            
             if (reader == null)
             {
-                throw new ArgumentNullException("读API权限配置[IReader<ApiPermissionInfo[]>]不能为空");
+                throw new ArgumentNullException("读API权限配置不能为空");
             }
 
             this.next = next;

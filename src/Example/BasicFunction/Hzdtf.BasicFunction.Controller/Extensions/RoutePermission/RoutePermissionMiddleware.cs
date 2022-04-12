@@ -1,7 +1,6 @@
 ﻿using Hzdtf.BasicFunction.Service.Contract;
 using Hzdtf.Utility.RoutePermission;
 using Hzdtf.Utility.AspNet.Extensions.RoutePermission;
-using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.Model;
@@ -38,11 +37,11 @@ namespace Hzdtf.BasicFunction.Controller.Extensions.RoutePermission
         /// </summary>
         /// <param name="next">下一个中间件处理委托</param>
         /// <param name="options">路由权限选项配置</param>
-        /// <param name="reader">读取API权限配置</param>
+        /// <param name="reader">路由权限读取</param>
         /// <param name="userService">用户服务</param>
         /// <param name="localize">本地化</param>
         /// <param name="comDataFactory">通用数据工厂</param>
-        public RoutePermissionMiddleware(RequestDelegate next, IOptions<RoutePermissionOptions> options, IReader<RoutePermissionInfo[]> reader,
+        public RoutePermissionMiddleware(RequestDelegate next, IOptions<RoutePermissionOptions> options, IRoutePermissionReader reader,
             IUserService userService, ILocalization localize,
             ISimpleFactory<HttpContext, CommonUseData> comDataFactory = null)
             : base(next, options, reader, localize)

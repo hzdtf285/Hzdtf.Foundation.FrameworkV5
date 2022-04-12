@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Net.Http;
 using Autofac;
 using Hzdtf.Autofac.Extensions;
 using Hzdtf.BasicFunction.Service.Impl;
 using Hzdtf.BasicFunction.Service.Impl.Expand.Attachment;
 using Hzdtf.Logger.Contract;
 using Hzdtf.Logger.Integration.ENLog;
-using Hzdtf.Quartz.Extensions.Scheduler;
 using Hzdtf.Utility;
-using Hzdtf.Utility.RoutePermission;
 using Hzdtf.Utility.Config.AssemblyConfig;
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.Localization;
@@ -42,7 +39,6 @@ namespace Hzdtf.Example.WebApp.AppStart
 
                     builder.RegisterType<AutofacInstance>().As<IInstance>().AsSelf().PropertiesAutowired().SingleInstance();
                     builder.RegisterType<IntegrationNLog>().As<ILogable>().AsSelf().PropertiesAutowired().SingleInstance();
-                    builder.RegisterType<RoutePermissionCache>().As<IReader<RoutePermissionInfo[]>>().AsSelf().PropertiesAutowired().SingleInstance();
                     builder.RegisterType<CultureLibraryCache>().As<ICultureLibrary>().AsSelf().PropertiesAutowired().SingleInstance();
                 }
             });

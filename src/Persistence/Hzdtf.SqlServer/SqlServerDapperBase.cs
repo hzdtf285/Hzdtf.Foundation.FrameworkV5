@@ -28,7 +28,7 @@ namespace Hzdtf.SqlServer
         /// 转义符后辍
         /// </summary>
         protected override string SufxEscapeChar { get => "]"; }
-
+        
 
         #endregion
 
@@ -81,14 +81,14 @@ namespace Hzdtf.SqlServer
 
         #endregion
 
-        #region 私有方法
+        #region 受保护方法
 
         /// <summary>
         /// 判断异常是否主键重复
         /// </summary>
         /// <param name="ex">异常</param>
         /// <returns>异常是否主键重复</returns>
-        protected bool IsCommonExceptionPkRepeat(Exception ex)
+        protected virtual bool IsCommonExceptionPkRepeat(Exception ex)
         {
             SqlException sqlEx = null;
             if (ex is SqlException)
@@ -108,8 +108,22 @@ namespace Hzdtf.SqlServer
                 return false;
             }
 
-            return sqlEx.Number == 2627;
+            var result = sqlEx.Number == 2627;
+            if (result)
+            {
+                return OtherIsPkRepeat(sqlEx);
+            }
+
+            return result;
         }
+
+        /// <summary>
+        /// 其他判断主键重复，此方法目的是为了异常可能包含其他非主键重复的
+        /// 如果子类没重写，默认为是
+        /// </summary>
+        /// <param name="ex">异常</param>
+        /// <returns>其他判断主键重复</returns>
+        protected virtual bool OtherIsPkRepeat(SqlException ex) => true;
 
         #endregion
     }
